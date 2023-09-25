@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: klub-ada
+  labels:
+    app: klub-ada
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: klub-ada
+  template:
+    metadata:
+      labels:
+        app: klub-ada
+    spec:
+      containers:
+      - name: klub-ada
+        image: klub-ada
+        ports:
+        - containerPort: 80
