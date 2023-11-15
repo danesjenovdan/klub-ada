@@ -96,7 +96,7 @@ h4 {
   text-transform: uppercase;
 }
 
-p {
+p, li {
   font-size: 1.25rem;
 }
 
@@ -154,7 +154,7 @@ a:hover {
   background-color: #2b2831;
 }
 
-.bg-custom-dark p {
+.bg-custom-dark p, li {
   color: white;
 }
 
