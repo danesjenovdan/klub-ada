@@ -168,14 +168,15 @@ section>div, section>footer {
 
   h2 {
     color: var(--color-light);
-    font-size: 60px;
+    font-size: 40px;
     line-height: 1;
     font-weight: 600;
     text-align: center;
+    margin-bottom: 40px;
 
-    // @media (min-width: 992px) {
-    //   font-size: 93px;
-    // }
+    @media (min-width: 992px) {
+      font-size: 60px;
+    }
 
     span {
       color: var(--color-red);
@@ -203,6 +204,7 @@ section>div, section>footer {
     p {
       font-size: 20px;
       color: #BABBBD;
+      margin: 20px 0;
 
       strong {
         color: white;
@@ -210,7 +212,6 @@ section>div, section>footer {
 
       @media (min-width: 992px) {
         font-size: 26px;
-        margin: 20px 0;
       }
     }
 
@@ -243,14 +244,21 @@ section>div, section>footer {
 
       .button {
         display: inline-block;
-        font-size: 30px;
+        font-size: 20px;
         font-weight: 600;
         color: var(--color-text);
         background-color: var(--color-red);
         text-decoration: none;
-        margin: 40px 0;
-        padding: 20px 40px;
-        border-width: 4px;
+        margin: 20px 0;
+        padding: 10px 20px;
+        border-width: 2px;
+
+        @media (min-width: 992px) {
+          font-size: 30px;
+          padding: 20px 40px;
+          border-width: 4px;
+          margin: 40px 0;
+        }
 
         &:hover {
           color: var(--color-red);
