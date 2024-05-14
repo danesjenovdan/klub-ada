@@ -36,13 +36,13 @@
           <h3>Program bo sestavljen iz treh delov<span>:</span></h3>
           <ol>
             <li>
-              <strong><span>17.00 - 17.45</span> vodena delavnica</strong> na temo načrtovanja kariere - primeren za
+              <strong><span>17.00 - 18:00</span> vodena delavnica</strong> na temo načrtovanja kariere - primeren za
               vse, od študentk
               do že zaposlenih
             </li>
-            <li><strong><span>17.45 - 18.30</span> voden pogovor z uspešnimi ženskami iz področja tehnologije</strong>,
+            <li><strong><span>18.00 - 19.00</span> voden pogovor z uspešnimi ženskami iz področja tehnologije</strong>,
               ki so ustanovile/vodile skupino za ženske</li>
-            <li><strong><span>18.30 - 20.00</span> druženje</strong> z gostjami iz preteklih dogodkov 🎈</li>
+            <li><strong><span>19.00 - 20.30</span> druženje</strong> z gostjami iz preteklih dogodkov 🎈</li>
           </ol>
 
           <h3>V vodenem pogovoru bodo z nami:</h3>
