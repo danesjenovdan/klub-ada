@@ -1,28 +1,6 @@
 <template>
   <main>
 
-    <section id="organizatorji">
-      <div>
-        <h1>
-          <span>Klub Ada</span>
-        </h1>
-        <div class="description">
-          <p><strong>smo skupnost študentk in strokovnjakinj iz tehničnih področij.</strong></p>
-          <p class="color-lighter">Iniciativa za opolnomočenje in podporo žensk v tehnoloških karierah. Inženirke,
-            razvijalke, podatkovne znanstvenice, oblikovalke in druge, podpiramo z viri, dogodki in izobraževanji.</p>
-        </div>
-        <div class="social-media">
-          <a href="https://www.instagram.com/klub_ada/" target="_blank" class="instagram">
-            <img alt="instagram logo" class="logo" src="@/assets/instagram.svg" />
-          </a>
-          <a href="https://www.linkedin.com/company/klub-ada/" target="_blank" class="linkedin">
-            <img alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
-          </a>
-        </div>
-        <hr class="short-divider" />
-      </div>
-    </section>
-
     <section class="hero">
       <div>
         <h2><span>Pridruži se nam</span> na naslednjem dogodku!</h2>
@@ -94,6 +72,28 @@
       </div>
     </section>
 
+    <section id="organizatorji">
+      <hr class="short-divider" />
+      <div>
+        <h1>
+          <span>Klub Ada</span>
+        </h1>
+        <div class="description">
+          <p><strong>smo skupnost študentk in strokovnjakinj iz tehničnih področij.</strong></p>
+          <p class="color-lighter">Iniciativa za opolnomočenje in podporo žensk v tehnoloških karierah. Inženirke,
+            razvijalke, podatkovne znanstvenice, oblikovalke in druge, podpiramo z viri, dogodki in izobraževanji.</p>
+        </div>
+        <div class="social-media">
+          <a href="https://www.instagram.com/klub_ada/" target="_blank" class="instagram">
+            <img alt="instagram logo" class="logo" src="@/assets/instagram.svg" />
+          </a>
+          <a href="https://www.linkedin.com/company/klub-ada/" target="_blank" class="linkedin">
+            <img alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section>
       <footer>
         <div class="newsletter">
@@ -150,7 +150,7 @@ section>div, section>footer {
 }
 
 .hero {
-  // padding-top: 60px;
+  padding-top: 60px;
   padding-bottom: 60px;
 
   @media (min-width: 992px) {
