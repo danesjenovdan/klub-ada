@@ -66,6 +66,11 @@
         </div>
       </div>
     </section>
+    <section class="hero">
+      <h3>Bi rada sodelovala tudi ti?</h3>
+      <p class="centeredText">Če te zanima organizacija zabavnih aktivnosti v super ekipi, nam piši na <a
+          href="mailto:info@klub-ada.si" target="_blank">info@klub-ada.si</a>! 🎉</p>
+    </section>
   </main>
 </template>
 
@@ -109,11 +114,24 @@ section>div {
   }
 }
 
+h4 {
+  color: var(--color-red);
+}
+
 .row>div {
   flex: 1;
 }
 
 .hero {
+  a {
+    color: white;
+    font-weight: 600;
+
+    &:hover {
+      color: var(--color-red);
+    }
+  }
+
   padding-top: 60px;
   padding-bottom: 60px;
 
@@ -121,7 +139,7 @@ section>div {
     color: var(--color-red);
     font-size: 32px;
     line-height: 1;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
     margin-bottom: 40px;
 
@@ -154,6 +172,10 @@ section>div {
     max-width: 300px;
     border-radius: 10px;
   }
+}
+
+.centeredText {
+  text-align: center;
 }
 
 .nameWithIcon {
