@@ -246,11 +246,11 @@ section {
 }
 
 .next-event {
-    display: flex;
+    
 
     >div:first-child {
         img {
-            max-width: 500px;
+            max-width: 100%;
         }
     }
 
@@ -268,6 +268,16 @@ section {
         font-weight: 700;
         color: var(--color-red);
         margin-bottom: 10px;
+    }
+
+    @media (min-width: 992px) {
+        display: flex;
+
+        >div:first-child {
+            img {
+                max-width: 500px;
+            }
+        }
     }
 }
 
@@ -321,6 +331,8 @@ section {
 
 .section {
     max-width: 992px;
+    padding-left: 32px;
+    padding-right: 32px;
 
     a {
         color: var(--color-red);
@@ -347,6 +359,7 @@ section {
     h4 {
         color: var(--color-red);
         font-size: 32px;
+        margin-top: 32px;
         margin-bottom: 16px;
     }
 
@@ -421,9 +434,13 @@ section {
     }
 
     img {
-        max-height: 200px;
-        width: auto;
-        max-width: 270px;
+        // max-height: 200px;
+        // max-width: 270px;
+        // width: auto;
+        flex-shrink: 0;
+        height: 200px;
+        width: 270px;
+        object-fit: cover;
         border: 2px solid var(--color-dark);
         border-radius: 8px;
     }
