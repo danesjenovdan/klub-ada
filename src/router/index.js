@@ -13,13 +13,13 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/about-us",
-      name: "about-us",
+      path: "/o-nas",
+      name: "o-nas",
       component: AboutUsView,
     },
     {
-      path: "/partnerships",
-      name: "partnerships",
+      path: "/partnerstvo",
+      name: "partnerstvo",
       component: PartnershipsView,
     },
     {

@@ -136,7 +136,7 @@ section>footer {
   margin: auto;
 
   h2 {
-    font-size: 40px;
+    font-size: 35px;
 
     @media (min-width: 992px) {
       font-size: 93px;
@@ -167,10 +167,10 @@ section>footer {
   // }
 
   h2 {
-    color: var(--color-light);
+    color: var(--color-dark);
     font-size: 40px;
     line-height: 1;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
     margin-bottom: 40px;
 
@@ -203,11 +203,11 @@ section>footer {
 
     p {
       font-size: 20px;
-      color: #BABBBD;
+      color: var(--color-dark);
       margin: 20px 0;
 
       strong {
-        color: white;
+        color: var(--color-red);
       }
 
       @media (min-width: 992px) {
@@ -218,15 +218,15 @@ section>footer {
     ul li,
     ol li {
       font-size: 20px;
-      color: #BABBBD;
+      color: var(--color-dark);
       margin: 20px 0;
 
       strong {
-        color: white;
+        color: var(--color-red);
       }
 
       a {
-        color: white;
+        color: var(--color-red);
         font-weight: 600;
 
         &:hover {
@@ -242,29 +242,29 @@ section>footer {
     .button-wrapper {
       text-align: center;
 
-      .button {
-        display: inline-block;
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--color-text);
-        background-color: var(--color-red);
-        text-decoration: none;
-        margin: 20px 0;
-        padding: 10px 20px;
-        border-width: 2px;
+      // .button {
+      //   display: inline-block;
+      //   font-size: 20px;
+      //   font-weight: 600;
+      //   color: var(--color-text);
+      //   background-color: var(--color-red);
+      //   text-decoration: none;
+      //   margin: 20px 0;
+      //   padding: 10px 20px;
+      //   border-width: 2px;
 
-        @media (min-width: 992px) {
-          font-size: 30px;
-          padding: 20px 40px;
-          border-width: 4px;
-          margin: 40px 0;
-        }
+        // @media (min-width: 992px) {
+        //   font-size: 30px;
+        //   padding: 20px 40px;
+        //   border-width: 4px;
+        //   margin: 40px 0;
+        // }
 
-        &:hover {
-          color: var(--color-red);
-          background-color: var(--color-text);
-        }
-      }
+        // &:hover {
+        //   color: var(--color-red);
+        //   background-color: var(--color-text);
+        // }
+      // }
     }
   }
 }
