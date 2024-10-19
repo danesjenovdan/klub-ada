@@ -253,17 +253,17 @@ section>footer {
       //   padding: 10px 20px;
       //   border-width: 2px;
 
-        // @media (min-width: 992px) {
-        //   font-size: 30px;
-        //   padding: 20px 40px;
-        //   border-width: 4px;
-        //   margin: 40px 0;
-        // }
+      // @media (min-width: 992px) {
+      //   font-size: 30px;
+      //   padding: 20px 40px;
+      //   border-width: 4px;
+      //   margin: 40px 0;
+      // }
 
-        // &:hover {
-        //   color: var(--color-red);
-        //   background-color: var(--color-text);
-        // }
+      // &:hover {
+      //   color: var(--color-red);
+      //   background-color: var(--color-text);
+      // }
       // }
     }
   }
@@ -389,7 +389,7 @@ footer {
       margin-bottom: 20px;
 
       a {
-        color: var(--color-light);
+        color: var(--color-red);
         font-weight: 600;
       }
     }

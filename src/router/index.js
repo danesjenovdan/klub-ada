@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import HekatonView from "../views/HekatonView.vue";
 import AboutUsView from "../views/AboutUsView.vue";
 import PartnershipsView from "../views/PartnershipsView.vue";
+import ActivitiesView from "../views/ActivitiesView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: "/partnerstvo",
       name: "partnerstvo",
       component: PartnershipsView,
+    },
+    {
+      path: "/aktivnosti",
+      name: "sktivnosti",
+      component: ActivitiesView,
     },
     {
       path: "/hekaton",
