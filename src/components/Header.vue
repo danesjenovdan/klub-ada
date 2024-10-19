@@ -1,58 +1,31 @@
 <template>
-  <<<<<<< HEAD <header>
+  <header>
     <div class="navigation">
       <div>
-        <RouterLink to="/"><img alt="Klub Ada logo" class="logo" src="@/assets/logo.svg" /></RouterLink>
+        <RouterLink to="/"><img alt="Klub Ada logo" class="logo" src="@/assets/newlogo.png" /></RouterLink>
       </div>
       <div>
-        <ul class="menu" :class="{ open: menuOpen }" @click="menuOpen = false">
-          <li>
-            <RouterLink to="/partnerships">Partnerstvo</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="/about-us">O nas</RouterLink>
-          </li>
+        <ul class="menu" :class="{ 'open': menuOpen }" @click="menuOpen = false">
           <li>
             <RouterLink to="/hekaton">Hekaton 2023</RouterLink>
           </li>
           <li>
-            <a href="https://forms.gle/kvwgZsTKaZVaLyJWA" target="_blank" class="button">Pridruži se 👩‍💻</a>
+            <RouterLink to="/aktivnosti">Aktivnosti</RouterLink>
           </li>
+          <li>
+            <RouterLink to="/o-nas">O nas</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/partnerstvo">Partnerstvo</RouterLink>
+          </li>
+          <li><a href="https://linktr.ee/klubada" target="_blank" class="button">Prihajajoče aktivnosti 🗓️</a></li>
         </ul>
         <span class="mobile-btn" @click="menuOpen = true">☰</span>
-        <div class="overlay" :class="{ open: menuOpen }" @click="menuOpen = false"></div>
+        <div class="overlay" :class="{ 'open': menuOpen }" @click="menuOpen = false"></div>
       </div>
     </div>
-    </header>
-    =======
-    <header>
-      <div class="navigation">
-        <div>
-          <RouterLink to="/"><img alt="Klub Ada logo" class="logo" src="@/assets/newlogo.png" /></RouterLink>
-        </div>
-        <div>
-          <ul class="menu" :class="{ 'open': menuOpen }" @click="menuOpen = false">
-            <li>
-              <RouterLink to="/hekaton">Hekaton 2023</RouterLink>
-            </li>
-            <li>
-              <RouterLink to="/aktivnosti">Aktivnosti</RouterLink>
-            </li>
-            <li>
-              <RouterLink to="/o-nas">O nas</RouterLink>
-            </li>
-            <li>
-              <RouterLink to="/partnerstvo">Partnerstvo</RouterLink>
-            </li>
-            <li><a href="https://linktr.ee/klubada" target="_blank" class="button">Prihajajoče aktivnosti 🗓️</a></li>
-          </ul>
-          <span class="mobile-btn" @click="menuOpen = true">☰</span>
-          <div class="overlay" :class="{ 'open': menuOpen }" @click="menuOpen = false"></div>
-        </div>
-      </div>
 
-    </header>
-    >>>>>>> af806d8404dfc848366758f942e6b3c93001a99d
+  </header>
 </template>
 
 <script>
