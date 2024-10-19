@@ -125,13 +125,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 section {
   padding-left: 20px;
   padding-right: 20px;
 }
 
-section>div, section>footer {
+section>div,
+section>footer {
   max-width: 1160px;
   margin: auto;
 
@@ -195,7 +195,7 @@ section>div, section>footer {
       color: var(--color-red);
       font-size: 32px;
       margin: 20px 0;
-  
+
       @media (min-width: 992px) {
         font-size: 40px;
       }
@@ -220,7 +220,7 @@ section>div, section>footer {
       font-size: 20px;
       color: #BABBBD;
       margin: 20px 0;
-      
+
       strong {
         color: white;
       }
@@ -299,7 +299,7 @@ section>div, section>footer {
   p {
     font-size: 20px;
     text-align: center;
-    
+
     @media (min-width: 992px) {
       font-size: 26px;
       padding: 0 90px;

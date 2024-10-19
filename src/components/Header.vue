@@ -7,6 +7,9 @@
       <div>
         <ul class="menu" :class="{ open: menuOpen }" @click="menuOpen = false">
           <li>
+            <RouterLink to="/partnerships">Partnerstvo</RouterLink>
+          </li>
+          <li>
             <RouterLink to="/about-us">O nas</RouterLink>
           </li>
           <li>
