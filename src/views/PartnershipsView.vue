@@ -30,35 +30,37 @@
         </div>
       </div>
     </section>
-    <section class="section">
-      <h4>Zakaj postati partner?</h4>
-      <p>V Klubu Ada verjamemo, da je povezovanje ključ do rasti in uspeha. Naša prizadevanja za spodbujanje žensk v
-        tehnologiji se ne bi mogla uresničiti brez podpore partnerjev, ki delijo naše vrednote in vizijo.
-      </p>
-      <div class="row rowCentered">
-        <img src="@/assets/socials.svg" alt="Socialna omrežja" />
-        <div>
-          <h4>Naše platforme vključujejo:
-          </h4>
-          <br />
-          <ul>
-            <li>
-              <strong>Družbena omrežja </strong>(Instagram, LinkedIn)
-            </li>
-            <li>
-              <strong>Spletna skupnost </strong>(Discord)
-            </li>
-            <li>
-              <strong>Novičnik </strong>z rednimi posodobitvami in novicami
-            </li>
-            <li>
-              <strong>Spletna stran</strong>
-            </li>
-          </ul>
+    <section class="section fullWidthSection">
+      <div>
+        <h4>Zakaj postati partner?</h4>
+        <p>V Klubu Ada verjamemo, da je povezovanje ključ do rasti in uspeha. Naša prizadevanja za spodbujanje žensk v
+          tehnologiji se ne bi mogla uresničiti brez podpore partnerjev, ki delijo naše vrednote in vizijo.
+        </p>
+        <div class="row rowCentered">
+          <img src="@/assets/socials.svg" alt="Socialna omrežja" />
+          <div>
+            <h4>Naše platforme vključujejo:
+            </h4>
+            <br />
+            <ul>
+              <li>
+                <strong>Družbena omrežja </strong>(Instagram, LinkedIn)
+              </li>
+              <li>
+                <strong>Spletna skupnost </strong>(Discord)
+              </li>
+              <li>
+                <strong>Novičnik </strong>z rednimi posodobitvami in novicami
+              </li>
+              <li>
+                <strong>Spletna stran</strong>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
-    <section class="section fullWidthSection">
+    <section class="section">
       <div>
         <br />
         <h4>
@@ -93,6 +95,21 @@
         </ul>
       </div>
     </section>
+    <section class="section fullWidthSection">
+      <div>
+        <h4>Kdo lahko postane partner?</h4>
+        <p>Partner Kluba Ada lahko postane vsako podjetje, organizacija ali posameznik, ki podpira našo vizijo in si
+          želi prispevati k večji vključenosti žensk v tehnologiji. Iščemo partnerje, ki si želijo sodelovati pri
+          krepitvi tehnološke skupnosti, spodbujanju talentov ter ustvarjanju priložnosti za izobraževanje in
+          zaposlovanje. Sodelovanje je odprto za podjetja vseh velikosti, nevladne organizacije, izobraževalne ustanove
+          ter tehnološke skupine in posameznike, ki želijo deliti svoje znanje in izkušnje.
+        </p>
+        <br />
+        <strong>Vas zanima sodelovanje? Za več informacij nam lahko pišete na <a href="mailto:info@klub-ada.si"
+            target="_blank">info@klub-ada.si</a>
+        </strong>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -102,6 +119,10 @@ section {
   padding-right: 32px;
   max-width: 1160px;
   margin: auto;
+}
+
+strong {
+  font-weight: 600;
 }
 
 .fullWidthSection {
@@ -115,6 +136,8 @@ section {
 }
 
 .fullWidthSection>div {
+  padding-left: 32px;
+  padding-right: 32px;
   max-width: 1160px;
   margin: auto;
 }
@@ -144,6 +167,8 @@ h4 {
 
 .whiteSquare {
   background-color: var(--color-light);
+  border: 2px solid var(--color-dark);
+  border-radius: 8px;
   color: var(--color-dark);
   padding: 32px;
   text-align: center;
@@ -166,7 +191,7 @@ h4 {
 
 .section {
   a {
-    color: white;
+    color: var(--color-red);
     font-weight: 600;
 
     &:hover {
