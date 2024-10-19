@@ -11,7 +11,7 @@
             povezovati ter poudariti, da je tehnologija prostor, kamor spadamo in kjer je naše mnenje dobrodošlo.
           </p>
           <br />
-          <p>Ime kluba je navdihnila Ada Lovelace – matematičarka, pisateljica in pionirka na področju računalništva. V
+          <p>Ime kluba je navdihnila Ada Lovelace - matematičarka, pisateljica in pionirka na področju računalništva. V
             19. stoletju je za analitični stroj Charlesa Babbaga, ki velja za prvi računalnik, zapisala prvi algoritem.
             Zaradi tega dosežka jo danes poznamo kot prvo programerko!
           </p>
@@ -21,20 +21,48 @@
     <section class="hero">
       <h3>Ekipa</h3>
       <div class="imageList">
-        <div class="imageItem"><img src="@/assets/ekipa/simona.png" alt="Simona" />
-          <p>Simona</p>
+        <div class="imageItem">
+          <img class="person" src="@/assets/ekipa/simona.png" alt="Simona" />
+          <div class="nameWithIcon">
+            <p>Simona</p>
+            <a href="https://www.linkedin.com/in/simonakek/" target="_blank" class="linkedin">
+              <img width="16" height="16" alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
+            </a>
+          </div>
         </div>
-        <div class="imageItem"><img src="@/assets/ekipa/kaja.jpg" alt="Kaja" />
-          <p>Kaja</p>
+        <div class="imageItem">
+          <img class="person" src="@/assets/ekipa/kaja.jpg" alt="Kaja" />
+          <div class="nameWithIcon">
+            <p>Kaja</p>
+            <a href="https://www.linkedin.com/in/kajaskerlj/" target="_blank" class="linkedin">
+              <img width="16" height="16" alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
+            </a>
+          </div>
         </div>
-        <div class="imageItem"><img src="@/assets/ekipa/patricija.jpg" alt="Patricija" />
-          <p>Patricija</p>
+        <div class="imageItem">
+          <img class="person" src="@/assets/ekipa/patricija.jpg" alt="Patricija" />
+          <div class="nameWithIcon">
+            <p>Patricija</p>
+            <a href="https://www.linkedin.com/in/patricijabrecko/" target="_blank" class="linkedin">
+              <img width="16" height="16" alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
+            </a>
+          </div>
         </div>
-        <div class="imageItem"><img src="@/assets/ekipa/eva.jpg" alt="Eva" />
-          <p>Eva</p>
+        <div class="imageItem"><img class="person" src="@/assets/ekipa/eva.jpg" alt="Eva" />
+          <div class="nameWithIcon">
+            <p>Eva</p>
+            <a href="https://www.linkedin.com/in/eva-vidmar/" target="_blank" class="linkedin">
+              <img width="16" height="16" alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
+            </a>
+          </div>
         </div>
-        <div class="imageItem"><img src="@/assets/ekipa/neza.jpeg" alt="Neza" />
-          <p>Neža</p>
+        <div class="imageItem"><img class="person" src="@/assets/ekipa/neza.jpeg" alt="Neza" />
+          <div class="nameWithIcon">
+            <p>Neža</p>
+            <a href="https://www.linkedin.com/in/nezadukic/" target="_blank" class="linkedin">
+              <img width="16" height="16" alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -121,10 +149,16 @@ section>div {
 
   gap: 8px;
 
-  img {
+  img.person {
     width: 100%;
     max-width: 300px;
     border-radius: 10px;
   }
+}
+
+.nameWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 </style>
