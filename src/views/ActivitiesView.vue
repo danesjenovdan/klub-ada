@@ -151,6 +151,7 @@ section {
 
 .row {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 24px;
@@ -158,24 +159,23 @@ section {
     margin-top: 32px;
     margin-bottom: 32px;
 
-    // @media (min-width: 944px) {
-    //   flex-wrap: nowrap;
-    // }
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
 }
 
 .card {
-    width: 30%;
+    width: 90%;
     background-color: var(--color-light);
     border: 2px solid var(--color-dark);
     border-radius: 8px;
     color: var(--color-dark);
     padding: 32px;
-    // text-align: center;
-    // justify-content: center;
-    // display: flex;
-    // flex-direction: column;
-    // gap: 16px;
-    align-self: stretch;
+
+    @media (min-width: 768px) {
+        width: 30%;
+        align-self: stretch;
+    }
 
     h3 {
         color: var(--color-dark);
