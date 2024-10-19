@@ -6,19 +6,25 @@
       </div>
       <div>
         <ul class="menu" :class="{ 'open': menuOpen }" @click="menuOpen = false">
-          <li>
+          <!-- <li>
             <RouterLink to="/hekaton">Hekaton 2023</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="/aktivnosti">Aktivnosti</RouterLink>
-          </li>
+          </li> -->
           <li>
             <RouterLink to="/o-nas">O nas</RouterLink>
           </li>
           <li>
+            <RouterLink to="/aktivnosti">Aktivnosti</RouterLink>
+          </li>
+          <!-- <li>
+            <RouterLink to="/dogodki">Dogodki</RouterLink>
+          </li> -->
+          <li>
             <RouterLink to="/partnerstvo">Partnerstvo</RouterLink>
           </li>
-          <li><a href="https://linktr.ee/klubada" target="_blank" class="button">Prihajajoče aktivnosti 🗓️</a></li>
+          <li>
+            <RouterLink to="/dogodki" class="button">Dogodki 🗓️</RouterLink>
+          </li>
+          <!-- <li><a href="https://linktr.ee/klubada" target="_blank" class="button">Prihajajoče aktivnosti 🗓️</a></li> -->
         </ul>
         <span class="mobile-btn" @click="menuOpen = true">☰</span>
         <div class="overlay" :class="{ 'open': menuOpen }" @click="menuOpen = false"></div>
@@ -39,6 +45,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media (min-width: 992px) {
+  header {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-light);
+    border-bottom: 2px solid var(--color-dark);
+  }
+}
+
+
 .navigation {
   max-width: 1160px;
   display: flex;
@@ -72,7 +88,7 @@ export default {
 
       a {
         display: block;
-        padding: 10px 40px;
+        padding: 10px 20px;
         font-size: 18px;
         color: var(--color-text);
         text-decoration: none;
@@ -83,6 +99,7 @@ export default {
       .button {
         color: var(--color-light);
         padding: 12px 30px;
+        margin-left: 20px;
       }
 
     }
@@ -99,7 +116,7 @@ export default {
       top: 0;
       right: 0;
       display: block;
-      background-color: var(--color-dark);
+      background-color: var(--color-light);
       width: 0;
       height: 100%;
       z-index: 3;
@@ -110,13 +127,13 @@ export default {
 
     .menu.open {
       transform: translateX(0);
-      width: 300px;
+      width: 100%;
     }
 
     .menu li {
       display: block;
       padding: 10px 30px;
-      width: 300px;
+      width: 100%;
 
       &:first-child {
         padding-top: 30px;
