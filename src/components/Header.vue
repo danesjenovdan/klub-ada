@@ -45,12 +45,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-header {
-  position: sticky;
-  top: 0;
-  background-color: var(--color-light);
-  border-bottom: 2px solid var(--color-dark);
+@media (min-width: 992px) {
+  header {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-light);
+    border-bottom: 2px solid var(--color-dark);
+  }
 }
+
 
 .navigation {
   max-width: 1160px;
@@ -113,7 +116,7 @@ header {
       top: 0;
       right: 0;
       display: block;
-      background-color: var(--color-dark);
+      background-color: var(--color-light);
       width: 0;
       height: 100%;
       z-index: 3;
@@ -124,13 +127,13 @@ header {
 
     .menu.open {
       transform: translateX(0);
-      width: 300px;
+      width: 100%;
     }
 
     .menu li {
       display: block;
       padding: 10px 30px;
-      width: 300px;
+      width: 100%;
 
       &:first-child {
         padding-top: 30px;
