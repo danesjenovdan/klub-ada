@@ -35,6 +35,63 @@
       <p>V Klubu Ada verjamemo, da je povezovanje ključ do rasti in uspeha. Naša prizadevanja za spodbujanje žensk v
         tehnologiji se ne bi mogla uresničiti brez podpore partnerjev, ki delijo naše vrednote in vizijo.
       </p>
+      <div class="row rowCentered">
+        <img src="@/assets/socials.svg" alt="Socialna omrežja" />
+        <div>
+          <h4>Naše platforme vključujejo:
+          </h4>
+          <br />
+          <ul>
+            <li>
+              <strong>Družbena omrežja </strong>(Instagram, LinkedIn)
+            </li>
+            <li>
+              <strong>Spletna skupnost </strong>(Discord)
+            </li>
+            <li>
+              <strong>Novičnik </strong>z rednimi posodobitvami in novicami
+            </li>
+            <li>
+              <strong>Spletna stran</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="section fullWidthSection">
+      <div>
+        <br />
+        <h4>
+          Možnosti sodelovanja:
+        </h4>
+        <br />
+        <ul>
+          <li>
+            <strong>Povezovanje s skupnostjo: </strong>Partnerji se lahko povežejo z našo aktivno skupnostjo tehnoloških
+            navdušenk in strokovnjakinj.
+          </li>
+          <li>
+            <strong>Promocija: </strong>Vaš logotip in predstavitev bodo vidni na naših platformah.
+          </li>
+          <li>
+            <strong>Zaposlovanje: </strong>Možnost objave zaposlitvenih oglasov na naših platformah.
+          </li>
+          <li>
+            <strong>Sodelovanje na dogodkih: </strong>Partnerji se lahko predstavijo na dogodkih in sodelujejo pri
+            oblikovanju vsebin.
+          </li>
+          <li>
+            <strong>Promocijski materiali: </strong> Na dogodkih lahko delite svoj promocijski material.
+          </li>
+          <li>
+            <strong>Promocija dogodkov: </strong>Podpora pri promociji vaših dogodkov (konference, webinarji, karierni
+            dogodki) na naših platformah.
+          </li>
+          <li>
+            <strong>Druge oblike sodelovanja po dogovoru.</strong>
+          </li>
+        </ul>
+      </div>
     </section>
   </main>
 </template>
@@ -43,6 +100,21 @@
 section {
   padding-left: 32px;
   padding-right: 32px;
+  max-width: 1160px;
+  margin: auto;
+}
+
+.fullWidthSection {
+  width: 100%;
+  max-width: unset;
+  background-color: var(--color-light);
+
+  li {
+    color: var(--color-dark);
+  }
+}
+
+.fullWidthSection>div {
   max-width: 1160px;
   margin: auto;
 }
@@ -59,10 +131,15 @@ h4 {
   gap: 24px;
   flex-wrap: wrap;
   margin-top: 32px;
+  margin-bottom: 32px;
 
   @media (min-width: 944px) {
     flex-wrap: nowrap;
   }
+}
+
+.rowCentered {
+  justify-content: center;
 }
 
 .whiteSquare {
