@@ -10,7 +10,7 @@
 
         <section class="next-event">
             <div>
-                <img src="@/assets/masa_jazbec.png" alt="ZAKLJUČNI DOGODEK SEZONE">
+                <img src="@/assets/masa_jazbec.png" alt="Portret dr. Maše Jazbec.">
             </div>
             <div>
                 <p class="small">23. 10. 2024 ob 17:00 @ FRI v P04</p>
@@ -23,7 +23,26 @@
                 </p>
 
                 <div class="button-wrapper">
-                    <a href="https://forms.gle/kvwgZsTKaZVaLyJWA" target="_blank" class="button">Pridruži se!</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3iltOHdq8v__fd8GV-TLcAYu6gca4f4R3Ggw1dSHtvMk4LQ/viewform"
+                        target="_blank" class="button">Pridruži se!</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-event">
+            <div>
+                <img src="@/assets/activities/coffee&&code.png"
+                    alt="Skodelica kave z napisom Klub Ada, v ozadju nje pa srček.">
+            </div>
+            <div>
+                <p class="small">5. 11. 2024 ob 17:00 @ Impact Hub, Slovenska cesta 56, Ljubljana</p>
+                <h2>Coffee&&Code</h2>
+                <p>
+                    Enkrat mesečno se družimo ob kavi in programiramo v dobri družbi!
+                </p>
+
+                <div class="button-wrapper">
+                    <a href="https://forms.gle/HfXXWedF4Q6btBWM7" target="_blank" class="button">Pridruži se!</a>
                 </div>
             </div>
         </section>
@@ -35,7 +54,7 @@
         <section class="section">
             <div>
                 <h3>Pretekli dogodki</h3>
-                <h4>Sezona 23/24</h4>
+                <h4>Sezona 2023/2024</h4>
                 <div class="list">
                     <div class="whiteSquare">
                         <img src="@/assets/pretekli-dogodki/uspeh.png" alt="Koda za uspeh dogodek" />
@@ -116,7 +135,7 @@
                         </div>
                     </div>
                 </div>
-                <h4>Sezona 22/23</h4>
+                <h4>Sezona 2022/2023</h4>
                 <div class="list">
                     <div class="whiteSquare">
                         <img src="@/assets/pretekli-dogodki/ux-ui.jpg" alt="Ux/ui dogodek" />
