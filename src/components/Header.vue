@@ -1,28 +1,31 @@
 <template>
-    <header>
-        <div class="navigation">
-            <div>
-                <RouterLink to="/"><img alt="Klub Ada logo" class="logo" src="@/assets/newlogo.png" /></RouterLink>
-            </div>
-            <div>
-                <ul class="menu" :class="{ 'open': menuOpen }" @click="menuOpen = false">
-                    <li>
-                        <RouterLink to="/hekaton">Hekaton 2023</RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/aktivnosti">Aktivnosti</RouterLink>
-                    </li>
-                    <li>
-                        <RouterLink to="/o-nas">O nas</RouterLink>
-                    </li>
-                    <li><a href="https://linktr.ee/klubada" target="_blank" class="button">Prihajajoče aktivnosti 🗓️</a></li>
-                </ul>
-                <span class="mobile-btn" @click="menuOpen = true">☰</span>
-                <div class="overlay" :class="{ 'open': menuOpen }" @click="menuOpen = false"></div>
-            </div>
-        </div>
+  <header>
+    <div class="navigation">
+      <div>
+        <RouterLink to="/"><img alt="Klub Ada logo" class="logo" src="@/assets/newlogo.png" /></RouterLink>
+      </div>
+      <div>
+        <ul class="menu" :class="{ 'open': menuOpen }" @click="menuOpen = false">
+          <li>
+            <RouterLink to="/hekaton">Hekaton 2023</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/aktivnosti">Aktivnosti</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/o-nas">O nas</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/partnerstvo">Partnerstvo</RouterLink>
+          </li>
+          <li><a href="https://linktr.ee/klubada" target="_blank" class="button">Prihajajoče aktivnosti 🗓️</a></li>
+        </ul>
+        <span class="mobile-btn" @click="menuOpen = true">☰</span>
+        <div class="overlay" :class="{ 'open': menuOpen }" @click="menuOpen = false"></div>
+      </div>
+    </div>
 
-    </header>
+  </header>
 </template>
 
 <script>
@@ -67,23 +70,23 @@ export default {
         display: inline-block;
       }
 
-            a {
-                display: block;
-                padding: 10px 40px;
-                font-size: 18px;
-                color: var(--color-text);
-                text-decoration: none;
-                line-height: 1;
-                font-weight: 600;
-            }
+      a {
+        display: block;
+        padding: 10px 40px;
+        font-size: 18px;
+        color: var(--color-text);
+        text-decoration: none;
+        line-height: 1;
+        font-weight: 600;
+      }
 
-            .button {
-                color: var(--color-light);
-                padding: 12px 30px;
-            }
+      .button {
+        color: var(--color-light);
+        padding: 12px 30px;
+      }
 
-        }
     }
+  }
 
   .mobile-btn {
     display: none;
