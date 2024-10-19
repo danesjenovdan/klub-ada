@@ -111,6 +111,8 @@ section>div {
   img {
     max-width: 100%;
     height: auto;
+    border: 2px solid var(--color-dark);
+    border-radius: 8px;
   }
 }
 
@@ -170,7 +172,8 @@ h4 {
   img.person {
     width: 100%;
     max-width: 300px;
-    border-radius: 10px;
+    border: 2px solid var(--color-dark);
+    border-radius: 8px;
   }
 }
 
