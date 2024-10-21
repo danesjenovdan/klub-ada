@@ -41,9 +41,7 @@
                     Enkrat mesečno se družimo ob kavi in programiramo v dobri družbi!
                 </p>
 
-                <div class="button-wrapper">
-                    <a href="https://forms.gle/HfXXWedF4Q6btBWM7" target="_blank" class="button">Pridruži se!</a>
-                </div>
+                <p><strong>Prijava na dogodek ni potrebna.</strong></p>
             </div>
         </section>
 
@@ -265,8 +263,6 @@ section {
 }
 
 .next-event {
-    
-
     >div:first-child {
         img {
             max-width: 100%;

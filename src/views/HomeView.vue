@@ -1,104 +1,53 @@
 <template>
   <main>
     <section class="hero-image">
-      <img src="@/assets/hero-image.jpg" alt=""> 
+      <img src="@/assets/hero-image.jpg" alt="">
     </section>
-    
+
     <section class="hero">
       <div>
-        <h2><span>Skupnost žensk</span> žensk v tehnologiji</h2>
-        <p>Klub Ada je skupnost žensk v tehnologiji, ki povezuje dijakinje, študentke, zaposlene in vse, ki jih to področje zanima. Organiziramo dogodke, ki so namenjeni mreženju in deljenju znanja iz področje tehnologije, kariernega in osebnega razvoja.</p>
-        <div class="narrow">
-
-          <a href="https://forms.gle/kvwgZsTKaZVaLyJWA" target="_blank">
-            <img src="@/assets/unnamed.png" alt="ZAKLJUČNI DOGODEK SEZONE">
-          </a>
-          <p class="">Najboljše smo prihranile za konec! 🚀</p>
-          <p>Vabljene na zadnji dogodek te sezone z naslovom <br /><strong>Koda za uspeh: delavnica načrtovanja kariere
-              v
-              tehnologiji</strong>! ✨</p>
-          <p>Dogodek se bo odvijal v</p>
-          <ul>
-            <li>📅 Torek, 21. 5. 2024</li>
-            <li>⏰ Ob 17. uri</li>
-            <li>📍Računalniški muzej, Celovška cesta 111, Ljubljana</li>
-          </ul>
-
-          <div class="button-wrapper">
-            <a href="https://forms.gle/kvwgZsTKaZVaLyJWA" target="_blank" class="button">Pridruži se!</a>
-          </div>
-
-          <h3>
-            Opis dogodka<span>:</span>
-          </h3>
-          <p>Na dogodku bomo ustvarile <strong>personaliziran karierni načrt</strong>, ki nam bo pomagal dosegati
-            karierne cilje,
-            olajšati pot do napredovanj in postati vodilna igralka v industriji! 💼 </p>
-          <p>Pogovarjale se bomo z uspešnimi <strong>ženskami, ki delujejo na visokih položajih</strong> in so prav tako
-            ustanovile/vodile skupino za ženske v tehnologiji, ter se podružile z gostjami iz preteklih dogodkov. 🎉</p>
-
-          <h3>Program bo sestavljen iz treh delov<span>:</span></h3>
-          <ol>
-            <li>
-              <strong><span>17.00 - 18:00</span> vodena delavnica</strong> na temo načrtovanja kariere - primeren za
-              vse, od študentk
-              do že zaposlenih
-            </li>
-            <li><strong><span>18.00 - 19.00</span> voden pogovor z uspešnimi ženskami iz področja tehnologije</strong>,
-              ki so ustanovile/vodile skupino za ženske</li>
-            <li><strong><span>19.00 - 20.30</span> druženje</strong> z gostjami iz preteklih dogodkov 🎈</li>
-          </ol>
-
-          <h3>V vodenem pogovoru bodo z nami:</h3>
-          <ul>
-            <li><a href="https://www.linkedin.com/in/ialja/" target="_blank">Alja Isaković</a>, CTO pri podjetju Tethix
-              in ustanoviteljica CodeCatz</li>
-            <li><a href="https://www.linkedin.com/in/88478734/" target="_blank">Biserka Cvetkovska</a>, General Manager
-              pri podjetju tretton37,
-              ustanoviteljica LeetLadies
-            </li>
-            <li><a href="https://www.linkedin.com/in/tamarastumperger/" target="_blank">Tamara Štumperger</a>, vodja
-              sistema kakovosti dobaviteljev v podjetju
-              Danfoss, članica
-              skupine Women in
-              STEM @Danfoss</li>
-          </ul>
-
-          <p>Ne zamudi priložnosti za načrtovanje uspešne kariere ter spoznavanje uspešnih žensk v industriji! ✨</p>
-
-          <p>Število mest je omejeno, zato se čimprej prijavi! 🏃🏻‍♀️</p>
-
-          <div class="button-wrapper">
-            <a href="https://forms.gle/kvwgZsTKaZVaLyJWA" target="_blank" class="button">Prijavi se na dogodek!</a>
-          </div>
-
-        </div>
+        <h1><span>Skupnost žensk</span><br /> v tehnologiji</h1>
+        <p><strong>Klub Ada je skupnost žensk v tehnologiji, ki povezuje dijakinje, študentke, zaposlene in vse, ki jih
+            to področje zanima. Organiziramo dogodke, ki so namenjeni mreženju in deljenju znanja iz področje
+            tehnologije, kariernega in osebnega razvoja.</strong></p>
       </div>
-    </section>
-
-    <section id="organizatorji">
+      <div class="social-media">
+        <a href="https://www.instagram.com/klub_ada/" target="_blank" class="instagram">
+          <img alt="instagram logo" class="logo" src="@/assets/instagram.svg" />
+        </a>
+        <a href="https://www.linkedin.com/company/klub-ada/" target="_blank" class="linkedin">
+          <img alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
+        </a>
+      </div>
       <hr class="short-divider" />
+    </section>
+
+    <section class="next-event">
+      <h2>Pridruži se nam na naslednjem dogodku!</h2>
+    </section>
+
+    <section class="next-event">
       <div>
-        <h1>
-          <span>Klub Ada</span>
-        </h1>
-        <div class="description">
-          <p><strong>smo skupnost študentk in strokovnjakinj iz tehničnih področij.</strong></p>
-          <p class="color-lighter">Iniciativa za opolnomočenje in podporo žensk v tehnoloških karierah. Inženirke,
-            razvijalke, podatkovne znanstvenice, oblikovalke in druge, podpiramo z viri, dogodki in izobraževanji.</p>
-        </div>
-        <div class="social-media">
-          <a href="https://www.instagram.com/klub_ada/" target="_blank" class="instagram">
-            <img alt="instagram logo" class="logo" src="@/assets/instagram.svg" />
-          </a>
-          <a href="https://www.linkedin.com/company/klub-ada/" target="_blank" class="linkedin">
-            <img alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
-          </a>
+        <img src="@/assets/masa_jazbec.png" alt="Portret dr. Maše Jazbec.">
+      </div>
+      <div>
+        <p class="small">23. 10. 2024 ob 17:00 @ FRI v P04</p>
+        <h3>🤖 Robotika x Umetnost 🎨</h3>
+        <p>
+          Vabimo te na naš drugi dogodek sezone, kjer bomo gostile izjemno strokovnjakinjo s področja
+          robotike,
+          <strong>dr.
+            Mašo Jazbec</strong>!
+        </p>
+
+        <div class="button-wrapper">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3iltOHdq8v__fd8GV-TLcAYu6gca4f4R3Ggw1dSHtvMk4LQ/viewform"
+            target="_blank" class="button">Pridruži se!</a>
         </div>
       </div>
     </section>
 
-    <section>
+    <!-- <section>
       <footer>
         <div class="newsletter">
           <p><strong>Prijavi se na Klub Ada novičke in prejmi vabila na naslednje dogodke, hekatone, itd.</strong></p>
@@ -114,7 +63,7 @@
               target="_blank">info@klub-ada.si</a>.</p>
         </div>
       </footer>
-    </section>
+    </section> -->
   </main>
 </template>
 
@@ -130,24 +79,24 @@ export default {
 
 <style lang="scss" scoped>
 
-section>div,
-section>footer {
-  max-width: 1160px;
-  margin: auto;
+// section,
+// section>footer {
+//   max-width: 1160px;
+//   margin: auto;
 
-  h2 {
-    font-size: 35px;
+//   h2 {
+//     font-size: 35px;
 
-    @media (min-width: 992px) {
-      font-size: 93px;
-      margin-bottom: 80px;
-    }
+//     @media (min-width: 992px) {
+//       font-size: 93px;
+//       margin-bottom: 80px;
+//     }
 
-    span {
-      color: var(--color-red);
-    }
-  }
-}
+//     span {
+//       color: var(--color-red);
+//     }
+//   }
+// }
 
 .hero-image img {
   width: 100%;
@@ -157,128 +106,9 @@ section>footer {
 }
 
 .hero {
-  padding-top: 60px;
-  padding-bottom: 60px;
-
-  @media (min-width: 992px) {
-    // padding-top: 115px;
-    // padding-bottom: 115px;
-  }
-
-  // @media (min-width: 992px) {
-  //   &>div:last-child {
-  //     display: grid;
-  //     grid-template-columns: 1fr 1fr;
-  //     padding: 100px 0;
-  //   }
-  // }
-
-  h2 {
-    color: var(--color-dark);
-    font-size: 40px;
-    line-height: 1;
-    font-weight: 500;
-    text-align: center;
-    margin-bottom: 40px;
-
-    @media (min-width: 992px) {
-      font-size: 60px;
-    }
-
-    span {
-      color: var(--color-red);
-    }
-  }
-
-  .narrow {
-    max-width: 800px;
-    margin: auto;
-
-    img {
-      max-width: 100%;
-    }
-
-    h3 {
-      color: var(--color-red);
-      font-size: 32px;
-      margin: 20px 0;
-
-      @media (min-width: 992px) {
-        font-size: 40px;
-      }
-    }
-
-    p {
-      font-size: 20px;
-      color: var(--color-dark);
-      margin: 20px 0;
-
-      strong {
-        color: var(--color-red);
-      }
-
-      @media (min-width: 992px) {
-        font-size: 26px;
-      }
-    }
-
-    ul li,
-    ol li {
-      font-size: 20px;
-      color: var(--color-dark);
-      margin: 20px 0;
-
-      strong {
-        color: var(--color-red);
-      }
-
-      a {
-        color: var(--color-red);
-        font-weight: 600;
-
-        &:hover {
-          color: var(--color-red);
-        }
-      }
-
-      @media (min-width: 992px) {
-        font-size: 26px;
-      }
-    }
-
-    .button-wrapper {
-      text-align: center;
-
-      // .button {
-      //   display: inline-block;
-      //   font-size: 20px;
-      //   font-weight: 600;
-      //   color: var(--color-text);
-      //   background-color: var(--color-red);
-      //   text-decoration: none;
-      //   margin: 20px 0;
-      //   padding: 10px 20px;
-      //   border-width: 2px;
-
-      // @media (min-width: 992px) {
-      //   font-size: 30px;
-      //   padding: 20px 40px;
-      //   border-width: 4px;
-      //   margin: 40px 0;
-      // }
-
-      // &:hover {
-      //   color: var(--color-red);
-      //   background-color: var(--color-text);
-      // }
-      // }
-    }
-  }
-}
-
-#organizatorji {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  margin-top: 80px;
+  padding-left: 32px;
+  padding-right: 32px;
 
   @media (min-width: 992px) {
     // padding-top: 115px;
@@ -286,20 +116,26 @@ section>footer {
   }
 
   h1 {
-    color: var(--color-light);
-    font-size: 60px;
+    color: var(--color-dark);
+    font-size: 38px;
     line-height: 1;
-    font-weight: 600;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
 
     @media (min-width: 992px) {
-      font-size: 93px;
-      margin-bottom: 20px;
+      font-size: 60px;
+      margin-bottom: 60px;
     }
 
     span {
       color: var(--color-red);
+      font-weight: 600;
+      font-size: 48px;
+
+      @media (min-width: 992px) {
+        font-size: 72px;
+        margin-bottom: 20px;
+      }
     }
   }
 
@@ -349,6 +185,66 @@ section>footer {
 
       img {
         width: 280px;
+      }
+    }
+  }
+}
+
+.next-event {
+  max-width: 1160px;
+  margin: 60px auto;
+  padding-left: 32px;
+  padding-right: 32px;
+
+  >div:first-child {
+    img {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    >div:last-child {
+      margin-left: 40px;
+    }
+  }
+
+  p {
+    font-size: 20px;
+    margin-bottom: 20px;
+
+    strong {
+      font-weight: 700;
+    }
+
+    @media (min-width: 992px) {
+      font-size: 28px;
+    }
+  }
+
+  p.small {
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-weight: 500;
+    margin: auto;
+  }
+
+  h3 {
+    color: var(--color-red);
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: 992px) {
+    display: flex;
+
+    >div:first-child {
+      img {
+        max-width: 500px;
       }
     }
   }
