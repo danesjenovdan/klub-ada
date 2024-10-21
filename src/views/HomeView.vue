@@ -1,9 +1,13 @@
 <template>
   <main>
-
+    <section class="hero-image">
+      <img src="@/assets/hero-image.jpg" alt=""> 
+    </section>
+    
     <section class="hero">
       <div>
-        <h2><span>Pridruži se nam</span> na naslednjem dogodku!</h2>
+        <h2><span>Skupnost žensk</span> žensk v tehnologiji</h2>
+        <p>Klub Ada je skupnost žensk v tehnologiji, ki povezuje dijakinje, študentke, zaposlene in vse, ki jih to področje zanima. Organiziramo dogodke, ki so namenjeni mreženju in deljenju znanja iz področje tehnologije, kariernega in osebnega razvoja.</p>
         <div class="narrow">
 
           <a href="https://forms.gle/kvwgZsTKaZVaLyJWA" target="_blank">
@@ -125,10 +129,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
-  padding-left: 20px;
-  padding-right: 20px;
-}
 
 section>div,
 section>footer {
@@ -147,6 +147,13 @@ section>footer {
       color: var(--color-red);
     }
   }
+}
+
+.hero-image img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  object-position: center;
 }
 
 .hero {
