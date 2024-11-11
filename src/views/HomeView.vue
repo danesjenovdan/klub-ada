@@ -28,22 +28,18 @@
 
     <section class="next-event">
       <div>
-        <img src="@/assets/masa_jazbec.png" alt="Portret dr. Maše Jazbec.">
+          <img src="@/assets/pretekli-dogodki/TejaSavs.jpg" alt="Portret Teje Šavs.">
       </div>
       <div>
-        <p class="small">23. 10. 2024 ob 17:00 @ FRI v P04</p>
-        <h3>🤖 Robotika x Umetnost 🎨</h3>
-        <p>
-          Vabimo te na naš drugi dogodek sezone, kjer bomo gostile izjemno strokovnjakinjo s področja
-          robotike,
-          <strong>dr.
-            Mašo Jazbec</strong>!
-        </p>
+          <p class="small">19. 11. 2024 ob 17:00 @ FRI v P18</p>
+          <h3>Vodenje v tehnološkem podjetju</h3>
+          <p>Te zanima kako vodja spremlja uspešnost svojih zaposlenih? Kako izbere člane ekipe glede na projekt?</p>
+          <p>Vabljena na novembrski dogodek, kjer bomo gostile tehnološko direktorico <strong>Tejo Šavs</strong> iz podjetja <strong>Outfit7</strong>!</p>
 
-        <div class="button-wrapper">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3iltOHdq8v__fd8GV-TLcAYu6gca4f4R3Ggw1dSHtvMk4LQ/viewform"
-            target="_blank" class="button">Pridruži se!</a>
-        </div>
+          <div class="button-wrapper">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNWByisvH-7MQdbzo03EyUgSNchYDwlhBOxuSxLGHfb66jhw/viewform"
+                  target="_blank" class="button">Pridruži se!</a>
+          </div>
       </div>
     </section>
 
