@@ -10,20 +10,16 @@
 
         <section class="next-event">
             <div>
-                <img src="@/assets/masa_jazbec.png" alt="Portret dr. Maše Jazbec.">
+                <img src="@/assets/pretekli-dogodki/TejaSavs.jpg" alt="Portret Teje Šavs.">
             </div>
             <div>
-                <p class="small">23. 10. 2024 ob 17:00 @ FRI v P04</p>
-                <h2>🤖 Robotika x Umetnost 🎨 </h2>
-                <p>
-                    Vabimo te na naš drugi dogodek sezone, kjer bomo gostile izjemno strokovnjakinjo s področja
-                    robotike,
-                    <strong>dr.
-                        Mašo Jazbec</strong>!
-                </p>
+                <p class="small">19. 11. 2024 ob 17:00 @ FRI v P18</p>
+                <h2>Vodenje v tehnološkem podjetju</h2>
+                <p>Te zanima kako vodja spremlja uspešnost svojih zaposlenih? Kako izbere člane ekipe glede na projekt?</p>
+                <p>Vabljena na novembrski dogodek, kjer bomo gostile tehnološko direktorico <strong>Tejo Šavs</strong> iz podjetja <strong>Outfit7</strong>!</p>
 
                 <div class="button-wrapper">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3iltOHdq8v__fd8GV-TLcAYu6gca4f4R3Ggw1dSHtvMk4LQ/viewform"
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNWByisvH-7MQdbzo03EyUgSNchYDwlhBOxuSxLGHfb66jhw/viewform"
                         target="_blank" class="button">Pridruži se!</a>
                 </div>
             </div>
@@ -35,7 +31,7 @@
                     alt="Skodelica kave z napisom Klub Ada, v ozadju nje pa srček.">
             </div>
             <div>
-                <p class="small">5. 11. 2024 ob 17:00 @ Impact Hub, Slovenska cesta 56, Ljubljana</p>
+                <p class="small">3. 12. 2024 ob 17:00 @ Impact Hub, Slovenska cesta 56, Ljubljana</p>
                 <h2>Coffee&&Code</h2>
                 <p>
                     Enkrat mesečno se družimo ob kavi in programiramo v dobri družbi!
@@ -52,6 +48,24 @@
         <section class="section">
             <div>
                 <h3>Pretekli dogodki</h3>
+                <h4>Sezona 2024/2025</h4>
+                <div class="list">
+                    <div class="whiteSquare">
+                        <img src="@/assets/activities/coffee&&code.png" alt="Skodelica kave z napisom Klub Ada, v ozadju nje pa srček." />
+                        <div class="column">
+                            <strong>Coffee&&Code #1</strong>
+                            <p>Enkrat mesečno se družimo ob kavi in programiramo v dobri družbi!</p>
+                        </div>
+                    </div>
+                    <div class="whiteSquare">
+                        <img src="@/assets/pretekli-dogodki/robotika-umetnost.jpg" alt="Koda za uspeh dogodek" />
+                        <div class="column">
+                            <strong>🤖 Robotika x Umetnost 🎨</strong>
+                            <p>Na oktobrskem dogodku Klub Ada smo gostile dr. Mašo Jazbec, umetnico in inženirko robotike, ki združuje svet umetnosti in tehnologije.</p>
+                            <p>Pogovor je vodila Eva Vidmar.</p>
+                        </div>
+                    </div>
+                </div>
                 <h4>Sezona 2023/2024</h4>
                 <div class="list">
                     <div class="whiteSquare">
