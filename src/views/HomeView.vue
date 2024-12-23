@@ -1,23 +1,57 @@
 <template>
   <main>
     <section class="hero-image">
-      <img src="@/assets/hero-image.jpg" alt="">
+      <img src="@/assets/hero-image.jpg" alt="" />
     </section>
 
     <section class="hero">
       <div>
-        <h1><span>Skupnost žensk</span><br /> v tehnologiji</h1>
-        <p><strong>Klub Ada je skupnost žensk v tehnologiji, ki povezuje dijakinje, študentke, zaposlene in vse, ki jih
-            to področje zanima. Organiziramo dogodke, ki so namenjeni mreženju in deljenju znanja iz področje
-            tehnologije, kariernega in osebnega razvoja.</strong></p>
+        <h1>
+          <span>Skupnost žensk</span><br />
+          v tehnologiji
+        </h1>
+        <p>
+          <strong
+            >Klub Ada je skupnost žensk v tehnologiji, ki povezuje dijakinje,
+            študentke, zaposlene in vse, ki jih to področje zanima. Organiziramo
+            dogodke, ki so namenjeni mreženju in deljenju znanja iz področje
+            tehnologije, kariernega in osebnega razvoja.</strong
+          >
+        </p>
       </div>
       <div class="social-media">
-        <a href="https://www.instagram.com/klub_ada/" target="_blank" class="instagram">
+        <a
+          href="https://www.instagram.com/klub_ada/"
+          target="_blank"
+          class="instagram"
+        >
           <img alt="instagram logo" class="logo" src="@/assets/instagram.svg" />
         </a>
-        <a href="https://www.linkedin.com/company/klub-ada/" target="_blank" class="linkedin">
+        <a
+          href="https://www.linkedin.com/company/klub-ada/"
+          target="_blank"
+          class="linkedin"
+        >
           <img alt="linkedin logo" class="logo" src="@/assets/linkedin.svg" />
         </a>
+      </div>
+      <hr class="short-divider" />
+    </section>
+
+    <section class="sponsors">
+      <h2>Hvala partnerjem, ki nas podpirajo:</h2>
+      <div>
+        <img
+          alt="Celtra logo"
+          class="logo"
+          src="@/assets/sponsors/celtra.svg"
+        />
+        <img
+          alt="Impact Hub Ljubljana logo"
+          class="logo"
+          src="@/assets/sponsors/impact-hub.png"
+        />
+        <img alt="FRI logo" class="logo" src="@/assets/sponsors/fri.png" />
       </div>
       <hr class="short-divider" />
     </section>
@@ -28,18 +62,32 @@
 
     <section class="next-event">
       <div>
-          <img src="@/assets/pretekli-dogodki/TejaSavs.jpg" alt="Portret Teje Šavs.">
+        <img
+          src="@/assets/pretekli-dogodki/TejaSavs.jpg"
+          alt="Portret Teje Šavs."
+        />
       </div>
       <div>
-          <p class="small">19. 11. 2024 ob 17:00 @ FRI v P18</p>
-          <h3>Vodenje v tehnološkem podjetju</h3>
-          <p>Te zanima kako vodja spremlja uspešnost svojih zaposlenih? Kako izbere člane ekipe glede na projekt?</p>
-          <p>Vabljena na novembrski dogodek, kjer bomo gostile tehnološko direktorico <strong>Tejo Šavs</strong> iz podjetja <strong>Outfit7</strong>!</p>
+        <p class="small">19. 11. 2024 ob 17:00 @ FRI v P18</p>
+        <h3>Vodenje v tehnološkem podjetju</h3>
+        <p>
+          Te zanima kako vodja spremlja uspešnost svojih zaposlenih? Kako izbere
+          člane ekipe glede na projekt?
+        </p>
+        <p>
+          Vabljena na novembrski dogodek, kjer bomo gostile tehnološko
+          direktorico <strong>Tejo Šavs</strong> iz podjetja
+          <strong>Outfit7</strong>!
+        </p>
 
-          <div class="button-wrapper">
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNWByisvH-7MQdbzo03EyUgSNchYDwlhBOxuSxLGHfb66jhw/viewform"
-                  target="_blank" class="button">Pridruži se!</a>
-          </div>
+        <div class="button-wrapper">
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfNWByisvH-7MQdbzo03EyUgSNchYDwlhBOxuSxLGHfb66jhw/viewform"
+            target="_blank"
+            class="button"
+            >Pridruži se!</a
+          >
+        </div>
       </div>
     </section>
 
@@ -67,14 +115,13 @@
 export default {
   data() {
     return {
-      "menuOpen": false
-    }
-  }
-}
+      menuOpen: false,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-
 // section,
 // section>footer {
 //   max-width: 1160px;
@@ -99,6 +146,38 @@ export default {
   height: 70vh;
   object-fit: cover;
   object-position: center;
+}
+
+.sponsors {
+  margin-top: 100px;
+  width: 100%;
+  .short-divider {
+    margin-top: 100px;
+    margin-bottom: 40px;
+  }
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 32px;
+  gap: 64px;
+  h2 {
+    font-weight: 500;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 48px;
+    img {
+      height: 120px;
+    }
+    @media (min-width: 992px) {
+      // padding-top: 115px;
+      // padding-bottom: 115px;
+    }
+  }
 }
 
 .hero {
@@ -158,7 +237,7 @@ export default {
   .social-media {
     text-align: center;
 
-    &>a {
+    & > a {
       display: inline-block;
       margin: 40px 20px 0;
 
@@ -169,7 +248,7 @@ export default {
   }
 
   .short-divider {
-    margin: 50px auto;
+    margin: 100px auto;
   }
 
   .djnd {
@@ -192,14 +271,14 @@ export default {
   padding-left: 32px;
   padding-right: 32px;
 
-  >div:first-child {
+  > div:first-child {
     img {
       max-width: 100%;
     }
   }
 
   @media (min-width: 992px) {
-    >div:last-child {
+    > div:last-child {
       margin-left: 40px;
     }
   }
@@ -238,7 +317,7 @@ export default {
   @media (min-width: 992px) {
     display: flex;
 
-    >div:first-child {
+    > div:first-child {
       img {
         max-width: 500px;
       }
