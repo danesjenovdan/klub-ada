@@ -8,15 +8,17 @@
                 ki ti je zanimiv, in prideš.</p>
         </section>
 
-        <section class="next-event">
+        <!-- <section class="next-event">
             <div>
                 <img src="@/assets/pretekli-dogodki/TejaSavs.jpg" alt="Portret Teje Šavs.">
             </div>
             <div>
                 <p class="small">19. 11. 2024 ob 17:00 @ FRI v P18</p>
                 <h2>Vodenje v tehnološkem podjetju</h2>
-                <p>Te zanima kako vodja spremlja uspešnost svojih zaposlenih? Kako izbere člane ekipe glede na projekt?</p>
-                <p>Vabljena na novembrski dogodek, kjer bomo gostile tehnološko direktorico <strong>Tejo Šavs</strong> iz podjetja <strong>Outfit7</strong>!</p>
+                <p>Te zanima kako vodja spremlja uspešnost svojih zaposlenih? Kako izbere člane ekipe glede na projekt?
+                </p>
+                <p>Vabljena na novembrski dogodek, kjer bomo gostile tehnološko direktorico <strong>Tejo Šavs</strong>
+                    iz podjetja <strong>Outfit7</strong>!</p>
 
                 <div class="button-wrapper">
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNWByisvH-7MQdbzo03EyUgSNchYDwlhBOxuSxLGHfb66jhw/viewform"
@@ -39,7 +41,7 @@
 
                 <p><strong>Prijava na dogodek ni potrebna.</strong></p>
             </div>
-        </section>
+        </section> -->
 
         <section>
             <hr />
@@ -51,17 +53,36 @@
                 <h4>Sezona 2024/2025</h4>
                 <div class="list">
                     <div class="whiteSquare">
-                        <img src="@/assets/activities/coffee&&code.png" alt="Skodelica kave z napisom Klub Ada, v ozadju nje pa srček." />
+                        <img src="@/assets/activities/coffee&&code.png"
+                            alt="Skodelica kave z napisom Klub Ada, v ozadju nje pa srček." />
                         <div class="column">
-                            <strong>Coffee&&Code #1</strong>
+                            <strong>Coffee&&Code #2 [3. 12. 2024]</strong>
+                            <p>Enkrat mesečno se družimo ob kavi in programiramo v dobri družbi!</p>
+                        </div>
+                    </div>
+                    <div class="whiteSquare">
+                        <img src="@/assets/pretekli-dogodki/TejaSavs.jpg" alt="Portret Teje Šavs" />
+                        <div class="column">
+                            <strong>Vodenje v tehnološkem podjetju [19. 11. 2024]</strong>
+                            <p>Na novembrskem dogodku nam je Teja Šavs iz podjetja Outfit7 predstavila delo tehnološke
+                                direktorice.</p>
+                            <p>Pogovor je vodila Simona Kek.</p>
+                        </div>
+                    </div>
+                    <div class="whiteSquare">
+                        <img src="@/assets/activities/coffee&&code.png"
+                            alt="Skodelica kave z napisom Klub Ada, v ozadju nje pa srček." />
+                        <div class="column">
+                            <strong>Coffee&&Code #1 [5. 11. 2024]</strong>
                             <p>Enkrat mesečno se družimo ob kavi in programiramo v dobri družbi!</p>
                         </div>
                     </div>
                     <div class="whiteSquare">
                         <img src="@/assets/pretekli-dogodki/robotika-umetnost.jpg" alt="Koda za uspeh dogodek" />
                         <div class="column">
-                            <strong>🤖 Robotika x Umetnost 🎨</strong>
-                            <p>Na oktobrskem dogodku Klub Ada smo gostile dr. Mašo Jazbec, umetnico in inženirko robotike, ki združuje svet umetnosti in tehnologije.</p>
+                            <strong>🤖 Robotika x Umetnost 🎨 [23. 10. 2024]</strong>
+                            <p>Na oktobrskem dogodku Klub Ada smo gostile dr. Mašo Jazbec, umetnico in inženirko
+                                robotike, ki združuje svet umetnosti in tehnologije.</p>
                             <p>Pogovor je vodila Eva Vidmar.</p>
                         </div>
                     </div>
