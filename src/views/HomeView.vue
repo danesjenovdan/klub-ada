@@ -56,11 +56,11 @@
       <hr class="short-divider" />
     </section>
 
-    <section class="next-event">
+    <!-- <section class="next-event">
       <h2>Pridruži se nam na naslednjem dogodku!</h2>
-    </section>
+    </section> -->
 
-    <section class="next-event">
+    <!-- <section class="next-event">
       <div>
         <img
           src="@/assets/pretekli-dogodki/TejaSavs.jpg"
@@ -89,7 +89,7 @@
           >
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- <section>
       <footer>
