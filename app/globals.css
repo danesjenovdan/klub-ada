@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-white: #fafafa;
+  --color-black: #231f20;
+  --color-beige: #f7efe9;
+
+  --color-red: #ff5757;
+  --color-blue: #77a4d4;
+  --color-yellow: #fbb040;
+  --color-pink: #ff85a5;
+
+  --color-blue-100: #f1f6fb;
+  --color-blue-200: #e4edf6;
+  --color-blue-300: #c9dbee;
+  --color-blue-400: #adc8e5;
+  --color-blue-500: #92b6dd;
+  --color-blue-600: var(--color-blue);
+  --color-blue-700: #5f83aa;
+  --color-blue-800: #47627f;
+
+  --color-red-100: #ffeeee;
+  --color-red-200: #ffdddd;
+  --color-red-300: #ffbcbc;
+  --color-red-400: #ff9a9a;
+  --color-red-500: #ff7979;
+  --color-red-600: var(--color-red);
+  --color-red-700: #cc4646;
+  --color-red-800: #993434;
+
+  --color-pink-100: #fff3f6;
+  --color-pink-200: #ffe7ed;
+  --color-pink-300: #ffcedb;
+  --color-pink-400: #ffb6c9;
+  --color-pink-500: #ff9db7;
+  --color-pink-600: var(--color-pink);
+  --color-pink-700: #cc6a84;
+  --color-pink-800: #995063;
+
+  --color-gray-100: #e9e9e9;
+  --color-gray-200: #d3d2d2;
+  --color-gray-300: #bdbcbc;
+  --color-gray-400: #a7a5a6;
+  --color-gray-500: #918f90;
+  --color-gray-600: #7b7979;
+  --color-gray-700: #656263;
+  --color-gray-800: #4f4c4d;
+  --color-gray-900: #393536;
+
+  --color-background: var(--color-beige);
+  --color-border: var(--color-black);
+  --color-text-default: var(--color-black);
+  --color-text-light: var(--color-white);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: "Anaheim";
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+.underline-animation {
+  position: relative;
+  display: inline;
+}
+
+.underline-animation::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease-in-out;
+}
+
+.underline-animation:hover::after {
+  width: 100%;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-embedBody.ml-form-embedBodyHorizontal {
+  padding: 0;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-embedBody
+  .ml-form-formContent,
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-embedBody
+  .ml-form-checkboxRow {
+  margin: 0 !important;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-embedBody
+  .ml-form-checkboxRow
+  label
+  p:first-child {
+  font-family: "Anaheim" !important;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-embedBody
+  .ml-form-horizontalRow
+  input {
+  font-family: "Anaheim" !important;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-embedBody
+  .ml-form-horizontalRow
+  button {
+  font-family: "Anaheim" !important;
+  border-color: black !important;
+  font-weight: 500 !important;
+  transform: translate(0, 0) 0 0 0 1 1;
+  border-radius: 0.5rem !important;
+  width: 100% !important;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-embedBody
+  .ml-form-horizontalRow
+  .primary
+  button:hover {
+  box-shadow: -4px 4px black;
+  transform: translate(0.25rem, -0.25rem);
+  font-weight: 500 !important;
+  transition-duration: 0.2s;
+  border-color: black !important;
+  border-radius: 0.5rem;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-successBody
+  .ml-form-successContent
+  h4 {
+  font-family: "Anaheim" !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #ff85a5 !important;
+  margin-bottom: 1.5rem;
+  margin: 0 !important;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-successBody
+  .ml-form-successContent {
+  margin: 0 !important;
+}
+
+#mlb2-9478951.ml-form-embedContainer
+  .ml-form-embedWrapper
+  .ml-form-successBody {
+  padding: 0 !important;
+}
+
+.ml-form-formContent.horozintalForm
+  .ml-form-horizontalRow
+  .ml-button-horizontal {
+  width: 22% !important;
+}
+
+.ml-form-formContent.horozintalForm
+  .ml-form-horizontalRow
+  .ml-input-horizontal {
+  width: 78% !important;
+}
