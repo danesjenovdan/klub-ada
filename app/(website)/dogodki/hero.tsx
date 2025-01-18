@@ -16,7 +16,7 @@ export default function Hero() {
             alt="Calendar illustration"
             className="w-[80px] md:w-[120px] lg:w-[160]"
           />
-          <Heading size="xl" className="text-center">
+          <Heading size="lg" className="text-center">
             {"Dogodki"}
           </Heading>
         </div>
@@ -47,7 +47,7 @@ export default function Hero() {
             className="object-cover w-2/6 rounded-2xl border border-black"
           />
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-2 md:gap-4">
           <Image
             src="/assets/dogodek-3.png"
             width={500}
