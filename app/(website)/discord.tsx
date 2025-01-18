@@ -10,7 +10,7 @@ export function Discord() {
     <PageWrapper>
       <>
         <Card bgColor="bg-yellow">
-          <div className="flex flex-col-reverse md:flex-row items-left md:items-center justify-start gap-5 md:gap-10">
+          <div className="flex flex-col-reverse lg:flex-row items-left lg:items-center justify-start gap-5 md:gap-10">
             <div className="h-full lg:basis-3/5">
               <Image
                 src="/assets/discord-image.png"
@@ -32,7 +32,7 @@ export function Discord() {
                 {"Pridruži se naši skupnosti"}
               </Heading>
 
-              <Paragraph size="md" className="max-w-sm">
+              <Paragraph size="lg" className="max-w-md">
                 {
                   "Naša Discord platforma je varen prostor za izmenjavo idej, zanimivih tem, dogodkov, uporabnih virov in priložnosti za osebni in karierni razvoj."
                 }

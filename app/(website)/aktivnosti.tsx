@@ -17,11 +17,13 @@ export async function Aktivnosti() {
     <PageWrapper>
       <div className="flex flex-col gap-4">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <div className="flex flex-col gap-4">
-            <Heading size="lg">{"Aktivnosti"}</Heading>
-            <Paragraph size="lg">
-              {"Preberi si vse aktivnosti, ki jih ponujamo."}
-            </Paragraph>
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <Heading size="lg">{"Aktivnosti"}</Heading>
+              <Paragraph size="lg">
+                {"Preberi si vse aktivnosti, ki jih ponujamo."}
+              </Paragraph>
+            </div>
             <div>
               <LinkButton
                 size="md"
