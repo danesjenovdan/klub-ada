@@ -14,7 +14,7 @@ export function Collaboration() {
           </Heading>
         </div>
         <div className="flex flex-col gap-4 basis-1/2">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-baseline md:items-center">
             <Image
               src="/assets/bullet.svg"
               width={36}
@@ -26,7 +26,7 @@ export function Collaboration() {
               {"Predstavitev in sodelovanje pri oblikovanju vsebine dogodkov."}
             </Paragraph>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-baseline md:items-center">
             <Image
               src="/assets/bullet.svg"
               width={36}
@@ -38,7 +38,7 @@ export function Collaboration() {
               {"Objava zaposlitvenih oglasov na naših platformah."}
             </Paragraph>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-baseline md:items-center">
             <Image
               src="/assets/bullet.svg"
               width={36}
@@ -50,7 +50,7 @@ export function Collaboration() {
               {"Programerski dogodki in mreženje."}
             </Paragraph>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-baseline md:items-center">
             <Image
               src="/assets/bullet.svg"
               width={36}
@@ -62,7 +62,7 @@ export function Collaboration() {
               {"Deljenje promocijskega materiala na dogodkih."}
             </Paragraph>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-baseline md:items-center">
             <Image
               src="/assets/bullet.svg"
               width={36}
@@ -74,7 +74,7 @@ export function Collaboration() {
               {"Povečanje prepoznavnosti vaše blagovne znamke."}
             </Paragraph>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-baseline md:items-center">
             <Image
               src="/assets/bullet.svg"
               width={36}

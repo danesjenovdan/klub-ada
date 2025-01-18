@@ -7,7 +7,7 @@ import Image from "next/image";
 export function Hero() {
   return (
     <PageWrapper>
-      <div className="flex flex-col pb-10 md:pb-20 md:px-16 gap-6 items-center">
+      <div className="flex flex-col pb-4 md:pb-14 md:px-16 gap-6 items-center">
         <div className="flex flex-col gap-2 items-center">
           <Image
             src="/assets/partners-illustration.png"
@@ -16,7 +16,7 @@ export function Hero() {
             alt="Partners illustration"
             className="w-[80px] md:w-[120px] lg:w-[160]"
           />
-          <Heading size="xl" className="text-center">
+          <Heading size="lg" className="text-center">
             {"Postani partner Kluba Ada"}
           </Heading>
         </div>
