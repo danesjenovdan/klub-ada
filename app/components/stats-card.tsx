@@ -12,7 +12,7 @@ export function StatsCard({
   return (
     <Card bgColor="bg-white" contentAlignment="center">
       <div className="flex flex-col gap-2 md:gap-4">
-        <Heading size="xl" className="text-red text-center">
+        <Heading size="lg" className="text-red text-center">
           {number}
         </Heading>
         <Paragraph size="lg" weight="bold" className="text-black text-center">

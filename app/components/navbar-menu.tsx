@@ -15,9 +15,9 @@ export function NavbarMenu() {
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (
-          <XMarkIcon className="w-8 h-8" />
+          <XMarkIcon className="w-7 h-7" />
         ) : (
-          <Bars3Icon className="w-8 h-8" />
+          <Bars3Icon className="w-7 h-7" />
         )}
       </button>
       <div
@@ -26,18 +26,24 @@ export function NavbarMenu() {
           isOpen ? "flex" : "hidden"
         } bg-white rounded-2xl border border-black flex-col gap-6`}
       >
-        <ol className="flex flex-col gap-3">
+        <ol className="flex flex-col gap-4">
           <li>
-            <Link href="/o-nas">O nas</Link>
+            <Link variant="secondary" href="/o-nas">
+              O nas
+            </Link>
           </li>
           <li>
-            <Link href="/blog">Blog</Link>
+            <Link variant="secondary" href="/blog">
+              Blog
+            </Link>
           </li>
           <li>
-            <Link href="/partnerstvo">Partnerstva</Link>
+            <Link variant="secondary" href="/partnerstvo">
+              Partnerstva
+            </Link>
           </li>
         </ol>
-        <Button>Dogodki</Button>
+        <Button>Vsi dogodki</Button>
       </div>
     </div>
   );
