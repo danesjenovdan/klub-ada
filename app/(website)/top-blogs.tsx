@@ -3,7 +3,22 @@ import { LinkButton } from "../components/link-button";
 import { PageWrapper } from "../components/page-wrapper";
 import PostComponent from "../components/post-component";
 import { Post } from "../utils/interface";
-import { getPinnedPosts } from "./blog/blogs";
+import { client } from "@/sanity/lib/client";
+
+export async function getPinnedPosts() {
+  const query = `*[_type == "post" && pinned] {
+    title,
+    slug,
+    mainImage,
+    categories[]-> {
+      _id,
+      slug,
+      title,
+    }
+  }`;
+  const data = await client.fetch(query);
+  return data;
+}
 
 export async function TopBlogs() {
   const pinnedPosts: Post[] = await getPinnedPosts();
