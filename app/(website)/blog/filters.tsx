@@ -33,7 +33,9 @@ function Filter({ isSelected, label, handleSelectFilter }: FilterProps) {
 
 type CategoryType = {
   title: string;
-  slug: string;
+  slug: {
+    current: string;
+  };
 };
 type FiltersProps = {
   selectedCategory: string;
@@ -63,8 +65,10 @@ export function Filters({
         <Filter
           key={category.title}
           label={category.title}
-          isSelected={selectedCategory === category.slug}
-          handleSelectFilter={() => setSelectedCategoryAction(category.slug)}
+          isSelected={selectedCategory === category.slug.current}
+          handleSelectFilter={() =>
+            setSelectedCategoryAction(category.slug.current)
+          }
         />
       ))}
     </div>
