@@ -12,7 +12,7 @@ export function Hero() {
         <div className="flex flex-col gap-4 shrink-1 basis-1/2 lg:basis-2/5">
           <Card bgColor="bg-white">
             <div className="flex flex-col h-full justify-between gap-8">
-              <Heading size="xl">{"Skupnost žensk v tehnologiji"}</Heading>
+              <Heading size="lg">{"Skupnost žensk v tehnologiji"}</Heading>
               <Paragraph size="lg">
                 {
                   "Klub Ada organizira dogodke, ki so namenjeni mreženju in deljenju znanja, kariernega in osebnega razvoja za dijakinje, študentke, zaposlene in vse, ki jih področje tehnologije zanima."

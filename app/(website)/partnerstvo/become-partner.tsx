@@ -6,7 +6,7 @@ import { Paragraph } from "@/app/components/paragraph";
 export function BecomePartner() {
   return (
     <PageWrapper>
-      <div className="p-10 md:p-16 lg:p-20 bg-blue grow rounded-2xl border border-black">
+      <div className="flex p-8 md:p-16 lg:p-20 bg-blue grow rounded-2xl border border-black">
         <div className="flex flex-col gap-10 md:flex-row justify-between items-center">
           <div className="flex flex-col gap-3 md:gap-6">
             <Heading size="lg">{"Vas zanima sodelovanje?"}</Heading>

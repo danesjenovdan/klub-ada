@@ -35,7 +35,7 @@ export function Mission() {
     <PageWrapper hasNoBottomPadding hasNoTopPadding>
       <>
         {sections.map((section, index) => (
-          <div key={index} className="flex h-screen w-full">
+          <div key={index} className="flex h-[90vh] w-full">
             <div className="w-1/2 h-full flex items-center justify-center">
               <Image
                 src={section.image}

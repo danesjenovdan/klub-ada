@@ -22,7 +22,7 @@ const PostComponent = ({ post }: Props) => {
               width={500}
               height={500}
               alt={post.mainImage.alt}
-              className="w-full object-cover md:aspect-square rounded-2xl"
+              className="w-full object-cover aspect-square rounded-2xl"
             />
             <div className="flex gap-2">
               {post.categories.map((category) => (

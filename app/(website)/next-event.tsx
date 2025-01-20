@@ -27,7 +27,7 @@ export async function NextEvent() {
   return (
     <PageWrapper bgColor="bg-red">
       <div id="next-event" className="flex flex-col gap-8 md:gap-16">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 md:gap-8">
           <div className="max-w-sm md:max-w-xl">
             <Heading size="lg">{"Pridi na naš naslednji dogodek!"}</Heading>
           </div>
@@ -45,12 +45,12 @@ export async function NextEvent() {
                 width={500}
                 height={500}
                 alt={nextEvent.eventImage.alt}
-                className="w-full object-cover md:aspect-square rounded-2xl"
+                className="w-full object-cover aspect-square rounded-2xl"
               />
             </div>
             <div className="flex flex-col pt-4 gap-6 md:gap-12 justify-center grow">
               <div className="flex flex-col gap-3">
-                <Paragraph size="lg" weight="regular">
+                <Paragraph size="lg">
                   {`${formattedDateAndTime} @ ${nextEvent.location}`}
                 </Paragraph>
                 <Heading size="sm">{nextEvent.title}</Heading>

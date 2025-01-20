@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import { IconArrowRight } from "@tabler/icons-react";
 
 const baseCtaLink = tv({
-  base: "flex flex-col grow p-4 lg:p-6 gap-6 justify-between min-h-40 h-full select-none rounded-2xl font-button font-medium outline-none border border-black hover:shadow-button text-start transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1",
+  base: "flex flex-col grow p-4 lg:p-6 gap-4 md:gap-6 justify-between min-h-32 md:min-h-40 h-full select-none rounded-2xl font-button font-medium outline-none border border-black hover:shadow-button text-start transition-all duration-200 ease-in-out transform hover:shadow-button hover:-translate-y-1 hover:translate-x-1",
   variants: {
     color: {
       red: "bg-red",

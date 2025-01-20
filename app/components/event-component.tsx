@@ -35,10 +35,10 @@ export default async function EventComponent({ event }: Props) {
             alt={event.eventImage.alt}
             className="w-full object-cover aspect-[4/3] md:aspect-square rounded-2xl"
           />
-          <Paragraph size="md">{formattedDate}</Paragraph>
-          <Heading size="xs" lineHeight="tight">
-            {event.title}
-          </Heading>
+          <div className="flex flex-col gap-2">
+            <Paragraph size="md">{formattedDate}</Paragraph>
+            <Heading size="xs">{event.title}</Heading>
+          </div>
         </div>
         <div className="flex items-center justify-between">
           <div>

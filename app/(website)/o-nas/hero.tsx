@@ -15,9 +15,9 @@ export function Hero() {
             alt="Computer illustration"
             className="w-[80px] md:w-[120px] lg:w-[160]"
           />
-          <Heading size="xl" className="text-center max-w-4xl">
+          <Heading size="lg" className="text-center max-w-4xl">
             {
-              "Navdušujemo ženske nad tehnologijo   in jih podpiramo na karierni poti."
+              "Navdušujemo ženske nad tehnologijo in jih podpiramo na karierni poti."
             }
           </Heading>
         </div>

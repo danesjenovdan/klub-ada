@@ -58,11 +58,9 @@ export function Reviews() {
   return (
     <PageWrapper bgColor="bg-blue">
       <div className="flex flex-col gap-8 md:gap-16">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 md:gap-8">
           <div className="max-w-sm md:max-w-2xl">
-            <Heading size="lg">
-              {"Kaj pravijo naše članice in partnerji"}
-            </Heading>
+            <Heading size="lg">{"Izjave naših članic in partnerjev"}</Heading>
           </div>
           <div className="">
             <LinkButton size="md" variant="secondary" href="/partnerstvo">

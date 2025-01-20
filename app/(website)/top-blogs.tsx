@@ -11,7 +11,7 @@ export async function TopBlogs() {
   return (
     <PageWrapper bgColor="bg-pink">
       <div className="flex flex-col gap-8 md:gap-16">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 md:gap-8">
           <div className="max-w-sm md:max-w-2xl">
             <Heading size="lg">Najnovejše objave</Heading>
           </div>

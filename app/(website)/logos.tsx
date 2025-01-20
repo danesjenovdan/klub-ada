@@ -6,15 +6,15 @@ export function Logos() {
   const logos = [
     {
       id: "logo-1",
-      src: "/assets/impact-hub-logo.png",
-      href: "https://ljubljana.impacthub.net/",
-      alt: "Impact Hub Ljubljana logo",
-    },
-    {
-      id: "logo-2",
       src: "/assets/celtra-logo.png",
       href: "https://celtra.com/",
       alt: "Celtra logo",
+    },
+    {
+      id: "logo-2",
+      src: "/assets/impact-hub-logo.png",
+      href: "https://ljubljana.impacthub.net/",
+      alt: "Impact Hub Ljubljana logo",
     },
     {
       id: "logo-3",
@@ -27,7 +27,7 @@ export function Logos() {
   return (
     <PageWrapper>
       <div className="flex flex-col items-center text-center gap-6 md:gap-12">
-        <Heading size="xs">{"Hvala podjetjem, ki nas podpirajo:"}</Heading>
+        <Heading size="xs">{"Podporniki & Partnerji"}</Heading>
         <div className="flex justify-between items-center gap-8 md:gap-28">
           {logos.map((logo) => (
             <a

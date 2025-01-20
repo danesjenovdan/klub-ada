@@ -66,7 +66,7 @@ export function Footer() {
             <Paragraph size="sm">{"info@klub-ada.si"}</Paragraph>
           </div>
           <div className="flex flex-col md:flex-row gap-10 lg:gap-24">
-            <div className="flex flex-col gap-2 w">
+            <div className="flex flex-col gap-2">
               <Paragraph size="lg" weight="bold">
                 {"O nas"}
               </Paragraph>
@@ -76,6 +76,7 @@ export function Footer() {
                     {"Spoznaj Klub Ada"}
                   </Link>
                 </div>
+                {/* 
                 <div>
                   <Link variant="secondary" href="/o-nas">
                     {"Zgodovina"}
@@ -86,6 +87,7 @@ export function Footer() {
                     {"Doniraj nam"}
                   </Link>
                 </div>
+                */}
               </div>
             </div>
 

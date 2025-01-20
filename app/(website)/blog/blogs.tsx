@@ -51,7 +51,7 @@ export default async function Blogs() {
             alt="Blog illustration"
             className="w-[80px] md:w-[120px] lg:w-[160]"
           />
-          <Heading size="xl" className="max-w-xl text-center">
+          <Heading size="lg" className="max-w-xl text-center">
             {"Preberi naše članke"}
           </Heading>
         </div>
