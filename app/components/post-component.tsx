@@ -34,9 +34,7 @@ const PostComponent = ({ post }: Props) => {
                 </Paragraph>
               ))}
             </div>
-            <Heading size="xs" lineHeight="tight">
-              {post.title}
-            </Heading>
+            <Heading size="xs">{post.title}</Heading>
           </div>
           <div className="flex items-center justify-between">
             <div>
