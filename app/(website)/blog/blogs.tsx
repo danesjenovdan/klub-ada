@@ -9,8 +9,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Filters } from "./filters";
 
-export async function getPosts(category?: string) {
-  const query = `*[_type == "post" && $category in (categories[]->slug.current)] | order(pinned asc) {
+export async function getPosts(category: string | null) {
+  const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";
+  const query = `*[_type == "post" ${
+    category ? optionalCategoryFilter : ""
+  }] | order(pinned asc) {
   title,
   slug,
   mainImage,
@@ -25,15 +28,13 @@ export async function getPosts(category?: string) {
 }
 
 export default function Blogs() {
-  const [selectedCategory, setSelectedCategory] = useState("iskanje-sluzbe");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
 
   console.log(posts);
   useEffect(() => {
     const asyncFn = async () => {
-      const data = await getPosts(
-        selectedCategory !== "VSE" ? selectedCategory : undefined
-      );
+      const data = await getPosts(selectedCategory);
       setPosts(data);
     };
     asyncFn();
@@ -61,7 +62,7 @@ export default function Blogs() {
         </Paragraph>
         <Filters
           selectedCategory={selectedCategory}
-          setSelectedCategoryAction={(category: string) =>
+          setSelectedCategoryAction={(category: string | null) =>
             setSelectedCategory(category)
           }
         />

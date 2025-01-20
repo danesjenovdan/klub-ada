@@ -39,8 +39,8 @@ type CategoryType = {
   };
 };
 type FiltersProps = {
-  selectedCategory: string;
-  setSelectedCategoryAction: (category: string) => void;
+  selectedCategory: string | null;
+  setSelectedCategoryAction: (category: string | null) => void;
 };
 export function Filters({
   selectedCategory,
@@ -59,8 +59,8 @@ export function Filters({
     <div className="flex gap-2">
       <Filter
         label="VSE"
-        isSelected={selectedCategory === "VSE"}
-        handleSelectFilter={() => setSelectedCategoryAction("VSE")}
+        isSelected={selectedCategory === null}
+        handleSelectFilter={() => setSelectedCategoryAction(null)}
       />
       {categories.map((category) => (
         <Filter
