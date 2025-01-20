@@ -6,9 +6,11 @@ import { client } from "@/sanity/lib/client";
 import PostComponent from "@/app/components/post-component";
 import { NewsletterComponent } from "@/app/components/newsletter-component";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Filters } from "./filters";
 
-async function getPosts() {
-  const query = `*[_type == "post" && pinned != true] {
+export async function getPosts(categoryId?: string) {
+  const query = `*[_type == "post" && $categoryId in categories[].title] | order(pinned asc) {
   title,
   slug,
   mainImage,
@@ -18,27 +20,23 @@ async function getPosts() {
     title,
   }
 }`;
-  const data = await client.fetch(query);
+  const data = await client.fetch(query, { categoryId });
   return data;
 }
 
-export async function getPinnedPosts() {
-  const query = `*[_type == "post" && pinned] {
-  title,
-  slug,
-  mainImage,
-  categories[]-> {
-    _id,
-    slug,
-    title,
-  }
-}`;
-  const data = await client.fetch(query);
-  return data;
-}
-export default async function Blogs() {
-  const posts: Post[] = await getPosts();
-  const pinnedPosts: Post[] = await getPinnedPosts();
+export default function Blogs() {
+  const [selectedCategory, setSelectedCategory] = useState("VSE");
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const asyncFn = async () => {
+      const data = await getPosts(
+        selectedCategory !== "Vse" ? selectedCategory : undefined
+      );
+      setPosts(data);
+    };
+    asyncFn();
+  }, []);
 
   return (
     <PageWrapper>
@@ -60,24 +58,28 @@ export default async function Blogs() {
             "Preberi povzetke dogodkov, uporabne nasvete za iskanje službe, priprava na tehnični intervju, predlogi knjig in še več."
           }
         </Paragraph>
+        <Filters
+          selectedCategory={selectedCategory}
+          setSelectedCategoryAction={(category: string) =>
+            setSelectedCategory(category)
+          }
+        />
       </div>
       {/* First 3 posts */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {pinnedPosts.map((post) => (
+        {posts.slice(0, 3).map((post) => (
           <div key={post.slug.current} className="col-span-1">
             <PostComponent post={post} />
           </div>
         ))}
-      </div>
 
-      {/* Newsletter Component */}
-      <div className="py-10 md:py-20">
-        <NewsletterComponent />
-      </div>
+        {/* Newsletter Component */}
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 py-10 md:py-20">
+          <NewsletterComponent />
+        </div>
 
-      {/* Remaining Posts (4 to 10) */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
+        {/* Remaining Posts (4 to 10) */}
+        {posts.slice(3).map((post) => (
           <div key={post.slug.current} className="col-span-1">
             <PostComponent post={post} />
           </div>
