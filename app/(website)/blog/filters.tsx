@@ -1,10 +1,22 @@
+import { client } from "@/sanity/lib/client";
 import clsx from "clsx";
+import { useEffect, useState } from "react";
 
 type FilterProps = {
   isSelected: boolean;
   label: string;
   handleSelectFilter: () => void;
 };
+
+export async function getPostCategories() {
+  const query = `*[_type == "category"] {
+    slug,
+    title,
+  }`;
+  const data = await client.fetch(query);
+  return data;
+}
+
 function Filter({ isSelected, label, handleSelectFilter }: FilterProps) {
   return (
     <button
@@ -19,6 +31,10 @@ function Filter({ isSelected, label, handleSelectFilter }: FilterProps) {
   );
 }
 
+type CategoryType = {
+  title: string;
+  slug: string;
+};
 type FiltersProps = {
   selectedCategory: string;
   setSelectedCategoryAction: (category: string) => void;
@@ -27,22 +43,28 @@ export function Filters({
   selectedCategory,
   setSelectedCategoryAction,
 }: FiltersProps) {
-  const FILTERS = [
-    "Vse",
-    "Iskanje službe",
-    "Kako postanem...",
-    "Mehke veščine",
-    "Tehnično znanje",
-    "Ženske v tehnologiji",
-  ];
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+  useEffect(() => {
+    const asyncFn = async () => {
+      const data = await getPostCategories();
+      setCategories(data);
+    };
+    asyncFn();
+  }, []);
+
   return (
     <div className="flex gap-2">
-      {FILTERS.map((filter) => (
+      <Filter
+        label="VSE"
+        isSelected={selectedCategory === "VSE"}
+        handleSelectFilter={() => setSelectedCategoryAction("VSE")}
+      />
+      {categories.map((category) => (
         <Filter
-          key={filter}
-          label={filter}
-          isSelected={selectedCategory === filter}
-          handleSelectFilter={() => setSelectedCategoryAction(filter)}
+          key={category.title}
+          label={category.title}
+          isSelected={selectedCategory === category.slug}
+          handleSelectFilter={() => setSelectedCategoryAction(category.slug)}
         />
       ))}
     </div>
