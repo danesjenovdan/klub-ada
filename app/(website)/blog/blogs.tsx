@@ -9,8 +9,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Filters } from "./filters";
 
-export async function getPosts(categoryId?: string) {
-  const query = `*[_type == "post" && $categoryId in categories[].title] | order(pinned asc) {
+export async function getPosts(category?: string) {
+  const query = `*[_type == "post" && $category in (categories[]->slug.current)] | order(pinned asc) {
   title,
   slug,
   mainImage,
@@ -20,23 +20,24 @@ export async function getPosts(categoryId?: string) {
     title,
   }
 }`;
-  const data = await client.fetch(query, { categoryId });
+  const data = await client.fetch(query, { category });
   return data;
 }
 
 export default function Blogs() {
-  const [selectedCategory, setSelectedCategory] = useState("VSE");
+  const [selectedCategory, setSelectedCategory] = useState("iskanje-sluzbe");
   const [posts, setPosts] = useState<Post[]>([]);
 
+  console.log(posts);
   useEffect(() => {
     const asyncFn = async () => {
       const data = await getPosts(
-        selectedCategory !== "Vse" ? selectedCategory : undefined
+        selectedCategory !== "VSE" ? selectedCategory : undefined
       );
       setPosts(data);
     };
     asyncFn();
-  }, []);
+  }, [selectedCategory]);
 
   return (
     <PageWrapper>

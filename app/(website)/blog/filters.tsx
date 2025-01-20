@@ -10,8 +10,8 @@ type FilterProps = {
 
 export async function getPostCategories() {
   const query = `*[_type == "category"] {
-    slug,
     title,
+    slug
   }`;
   const data = await client.fetch(query);
   return data;
@@ -33,6 +33,7 @@ function Filter({ isSelected, label, handleSelectFilter }: FilterProps) {
 
 type CategoryType = {
   title: string;
+  _id: string;
   slug: {
     current: string;
   };
