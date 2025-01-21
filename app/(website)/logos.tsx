@@ -18,7 +18,7 @@ export function Logos() {
     },
     {
       id: "logo-3",
-      src: "/assets/FRI-logo.png",
+      src: "/assets/fri-logo.png",
       href: "https://fri.uni-lj.si/sl",
       alt: "FRI logo",
     },

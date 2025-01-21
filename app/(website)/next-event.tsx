@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Heading } from "../components/heading";
 import { PageWrapper } from "../components/page-wrapper";
@@ -8,21 +10,45 @@ import { client } from "@/sanity/lib/client";
 import imageLoader from "../utils/image-loader";
 import { LinkButton } from "../components/link-button";
 import { formatDate, formatTime } from "../utils/date";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+interface EventData {
+  title: string;
+  description: string;
+  eventImage: { src: string; alt: string };
+  location: string;
+  applyLink: string;
+  eventTime: string;
+}
 
 const NEXT_EVENT_QUERY = `*[
   _type == "event" && eventTime >= $today
 ] | order(eventTime) [0] {title, description, eventImage, location, applyLink, eventTime}`;
 
-export async function NextEvent() {
+export function NextEvent() {
+  const [nextEvent, setNextEvent] = useState<EventData | null>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Fetch event data on mount
+    const fetchEvent = async () => {
+      const today = new Date().toISOString().split("T")[0];
+      const event = await client.fetch(NEXT_EVENT_QUERY, { today });
+      setNextEvent(event); // Store the fetched event
+    };
+
+    fetchEvent();
+  }, []); // Empty dependency array ensures this runs only once
+
+  // Render nothing if the event data hasn't loaded yet
+  if (!nextEvent) return null;
+
   const today = new Date().toISOString().split("T")[0];
-  const nextEvent = await client.fetch<SanityDocument>(NEXT_EVENT_QUERY, {
-    today,
-  });
   const imageSrc = imageLoader(nextEvent.eventImage);
   const date = formatDate(nextEvent.eventTime);
   const time = formatTime(nextEvent.eventTime);
   const formattedDateAndTime = [date, time].join(" ");
-  console.log(date, time);
 
   return (
     <PageWrapper bgColor="bg-red">
@@ -31,11 +57,13 @@ export async function NextEvent() {
           <div className="max-w-sm md:max-w-xl">
             <Heading size="lg">{"Pridi na naš naslednji dogodek!"}</Heading>
           </div>
-          <div className="">
-            <LinkButton size="md" variant="secondary" href="/dogodki">
-              Vsi dogodki
-            </LinkButton>
-          </div>
+          {pathname !== "/dogodki" && (
+            <div className="">
+              <LinkButton size="md" variant="secondary" href="/dogodki">
+                Vsi dogodki
+              </LinkButton>
+            </div>
+          )}
         </div>
         <Card bgColor="bg-red100">
           <div className="md:flex gap-8 md:items-center">
@@ -65,7 +93,7 @@ export async function NextEvent() {
                   href={nextEvent.applyLink}
                   isExternal
                 >
-                  Pridruži se
+                  Prijavi se
                 </LinkButton>
               </div>
             </div>
