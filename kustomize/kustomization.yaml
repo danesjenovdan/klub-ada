@@ -8,4 +8,4 @@ resources:
 images:
   - name: klub-ada-staging
     newName: rg.fr-par.scw.cloud/djnd/klub-ada-staging
-    newTag: '370bf9501b05987c8a9aad0bf2136412e97c4a9e'
+    newTag: '6f0e6f7322afc805d3e01616defc1e0da60e6efb'
