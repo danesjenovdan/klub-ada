@@ -14,6 +14,7 @@ const reviews = [
     alt: "Tamara Stumperger profile picture",
     title:
       "Tamara Štumperger, Supplier Quality System Senior Manager @ Danfoss",
+    href: "https://www.linkedin.com/in/tamarastumperger/",
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const reviews = [
     image: "/assets/marusa-kerpan.jpeg",
     alt: "Marusa Kerpan profile picture",
     title: "Maruša Kerpan, Automation Engineer @ Domel",
+    href: "https://www.linkedin.com/in/maru%C5%A1a-kerpan-1196782aa/",
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ const reviews = [
     image: "/assets/jana-vovk.jpg",
     alt: "Jana Vovk profile picture",
     title: "Jana Vovk, Student @ FRI",
+    href: "https://www.fri.uni-lj.si/sl/novice/novica/uspeh-studentov-fri-na-vseslovenskem-hackathonu",
   },
   {
     id: 4,
@@ -42,6 +45,7 @@ const reviews = [
     image: "/assets/nika-likar.jpeg",
     alt: "Nika Likar profile picture",
     title: "Nika Likar, UX Designer @ Omnia8",
+    href: "https://www.linkedin.com/in/nika-likar-6b8b9a217/",
   },
   {
     id: 5,
@@ -52,6 +56,7 @@ const reviews = [
     image: "/assets/tamara-demir.jpeg",
     alt: "Tamara Demir profile picture",
     title: "Tamara Demir, Web Developer @ ENKI",
+    href: "https://www.linkedin.com/in/tamara-demir/",
   },
 ];
 export function Reviews() {
@@ -81,6 +86,7 @@ export function Reviews() {
                     image={review.image}
                     alt={review.alt}
                     title={review.title}
+                    href={review.href}
                   />
                 ))}
             </div>
@@ -95,6 +101,7 @@ export function Reviews() {
                     image={review.image}
                     alt={review.alt}
                     title={review.title}
+                    href={review.href}
                   />
                 ))}
             </div>
@@ -112,6 +119,7 @@ export function Reviews() {
                     image={review.image}
                     alt={review.alt}
                     title={review.title}
+                    href={review.href}
                   />
                 ))}
             </div>
@@ -126,6 +134,7 @@ export function Reviews() {
                     image={review.image}
                     alt={review.alt}
                     title={review.title}
+                    href={review.href}
                   />
                 ))}
             </div>
@@ -140,6 +149,7 @@ export function Reviews() {
                     image={review.image}
                     alt={review.alt}
                     title={review.title}
+                    href={review.href}
                   />
                 ))}
             </div>
