@@ -9,8 +9,8 @@ export const blockContentType = defineType({
     {
       type: "block",
       styles: [
+        { title: "Normal", value: "normal" },
         { title: "Body", value: "body" },
-        { title: "Body SM", value: "bodySm" },
         { title: "H1", value: "h1" },
         { title: "H2", value: "h2" },
         { title: "H3", value: "h3" },
