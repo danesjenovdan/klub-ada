@@ -18,7 +18,8 @@ spec:
       - name: klub-ada-staging
         image: klub-ada-staging
         ports:
-        - containerPort: 3000
-        # command:
-        # - 
+          - containerPort: 3000
+        envFrom:
+          - secretRef:
+              name: klub-ada-staging-secrets
         
