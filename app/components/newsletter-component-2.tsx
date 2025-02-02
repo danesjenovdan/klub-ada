@@ -19,15 +19,13 @@ export default function NewsletterComponent2() {
     }
 
     try {
-      const response = await fetch("https://connect.mailerlite.com/api/subscribers", {
-        method: "POST",
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${process.env.MAILERLITE_API}`
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          email 
+        body: JSON.stringify({
+          email,
         }),
       });
 
