@@ -3,7 +3,7 @@ import { ForwardRefComponent, PropsOf } from "../utils/polymorphic";
 import { forwardRef } from "react";
 import { tv } from "tailwind-variants";
 
-const linkBase = tv({
+export const linkBase = tv({
   variants: {
     variant: {
       primary:
