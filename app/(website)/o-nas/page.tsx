@@ -1,13 +1,13 @@
 import { Footer } from "@/app/components/footer";
 import { Hero } from "./hero";
 import Team from "./team";
-import { Mission2 } from "./mission2";
+import { Mission } from "./mission";
 
 export default function Page() {
   return (
     <>
       <Hero />
-      <Mission2 />
+      <Mission />
       <Team />
       <Footer />
     </>

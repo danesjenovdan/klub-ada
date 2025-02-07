@@ -20,6 +20,7 @@ export const categoryType = defineType({
       options: {
         source: "title",
       },
+      validation: (Rule) => Rule.required(),
     }),
   ],
 });

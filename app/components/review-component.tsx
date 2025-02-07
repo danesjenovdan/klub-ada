@@ -8,6 +8,7 @@ interface ReviewProps {
   image: string;
   alt: string;
   title: string;
+  href: string;
 }
 
 export default function ReviewComponent({
@@ -16,6 +17,7 @@ export default function ReviewComponent({
   image,
   alt,
   title,
+  href,
 }: ReviewProps) {
   return (
     <>
@@ -37,9 +39,11 @@ export default function ReviewComponent({
               alt={alt}
               className="rounded-full max-w-11 max-h-11 object-cover border border-black"
             />
-            <Paragraph size="md" weight="medium">
-              {title}
-            </Paragraph>
+            <a href={href} target="_blank">
+              <Paragraph size="md" weight="medium">
+                {title}
+              </Paragraph>
+            </a>
           </div>
         </div>
       </Card>

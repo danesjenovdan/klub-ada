@@ -9,6 +9,7 @@ import { client } from "@/sanity/lib/client";
 import { PortableText, PortableTextComponents } from "next-sanity";
 import React from "react";
 import { formatDate } from "@/app/utils/date";
+import { NewsletterComponent } from "@/app/components/newsletter-component";
 
 type Params = Promise<{
   slug: string;
@@ -57,7 +58,7 @@ const BlogArticle = async (props: { params: Params }) => {
           color="black"
           weight="bold"
           textAlign="left"
-          className="mt-10 mb-2"
+          className="mt-8 mb-2"
         >
           {children}
         </Paragraph>
@@ -65,7 +66,8 @@ const BlogArticle = async (props: { params: Params }) => {
       h3: ({ children }) => (
         <Paragraph
           size="xl"
-          color="black"
+          color="pink"
+          weight="bold"
           textAlign="left"
           className="mt-6 mb-2"
         >
@@ -77,15 +79,20 @@ const BlogArticle = async (props: { params: Params }) => {
           {children}
         </Paragraph>
       ),
-      bodySm: ({ children }) => (
-        <Paragraph size="sm" color="gray" textAlign="left" className="mb-4">
+      bodyLg: ({ children }) => (
+        <Paragraph size="xl" color="black" textAlign="left" className="mb-6">
+          {children}
+        </Paragraph>
+      ),
+      normal: ({ children }) => (
+        <Paragraph size="lg" color="black" textAlign="left" className="mb-6">
           {children}
         </Paragraph>
       ),
       blockquote: ({ children }) => (
         <Paragraph
           size="lg"
-          className="pl-4 border-l-4 border-red italic text-gray-500 my-6"
+          className="pl-4 border-l-4 border-pink italic text-gray-500 my-8"
         >
           {children}
         </Paragraph>
@@ -109,7 +116,7 @@ const BlogArticle = async (props: { params: Params }) => {
           href={value?.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-black underline underline-offset-2 font-medium	 hover:text-pink"
+          className="text-black text-lg underline underline-offset-2 font-medium hover:text-pink"
           style={{ textDecorationColor: "pink" }}
         >
           {children}
@@ -128,7 +135,7 @@ const BlogArticle = async (props: { params: Params }) => {
               alt={value.alt}
               width={700}
               height={700}
-              className="w-full object-cover max-h-96 rounded-2xl border border-black mb-6"
+              className="w-full object-cover max-h-96 rounded-2xl border border-black my-10"
             />
           </div>
         );
