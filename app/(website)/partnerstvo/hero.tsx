@@ -33,7 +33,7 @@ export function Hero() {
       </div>
       <div>
         <Image
-          src="/assets/hero.jpg"
+          src="/assets/hero.webp"
           width={1500}
           height={1500}
           alt="Blog illustration"

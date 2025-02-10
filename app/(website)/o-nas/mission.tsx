@@ -25,7 +25,7 @@ export function Mission() {
           <div className="flex flex-col md:flex-row md:h-[90vh] w-full">
             <div className="flex w-full md:w-1/2 h-full items-center justify-center md:ml-[-96px] p-4 md:p-0">
               <Image
-                src="/assets/mission.jpg"
+                src="/assets/mission.webp"
                 alt="Alt text"
                 width={1000}
                 height={1000}
@@ -59,7 +59,7 @@ export function Mission() {
           <div className="flex flex-col md:flex-row md:h-[90vh] w-full">
             <div className="flex w-full md:w-1/2 h-full items-center justify-center md:ml-[-96px] p-4 md:p-0">
               <Image
-                src="/assets/beginning-story.png"
+                src="/assets/beginning-story.webp"
                 alt="Alt text"
                 width={1000}
                 height={1000}

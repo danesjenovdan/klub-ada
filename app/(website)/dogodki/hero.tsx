@@ -33,14 +33,14 @@ export default function Hero() {
       <div className="flex flex-col gap-2 md:gap-4">
         <div className="flex gap-2 md:gap-4">
           <Image
-            src="/assets/dogodek-1.png"
+            src="/assets/dogodek-1.webp"
             width={500}
             height={500}
             alt="Dogodek Image 1"
             className="object-cover w-4/6 rounded-2xl border border-black"
           />
           <Image
-            src="/assets/dogodek-2.png"
+            src="/assets/dogodek-2.webp"
             width={500}
             height={500}
             alt="Dogodek Image 2"
@@ -49,14 +49,14 @@ export default function Hero() {
         </div>
         <div className="flex gap-2 md:gap-4">
           <Image
-            src="/assets/dogodek-3.png"
+            src="/assets/dogodek-3.webp"
             width={500}
             height={500}
             alt="Dogodek Image 3"
             className="object-cover w-2/6 rounded-2xl border border-black"
           />
           <Image
-            src="/assets/dogodek-4.png"
+            src="/assets/dogodek-4.webp"
             width={500}
             height={500}
             alt="Dogodek Image 4"

@@ -29,7 +29,7 @@ export function Hero() {
       </div>
       <div>
         <Image
-          src="/assets/team.jpg"
+          src="/assets/team.webp"
           width={1500}
           height={1500}
           alt="Klub Ada Team image"

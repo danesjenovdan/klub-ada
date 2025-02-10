@@ -13,7 +13,7 @@ export function Discord() {
           <div className="flex flex-col-reverse lg:flex-row items-left lg:items-center justify-start gap-5 md:gap-10">
             <div className="h-full lg:basis-3/5">
               <Image
-                src="/assets/discord-image.png"
+                src="/assets/discord-image.webp"
                 width={1000}
                 height={1000}
                 alt="Discord Image"

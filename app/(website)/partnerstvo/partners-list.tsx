@@ -11,7 +11,7 @@ export function PartnersList() {
         <div className="flex flex-col gap-5 md:gap-10 items-center justify-center">
           <Paragraph size="xl">Zlati partnerji</Paragraph>
           <Image
-            src="/assets/outbrain-logo.png"
+            src="/assets/outbrain-logo.webp"
             alt="Outbrain logo"
             width={200}
             height={50}
@@ -23,7 +23,7 @@ export function PartnersList() {
         <div className="flex flex-col gap-5 md:gap-10 items-center justify-center">
           <Paragraph size="xl">Srebrni partnerji</Paragraph>
           <Image
-            src="/assets/celtra-logo.png"
+            src="/assets/celtra-logo.webp"
             alt="Celtra logo"
             width={200}
             height={80}
@@ -36,14 +36,14 @@ export function PartnersList() {
           <Paragraph size="xl">Projektni partnerji</Paragraph>
           <div className="flex md:flex-row flex-col gap-8 md:gap-16">
             <Image
-              src="/assets/impact-hub-logo.png"
+              src="/assets/impact-hub-logo.webp"
               alt="Impact Hub Ljubljana logo"
               width={200}
               height={50}
               className="h-16 w-full object-contain"
             />
             <Image
-              src="/assets/fri-logo.png"
+              src="/assets/fri-logo.webp"
               alt="FRI logo"
               width={220}
               height={50}

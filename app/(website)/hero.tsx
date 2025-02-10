@@ -22,7 +22,7 @@ export function Hero() {
           </Card>
           <div className="block md:hidden">
             <Image
-              src="/assets/hero.jpg"
+              src="/assets/hero.webp"
               width={768}
               height={150}
               alt="Hero picture"
@@ -44,7 +44,7 @@ export function Hero() {
         </div>
         <div className="hidden md:block grow basis-1/2 lg:basis-3/5">
           <Image
-            src="/assets/hero.jpg"
+            src="/assets/hero.webp"
             width={865}
             height={500}
             alt="Hero picture"
