@@ -35,7 +35,7 @@ export function Hero() {
         <Image
           src="/assets/hero.webp"
           width={1500}
-          height={1500}
+          height={672}
           alt="Blog illustration"
           className="w-full object-cover max-h-[42rem] rounded-2xl border border-black my-6"
         />

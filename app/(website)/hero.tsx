@@ -45,8 +45,8 @@ export function Hero() {
         <div className="hidden md:block grow basis-1/2 lg:basis-3/5">
           <Image
             src="/assets/hero.webp"
-            width={865}
-            height={500}
+            width={700}
+            height={525}
             alt="Hero picture"
             className="rounded-2xl w-full h-full object-cover"
           />

@@ -37,8 +37,8 @@ export function Logos() {
               key={logo.id}
             >
               <Image
-                width={300}
-                height={300}
+                width={200}
+                height={56}
                 src={logo.src}
                 alt={logo.alt}
                 className="h-14 w-full object-contain grayscale hover:grayscale-0 flex-shrink-0"

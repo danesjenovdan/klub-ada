@@ -27,8 +27,8 @@ export function Mission() {
               <Image
                 src="/assets/mission.webp"
                 alt="Alt text"
-                width={1000}
-                height={1000}
+                width={700}
+                height={700}
                 className="aspect-square object-cover rounded-2xl border border-black"
               />
             </div>
@@ -61,8 +61,8 @@ export function Mission() {
               <Image
                 src="/assets/beginning-story.webp"
                 alt="Alt text"
-                width={1000}
-                height={1000}
+                width={700}
+                height={700}
                 className="aspect-square object-cover rounded-2xl border border-black"
               />
             </div>
@@ -95,8 +95,8 @@ export function Mission() {
               <Image
                 src="/assets/ada-lovelace.webp"
                 alt="Alt text"
-                width={1000}
-                height={1000}
+                width={700}
+                height={700}
                 className="aspect-square object-cover rounded-2xl border border-black"
               />
             </div>

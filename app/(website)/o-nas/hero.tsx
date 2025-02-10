@@ -31,7 +31,7 @@ export function Hero() {
         <Image
           src="/assets/team.webp"
           width={1500}
-          height={1500}
+          height={672}
           alt="Klub Ada Team image"
           className="w-full object-cover bg-top object-[50%_10%] max-h-[42rem] rounded-2xl border border-black"
         />

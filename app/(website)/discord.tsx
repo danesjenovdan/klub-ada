@@ -14,8 +14,8 @@ export function Discord() {
             <div className="h-full lg:basis-3/5">
               <Image
                 src="/assets/discord-image.webp"
-                width={1000}
-                height={1000}
+                width={800}
+                height={800}
                 alt="Discord Image"
                 className="w-full max-h-4/5 object-cover rounded-2xl"
               />

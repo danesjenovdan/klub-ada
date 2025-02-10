@@ -41,8 +41,8 @@ export default function Hero() {
           />
           <Image
             src="/assets/dogodek-2.webp"
-            width={500}
-            height={500}
+            width={450}
+            height={450}
             alt="Dogodek Image 2"
             className="object-cover w-2/6 rounded-2xl border border-black"
           />
@@ -50,8 +50,8 @@ export default function Hero() {
         <div className="flex gap-2 md:gap-4">
           <Image
             src="/assets/dogodek-3.webp"
-            width={500}
-            height={500}
+            width={450}
+            height={450}
             alt="Dogodek Image 3"
             className="object-cover w-2/6 rounded-2xl border border-black"
           />
