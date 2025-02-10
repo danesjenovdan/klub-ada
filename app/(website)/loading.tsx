@@ -1,12 +1,10 @@
-import { LoadingPing } from "../components/loading-ping";
+import { LoadingAnimation } from "../components/loading-animation";
 import { PageWrapper } from "../components/page-wrapper";
 
 export default function Loading() {
   return (
-    <PageWrapper>
-      <div className="w-full h-full flex items-center justify-center">
-        <LoadingPing />
-      </div>
-    </PageWrapper>
+    <div className="w-full pt-32 flex items-center justify-center">
+      <LoadingAnimation />
+    </div>
   );
 }

@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { Navbar } from "../components/navbar";
+import { LoadingAnimation } from "../components/loading-animation";
 
 export default function Layout({
   children,
@@ -8,7 +10,15 @@ export default function Layout({
   return (
     <>
       <Navbar />
-      {children}
+      <Suspense
+        fallback={
+          <div className="w-full pt-32 flex items-center justify-center">
+            <LoadingAnimation />
+          </div>
+        }
+      >
+        {children}
+      </Suspense>
     </>
   );
 }
