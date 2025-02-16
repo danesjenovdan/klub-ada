@@ -23,6 +23,7 @@ export function Hero() {
           </Card>
           <div className="block md:hidden">
             <Image
+              priority
               src={hero}
               width={768}
               height={150}

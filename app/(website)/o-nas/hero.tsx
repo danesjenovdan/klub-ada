@@ -35,6 +35,7 @@ export function Hero() {
           height={672}
           placeholder="blur"
           alt="Klub Ada Team image"
+          priority
           className="w-full object-cover bg-top object-[50%_10%] max-h-[42rem] rounded-2xl border border-black"
         />
       </div>

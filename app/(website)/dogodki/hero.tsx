@@ -44,6 +44,7 @@ export default function Hero() {
             alt="Dogodek Image 1"
             className="object-cover w-4/6 rounded-2xl border border-black"
             placeholder="blur"
+            priority
           />
           <Image
             src={dogodek2}

@@ -12,6 +12,7 @@ export function Hero() {
         <div className="flex flex-col gap-2 items-center">
           <Image
             src="/assets/partners-illustration.png"
+            priority
             width={100}
             height={100}
             alt="Partners illustration"
@@ -35,6 +36,7 @@ export function Hero() {
       <div>
         <Image
           src={hero}
+          priority
           placeholder="blur"
           width={1500}
           height={672}
