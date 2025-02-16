@@ -5,6 +5,9 @@ import { PageWrapper } from "@/app/components/page-wrapper";
 import { Paragraph } from "@/app/components/paragraph";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import mission from "../../../public/assets/mission.webp";
+import ada from "../../../public/assets/ada-lovelace.webp";
+import beginning from "../../../public/assets/beginning-story.webp";
 
 export function Mission() {
   const textVariants = {
@@ -25,7 +28,8 @@ export function Mission() {
           <div className="flex flex-col md:flex-row md:h-[90vh] w-full">
             <div className="flex w-full md:w-1/2 h-full items-center justify-center md:ml-[-96px] p-4 md:p-0">
               <Image
-                src="/assets/mission.webp"
+                src={mission}
+                placeholder="blur"
                 alt="Alt text"
                 width={700}
                 height={700}
@@ -59,7 +63,8 @@ export function Mission() {
           <div className="flex flex-col md:flex-row md:h-[90vh] w-full">
             <div className="flex w-full md:w-1/2 h-full items-center justify-center md:ml-[-96px] p-4 md:p-0">
               <Image
-                src="/assets/beginning-story.webp"
+                src={beginning}
+                placeholder="blur"
                 alt="Alt text"
                 width={700}
                 height={700}
@@ -93,7 +98,8 @@ export function Mission() {
           <div className="flex flex-col md:flex-row md:h-[90vh] w-full">
             <div className="flex w-full md:w-1/2 h-full items-center justify-center md:ml-[-96px] p-4 md:p-0">
               <Image
-                src="/assets/ada-lovelace.webp"
+                src={ada}
+                placeholder="blur"
                 alt="Alt text"
                 width={700}
                 height={700}

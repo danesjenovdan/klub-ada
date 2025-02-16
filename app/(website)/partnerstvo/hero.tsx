@@ -3,6 +3,7 @@ import { LinkButton } from "@/app/components/link-button";
 import { PageWrapper } from "@/app/components/page-wrapper";
 import { Paragraph } from "@/app/components/paragraph";
 import Image from "next/image";
+import hero from "../../../public/assets/hero.webp";
 
 export function Hero() {
   return (
@@ -33,10 +34,11 @@ export function Hero() {
       </div>
       <div>
         <Image
-          src="/assets/hero.webp"
+          src={hero}
+          placeholder="blur"
           width={1500}
           height={672}
-          alt="Blog illustration"
+          alt="Hero image"
           className="w-full object-cover max-h-[42rem] rounded-2xl border border-black my-6"
         />
       </div>
