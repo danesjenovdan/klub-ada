@@ -45,7 +45,7 @@ export default function Blogs() {
       <div className="flex flex-col pb-10 md:pb-20 md:px-16 md:gap-6 items-center">
         <div className="flex flex-col gap-2 items-center">
           <Image
-            src="/assets/blog-illustration.png"
+            src="/assets/blog-illustration.svg"
             width={100}
             height={100}
             alt="Blog illustration"

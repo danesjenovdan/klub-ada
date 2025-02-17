@@ -11,7 +11,7 @@ export function Hero() {
       <div className="flex flex-col pb-4 md:pb-14 md:px-16 gap-6 items-center">
         <div className="flex flex-col gap-2 items-center">
           <Image
-            src="/assets/partners-illustration.png"
+            src="/assets/partners-illustration.svg"
             priority
             width={100}
             height={100}

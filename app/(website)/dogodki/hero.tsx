@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="flex flex-col pb-10 md:pb-20 md:px-16 gap-6 items-center">
         <div className="flex flex-col gap-2 items-center">
           <Image
-            src="/assets/calendar-illustration.png"
+            src="/assets/calendar-illustration.svg"
             width={100}
             height={100}
             alt="Calendar illustration"
