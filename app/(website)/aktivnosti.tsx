@@ -39,7 +39,7 @@ export async function Aktivnosti() {
           {activities.map(({ name, description, activityImage }) => {
             const imageSrc = imageLoader(activityImage);
             return (
-              <div className="col-span-1">
+              <div className="col-span-1" key={name}>
                 <ActivityCard
                   title={name}
                   description={description}

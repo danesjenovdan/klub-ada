@@ -4,8 +4,25 @@ import { Heading } from "./heading";
 import { Paragraph } from "./paragraph";
 import Image from "next/image";
 import imageLoader from "../utils/image-loader";
-import { Link } from "./link";
+import { Link, linkBase } from "./link";
 
+interface LinkDivProps {
+  /**
+   * Sets the style variant of the link element
+   * @default 'primary'
+   */
+  variant?: "primary" | "secondary" | "tertiary";
+  children: React.ReactNode;
+}
+function LinkDiv({ children, variant = "primary" }: LinkDivProps) {
+  return (
+    <div
+      className={`${linkBase({ variant })} underline-animation group-hover:after:w-full`}
+    >
+      {children}
+    </div>
+  );
+}
 interface Props {
   post: Post;
 }
@@ -27,6 +44,7 @@ const PostComponent = ({ post }: Props) => {
             <div className="flex gap-2">
               {post.categories.map((category) => (
                 <Paragraph
+                  key={category.title}
                   size="xs"
                   className="py-1 px-2 text-white font-semibold bg-pink border border-black rounded-lg"
                 >
@@ -38,9 +56,7 @@ const PostComponent = ({ post }: Props) => {
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <Link variant="secondary" href={`/blog/${post.slug.current}`}>
-                Preberi blog
-              </Link>
+              <LinkDiv variant="secondary">Preberi blog</LinkDiv>
             </div>
             <Image
               src="/assets/chevron-right.svg"

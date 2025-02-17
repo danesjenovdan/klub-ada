@@ -5,7 +5,7 @@ import { LinkButton } from "./link-button";
 
 export function Navbar() {
   return (
-    <nav className="mx-5 md:mx-20 px-5 md:px-10 h-16 md:h-20 bg-white rounded-b-2xl border border-black border-t-0 flex items-center justify-between gap-2">
+    <nav className="sticky top-0 right-0 left-0 z-20 mx-5 md:mx-20 px-5 md:px-10 h-16 md:h-20 bg-white rounded-b-2xl border border-black border-t-0 flex items-center justify-between gap-2">
       <div className="flex items-center justify-start">
         <a href="/" rel="noopener noreferrer">
           <Image

@@ -6,19 +6,19 @@ export function Logos() {
   const logos = [
     {
       id: "logo-1",
-      src: "/assets/celtra-logo.png",
+      src: "/assets/celtra-logo.webp",
       href: "https://celtra.com/",
       alt: "Celtra logo",
     },
     {
       id: "logo-2",
-      src: "/assets/impact-hub-logo.png",
+      src: "/assets/impact-hub-logo.webp",
       href: "https://ljubljana.impacthub.net/",
       alt: "Impact Hub Ljubljana logo",
     },
     {
       id: "logo-3",
-      src: "/assets/fri-logo.png",
+      src: "/assets/fri-logo.webp",
       href: "https://fri.uni-lj.si/sl",
       alt: "FRI logo",
     },
@@ -37,8 +37,8 @@ export function Logos() {
               key={logo.id}
             >
               <Image
-                width={300}
-                height={300}
+                width={200}
+                height={56}
                 src={logo.src}
                 alt={logo.alt}
                 className="h-14 w-full object-contain grayscale hover:grayscale-0 flex-shrink-0"
