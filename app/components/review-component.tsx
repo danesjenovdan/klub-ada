@@ -34,8 +34,8 @@ export default function ReviewComponent({
           <div className="flex gap-3 items-center">
             <Image
               src={image}
-              width={500}
-              height={500}
+              width={50}
+              height={50}
               alt={alt}
               className="rounded-full max-w-11 max-h-11 object-cover border border-black"
             />

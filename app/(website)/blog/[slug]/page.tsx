@@ -134,7 +134,7 @@ const BlogArticle = async (props: { params: Params }) => {
               src={imageLoader(value)}
               alt={value.alt}
               width={700}
-              height={700}
+              height={384}
               className="w-full object-cover max-h-96 rounded-2xl border border-black my-10"
             />
           </div>
@@ -166,7 +166,7 @@ const BlogArticle = async (props: { params: Params }) => {
             <Image
               src={imageSrc}
               width={700}
-              height={700}
+              height={384}
               alt={post.mainImage.alt}
               className="w-full object-cover max-h-96 rounded-2xl border border-black mb-6"
             />

@@ -35,7 +35,7 @@ const TeamMemberComponent = ({ member }: TeamMemberProps) => {
               <IconBrandLinkedinFilled
                 className="text-black group-hover:text-red"
                 size={24}
-                stroke-width="2"
+                strokeWidth="2"
               />
             </a>
           </div>

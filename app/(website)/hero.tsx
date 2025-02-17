@@ -4,6 +4,7 @@ import { Heading } from "../components/heading";
 import { PageWrapper } from "../components/page-wrapper";
 import { Paragraph } from "../components/paragraph";
 import { CtaLink } from "../components/cta-link";
+import hero from "../../public/assets/hero.webp";
 
 export function Hero() {
   return (
@@ -22,11 +23,13 @@ export function Hero() {
           </Card>
           <div className="block md:hidden">
             <Image
-              src="/assets/hero.jpg"
+              priority
+              src={hero}
               width={768}
               height={150}
               alt="Hero picture"
               className="rounded-2xl max-h-52 object-cover"
+              placeholder="blur"
             />
           </div>
           <div className="flex flex-row gap-4">
@@ -44,11 +47,12 @@ export function Hero() {
         </div>
         <div className="hidden md:block grow basis-1/2 lg:basis-3/5">
           <Image
-            src="/assets/hero.jpg"
-            width={865}
-            height={500}
+            src={hero}
+            width={700}
+            height={525}
             alt="Hero picture"
             className="rounded-2xl w-full h-full object-cover"
+            placeholder="blur"
           />
         </div>
       </div>

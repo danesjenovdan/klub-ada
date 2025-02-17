@@ -3,6 +3,10 @@ import { LinkButton } from "@/app/components/link-button";
 import { PageWrapper } from "@/app/components/page-wrapper";
 import { Paragraph } from "@/app/components/paragraph";
 import Image from "next/image";
+import dogodek1 from "../../public/assets/dogodek-1.webp";
+import dogodek2 from "../../public/assets/dogodek-2.webp";
+import dogodek3 from "../../public/assets/dogodek-3.webp";
+import dogodek4 from "../../public/assets/dogodek-4.webp";
 
 export default function Hero() {
   return (
@@ -15,6 +19,7 @@ export default function Hero() {
             height={100}
             alt="Calendar illustration"
             className="w-[80px] md:w-[120px] lg:w-[160]"
+            placeholder="blur"
           />
           <Heading size="lg" className="text-center">
             {"Dogodki"}
@@ -33,34 +38,39 @@ export default function Hero() {
       <div className="flex flex-col gap-2 md:gap-4">
         <div className="flex gap-2 md:gap-4">
           <Image
-            src="/assets/dogodek-1.png"
+            src={dogodek1}
             width={500}
             height={500}
             alt="Dogodek Image 1"
             className="object-cover w-4/6 rounded-2xl border border-black"
+            placeholder="blur"
+            priority
           />
           <Image
-            src="/assets/dogodek-2.png"
-            width={500}
-            height={500}
+            src={dogodek2}
+            width={450}
+            height={450}
             alt="Dogodek Image 2"
             className="object-cover w-2/6 rounded-2xl border border-black"
+            placeholder="blur"
           />
         </div>
         <div className="flex gap-2 md:gap-4">
           <Image
-            src="/assets/dogodek-3.png"
-            width={500}
-            height={500}
+            src={dogodek3}
+            width={450}
+            height={450}
             alt="Dogodek Image 3"
             className="object-cover w-2/6 rounded-2xl border border-black"
+            placeholder="blur"
           />
           <Image
-            src="/assets/dogodek-4.png"
+            src={dogodek4}
             width={500}
             height={500}
             alt="Dogodek Image 4"
             className="object-cover w-4/6 rounded-2xl border border-black"
+            placeholder="blur"
           />
         </div>
       </div>

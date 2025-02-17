@@ -2,6 +2,7 @@ import { Heading } from "@/app/components/heading";
 import { LinkButton } from "@/app/components/link-button";
 import { PageWrapper } from "@/app/components/page-wrapper";
 import Image from "next/image";
+import team from "../../../public/assets/team.webp";
 
 export function Hero() {
   return (
@@ -29,10 +30,12 @@ export function Hero() {
       </div>
       <div>
         <Image
-          src="/assets/team.jpg"
+          src={team}
           width={1500}
-          height={1500}
+          height={672}
+          placeholder="blur"
           alt="Klub Ada Team image"
+          priority
           className="w-full object-cover bg-top object-[50%_10%] max-h-[42rem] rounded-2xl border border-black"
         />
       </div>
