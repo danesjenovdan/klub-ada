@@ -3,10 +3,10 @@ import { LinkButton } from "@/app/components/link-button";
 import { PageWrapper } from "@/app/components/page-wrapper";
 import { Paragraph } from "@/app/components/paragraph";
 import Image from "next/image";
-import dogodek1 from "../../public/assets/dogodek-1.webp";
-import dogodek2 from "../../public/assets/dogodek-2.webp";
-import dogodek3 from "../../public/assets/dogodek-3.webp";
-import dogodek4 from "../../public/assets/dogodek-4.webp";
+import dogodek1 from "../../../public/assets/dogodek-1.webp";
+import dogodek2 from "../../../public/assets/dogodek-2.webp";
+import dogodek3 from "../../../public/assets/dogodek-3.webp";
+import dogodek4 from "../../../public/assets/dogodek-4.webp";
 
 export default function Hero() {
   return (
@@ -19,7 +19,6 @@ export default function Hero() {
             height={100}
             alt="Calendar illustration"
             className="w-[80px] md:w-[120px] lg:w-[160]"
-            placeholder="blur"
           />
           <Heading size="lg" className="text-center">
             {"Dogodki"}
