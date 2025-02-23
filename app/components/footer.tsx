@@ -4,6 +4,8 @@ import { Heading } from "./heading";
 import { PageWrapper } from "./page-wrapper";
 import { Paragraph } from "./paragraph";
 import { Link } from "./link";
+import { Card } from "./card";
+import FooterNewsletter from "./footer-newsletter";
 
 export function Footer() {
   return (
@@ -43,11 +45,14 @@ export function Footer() {
                   />
                 </div>
                 <div className="basis-8/12">
-                  <CtaLink
-                    label="Prijavi se na novičnik"
-                    color="beige"
-                    href="/"
-                  />
+                  <Card>
+                    <div className="flex flex-col gap-4">
+                      <Paragraph size="xl" weight="bold">
+                        Prijavi se na novicnik
+                      </Paragraph>
+                      <FooterNewsletter />
+                    </div>
+                  </Card>
                 </div>
               </div>
             </div>
