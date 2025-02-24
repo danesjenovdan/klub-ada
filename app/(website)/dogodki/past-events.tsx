@@ -7,7 +7,7 @@ import { Event } from "../../utils/interface";
 export async function getEvents(today: string) {
   const query = `*[
     _type == "event" && eventTime <= $today
-  ] | order(eventTime) {
+  ] | order(eventTime desc) {
   title,
   description,
   eventImage,
