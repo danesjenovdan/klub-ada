@@ -19,7 +19,7 @@ export default function NotFound() {
             className="w-full max-w-[457px]"
           />
           <Heading className="text-center">
-            {"O ne! Stran ni bila najdena."}
+            {"O ne! Strani ni bila mogoče najti."}
           </Heading>
           <LinkButton href="/">{"Nazaj na glavno stran"}</LinkButton>
         </div>
