@@ -61,6 +61,9 @@ const config: Config = {
       },
       boxShadow: {
         button: "-4px 4px var(--color-black)",
+        yellow: "-7px 7px var(--color-yellow)",
+        blue: "-7px 7px var(--color-blue)",
+        pink: "-7px 7px var(--color-pink)",
       },
     },
   },
