@@ -6,7 +6,22 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Klub Ada",
-  description: "Website for Klub Ada community for women in tech in Slovenia.",
+  description: "Community for women in tech in Slovenia.",
+  openGraph: {
+    type: "website",
+    title: "Klub Ada",
+    description: "Community for women in tech in Slovenia.",
+    url: "https://klub-ada.si",
+    siteName: "Klub Ada",
+    images: [
+      {
+        url: "/assets/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Klub Ada - Women in Tech Community",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
