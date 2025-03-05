@@ -33,17 +33,17 @@ export function Mission() {
                 alt="Alt text"
                 width={700}
                 height={700}
-                className="aspect-square object-cover rounded-2xl border border-black"
+                className="aspect-square object-cover rounded-2xl border border-black transition-all duration-200 ease-in-out transform hover:shadow-yellow hover:-translate-y-1 hover:translate-x-1"
               />
             </div>
             <motion.div
-              className="w-full md:w-1/2 h-full flex flex-col justify-center p-4 md:px-20 gap-4"
+              className="w-full md:w-1/2 h-full flex flex-col justify-center p-4 md:px-20 gap-6"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.4 }} // Trigger animation when 50% of the div is in view
               variants={textVariants}
             >
-              <Heading size="md" color="red">
+              <Heading size="lg" color="red">
                 {"Misija"}
               </Heading>
               <Paragraph size="lg" weight="bold">
@@ -68,7 +68,7 @@ export function Mission() {
                 alt="Alt text"
                 width={700}
                 height={700}
-                className="aspect-square object-cover rounded-2xl border border-black"
+                className="aspect-square object-cover rounded-2xl border border-black transition-all duration-200 ease-in-out transform hover:shadow-blue hover:-translate-y-1 hover:translate-x-1"
               />
             </div>
             <motion.div
@@ -78,7 +78,7 @@ export function Mission() {
               viewport={{ once: true, amount: 0.4 }} // Trigger animation when 50% of the div is in view
               variants={textVariants}
             >
-              <Heading size="md" color="red">
+              <Heading size="lg" color="red">
                 {"Naša zgodba začetka"}
               </Heading>
               <Paragraph size="lg" weight="bold">
@@ -103,7 +103,7 @@ export function Mission() {
                 alt="Alt text"
                 width={700}
                 height={700}
-                className="aspect-square object-cover rounded-2xl border border-black"
+                className="aspect-square object-cover rounded-2xl border border-black transition-all duration-200 ease-in-out transform hover:shadow-pink hover:-translate-y-1 hover:translate-x-1"
               />
             </div>
             <motion.div
@@ -113,7 +113,7 @@ export function Mission() {
               viewport={{ once: true, amount: 0.4 }} // Trigger animation when 50% of the div is in view
               variants={textVariants}
             >
-              <Heading size="md" color="red">
+              <Heading size="lg" color="red">
                 {"Od kje ime Klub Ada?"}
               </Heading>
               <Paragraph size="lg" weight="bold">
