@@ -24,7 +24,7 @@ interface EventData {
 }
 
 const NEXT_EVENT_QUERY = `*[
-  _type == "event" && eventTime >= $today1
+  _type == "event" && eventTime >= $today
 ] | order(eventTime) [0] {title, description, eventImage, location, applyLink, eventTime}`;
 
 function NextEventContent() {
