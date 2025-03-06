@@ -29,10 +29,16 @@ const NEXT_EVENT_QUERY = `*[
 
 function NextEventContent() {
   const today = new Date().toISOString().split("T")[0];
-  const { data, error } = useSanityData({
+  const { data, error, isLoading } = useSanityData({
     query: NEXT_EVENT_QUERY,
     params: { today },
   });
+
+  if (isLoading) {
+    <div className="w-full flex items-center justify-center">
+      <LoadingAnimation />
+    </div>;
+  }
 
   if (error || !data) {
     return (
@@ -97,15 +103,7 @@ export function NextEvent() {
           )}
         </div>
         <Card bgColor="bg-red100">
-          <Suspense
-            fallback={
-              <div className="w-full pt-32 flex items-center justify-center">
-                <LoadingAnimation />
-              </div>
-            }
-          >
-            <NextEventContent />
-          </Suspense>
+          <NextEventContent />
         </Card>
       </div>
     </PageWrapper>
