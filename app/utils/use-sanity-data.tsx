@@ -10,6 +10,7 @@ type UseSanityDataParams = {
 };
 export function useSanityData({ query, params }: UseSanityDataParams) {
   const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -18,11 +19,13 @@ export function useSanityData({ query, params }: UseSanityDataParams) {
       .then((data) => {
         setData(data);
       })
-      .catch((error) => setError(error));
+      .catch((error) => setError(error))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return {
     data,
+    isLoading,
     error: error as SanityError | null,
   };
 }
