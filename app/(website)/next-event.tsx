@@ -9,7 +9,6 @@ import imageLoader from "../utils/image-loader";
 import { LinkButton } from "../components/link-button";
 import { formatDate, formatTime } from "../utils/date";
 import { usePathname } from "next/navigation";
-import { Suspense } from "react";
 import { LoadingAnimation } from "../components/loading-animation";
 import { InlineError } from "../components/inline-error";
 import { useSanityData } from "../utils/use-sanity-data";

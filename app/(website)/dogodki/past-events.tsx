@@ -3,11 +3,9 @@
 import EventComponent from "@/app/components/event-component";
 import { Heading } from "@/app/components/heading";
 import { PageWrapper } from "@/app/components/page-wrapper";
-import { client } from "@/sanity/lib/client";
 import { Event } from "../../utils/interface";
 import { useSanityData } from "@/app/utils/use-sanity-data";
 import { InlineError } from "@/app/components/inline-error";
-import { Suspense } from "react";
 import EventSkeleton from "@/app/components/event-skeleton";
 import { Paragraph } from "@/app/components/paragraph";
 
@@ -21,21 +19,6 @@ slug,
 eventTime,
 _id,
 }`;
-
-export async function getEvents(today: string) {
-  const query = `*[
-    _type == "event" && eventTime <= $today
-  ] | order(eventTime desc) {
-  title,
-  description,
-  eventImage,
-  slug,
-  eventTime,
-  _id,
-}`;
-  const data = await client.fetch(query, { today });
-  return data;
-}
 
 function PastEventsContent() {
   const today = new Date().toISOString().split("T")[0];
