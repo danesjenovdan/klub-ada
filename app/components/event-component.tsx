@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Heading } from "./heading";
 import { Paragraph } from "./paragraph";
@@ -7,22 +8,27 @@ import imageLoader from "../utils/image-loader";
 import { formatDate } from "../utils/date";
 import { client } from "@/sanity/lib/client";
 import { Link } from "./link";
+import { useSanityData } from "../utils/use-sanity-data";
 
-export async function getEventBlog(eventId: string) {
-  const query = `*[_type == "post" && event._ref == $eventId] {
+const EVENT_BLOG_QUERY = `*[_type == "post" && event._ref == $eventId] {
   slug,
 }`;
-  const data = await client.fetch(query, { eventId });
-  return data;
-}
 
+type EventBlogPost = {
+  slug: { current: string };
+};
 interface Props {
   event: Event;
 }
-export default async function EventComponent({ event }: Props) {
+export default function EventComponent({ event }: Props) {
   const imageSrc = imageLoader(event.eventImage);
   const formattedDate = formatDate(event.eventTime);
-  const blogPost = await getEventBlog(event._id);
+  const { data } = useSanityData({
+    query: EVENT_BLOG_QUERY,
+    params: { eventId: event._id },
+  });
+
+  const blogPost = (data || []) as EventBlogPost[];
 
   return (
     <div className="flex flex-col bg-white gap-6 border border-black rounded-2xl p-4 lg:p-6 h-full justify-between">
@@ -42,7 +48,7 @@ export default async function EventComponent({ event }: Props) {
         </div>
         <div className="flex items-center justify-between">
           <div>
-            {blogPost.length > 0 && (
+            {blogPost?.length > 0 && (
               <Link
                 variant="secondary"
                 href={`/blog/${blogPost[0].slug.current}`}
