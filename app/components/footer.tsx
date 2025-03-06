@@ -48,7 +48,7 @@ export function Footer() {
                   <Card>
                     <div className="flex flex-col gap-4">
                       <Paragraph size="xl" weight="bold">
-                        Prijavi se na novicnik
+                        Prijavi se na novičnik
                       </Paragraph>
                       <FooterNewsletter />
                     </div>

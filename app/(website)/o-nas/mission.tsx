@@ -79,7 +79,7 @@ export function Mission() {
               variants={textVariants}
             >
               <Heading size="lg" color="red">
-                {"Naša zgodba začetka"}
+                {"Zgodba o našem začetku"}
               </Heading>
               <Paragraph size="lg" weight="bold">
                 {
@@ -114,7 +114,7 @@ export function Mission() {
               variants={textVariants}
             >
               <Heading size="lg" color="red">
-                {"Od kje ime Klub Ada?"}
+                {"Od kod ime Klub Ada?"}
               </Heading>
               <Paragraph size="lg" weight="bold">
                 {

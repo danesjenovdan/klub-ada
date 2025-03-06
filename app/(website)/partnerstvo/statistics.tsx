@@ -23,8 +23,8 @@ export function Statistics() {
       </div>
       <div>
         <div className="grid gap-4 md:gap-8 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-          <StatsCard number="430+" label="sledilcev na Instagramu" />
-          <StatsCard number="380+" label="sledilcev na LinkedInu" />
+          <StatsCard number="430+" label="sledilk in sledilcev na Instagramu" />
+          <StatsCard number="380+" label="sledilk in sledilcev na LinkedInu" />
           <StatsCard number="200+" label="prijavljenih na novičnik" />
           <StatsCard number="120+" label="članic v Discord skupini" />
           <StatsCard
