@@ -5,14 +5,14 @@ import { Heading } from "../components/heading";
 import { PageWrapper } from "../components/page-wrapper";
 import { Card } from "../components/card";
 import { Paragraph } from "../components/paragraph";
-import { SanityDocument } from "next-sanity";
-import { client } from "@/sanity/lib/client";
 import imageLoader from "../utils/image-loader";
 import { LinkButton } from "../components/link-button";
 import { formatDate, formatTime } from "../utils/date";
 import { usePathname } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import { LoadingAnimation } from "../components/loading-animation";
+import { InlineError } from "../components/inline-error";
+import { useSanityData } from "../utils/use-sanity-data";
 
 interface EventData {
   title: string;
@@ -24,13 +24,25 @@ interface EventData {
 }
 
 const NEXT_EVENT_QUERY = `*[
-  _type == "event" && eventTime >= $today
+  _type == "event" && eventTime >= $today1
 ] | order(eventTime) [0] {title, description, eventImage, location, applyLink, eventTime}`;
 
-async function NextEventContent() {
+function NextEventContent() {
   const today = new Date().toISOString().split("T")[0];
-  const nextEvent = await client.fetch(NEXT_EVENT_QUERY, { today });
+  const { data, error } = useSanityData({
+    query: NEXT_EVENT_QUERY,
+    params: { today },
+  });
 
+  if (error || !data) {
+    return (
+      <div className="flex w-full justify-center">
+        <InlineError />
+      </div>
+    );
+  }
+
+  const nextEvent = data as EventData;
   const imageSrc = imageLoader(nextEvent.eventImage);
   const date = formatDate(nextEvent.eventTime);
   const time = formatTime(nextEvent.eventTime);
