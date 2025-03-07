@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Filters } from "./filters";
 import { useSanityData } from "@/app/utils/use-sanity-data";
 import { InlineError } from "@/app/components/inline-error";
+import { LoadingAnimation } from "@/app/components/loading-animation";
 
 const getBlogQuery = (category: string | null) => {
   const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";
@@ -28,7 +29,7 @@ categories[]-> {
 
 export default function Blogs() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const { data, error } = useSanityData({
+  const { data, error, isLoading } = useSanityData({
     query: getBlogQuery(selectedCategory),
     params: { category: selectedCategory },
   });
@@ -62,10 +63,10 @@ export default function Blogs() {
           }
         />
       </div>
-      {error ? (
+      {error || isLoading ? (
         <div className="w-full flex flex-col gap-6">
           <div className="self-center">
-            <InlineError />
+            {isLoading ? <LoadingAnimation /> : <InlineError />}
           </div>
           {/* Newsletter Component */}
           <div className="col-span-1 md:col-span-2 lg:col-span-3 py-10 md:py-20">
