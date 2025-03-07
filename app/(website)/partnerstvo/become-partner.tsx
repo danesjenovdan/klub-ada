@@ -11,7 +11,7 @@ export function BecomePartner() {
           <div className="flex flex-col gap-3 md:gap-6">
             <Heading size="lg">{"Vas zanima sodelovanje?"}</Heading>
             <Paragraph size="xl">
-              {"Za več informacij nam lahko pišete na"}{" "}
+              {"Za več informacij nam lahko pišete na "}
               <a
                 href="mailto:info@klub-ada.si"
                 className="text-white font-medium"
@@ -20,7 +20,7 @@ export function BecomePartner() {
               </a>
             </Paragraph>
           </div>
-          <div className="flex justify-start md:justify-end w-full md:w-auto">
+          <div className="flex justify-start md:justify-end w-full md:w-auto items-start self-start">
             <LinkButton
               size="md"
               variant="secondary"

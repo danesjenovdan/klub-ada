@@ -42,7 +42,7 @@ export default function Blogs() {
 
   return (
     <PageWrapper>
-      <div className="flex flex-col pb-10 md:pb-20 md:px-16 md:gap-6 items-center">
+      <div className="flex flex-col pb-10 md:pb-20 md:px-16 gap-6 items-center">
         <div className="flex flex-col gap-2 items-center">
           <Image
             src="/assets/blog-illustration.svg"
@@ -57,7 +57,7 @@ export default function Blogs() {
         </div>
         <Paragraph size="lg" className="max-w-xl text-center">
           {
-            "Preberi povzetke dogodkov, uporabne nasvete za iskanje službe, priprava na tehnični intervju, predlogi knjig in še več."
+            "Preberi povzetke dogodkov, uporabne nasvete za iskanje službe, priprave na tehnični intervju, predloge knjig in še več."
           }
         </Paragraph>
         <Filters

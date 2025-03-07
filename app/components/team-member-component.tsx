@@ -12,6 +12,8 @@ interface TeamMemberProps {
 const TeamMemberComponent = ({ member }: TeamMemberProps) => {
   const imageSrc = imageLoader(member.image);
 
+  const memeberBioParts = member.bio.split(" ");
+
   return (
     <div className="flex flex-col bg-white gap-6 border border-black rounded-2xl p-4 lg:p-6 h-full justify-between">
       <div className="flex flex-col h-full gap-4">
@@ -39,7 +41,21 @@ const TeamMemberComponent = ({ member }: TeamMemberProps) => {
               />
             </a>
           </div>
-          <Paragraph>{member.bio}</Paragraph>
+          <Paragraph>
+            {memeberBioParts.map((bioPart) => {
+              if (bioPart === "info@klub-ada.si") {
+                return (
+                  <a
+                    href={`mailto:${bioPart}`}
+                    className="text-red font-medium"
+                  >
+                    info@klub-ada.si
+                  </a>
+                );
+              }
+              return bioPart + " ";
+            })}
+          </Paragraph>
         </div>
       </div>
     </div>

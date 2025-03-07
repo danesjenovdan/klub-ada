@@ -16,7 +16,7 @@ export function Hero() {
               <Heading size="lg">{"Skupnost žensk v tehnologiji"}</Heading>
               <Paragraph size="lg">
                 {
-                  "Klub Ada organizira dogodke, ki so namenjeni mreženju in deljenju znanja, kariernega in osebnega razvoja za dijakinje, študentke, zaposlene in vse, ki jih področje tehnologije zanima."
+                  "Klub Ada organizira dogodke, ki so namenjeni mreženju in deljenju znanja, kariernemu in osebnemu razvoju za dijakinje, študentke, zaposlene in vse, ki jih zanima področje tehnologije."
                 }
               </Paragraph>
             </div>

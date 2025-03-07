@@ -29,7 +29,7 @@ export function Statistics() {
           <StatsCard number="120+" label="članic v Discord skupini" />
           <StatsCard
             number="12+"
-            label="podjetij, ki so nas že enkrat podprla"
+            label="podjetij, ki so nas do sedaj podprla"
           />
         </div>
       </div>
