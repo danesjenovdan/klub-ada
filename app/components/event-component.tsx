@@ -6,9 +6,9 @@ import Image from "next/image";
 import { Event } from "../utils/interface";
 import imageLoader from "../utils/image-loader";
 import { formatDate } from "../utils/date";
-import { client } from "@/sanity/lib/client";
 import { Link } from "./link";
 import { useSanityData } from "../utils/use-sanity-data";
+import { LinkDiv } from "./post-component";
 
 const EVENT_BLOG_QUERY = `*[_type == "post" && event._ref == $eventId] {
   slug,
@@ -31,7 +31,7 @@ export default function EventComponent({ event }: Props) {
 
   const blogPost = (data || []) as EventBlogPost[];
 
-  return (
+  const Content = (
     <div className="flex flex-col bg-white gap-6 border border-black rounded-2xl p-4 lg:p-6 h-full justify-between">
       <div className="flex flex-col h-full justify-between gap-4">
         <div className="flex flex-col gap-4">
@@ -50,27 +50,31 @@ export default function EventComponent({ event }: Props) {
         <div className="flex items-center justify-between">
           <div>
             {blogPost?.length > 0 && (
-              <Link
-                variant="secondary"
-                href={`/blog/${blogPost[0].slug.current}`}
-              >
-                Preberi blog
-              </Link>
+              <LinkDiv variant="secondary">Preberi blog</LinkDiv>
             )}
           </div>
           {blogPost.length > 0 && (
-            <a href={`/blog/${blogPost[0]?.slug?.current}`}>
-              <Image
-                src="/assets/chevron-right-red.svg"
-                width={24}
-                height={24}
-                alt="Chevron right illustration"
-                className="cover-image"
-              />
-            </a>
+            <Image
+              src="/assets/chevron-right-red.svg"
+              width={24}
+              height={24}
+              alt="Chevron right illustration"
+              className="cover-image"
+            />
           )}
         </div>
       </div>
     </div>
+  );
+
+  return blogPost.length > 0 ? (
+    <Link
+      href={`/blog/${blogPost[0].slug.current}`}
+      className="block h-full group"
+    >
+      {Content}
+    </Link>
+  ) : (
+    Content
   );
 }
