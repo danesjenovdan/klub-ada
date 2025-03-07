@@ -20,7 +20,7 @@ export function BecomePartner() {
               </a>
             </Paragraph>
           </div>
-          <div className="flex justify-start md:justify-end w-full md:w-auto">
+          <div className="flex justify-start md:justify-end w-full md:w-auto items-start self-start">
             <LinkButton
               size="md"
               variant="secondary"

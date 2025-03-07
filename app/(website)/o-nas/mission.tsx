@@ -53,7 +53,7 @@ export function Mission() {
               </Paragraph>
               <Paragraph size="lg">
                 {
-                  "Naše aktivnosti so zasnovane tako, da ustvarjajo varno in spodbudno okolje, kjer lahko članice delijo ideje, izkušnje in se vključujejo v pogovore."
+                  "Naše aktivnosti so zasnovane tako, da ustvarjajo varno in spodbudno okolje, kjer lahko udeleženke delijo ideje, izkušnje in se vključujejo v pogovore."
                 }
               </Paragraph>
             </motion.div>

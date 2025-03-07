@@ -57,7 +57,7 @@ export default function Blogs() {
         </div>
         <Paragraph size="lg" className="max-w-xl text-center">
           {
-            "Preberi povzetke dogodkov, uporabne nasvete za iskanje službe, priprava na tehnični intervju, predlogi knjig in še več."
+            "Preberi povzetke dogodkov, uporabne nasvete za iskanje službe, priprave na tehnični intervju, predloge knjig in še več."
           }
         </Paragraph>
         <Filters

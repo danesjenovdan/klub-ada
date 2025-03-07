@@ -116,7 +116,7 @@ const BlogArticle = async (props: { params: Params }) => {
           href={value?.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-black text-lg underline underline-offset-2 font-medium hover:text-pink"
+          className="text-black text-lg underline underline-offset-2 font-bold hover:text-pink"
           style={{ textDecorationColor: "pink" }}
         >
           {children}
