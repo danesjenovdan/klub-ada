@@ -31,7 +31,6 @@ export default function Blogs() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
 
-  console.log(posts);
   useEffect(() => {
     const asyncFn = async () => {
       const data = await getPosts(selectedCategory);

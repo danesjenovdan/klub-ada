@@ -1,21 +1,18 @@
-import { client } from "@/sanity/lib/client";
+"use client";
+
+import { useSanityData } from "@/app/utils/use-sanity-data";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+
+const FILTERS_QUERY = `*[_type == "category"] {
+  title,
+  slug
+}`;
 
 type FilterProps = {
   isSelected: boolean;
   label: string;
   handleSelectFilter: () => void;
 };
-
-export async function getPostCategories() {
-  const query = `*[_type == "category"] {
-    title,
-    slug
-  }`;
-  const data = await client.fetch(query);
-  return data;
-}
 
 function Filter({ isSelected, label, handleSelectFilter }: FilterProps) {
   return (
@@ -46,14 +43,11 @@ export function Filters({
   selectedCategory,
   setSelectedCategoryAction,
 }: FiltersProps) {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
-  useEffect(() => {
-    const asyncFn = async () => {
-      const data = await getPostCategories();
-      setCategories(data);
-    };
-    asyncFn();
-  }, []);
+  const { data, error, isLoading } = useSanityData({
+    query: FILTERS_QUERY,
+  });
+
+  const categories = (data || []) as CategoryType[];
 
   return (
     <div className="flex gap-2">
