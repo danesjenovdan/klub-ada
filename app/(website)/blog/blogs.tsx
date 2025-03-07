@@ -5,7 +5,7 @@ import { Post } from "@/app/utils/interface";
 import PostComponent from "@/app/components/post-component";
 import { NewsletterComponent } from "@/app/components/newsletter-component";
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Filters } from "./filters";
 import { useSanityData } from "@/app/utils/use-sanity-data";
 import { InlineError } from "@/app/components/inline-error";
@@ -29,9 +29,13 @@ categories[]-> {
 
 export default function Blogs() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const params = useMemo(
+    () => ({ category: selectedCategory }),
+    [selectedCategory]
+  );
   const { data, error, isLoading } = useSanityData({
     query: getBlogQuery(selectedCategory),
-    params: { category: selectedCategory },
+    params,
   });
 
   const posts = (data || []) as Post[];

@@ -9,7 +9,7 @@ import { PageWrapper } from "@/app/components/page-wrapper";
 import { Post } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { PortableText, PortableTextComponents } from "next-sanity";
-import React from "react";
+import React, { useMemo } from "react";
 import { formatDate } from "@/app/utils/date";
 import { useParams } from "next/navigation";
 import { useSanityData } from "@/app/utils/use-sanity-data";
@@ -33,9 +33,10 @@ const GET_BLOG_POST = `*[_type == "post" && slug.current == $slug][0] {
 // Blog Article Component
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
+  const params = useMemo(() => ({ slug }), []);
   const { data, error, isLoading } = useSanityData({
     query: GET_BLOG_POST,
-    params: { slug },
+    params,
   });
 
   if (isLoading) {

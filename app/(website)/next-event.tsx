@@ -29,9 +29,7 @@ const NEXT_EVENT_QUERY = `*[
 
 function NextEventContent() {
   const params = useMemo(
-    () => ({
-      today: new Date().toISOString().split("T")[0],
-    }),
+    () => ({ today: new Date().toISOString().split("T")[0] }),
     []
   );
   const { data, error, isLoading } = useSanityData({
