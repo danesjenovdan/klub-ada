@@ -35,13 +35,13 @@ export default function Hero() {
         </LinkButton>
       </div>
       <div className="flex flex-col gap-2 md:gap-4">
-        <div className="flex gap-2 md:gap-4">
+        <div className="flex flex-wrap md:flex-nowrap gap-2 md:gap-4">
           <Image
             src={dogodek1}
             width={800}
             height={800}
             alt="Dogodek Image 1"
-            className="object-cover w-4/6 rounded-2xl border border-black"
+            className="object-cover w-full md:w-4/6 rounded-2xl border border-black"
             placeholder="blur"
             priority
           />
@@ -50,17 +50,17 @@ export default function Hero() {
             width={650}
             height={650}
             alt="Dogodek Image 2"
-            className="object-cover w-2/6 rounded-2xl border border-black"
+            className="object-cover w-full md:w-2/6 rounded-2xl border border-black"
             placeholder="blur"
           />
         </div>
-        <div className="flex gap-2 md:gap-4">
+        <div className="flex flex-wrap md:flex-nowrap gap-2 md:gap-4">
           <Image
             src={dogodek3}
             width={650}
             height={650}
             alt="Dogodek Image 3"
-            className="object-cover w-2/6 rounded-2xl border border-black"
+            className="object-cover w-full md:w-2/6 rounded-2xl border border-black"
             placeholder="blur"
           />
           <Image
@@ -68,7 +68,7 @@ export default function Hero() {
             width={800}
             height={800}
             alt="Dogodek Image 4"
-            className="object-cover w-4/6 rounded-2xl border border-black"
+            className="object-cover w-full md:w-4/6 rounded-2xl border border-black"
             placeholder="blur"
           />
         </div>

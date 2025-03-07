@@ -14,7 +14,7 @@ interface LinkDivProps {
   variant?: "primary" | "secondary" | "tertiary";
   children: React.ReactNode;
 }
-function LinkDiv({ children, variant = "primary" }: LinkDivProps) {
+export function LinkDiv({ children, variant = "primary" }: LinkDivProps) {
   return (
     <div
       className={`${linkBase({ variant })} underline-animation group-hover:after:w-full`}
