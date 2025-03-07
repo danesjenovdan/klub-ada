@@ -39,14 +39,16 @@ const BlogArticle = () => {
   });
 
   if (isLoading) {
-    <div className="w-full flex items-center justify-center">
-      <LoadingAnimation />
-    </div>;
+    return (
+      <div className="w-full flex items-center justify-center">
+        <LoadingAnimation />
+      </div>
+    );
   }
 
   if (error) {
     return (
-      <div className="flex w-full justify-center">
+      <div className="flex w-full p-6 justify-center">
         <InlineError />
       </div>
     );

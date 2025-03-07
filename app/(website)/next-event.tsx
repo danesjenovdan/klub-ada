@@ -34,9 +34,11 @@ function NextEventContent() {
   });
 
   if (isLoading) {
-    <div className="w-full flex items-center justify-center">
-      <LoadingAnimation />
-    </div>;
+    return (
+      <div className="w-full flex items-center justify-center">
+        <LoadingAnimation />
+      </div>
+    );
   }
 
   if (error || !data) {
