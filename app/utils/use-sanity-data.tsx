@@ -21,7 +21,7 @@ export function useSanityData({ query, params }: UseSanityDataParams) {
       })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [params]);
 
   return {
     data,

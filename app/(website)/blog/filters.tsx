@@ -43,7 +43,7 @@ export function Filters({
   selectedCategory,
   setSelectedCategoryAction,
 }: FiltersProps) {
-  const { data, error, isLoading } = useSanityData({
+  const { data } = useSanityData({
     query: FILTERS_QUERY,
   });
 

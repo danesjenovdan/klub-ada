@@ -8,6 +8,25 @@ import { NewsletterComponent } from "@/app/components/newsletter-component";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Filters } from "./filters";
+import { useSanityData } from "@/app/utils/use-sanity-data";
+import { LoadingAnimation } from "@/app/components/loading-animation";
+import { InlineError } from "@/app/components/inline-error";
+
+const getBlogQuery = (category: string | null) => {
+  const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";
+  return `*[_type == "post" ${
+    category ? optionalCategoryFilter : ""
+  }] | order(pinned asc) {
+title,
+slug,
+mainImage,
+categories[]-> {
+  _id,
+  slug,
+  title,
+}
+}`;
+};
 
 export async function getPosts(category: string | null) {
   const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";
@@ -29,15 +48,21 @@ export async function getPosts(category: string | null) {
 
 export default function Blogs() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [posts, setPosts] = useState<Post[]>([]);
+  // const [posts, setPosts] = useState<Post[]>([]);
+  const { data, isLoading, error } = useSanityData({
+    query: getBlogQuery(selectedCategory),
+    params: { category: selectedCategory },
+  });
 
-  useEffect(() => {
-    const asyncFn = async () => {
-      const data = await getPosts(selectedCategory);
-      setPosts(data);
-    };
-    asyncFn();
-  }, [selectedCategory]);
+  // useEffect(() => {
+  //   const asyncFn = async () => {
+  //     const data = await getPosts(selectedCategory);
+  //     setPosts(data);
+  //   };
+  //   asyncFn();
+  // }, [selectedCategory]);
+
+  const posts = (data || []) as Post[];
 
   return (
     <PageWrapper>
@@ -66,26 +91,37 @@ export default function Blogs() {
           }
         />
       </div>
-      {/* First 3 posts */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {posts.slice(0, 3).map((post) => (
-          <div key={post.slug.current} className="col-span-1">
-            <PostComponent post={post} />
+      {error ? (
+        <div className="w-full flex flex-col gap-6">
+          <div className="self-center">
+            <InlineError />
           </div>
-        ))}
-
-        {/* Newsletter Component */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-3 py-10 md:py-20">
-          <NewsletterComponent />
+          {/* Newsletter Component */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 py-10 md:py-20">
+            <NewsletterComponent />
+          </div>
         </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {posts.slice(0, 3).map((post) => (
+            <div key={post.slug.current} className="col-span-1">
+              <PostComponent post={post} />
+            </div>
+          ))}
 
-        {/* Remaining Posts (4 to 10) */}
-        {posts.slice(3).map((post) => (
-          <div key={post.slug.current} className="col-span-1">
-            <PostComponent post={post} />
+          {/* Newsletter Component */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 py-10 md:py-20">
+            <NewsletterComponent />
           </div>
-        ))}
-      </div>
+
+          {/* Remaining Posts (4 to 10) */}
+          {posts.slice(3).map((post) => (
+            <div key={post.slug.current} className="col-span-1">
+              <PostComponent post={post} />
+            </div>
+          ))}
+        </div>
+      )}
     </PageWrapper>
   );
 }
