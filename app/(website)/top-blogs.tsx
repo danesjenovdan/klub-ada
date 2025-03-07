@@ -21,21 +21,6 @@ const PINNED_POSTS_QUERY = `*[_type == "post" && pinned] {
   }
 }`;
 
-export async function getPinnedPosts() {
-  const query = `*[_type == "post" && pinned] {
-    title,
-    slug,
-    mainImage,
-    categories[]-> {
-      _id,
-      slug,
-      title,
-    }
-  }`;
-  const data = await client.fetch(query);
-  return data;
-}
-
 export function TopBlogs() {
   const { data, error, isLoading } = useSanityData({
     query: PINNED_POSTS_QUERY,
