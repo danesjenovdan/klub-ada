@@ -2,14 +2,12 @@ import { Heading } from "@/app/components/heading";
 import { PageWrapper } from "@/app/components/page-wrapper";
 import { Paragraph } from "@/app/components/paragraph";
 import { Post } from "@/app/utils/interface";
-import { client } from "@/sanity/lib/client";
 import PostComponent from "@/app/components/post-component";
 import { NewsletterComponent } from "@/app/components/newsletter-component";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Filters } from "./filters";
 import { useSanityData } from "@/app/utils/use-sanity-data";
-import { LoadingAnimation } from "@/app/components/loading-animation";
 import { InlineError } from "@/app/components/inline-error";
 
 const getBlogQuery = (category: string | null) => {
@@ -28,39 +26,12 @@ categories[]-> {
 }`;
 };
 
-export async function getPosts(category: string | null) {
-  const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";
-  const query = `*[_type == "post" ${
-    category ? optionalCategoryFilter : ""
-  }] | order(pinned asc) {
-  title,
-  slug,
-  mainImage,
-  categories[]-> {
-    _id,
-    slug,
-    title,
-  }
-}`;
-  const data = await client.fetch(query, { category });
-  return data;
-}
-
 export default function Blogs() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  // const [posts, setPosts] = useState<Post[]>([]);
-  const { data, isLoading, error } = useSanityData({
+  const { data, error } = useSanityData({
     query: getBlogQuery(selectedCategory),
     params: { category: selectedCategory },
   });
-
-  // useEffect(() => {
-  //   const asyncFn = async () => {
-  //     const data = await getPosts(selectedCategory);
-  //     setPosts(data);
-  //   };
-  //   asyncFn();
-  // }, [selectedCategory]);
 
   const posts = (data || []) as Post[];
 
