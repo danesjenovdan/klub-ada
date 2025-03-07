@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { LinkButton } from "./link-button";
 
 export function NavbarMenu() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const onClick = () => {
