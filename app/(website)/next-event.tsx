@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import { LoadingAnimation } from "../components/loading-animation";
 import { InlineError } from "../components/inline-error";
 import { useSanityData } from "../utils/use-sanity-data";
+import { useMemo } from "react";
 
 interface EventData {
   title: string;
@@ -27,10 +28,15 @@ const NEXT_EVENT_QUERY = `*[
 ] | order(eventTime) [0] {title, description, eventImage, location, applyLink, eventTime}`;
 
 function NextEventContent() {
-  const today = new Date().toISOString().split("T")[0];
+  const params = useMemo(
+    () => ({
+      today: new Date().toISOString().split("T")[0],
+    }),
+    []
+  );
   const { data, error, isLoading } = useSanityData({
     query: NEXT_EVENT_QUERY,
-    params: { today },
+    params,
   });
 
   if (isLoading) {
