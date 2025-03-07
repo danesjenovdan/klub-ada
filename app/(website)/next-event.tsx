@@ -60,7 +60,7 @@ function NextEventContent() {
           src={imageSrc}
           width={500}
           height={500}
-          alt={nextEvent.eventImage.alt}
+          alt={nextEvent.eventImage.alt || "Placeholder alt"}
           className="w-full object-cover aspect-square rounded-2xl"
         />
       </div>

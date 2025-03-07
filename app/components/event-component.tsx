@@ -38,7 +38,7 @@ export default function EventComponent({ event }: Props) {
             src={imageSrc}
             width={500}
             height={500}
-            alt={event.eventImage.alt}
+            alt={event.eventImage.alt || "Placeholder alt"}
             className="w-full object-cover aspect-[4/3] md:aspect-square rounded-2xl"
           />
           <div className="flex flex-col gap-2">

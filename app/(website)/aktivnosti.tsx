@@ -44,7 +44,7 @@ export async function Aktivnosti() {
                   title={name}
                   description={description}
                   imageSrc={imageSrc}
-                  imageAlt={activityImage.alt}
+                  imageAlt={activityImage.alt || "Placeholder alt"}
                 />
               </div>
             );
