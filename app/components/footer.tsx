@@ -81,18 +81,6 @@ export function Footer() {
                     {"Spoznaj Klub Ada"}
                   </Link>
                 </div>
-                {/* 
-                <div>
-                  <Link variant="secondary" href="/o-nas">
-                    {"Zgodovina"}
-                  </Link>
-                </div>
-                <div>
-                  <Link variant="secondary" href="/o-nas">
-                    {"Doniraj nam"}
-                  </Link>
-                </div>
-                */}
               </div>
             </div>
 

@@ -15,7 +15,7 @@ export function Statistics() {
           width={50}
           height={50}
           alt="Blog illustration"
-          className="max-h-100 object-cover"
+          className="max-h-100 w-auto object-cover"
         />
         <Heading size="lg" className="text-center max-w-md">
           {"Vpliv Kluba Ada v številkah"}

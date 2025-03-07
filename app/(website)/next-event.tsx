@@ -60,7 +60,7 @@ function NextEventContent() {
   const formattedDateAndTime = [date, time].join(" ");
 
   return (
-    <div className="md:flex gap-8 md:items-center">
+    <div className="w-full md:flex gap-8 md:items-center">
       <div className="h-full lg:basis-2/5">
         <Image
           src={imageSrc}
