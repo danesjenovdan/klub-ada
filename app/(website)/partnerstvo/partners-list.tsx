@@ -32,7 +32,7 @@ export function PartnersList() {
             />
             <Image
               src="/assets/dewesoft-logo.svg"
-              alt="Celtra logo"
+              alt="Dewesoft logo"
               width={200}
               height={80}
               className="h-16 w-46 object-contain"

@@ -21,7 +21,7 @@ const TeamMemberComponent = ({ member }: TeamMemberProps) => {
           src={imageSrc}
           width={700}
           height={700}
-          alt={member.image.alt}
+          alt={member.image.alt || "Placeholder alt"}
           className="w-full object-cover md:aspect-square rounded-2xl"
         />
         <div className="flex flex-col gap-2 md:gap-4">

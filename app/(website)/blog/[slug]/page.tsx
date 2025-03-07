@@ -1,3 +1,5 @@
+"use client";
+
 import { Footer } from "@/app/components/footer";
 import { Paragraph } from "@/app/components/paragraph";
 import imageLoader from "@/app/utils/image-loader";
@@ -7,15 +9,14 @@ import { PageWrapper } from "@/app/components/page-wrapper";
 import { Post } from "@/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { PortableText, PortableTextComponents } from "next-sanity";
-import React from "react";
+import React, { useMemo } from "react";
 import { formatDate } from "@/app/utils/date";
-import { NewsletterComponent } from "@/app/components/newsletter-component";
+import { useParams } from "next/navigation";
+import { useSanityData } from "@/app/utils/use-sanity-data";
+import { LoadingAnimation } from "@/app/components/loading-animation";
+import { InlineError } from "@/app/components/inline-error";
 
-type Params = Promise<{
-  slug: string;
-}>;
-async function getPost(slug: string) {
-  const query = `*[_type == "post" && slug.current == $slug][0] {
+const GET_BLOG_POST = `*[_type == "post" && slug.current == $slug][0] {
   title,
   slug,
   publishedAt,
@@ -29,17 +30,36 @@ async function getPost(slug: string) {
   }
 }`;
 
-  const post = await client.fetch(query, { slug });
-  return post;
-}
-
 // Blog Article Component
-const BlogArticle = async (props: { params: Params }) => {
-  const { slug } = await props.params;
-  const post: Post = await getPost(slug);
-  const imageSrc = imageLoader(post.mainImage);
-  const formattedDate = formatDate(post.publishedAt);
+const BlogArticle = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const params = useMemo(() => ({ slug }), []);
+  const { data, error, isLoading } = useSanityData({
+    query: GET_BLOG_POST,
+    params,
+  });
 
+  if (isLoading) {
+    return (
+      <div className="w-full flex items-center justify-center">
+        <LoadingAnimation />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex w-full p-6 justify-center">
+        <InlineError />
+      </div>
+    );
+  }
+
+  const post = data as Post | null;
+  const imageSrc = imageLoader(post?.mainImage);
+  const formattedDate = post?.publishedAt ? formatDate(post.publishedAt) : "";
+
+  console.log(post);
   const portableTextComponents: Partial<PortableTextComponents> = {
     block: {
       h1: ({ children }) => (
@@ -132,7 +152,7 @@ const BlogArticle = async (props: { params: Params }) => {
           <div className="my-4">
             <Image
               src={imageLoader(value)}
-              alt={value.alt}
+              alt={value.alt || "Placeholder alt"}
               width={700}
               height={384}
               className="w-full object-cover max-h-96 rounded-2xl border border-black my-10"
@@ -149,10 +169,11 @@ const BlogArticle = async (props: { params: Params }) => {
         <div className="max-w-3xl mx-auto md:p-6 gap-10 pt-8 md:pt-16">
           <div className="flex flex-col gap-4">
             <div className="flex gap-2">
-              {post.categories.map((category) => (
+              {(post?.categories || []).map((category) => (
                 <Paragraph
                   size="xs"
                   className="py-1 px-2 text-white font-semibold bg-pink border border-black rounded-lg"
+                  key={category.title}
                 >
                   {category.title}
                 </Paragraph>
@@ -160,18 +181,21 @@ const BlogArticle = async (props: { params: Params }) => {
             </div>
 
             <Heading size="lg" color="black">
-              {post.title}
+              {post?.title}
             </Heading>
             <Paragraph size="lg">{formattedDate}</Paragraph>
             <Image
               src={imageSrc}
               width={700}
               height={384}
-              alt={post.mainImage.alt}
+              alt={post?.mainImage.alt || "Placeholder alt"}
               className="w-full object-cover max-h-96 rounded-2xl border border-black mb-6"
             />
           </div>
-          <PortableText value={post.body} components={portableTextComponents} />
+          <PortableText
+            value={post?.body}
+            components={portableTextComponents}
+          />
         </div>
       </PageWrapper>
 

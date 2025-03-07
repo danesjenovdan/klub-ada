@@ -38,7 +38,7 @@ const PostComponent = ({ post }: Props) => {
               src={imageSrc}
               width={500}
               height={500}
-              alt={post.mainImage.alt}
+              alt={post.mainImage.alt || "Placeholder alt"}
               className="w-full object-cover aspect-square rounded-2xl"
             />
             <div className="flex gap-2">
