@@ -48,6 +48,7 @@ const TeamMemberComponent = ({ member }: TeamMemberProps) => {
                   <a
                     href={`mailto:${bioPart}`}
                     className="text-red font-medium"
+                    key={bioPart}
                   >
                     info@klub-ada.si
                   </a>

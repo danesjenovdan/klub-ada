@@ -59,7 +59,6 @@ const BlogArticle = () => {
   const imageSrc = imageLoader(post?.mainImage);
   const formattedDate = post?.publishedAt ? formatDate(post.publishedAt) : "";
 
-  console.log(post);
   const portableTextComponents: Partial<PortableTextComponents> = {
     block: {
       h1: ({ children }) => (
