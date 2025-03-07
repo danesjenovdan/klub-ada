@@ -6,7 +6,7 @@ import { PageWrapper } from "@/app/components/page-wrapper";
 import { Event } from "../../utils/interface";
 import { useSanityData } from "@/app/utils/use-sanity-data";
 import { InlineError } from "@/app/components/inline-error";
-import EventSkeleton from "@/app/components/event-skeleton";
+import Skeleton from "@/app/components/skeleton";
 import { Paragraph } from "@/app/components/paragraph";
 import { useMemo } from "react";
 
@@ -32,7 +32,7 @@ function PastEventsContent() {
   });
 
   if (isLoading) {
-    return [0, 1, 2, 3, 4, 5].map((element) => <EventSkeleton key={element} />);
+    return [0, 1, 2, 3, 4, 5].map((element) => <Skeleton key={element} />);
   }
 
   if (error) {

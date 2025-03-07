@@ -8,7 +8,7 @@ import { SanityDocument } from "next-sanity";
 import imageLoader from "../utils/image-loader";
 import { LinkButton } from "../components/link-button";
 import { useSanityData } from "../utils/use-sanity-data";
-import EventSkeleton from "../components/event-skeleton";
+import Skeleton from "../components/skeleton";
 
 const ACTIVITIES_QUERY = `*[
   _type == "activity"] | order(_updatedAt desc)`;
@@ -50,7 +50,7 @@ export function Aktivnosti() {
           {isLoading ? (
             <>
               {[0, 1, 2, 3, 4].map((element) => (
-                <EventSkeleton key={element} />
+                <Skeleton key={element} />
               ))}
             </>
           ) : (

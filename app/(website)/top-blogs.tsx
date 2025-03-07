@@ -5,10 +5,9 @@ import { LinkButton } from "../components/link-button";
 import { PageWrapper } from "../components/page-wrapper";
 import PostComponent from "../components/post-component";
 import { Post } from "../utils/interface";
-import { client } from "@/sanity/lib/client";
 import { useSanityData } from "../utils/use-sanity-data";
 import { InlineError } from "../components/inline-error";
-import EventSkeleton from "../components/event-skeleton";
+import Skeleton from "../components/skeleton";
 
 const PINNED_POSTS_QUERY = `*[_type == "post" && pinned] {
   title,
@@ -55,9 +54,9 @@ export function TopBlogs() {
           <>
             {isLoading ? (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <EventSkeleton />
-                <EventSkeleton />
-                <EventSkeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
               </div>
             ) : (
               <div className="flex flex-col md:flex-row md:flex-nowrap gap-4">
