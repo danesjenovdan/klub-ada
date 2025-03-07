@@ -8,6 +8,7 @@ import { useSanityData } from "@/app/utils/use-sanity-data";
 import { InlineError } from "@/app/components/inline-error";
 import EventSkeleton from "@/app/components/event-skeleton";
 import { Paragraph } from "@/app/components/paragraph";
+import { useMemo } from "react";
 
 const GET_PAST_EVENTS_QUERY = `*[
   _type == "event" && eventTime <= $today
@@ -21,10 +22,15 @@ _id,
 }`;
 
 function PastEventsContent() {
-  const today = new Date().toISOString().split("T")[0];
+  const params = useMemo(
+    () => ({
+      today: new Date().toISOString().split("T")[0],
+    }),
+    []
+  );
   const { data, error, isLoading } = useSanityData({
     query: GET_PAST_EVENTS_QUERY,
-    params: { today },
+    params,
   });
 
   if (isLoading) {

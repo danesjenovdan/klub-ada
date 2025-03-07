@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { Heading } from "./heading";
 import { Paragraph } from "./paragraph";
 import Image from "next/image";
@@ -23,9 +23,15 @@ interface Props {
 export default function EventComponent({ event }: Props) {
   const imageSrc = imageLoader(event.eventImage);
   const formattedDate = formatDate(event.eventTime);
+  const params = useMemo(
+    () => ({
+      eventId: event._id,
+    }),
+    []
+  );
   const { data } = useSanityData({
     query: EVENT_BLOG_QUERY,
-    params: { eventId: event._id },
+    params,
   });
 
   const blogPost = (data || []) as EventBlogPost[];
