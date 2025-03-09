@@ -6,31 +6,31 @@ export function Logos() {
   const logos = [
     {
       id: "logo-1",
-      src: "/assets/impact-hub-logo.webp",
+      src: "/assets/logo-impact-hub-lj.svg",
       href: "https://ljubljana.impacthub.net/",
       alt: "Impact Hub Ljubljana logo",
     },
     {
       id: "logo-2",
-      src: "/assets/celtra-logo.webp",
+      src: "/assets/logo-celtra.svg",
       href: "https://celtra.com/",
       alt: "Celtra logo",
     },
     {
       id: "logo-3",
-      src: "/assets/teads-logo.webp",
+      src: "/assets/logo-teads.svg",
       href: "https://www.teads.com/",
       alt: "Teads logo",
     },
     {
       id: "logo-4",
-      src: "/assets/dewesoft-logo.svg",
+      src: "/assets/logo-dewesoft.svg",
       href: "https://dewesoft.com/",
       alt: "Dewesoft logo",
     },
     {
       id: "logo-5",
-      src: "/assets/fri-logo.webp",
+      src: "/assets/logo-fri.svg",
       href: "https://fri.uni-lj.si/sl",
       alt: "FRI logo",
     },
@@ -53,7 +53,7 @@ export function Logos() {
                 height={56}
                 src={logo.src}
                 alt={logo.alt}
-                className="h-14 w-44 object-contain grayscale hover:grayscale-0 flex-shrink-0 hover:scale-105 duration-200"
+                className="h-24 object-contain grayscale hover:grayscale-0 flex-shrink-0 hover:scale-105 duration-200"
               />
             </a>
           ))}
