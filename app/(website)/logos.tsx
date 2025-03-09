@@ -53,7 +53,7 @@ export function Logos() {
                 height={56}
                 src={logo.src}
                 alt={logo.alt}
-                className="h-24 object-contain grayscale hover:grayscale-0 flex-shrink-0 hover:scale-105 duration-200"
+                className="h-auto w-44 object-contain grayscale hover:grayscale-0 flex-shrink-0 hover:scale-105 duration-200"
               />
             </a>
           ))}

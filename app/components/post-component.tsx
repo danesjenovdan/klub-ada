@@ -14,7 +14,7 @@ interface LinkDivProps {
   variant?: "primary" | "secondary" | "tertiary";
   children: React.ReactNode;
 }
-function LinkDiv({ children, variant = "primary" }: LinkDivProps) {
+export function LinkDiv({ children, variant = "primary" }: LinkDivProps) {
   return (
     <div
       className={`${linkBase({ variant })} underline-animation group-hover:after:w-full`}
@@ -38,7 +38,7 @@ const PostComponent = ({ post }: Props) => {
               src={imageSrc}
               width={500}
               height={500}
-              alt={post.mainImage.alt}
+              alt={post.mainImage.alt || "Placeholder alt"}
               className="w-full object-cover aspect-square rounded-2xl"
             />
             <div className="flex gap-2">

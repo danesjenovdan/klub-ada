@@ -1,26 +1,51 @@
+"use client";
+
 import { Heading } from "@/app/components/heading";
+import { InlineError } from "@/app/components/inline-error";
+import { LoadingAnimation } from "@/app/components/loading-animation";
 import { PageWrapper } from "@/app/components/page-wrapper";
 import TeamMemberComponent from "@/app/components/team-member-component";
 import { TeamMember } from "@/app/utils/interface";
-import { client } from "@/sanity/lib/client";
+import { useSanityData } from "@/app/utils/use-sanity-data";
 import Image from "next/image";
+import { Suspense } from "react";
 
-async function getTeamMember() {
-  const query = `*[_type == "teamMember"]| order(_createdAt){
-    image,
-    name,
-    role,
-    bio,
-    linkedin,
-    _id,
-    alt,
+const TEAM_MEMBERS_QUERY = `*[_type == "teamMember"]| order(_createdAt){
+  image,
+  name,
+  role,
+  bio,
+  linkedin,
+  _id,
+  alt,
 }`;
-  const data = await client.fetch(query);
-  return data;
-}
-export default async function Team() {
-  const teamMember: TeamMember[] = await getTeamMember();
 
+function TeamMembers() {
+  const { data, error } = useSanityData({
+    query: TEAM_MEMBERS_QUERY,
+  });
+
+  const teamMembers = (data || []) as TeamMember[];
+
+  if (error) {
+    return (
+      <div className="flex w-full">
+        <InlineError hasBox />
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {teamMembers.map((member) => (
+        <div key={member._id} className="col-span-1">
+          <TeamMemberComponent member={member} />
+        </div>
+      ))}
+    </div>
+  );
+}
+export default function Team() {
   return (
     <PageWrapper>
       <div id="team" className="flex flex-col gap-6 md:gap-12">
@@ -35,13 +60,15 @@ export default async function Team() {
           />
           <Heading size="lg">{"ekipa"}</Heading>
         </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {teamMember.map((member) => (
-            <div key={member._id} className="col-span-1">
-              <TeamMemberComponent member={member} />
+        <Suspense
+          fallback={
+            <div className="w-full pt-32 flex items-center justify-center">
+              <LoadingAnimation />
             </div>
-          ))}
-        </div>
+          }
+        >
+          <TeamMembers />
+        </Suspense>
       </div>
     </PageWrapper>
   );

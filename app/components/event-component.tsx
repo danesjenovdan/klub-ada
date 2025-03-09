@@ -1,30 +1,37 @@
-import React from "react";
+"use client";
+import React, { useMemo } from "react";
 import { Heading } from "./heading";
 import { Paragraph } from "./paragraph";
 import Image from "next/image";
 import { Event } from "../utils/interface";
 import imageLoader from "../utils/image-loader";
 import { formatDate } from "../utils/date";
-import { client } from "@/sanity/lib/client";
 import { Link } from "./link";
+import { useSanityData } from "../utils/use-sanity-data";
+import { LinkDiv } from "./post-component";
 
-export async function getEventBlog(eventId: string) {
-  const query = `*[_type == "post" && event._ref == $eventId] {
+const EVENT_BLOG_QUERY = `*[_type == "post" && event._ref == $eventId] {
   slug,
 }`;
-  const data = await client.fetch(query, { eventId });
-  return data;
-}
 
+type EventBlogPost = {
+  slug: { current: string };
+};
 interface Props {
   event: Event;
 }
-export default async function EventComponent({ event }: Props) {
+export default function EventComponent({ event }: Props) {
   const imageSrc = imageLoader(event.eventImage);
   const formattedDate = formatDate(event.eventTime);
-  const blogPost = await getEventBlog(event._id);
+  const params = useMemo(() => ({ eventId: event._id }), []);
+  const { data } = useSanityData({
+    query: EVENT_BLOG_QUERY,
+    params,
+  });
 
-  return (
+  const blogPost = (data || []) as EventBlogPost[];
+
+  const Content = (
     <div className="flex flex-col bg-white gap-6 border border-black rounded-2xl p-4 lg:p-6 h-full justify-between">
       <div className="flex flex-col h-full justify-between gap-4">
         <div className="flex flex-col gap-4">
@@ -32,7 +39,7 @@ export default async function EventComponent({ event }: Props) {
             src={imageSrc}
             width={500}
             height={500}
-            alt={event.eventImage.alt}
+            alt={event.eventImage.alt || "Placeholder alt"}
             className="w-full object-cover aspect-[4/3] md:aspect-square rounded-2xl"
           />
           <div className="flex flex-col gap-2">
@@ -42,28 +49,32 @@ export default async function EventComponent({ event }: Props) {
         </div>
         <div className="flex items-center justify-between">
           <div>
-            {blogPost.length > 0 && (
-              <Link
-                variant="secondary"
-                href={`/blog/${blogPost[0].slug.current}`}
-              >
-                Preberi blog
-              </Link>
+            {blogPost?.length > 0 && (
+              <LinkDiv variant="secondary">Preberi blog</LinkDiv>
             )}
           </div>
           {blogPost.length > 0 && (
-            <a href={`/blog/${blogPost[0]?.slug?.current}`}>
-              <Image
-                src="/assets/chevron-right-red.svg"
-                width={24}
-                height={24}
-                alt="Chevron right illustration"
-                className="cover-image"
-              />
-            </a>
+            <Image
+              src="/assets/chevron-right-red.svg"
+              width={24}
+              height={24}
+              alt="Chevron right illustration"
+              className="cover-image"
+            />
           )}
         </div>
       </div>
     </div>
+  );
+
+  return blogPost.length > 0 ? (
+    <Link
+      href={`/blog/${blogPost[0].slug.current}`}
+      className="block h-full group"
+    >
+      {Content}
+    </Link>
+  ) : (
+    Content
   );
 }

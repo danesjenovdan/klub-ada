@@ -1,12 +1,24 @@
 "use client";
 
-import { Button } from "./button";
 import { Link } from "./link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { LinkButton } from "./link-button";
 
 export function NavbarMenu() {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const onClick = () => {
+      setIsOpen(false);
+    };
+
+    window.addEventListener("mouseup", onClick);
+
+    return () => {
+      window.removeEventListener("mouseup", onClick);
+    };
+  }, []);
 
   return (
     <div className="block md:hidden">
@@ -43,7 +55,7 @@ export function NavbarMenu() {
             </Link>
           </li>
         </ol>
-        <Button>Vsi dogodki</Button>
+        <LinkButton href="/dogodki">Vsi dogodki</LinkButton>
       </div>
     </div>
   );

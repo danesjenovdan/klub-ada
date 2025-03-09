@@ -28,14 +28,14 @@ export function PartnersList() {
               alt="Celtra logo"
               width={200}
               height={80}
-              className="h-16 w-40 object-contain"
+              className="h-auto w-40 object-contain"
             />
             <Image
               src="/assets/dewesoft-logo.svg"
-              alt="Celtra logo"
+              alt="Dewesoft logo"
               width={200}
               height={80}
-              className="h-16 w-46 object-contain"
+              className="h-auto w-46 object-contain"
             />
           </div>
         </div>
@@ -49,14 +49,14 @@ export function PartnersList() {
               alt="Impact Hub Ljubljana logo"
               width={200}
               height={50}
-              className="h-16 w-40 object-contain"
+              className="h-auto w-40 object-contain"
             />
             <Image
               src="/assets/fri-logo.webp"
               alt="FRI logo"
               width={220}
               height={50}
-              className="h-16 w-40 object-contain"
+              className="h-auto w-40 object-contain"
             />
           </div>
         </div>

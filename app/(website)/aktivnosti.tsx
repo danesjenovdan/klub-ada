@@ -1,4 +1,5 @@
-import { client } from "@/sanity/lib/client";
+"use client";
+
 import { ActivityCard } from "../components/activity-card";
 import { Heading } from "../components/heading";
 import { PageWrapper } from "../components/page-wrapper";
@@ -6,12 +7,22 @@ import { Paragraph } from "../components/paragraph";
 import { SanityDocument } from "next-sanity";
 import imageLoader from "../utils/image-loader";
 import { LinkButton } from "../components/link-button";
+import { useSanityData } from "../utils/use-sanity-data";
+import Skeleton from "../components/skeleton";
 
 const ACTIVITIES_QUERY = `*[
   _type == "activity"] | order(_updatedAt desc)`;
 
-export async function Aktivnosti() {
-  const activities = await client.fetch<SanityDocument[]>(ACTIVITIES_QUERY);
+export function Aktivnosti() {
+  const { data, error, isLoading } = useSanityData({
+    query: ACTIVITIES_QUERY,
+  });
+
+  const activities = (data || []) as SanityDocument[];
+
+  if (!error) {
+    return null;
+  }
 
   return (
     <PageWrapper>
@@ -36,19 +47,29 @@ export async function Aktivnosti() {
               </LinkButton>
             </div>
           </div>
-          {activities.map(({ name, description, activityImage }) => {
-            const imageSrc = imageLoader(activityImage);
-            return (
-              <div className="col-span-1" key={name}>
-                <ActivityCard
-                  title={name}
-                  description={description}
-                  imageSrc={imageSrc}
-                  imageAlt={activityImage.alt}
-                />
-              </div>
-            );
-          })}
+          {isLoading ? (
+            <>
+              {[0, 1, 2, 3, 4].map((element) => (
+                <Skeleton key={element} />
+              ))}
+            </>
+          ) : (
+            <>
+              {activities.map(({ name, description, activityImage }) => {
+                const imageSrc = imageLoader(activityImage);
+                return (
+                  <div className="col-span-1" key={name}>
+                    <ActivityCard
+                      title={name}
+                      description={description}
+                      imageSrc={imageSrc}
+                      imageAlt={activityImage.alt || "Placeholder alt"}
+                    />
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     </PageWrapper>
