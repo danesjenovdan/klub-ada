@@ -56,7 +56,7 @@ export function Filters({
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 justify-center md:justify-start">
       <Filter
         label="VSE"
         isSelected={selectedCategory === null}
