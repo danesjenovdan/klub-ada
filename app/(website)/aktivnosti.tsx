@@ -20,7 +20,7 @@ export function Aktivnosti() {
 
   const activities = (data || []) as SanityDocument[];
 
-  if (!error) {
+  if (error) {
     return null;
   }
 
