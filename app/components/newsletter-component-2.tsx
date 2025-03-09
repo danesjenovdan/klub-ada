@@ -19,10 +19,10 @@ export default function NewsletterComponent2() {
     }
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
@@ -43,7 +43,7 @@ export default function NewsletterComponent2() {
   };
 
   return (
-    <div className="flex flex-col gap-4 md:gap-8 border border-black rounded-2xl p-6 md:p-10 bg-pink100 max-w-[600px]">
+    <div className="flex flex-col gap-4 md:gap-8 border border-black rounded-2xl p-4 md:p-10 bg-pink100 max-w-[600px]">
       <div className="flex flex-col gap-4 text-ceneter">
         <Heading size="sm">Prijavi se na novičnik</Heading>
         <Paragraph size="md">
@@ -66,13 +66,13 @@ export default function NewsletterComponent2() {
           </div>
         </div>
 
-        <div className="flex items-center mt-3">
+        <div className="flex items-start mt-3">
           <input
             type="checkbox"
             id="consent"
             checked={consent}
             onChange={(e) => setConsent(!consent)}
-            className="w-4 h-4 border border-black rounded-lg cursor-pointer"
+            className="w-4 h-4 border border-black rounded-lg cursor-pointer mt-1"
           />
           <label htmlFor="consent" className="text-md ml-2">
             Strinjam se, da mi Klub Ada po e-pošti pošilja novičnik in druga
