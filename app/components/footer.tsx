@@ -87,15 +87,33 @@ export function Footer() {
               {"O nas"}
             </Paragraph>
             <div className="flex flex-col gap-2">
-              <Paragraph size="lg" weight="bold">
-                {"O nas"}
-              </Paragraph>
-              <div className="flex flex-col gap-2">
-                <div>
-                  <Link variant="secondary" href="/o-nas">
-                    {"Spoznaj Klub Ada"}
-                  </Link>
-                </div>
+              <div>
+                <Link variant="secondary" href="/o-nas">
+                  {"Spoznaj Klub Ada"}
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Paragraph size="lg" weight="bold">
+              {"Aktivnosti"}
+            </Paragraph>
+            <div className="flex flex-col gap-2">
+              <div>
+                <Link variant="secondary" href="/dogodki">
+                  {"Dogodki"}
+                </Link>
+              </div>
+              <div>
+                <Link variant="secondary" href="/blog">
+                  {"Blog"}
+                </Link>
+              </div>
+              <div>
+                <Link variant="secondary" href="/partnerstvo">
+                  {"Partnerstva"}
+                </Link>
               </div>
             </div>
           </div>
