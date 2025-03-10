@@ -1,11 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: klub-ada-staging
+namespace: klub-ada
 resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
 images:
-  - name: klub-ada-staging
-    newName: rg.fr-par.scw.cloud/djnd/klub-ada-staging
+  - name: klub-ada
+    newName: rg.fr-par.scw.cloud/djnd/klub-ada
     newTag: 'c0c4ddde2b3ca6088846ae4dd9343da633a4942d'

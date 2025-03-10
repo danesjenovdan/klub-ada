@@ -1,23 +1,34 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: klub-ada-staging
+  name: klub-ada
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - klub-ada-staging.lb.djnd.si
-      secretName: klub-ada-staging-tls
+        - klub-ada.lb.djnd.si
+        - klub-ada.si
+      secretName: klub-ada-tls
   rules:
-    - host: klub-ada-staging.lb.djnd.si
+    - host: klub-ada.lb.djnd.si
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: klub-ada-staging
+                name: klub-ada
+                port:
+                  number: 3000
+    - host: klub-ada.si
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: klub-ada
                 port:
                   number: 3000
