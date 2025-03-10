@@ -2,7 +2,7 @@ name: Build and publish Docker image
 on:
   push:
     branches:
-      - "k8s-staging"
+      - "production"
 jobs:
   push_to_registry:
     name: Build and push Docker image to registry
@@ -21,7 +21,7 @@ jobs:
           username: nologin
           password: ${{ secrets.SCW_SECRET_TOKEN }}
 
-      - name: Build and push staging
+      - name: Build and push klub-ada
         uses: docker/build-push-action@v6
         env:
           DOCKER_BUILD_SUMMARY: false
@@ -30,8 +30,8 @@ jobs:
           context: .
           push: true
           tags: |
-            rg.fr-par.scw.cloud/djnd/klub-ada-staging:${{ github.sha }}
-            rg.fr-par.scw.cloud/djnd/klub-ada-staging:latest
+            rg.fr-par.scw.cloud/djnd/klub-ada:${{ github.sha }}
+            rg.fr-par.scw.cloud/djnd/klub-ada:latest
 
       - name: Update image versions in kustomize/kustomization.yaml
         run: |
