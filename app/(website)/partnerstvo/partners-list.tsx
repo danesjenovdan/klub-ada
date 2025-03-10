@@ -8,55 +8,55 @@ export function PartnersList() {
     <PageWrapper>
       <div className="flex flex-col gap-20 md:gap-28">
         {/* Gold Partners */}
-        <div className="flex flex-col gap-5 md:gap-10 items-center justify-center">
+        <div className="flex flex-col gap-4 md:gap-8 items-center justify-center">
           <Paragraph size="xl">Zlati partnerji</Paragraph>
           <Image
-            src="/assets/teads-logo.webp"
+            src="/assets/logo-teads.svg"
             alt="Outbrain logo"
             width={200}
             height={50}
-            className="h-16 w-40 object-contain"
+            className="h-30 object-contain"
           />
         </div>
 
         {/* Silver Partners */}
-        <div className="flex flex-col gap-5 md:gap-10 items-center justify-center">
+        <div className="flex flex-col gap-4 md:gap-8 items-center justify-center">
           <Paragraph size="xl">Srebrni partnerji</Paragraph>
           <div className="flex md:flex-row flex-col gap-8 md:gap-16 items-center justify-center">
             <Image
-              src="/assets/celtra-logo.webp"
+              src="/assets/logo-celtra.svg"
               alt="Celtra logo"
               width={200}
               height={80}
-              className="h-auto w-40 object-contain"
+              className="h-28 object-contain"
             />
             <Image
-              src="/assets/dewesoft-logo.svg"
+              src="/assets/logo-dewesoft.svg"
               alt="Dewesoft logo"
               width={200}
               height={80}
-              className="h-auto w-46 object-contain"
+              className="h-28 object-contain"
             />
           </div>
         </div>
 
         {/* Project Partners */}
-        <div className="flex flex-col gap-5 md:gap-10 items-center justify-center">
+        <div className="flex flex-col gap-4 md:gap-8 items-center justify-center">
           <Paragraph size="xl">Projektni partnerji</Paragraph>
           <div className="flex md:flex-row flex-col gap-8 md:gap-16 items-center justify-center">
             <Image
-              src="/assets/impact-hub-logo.webp"
+              src="/assets/logo-impact-hub-lj.svg"
               alt="Impact Hub Ljubljana logo"
               width={200}
               height={50}
-              className="h-auto w-40 object-contain"
+              className="h-28 object-contain"
             />
             <Image
-              src="/assets/fri-logo.webp"
+              src="/assets/logo-fri.svg"
               alt="FRI logo"
               width={220}
               height={50}
-              className="h-auto w-40 object-contain"
+              className="h-28 object-contain"
             />
           </div>
         </div>
