@@ -45,7 +45,15 @@ function NextEventContent() {
     );
   }
 
-  if (error || !data) {
+  if (!data) {
+    return (
+      <div className="w-full flex items-center justify-center">
+        <Heading>COMING SOON!</Heading>
+      </div>
+    );
+  }
+
+  if (error) {
     return (
       <div className="flex w-full justify-center">
         <InlineError />
@@ -81,9 +89,16 @@ function NextEventContent() {
           </Paragraph>
         </div>
         <div className="">
-          <LinkButton size="md" showIcon href={nextEvent.applyLink} isExternal>
-            Prijavi se
-          </LinkButton>
+          {nextEvent.applyLink && (
+            <LinkButton
+              size="md"
+              showIcon
+              href={nextEvent.applyLink}
+              isExternal
+            >
+              Prijavi se
+            </LinkButton>
+          )}
         </div>
       </div>
     </div>
