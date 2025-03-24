@@ -52,7 +52,6 @@ export const eventType = defineType({
       name: "applyLink",
       title: "Apply Link",
       type: "string",
-      validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       name: "blog",
