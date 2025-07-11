@@ -1,6 +1,146 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "Blog": {
+    "title": "Read our articles",
+    "description_long": "Read event summaries, useful job search tips, technical interview prep, book suggestions and more.",
+    "top_blogs": {
+      "title": "Latest posts",
+      "cta": "Read our blog"
+    },
+    "cta_blog_post": "Read blog",
+    "description": "Read our latest posts and news."
+  },
+  "Reviews": {
+    "title": "Testimonials from our members and partners",
+    "cta": "Become a partner"
+  },
+  "Partners": {
+    "title": "Become a partner of Klub Ada",
+    "description": "Partnering with Klub Ada offers the opportunity to collaborate on shaping events and promotional activities. Cooperation provides access to a community that brings together women with varying levels of knowledge and experience in technology.",
+    "join": {
+      "title": "Interested in collaborating?",
+      "write_to_us": "For more information, you can write to us at "
+    },
+    "cta": "Become a partner",
+    "why": {
+      "title": "Why become a partner?",
+      "description": "We believe that connection is key to growth and success. Our efforts to encourage women in technology wouldn’t be possible without the support of partners who share our values and vision.",
+      "description2": "Our mission is to create an inclusive environment for women in technology by organizing live events, coding hours, book clubs, educational content, mentoring, Discord community, and more.",
+      "benefits_title": "With partnership you can gain the following:",
+      "benefits": [
+        "Increased visibility of your company.",
+        "Access to top talent.",
+        "Creating a positive impact on society."
+      ]
+    },
+    "collaboration": {
+      "title": "Collaboration opportunities",
+      "options": [
+        "Presentation and collaboration in shaping event content.",
+        "Posting job ads on our platforms.",
+        "Coding events and networking.",
+        "Sharing promotional material at events.",
+        "Increasing the visibility of your brand.",
+        "Other forms of cooperation by agreement."
+      ]
+    },
+    "stats": {
+      "title": "Klub Ada's impact in numbers",
+      "insta_followers": "followers on Instagram",
+      "linkedin_followers": "followers on LinkedIn",
+      "newsletter": "subscribed to the newsletter",
+      "discord_members": "members in the Discord group",
+      "companies": "companies that have supported us so far"
+    },
+    "logos": {
+      "title": "Supporters & Partners",
+      "gold_partners": "Gold partners",
+      "silver_partners": "Silver partners",
+      "project_partners": "Project partners"
+    }
+  },
+  "Activities": {
+    "title": "Activities",
+    "description": "Read about all the activities we offer.",
+    "cta": "Activity calendar"
+  },
+  "AboutUs": {
+    "title": "We inspire women in technology and support them on their career path.",
+    "meet_the_team": "Meet the team",
+    "mission": {
+      "title": "Mission",
+      "subtitle": "To inspire women in technology and provide them with support and resources to develop skills, network and grow in their careers.",
+      "description": "Our activities are designed to create a safe and encouraging environment where participants can share ideas, experiences, and engage in conversations."
+    },
+    "story": {
+      "title": "The story of our beginning",
+      "subtitle": "Klub Ada was born out of a desire to connect women in a field where we are often a minority, which brings unique challenges and dilemmas.",
+      "description": "Because of these experiences, we often feel as if we don't belong in this space. With our activities, we want to emphasize that technology is a place where we are welcome and where our voices matter."
+    },
+    "name": {
+      "title": "Where does the name Klub Ada come from?",
+      "subtitle": "We found inspiration in Ada Lovelace — a pioneer of computing, mathematician, writer, and the first programmer.",
+      "description": "In the 19th century, she wrote the first algorithm for Charles Babbage’s Analytical Engine, the predecessor of the modern computer. Ada Lovelace is proof that women have been shaping technology from the very beginning, and her impact continues to inspire us today as we build the future together."
+    },
+    "our": "Our",
+    "team": "team"
+  },
+  "Discord": {
+    "title": "Join our community",
+    "description": "Our Discord platform is a safe space to exchange ideas, interesting topics, events, useful resources, and opportunities for personal and career development.",
+    "cta": "Join us"
+  },
+  "Hero": {
+    "title": "A community of women in technology",
+    "description": "Klub Ada organizes events aimed at networking and knowledge sharing, career and personal development for high school students, university students, professionals, and anyone interested in technology.",
+    "cta_event": "Join an event",
+    "cta_partners": "Become a partner",
+    "image_alt": "Event photo"
+  },
+  "Events": {
+    "title": "Events",
+    "description": "Join us at informal gatherings where we discuss various career and technical topics, host experts from the industry, and socialize and exchange ideas in a relaxed atmosphere with snacks and drinks.",
+    "title_next_event": "Join our next event",
+    "coming_soon": "COMING SOON!",
+    "title_past_events": "Past events",
+    "all_events": "All events",
+    "cta": "Sign up",
+    "cta_next_event": "Next event"
+  },
+  "NotFound": {
+    "description": "Oh no! Page not found.",
+    "back_button": "Back to main page"
+  },
+  "Common": {
+    "image_alt": "Image",
+    "error_fallback": "Something went wrong. Please try again later.",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "discord": "Discord"
+  },
+  "Footer": {
+    "title": "A community of women in technology",
+    "cta": "Join us",
+    "cta_discord": "Join the Discord group",
+    "description_discord": "A safe space for exchanging ideas, events, job opportunities and opportunities for personal and career development.",
+    "cta_newsletter": "Subscribe to newsletter",
+    "cta_events": "Join an event",
+    "newsletter": {
+      "description": "By subscribing to our newsletter, you’ll receive invitations to upcoming events and event summaries, useful tips, links to other helpful resources like hackathons, career events, job opportunities, and more.",
+      "email_placeholder": "Enter your email address",
+      "consent": "I agree that Klub Ada may send me newsletters and other notifications via email.",
+      "cta": "Subscribe",
+      "status_error": "Error during subscription.",
+      "status_success": "Thanks for subscribing 💗",
+      "status_missing_info": "Please enter your email and confirm your consent."
+    }
+  },
+  "Pages": {
+    "about_us": "About us",
+    "about_us_description": "Meet Klub Ada",
+    "activities": "Activities",
+    "events": "Events",
+    "events_all": "All events",
+    "blog": "Blog",
+    "partners": "Partnerships"
   }
 }
