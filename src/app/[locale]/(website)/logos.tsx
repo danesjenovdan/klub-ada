@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
 import { useTranslations } from "next-intl";
 
 export function Logos() {

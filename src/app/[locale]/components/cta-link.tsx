@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
-import { ForwardRefComponent, PropsOf } from "../utils/polymorphic";
+import { ForwardRefComponent, PropsOf } from "../../utils/polymorphic";
 import { tv } from "tailwind-variants";
 import { Paragraph } from "./paragraph";
-import { Link as NextLink } from "../../i18n/navigation";
+import { Link as NextLink } from "../../../i18n/navigation";
 import { IconArrowRight } from "@tabler/icons-react";
 
 const baseCtaLink = tv({

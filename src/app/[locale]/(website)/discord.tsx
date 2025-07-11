@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import { Paragraph } from "@/src/app/components/paragraph";
-import { LinkButton } from "@/src/app/components/link-button";
-import { Card } from "@/src/app/components/card";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import { Paragraph } from "@/src/app/[locale]/components/paragraph";
+import { LinkButton } from "@/src/app/[locale]/components/link-button";
+import { Card } from "@/src/app/[locale]/components/card";
 import discordImage from "../../../../public/assets/discord-image.webp";
 import { useTranslations } from "next-intl";
 

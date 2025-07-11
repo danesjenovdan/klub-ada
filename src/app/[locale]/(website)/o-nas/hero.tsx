@@ -1,6 +1,6 @@
-import { Heading } from "@/src/app/components/heading";
-import { LinkButton } from "@/src/app/components/link-button";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { LinkButton } from "@/src/app/[locale]/components/link-button";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
 import Image from "next/image";
 import team from "../../../../../public/assets/team.webp";
 import { useTranslations } from "next-intl";

@@ -1,15 +1,15 @@
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import { Paragraph } from "@/src/app/components/paragraph";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import { Post } from "@/src/app/utils/interface";
-import PostComponent from "@/src/app/components/post-component";
-import { NewsletterComponent } from "@/src/app/components/newsletter-component";
+import PostComponent from "@/src/app/[locale]/components/post-component";
+import { NewsletterComponent } from "@/src/app/[locale]/components/newsletter-component";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Filters } from "./filters";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import { InlineError } from "@/src/app/components/inline-error";
-import { LoadingAnimation } from "@/src/app/components/loading-animation";
+import { InlineError } from "@/src/app/[locale]/components/inline-error";
+import { LoadingAnimation } from "@/src/app/[locale]/components/loading-animation";
 import { useTranslations } from "next-intl";
 
 const getBlogQuery = (category: string | null) => {

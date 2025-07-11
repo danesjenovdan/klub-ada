@@ -1,7 +1,7 @@
-import { Heading } from "@/src/app/components/heading";
-import { LinkButton } from "@/src/app/components/link-button";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import { Paragraph } from "@/src/app/components/paragraph";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { LinkButton } from "@/src/app/[locale]/components/link-button";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import { useTranslations } from "next-intl";
 
 export function BecomePartner() {

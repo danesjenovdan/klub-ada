@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Card } from "@/src/app/components/card";
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import { Paragraph } from "@/src/app/components/paragraph";
-import { CtaLink } from "@/src/app/components/cta-link";
+import { Card } from "@/src/app/[locale]/components/card";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import { Paragraph } from "@/src/app/[locale]/components/paragraph";
+import { CtaLink } from "@/src/app/[locale]/components/cta-link";
 import hero from "../../../../public/assets/hero.webp";
 import { useTranslations } from "next-intl";
 

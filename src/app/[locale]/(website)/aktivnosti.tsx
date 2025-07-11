@@ -1,14 +1,14 @@
 "use client";
 
-import { ActivityCard } from "@/src/app/components/activity-card";
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import { Paragraph } from "@/src/app/components/paragraph";
+import { ActivityCard } from "@/src/app/[locale]/components/activity-card";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import { SanityDocument } from "next-sanity";
 import imageLoader from "@/src/app/utils/image-loader";
-import { LinkButton } from "@/src/app/components/link-button";
+import { LinkButton } from "@/src/app/[locale]/components/link-button";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import Skeleton from "@/src/app/components/skeleton";
+import Skeleton from "@/src/app/[locale]/components/skeleton";
 import { useTranslations } from "next-intl";
 
 const ACTIVITIES_QUERY = `*[

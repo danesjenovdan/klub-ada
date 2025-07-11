@@ -1,13 +1,13 @@
 "use client";
 
-import EventComponent from "@/src/app/components/event-component";
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
+import EventComponent from "@/src/app/[locale]/components/event-component";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
 import { Event } from "@/src/app/utils/interface";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import { InlineError } from "@/src/app/components/inline-error";
-import Skeleton from "@/src/app/components/skeleton";
-import { Paragraph } from "@/src/app/components/paragraph";
+import { InlineError } from "@/src/app/[locale]/components/inline-error";
+import Skeleton from "@/src/app/[locale]/components/skeleton";
+import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 

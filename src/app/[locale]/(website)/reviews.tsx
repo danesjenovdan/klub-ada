@@ -1,7 +1,7 @@
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import ReviewComponent from "@/src/app/components/review-component";
-import { LinkButton } from "@/src/app/components/link-button";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import ReviewComponent from "@/src/app/[locale]/components/review-component";
+import { LinkButton } from "@/src/app/[locale]/components/link-button";
 import { useTranslations } from "next-intl";
 
 const reviews = [

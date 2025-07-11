@@ -1,10 +1,10 @@
 "use client";
 
-import { Heading } from "@/src/app/components/heading";
-import { InlineError } from "@/src/app/components/inline-error";
-import { LoadingAnimation } from "@/src/app/components/loading-animation";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import TeamMemberComponent from "@/src/app/components/team-member-component";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { InlineError } from "@/src/app/[locale]/components/inline-error";
+import { LoadingAnimation } from "@/src/app/[locale]/components/loading-animation";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import TeamMemberComponent from "@/src/app/[locale]/components/team-member-component";
 import { TeamMember } from "@/src/app/utils/interface";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { useTranslations } from "next-intl";

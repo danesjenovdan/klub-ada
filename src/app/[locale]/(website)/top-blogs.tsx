@@ -1,13 +1,13 @@
 "use client";
 
-import { Heading } from "@/src/app/components/heading";
-import { LinkButton } from "@/src/app/components/link-button";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import PostComponent from "@/src/app/components/post-component";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { LinkButton } from "@/src/app/[locale]/components/link-button";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import PostComponent from "@/src/app/[locale]/components/post-component";
 import { Post } from "@/src/app/utils/interface";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import { InlineError } from "@/src/app/components/inline-error";
-import Skeleton from "@/src/app/components/skeleton";
+import { InlineError } from "@/src/app/[locale]/components/inline-error";
+import Skeleton from "@/src/app/[locale]/components/skeleton";
 import { useTranslations } from "next-intl";
 
 const PINNED_POSTS_QUERY = `*[_type == "post" && pinned] {

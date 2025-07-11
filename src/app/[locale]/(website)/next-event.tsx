@@ -1,16 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import { Card } from "@/src/app/components/card";
-import { Paragraph } from "@/src/app/components/paragraph";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import { Card } from "@/src/app/[locale]/components/card";
+import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import imageLoader from "@/src/app/utils/image-loader";
-import { LinkButton } from "@/src/app/components/link-button";
+import { LinkButton } from "@/src/app/[locale]/components/link-button";
 import { formatDate, formatTime } from "@/src/app/utils/date";
 import { usePathname } from "@/src/i18n/navigation";
-import { LoadingAnimation } from "@/src/app/components/loading-animation";
-import { InlineError } from "@/src/app/components/inline-error";
+import { LoadingAnimation } from "@/src/app/[locale]/components/loading-animation";
+import { InlineError } from "@/src/app/[locale]/components/inline-error";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";

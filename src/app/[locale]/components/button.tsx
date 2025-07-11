@@ -1,5 +1,5 @@
 import { ElementType, forwardRef } from "react";
-import { ForwardRefComponent, PropsOf } from "../utils/polymorphic";
+import { ForwardRefComponent, PropsOf } from "../../utils/polymorphic";
 import { tv } from "tailwind-variants";
 
 export const baseButton = tv({

@@ -1,8 +1,8 @@
 "use client";
 
-import { Heading } from "@/src/app/components/heading";
-import { PageWrapper } from "@/src/app/components/page-wrapper";
-import { Paragraph } from "@/src/app/components/paragraph";
+import { Heading } from "@/src/app/[locale]/components/heading";
+import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
+import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import mission from "../../../../../public/assets/mission.webp";

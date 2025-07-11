@@ -3,11 +3,11 @@ import React, { useMemo } from "react";
 import { Heading } from "./heading";
 import { Paragraph } from "./paragraph";
 import Image from "next/image";
-import { Event } from "../utils/interface";
-import imageLoader from "../utils/image-loader";
-import { formatDate } from "../utils/date";
+import { Event } from "../../utils/interface";
+import imageLoader from "../../utils/image-loader";
+import { formatDate } from "../../utils/date";
 import { Link } from "./link";
-import { useSanityData } from "../utils/use-sanity-data";
+import { useSanityData } from "../../utils/use-sanity-data";
 import { LinkDiv } from "./post-component";
 
 const EVENT_BLOG_QUERY = `*[_type == "post" && event._ref == $eventId] {
