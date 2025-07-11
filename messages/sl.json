@@ -60,6 +60,27 @@
     "description": "Preberi si vse aktivnosti, ki jih ponujamo.",
     "cta": "Koledar aktivnosti"
   },
+  "AboutUs": {
+    "title": "Navdušujemo ženske nad tehnologijo in jih podpiramo na karierni poti.",
+    "meet_the_team": "Spoznaj ekipo",
+    "mission": {
+      "title": "Misija",
+      "subtitle": "Navduševati ženske nad tehnologijo ter jim nuditi podporo in vire za razvoj veščin, mreženje ter rast na kariernem področju.",
+      "description": "Naše aktivnosti so zasnovane tako, da ustvarjajo varno in spodbudno okolje, kjer lahko udeleženke delijo ideje, izkušnje in se vključujejo v pogovore."
+    },
+    "story": {
+      "title": "Zgodba o našem začetku",
+      "subtitle": "Klub Ada je nastal iz želje po povezovanju žensk na področju, kjer smo pogosto v manjšini, kar prinaša edinstvene izzive in dileme.",
+      "description": "Zaradi teh izkušenj se pogosto počutimo, kot da v ta prostor ne spadamo. Z našimi aktivnostmi želimo poudariti, da je tehnologija prostor, kjer smo dobrodošle in kjer je naš glas pomemben."
+    },
+    "name": {
+      "title": "Od kod ime Klub Ada?",
+      "subtitle": "Navdih za ime smo našli v pionirki računalništva Adi Lovelace - matematičarki, pisateljici in prvi programerki.",
+      "description": "V 19. stoletju je za analitični stroj Charlesa Babbaga, predhodnika sodobnega računalnika, zapisala prvi algoritem. Ada Lovelace je dokaz, da so ženske že od začetka sooblikovale tehnologijo, njen vpliv pa nas navdihuje tudi danes, ko skupaj gradimo prihodnost."
+    },
+    "our": "Naša",
+    "team": "ekipa"
+  },
   "Discord": {
     "title": "Pridruži se naši skupnosti",
     "description": "Naša Discord platforma je varen prostor za izmenjavo idej, zanimivih tem, dogodkov, uporabnih virov in priložnosti za osebni in karierni razvoj.",

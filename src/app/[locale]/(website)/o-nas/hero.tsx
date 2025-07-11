@@ -3,8 +3,10 @@ import { LinkButton } from "@/src/app/components/link-button";
 import { PageWrapper } from "@/src/app/components/page-wrapper";
 import Image from "next/image";
 import team from "../../../../../public/assets/team.webp";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
+  const t = useTranslations("AboutUs");
   return (
     <PageWrapper>
       <div className="flex flex-col pb-10 md:pb-20 md:px-16 gap-6 items-center">
@@ -17,14 +19,12 @@ export function Hero() {
             className="w-[80px] md:w-[120px] lg:w-[160]"
           />
           <Heading size="lg" className="text-center max-w-4xl">
-            {
-              "Navdušujemo ženske nad tehnologijo in jih podpiramo na karierni poti."
-            }
+            {t("title")}
           </Heading>
         </div>
         <div className="">
           <LinkButton size="md" variant="secondary" href="#team">
-            {"Spoznaj ekipo"}
+            {t("meet_the_team")}
           </LinkButton>
         </div>
       </div>

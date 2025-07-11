@@ -8,8 +8,10 @@ import { motion } from "framer-motion";
 import mission from "../../../../../public/assets/mission.webp";
 import ada from "../../../../../public/assets/ada-lovelace.webp";
 import beginning from "../../../../../public/assets/beginning-story.webp";
+import { useTranslations } from "next-intl";
 
 export function Mission() {
+  const t = useTranslations("AboutUs");
   const textVariants = {
     hidden: { x: 50, opacity: 0 }, // Start off-screen (to the right)
     visible: {
@@ -44,18 +46,12 @@ export function Mission() {
               variants={textVariants}
             >
               <Heading size="lg" color="red">
-                {"Misija"}
+                {t("mission.title")}
               </Heading>
               <Paragraph size="lg" weight="bold">
-                {
-                  "Navduševati ženske nad tehnologijo ter jim nuditi podporo in vire za razvoj veščin, mreženje ter rast na kariernem področju."
-                }
+                {t("mission.subtitle")}
               </Paragraph>
-              <Paragraph size="lg">
-                {
-                  "Naše aktivnosti so zasnovane tako, da ustvarjajo varno in spodbudno okolje, kjer lahko udeleženke delijo ideje, izkušnje in se vključujejo v pogovore."
-                }
-              </Paragraph>
+              <Paragraph size="lg">{t("mission.description")}</Paragraph>
             </motion.div>
           </div>
 
@@ -79,18 +75,12 @@ export function Mission() {
               variants={textVariants}
             >
               <Heading size="lg" color="red">
-                {"Zgodba o našem začetku"}
+                {t("story.title")}
               </Heading>
               <Paragraph size="lg" weight="bold">
-                {
-                  "Klub Ada je nastal iz želje po povezovanju žensk na področju, kjer smo pogosto v manjšini, kar prinaša edinstvene izzive in dileme."
-                }
+                {t("story.subtitle")}
               </Paragraph>
-              <Paragraph size="lg">
-                {
-                  "Zaradi teh izkušenj se pogosto počutimo, kot da v ta prostor ne spadamo. Z našimi aktivnostmi želimo poudariti, da je tehnologija prostor, kjer smo dobrodošle in kjer je naš glas pomemben."
-                }
-              </Paragraph>
+              <Paragraph size="lg">{t("story.description")}</Paragraph>
             </motion.div>
           </div>
 
@@ -114,18 +104,12 @@ export function Mission() {
               variants={textVariants}
             >
               <Heading size="lg" color="red">
-                {"Od kod ime Klub Ada?"}
+                {t("name.title")}
               </Heading>
               <Paragraph size="lg" weight="bold">
-                {
-                  "Navdih za ime smo našli v pionirki računalništva Adi Lovelace – matematičarki, pisateljici in prvi programerki."
-                }
+                {t("name.subtitle")}
               </Paragraph>
-              <Paragraph size="lg">
-                {
-                  "V 19. stoletju je za analitični stroj Charlesa Babbaga, predhodnika sodobnega računalnika, zapisala prvi algoritem. Ada Lovelace je dokaz, da so ženske že od začetka sooblikovale tehnologijo, njen vpliv pa nas navdihuje tudi danes, ko skupaj gradimo prihodnost."
-                }
-              </Paragraph>
+              <Paragraph size="lg">{t("name.description")}</Paragraph>
             </motion.div>
           </div>
         </div>
