@@ -3,10 +3,10 @@ import { LinkButton } from "@/src/app/components/link-button";
 import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Paragraph } from "@/src/app/components/paragraph";
 import Image from "next/image";
-import dogodek1 from "../../../../public/assets/dogodek-1.webp";
-import dogodek2 from "../../../../public/assets/dogodek-2.webp";
-import dogodek3 from "../../../../public/assets/dogodek-3.webp";
-import dogodek4 from "../../../../public/assets/dogodek-4.webp";
+import dogodek1 from "../../../../../public/assets/dogodek-1.webp";
+import dogodek2 from "../../../../../public/assets/dogodek-2.webp";
+import dogodek3 from "../../../../../public/assets/dogodek-3.webp";
+import dogodek4 from "../../../../../public/assets/dogodek-4.webp";
 
 export default function Hero() {
   return (

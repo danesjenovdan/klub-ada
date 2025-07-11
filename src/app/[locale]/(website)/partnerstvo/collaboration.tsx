@@ -1,4 +1,3 @@
-import { Button } from "@/src/app/components/button";
 import { Heading } from "@/src/app/components/heading";
 import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Paragraph } from "@/src/app/components/paragraph";

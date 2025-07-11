@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { PageWrapper } from "./components/page-wrapper";
-import { LinkButton } from "./components/link-button";
-import { Navbar } from "./components/navbar";
-import { Footer } from "./components/footer";
-import { Paragraph } from "./components/paragraph";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { LinkButton } from "@/src/app/components/link-button";
+import { Navbar } from "@/src/app/components/navbar";
+import { Footer } from "@/src/app/components/footer";
+import { Paragraph } from "@/src/app/components/paragraph";
 
 export default function NotFound() {
   return (

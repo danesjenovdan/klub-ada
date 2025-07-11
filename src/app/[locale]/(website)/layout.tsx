@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { Navbar } from "../components/navbar";
-import { LoadingAnimation } from "../components/loading-animation";
+import { Navbar } from "@/src/app/components/navbar";
+import { LoadingAnimation } from "@/src/app/components/loading-animation";
 
 export default function Layout({
   children,

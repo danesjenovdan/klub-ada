@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { Heading } from "../components/heading";
-import { PageWrapper } from "../components/page-wrapper";
-import { Paragraph } from "../components/paragraph";
-import { LinkButton } from "../components/link-button";
-import { Card } from "../components/card";
-import discordImage from "../../../public/assets/discord-image.webp";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Paragraph } from "@/src/app/components/paragraph";
+import { LinkButton } from "@/src/app/components/link-button";
+import { Card } from "@/src/app/components/card";
+import discordImage from "../../../../public/assets/discord-image.webp";
 
 export function Discord() {
   return (

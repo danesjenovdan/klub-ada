@@ -1,17 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { Heading } from "../components/heading";
-import { PageWrapper } from "../components/page-wrapper";
-import { Card } from "../components/card";
-import { Paragraph } from "../components/paragraph";
-import imageLoader from "../utils/image-loader";
-import { LinkButton } from "../components/link-button";
-import { formatDate, formatTime } from "../utils/date";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Card } from "@/src/app/components/card";
+import { Paragraph } from "@/src/app/components/paragraph";
+import imageLoader from "@/src/app/utils/image-loader";
+import { LinkButton } from "@/src/app/components/link-button";
+import { formatDate, formatTime } from "@/src/app/utils/date";
 import { usePathname } from "next/navigation";
-import { LoadingAnimation } from "../components/loading-animation";
-import { InlineError } from "../components/inline-error";
-import { useSanityData } from "../utils/use-sanity-data";
+import { LoadingAnimation } from "@/src/app/components/loading-animation";
+import { InlineError } from "@/src/app/components/inline-error";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { useMemo } from "react";
 
 interface EventData {

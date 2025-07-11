@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { anaheim } from "./fonts";
+import { anaheim } from "../fonts";
 import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
@@ -24,14 +24,13 @@ export const metadata: Metadata = {
   },
 };
 
-const locales = ['si', 'en'];
+const locales = ["si", "en"];
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <head>

@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Heading } from "@/src/app/components/heading";
 import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Post } from "@/src/app/utils/interface";
-import { client } from "@/sanity/lib/client";
 import { PortableText, PortableTextComponents } from "next-sanity";
 import React, { useMemo } from "react";
 import { formatDate } from "@/src/app/utils/date";

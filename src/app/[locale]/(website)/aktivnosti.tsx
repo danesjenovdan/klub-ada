@@ -1,14 +1,14 @@
 "use client";
 
-import { ActivityCard } from "../components/activity-card";
-import { Heading } from "../components/heading";
-import { PageWrapper } from "../components/page-wrapper";
-import { Paragraph } from "../components/paragraph";
+import { ActivityCard } from "@/src/app/components/activity-card";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Paragraph } from "@/src/app/components/paragraph";
 import { SanityDocument } from "next-sanity";
-import imageLoader from "../utils/image-loader";
-import { LinkButton } from "../components/link-button";
-import { useSanityData } from "../utils/use-sanity-data";
-import Skeleton from "../components/skeleton";
+import imageLoader from "@/src/app/utils/image-loader";
+import { LinkButton } from "@/src/app/components/link-button";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
+import Skeleton from "@/src/app/components/skeleton";
 
 const ACTIVITIES_QUERY = `*[
   _type == "activity"] | order(_updatedAt desc)`;

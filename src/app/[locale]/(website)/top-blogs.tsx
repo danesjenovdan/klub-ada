@@ -1,13 +1,13 @@
 "use client";
 
-import { Heading } from "../components/heading";
-import { LinkButton } from "../components/link-button";
-import { PageWrapper } from "../components/page-wrapper";
-import PostComponent from "../components/post-component";
-import { Post } from "../utils/interface";
-import { useSanityData } from "../utils/use-sanity-data";
-import { InlineError } from "../components/inline-error";
-import Skeleton from "../components/skeleton";
+import { Heading } from "@/src/app/components/heading";
+import { LinkButton } from "@/src/app/components/link-button";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import PostComponent from "@/src/app/components/post-component";
+import { Post } from "@/src/app/utils/interface";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
+import { InlineError } from "@/src/app/components/inline-error";
+import Skeleton from "@/src/app/components/skeleton";
 
 const PINNED_POSTS_QUERY = `*[_type == "post" && pinned] {
   title,

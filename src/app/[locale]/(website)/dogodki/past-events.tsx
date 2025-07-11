@@ -3,7 +3,7 @@
 import EventComponent from "@/src/app/components/event-component";
 import { Heading } from "@/src/app/components/heading";
 import { PageWrapper } from "@/src/app/components/page-wrapper";
-import { Event } from "../../utils/interface";
+import { Event } from "@/src/app/utils/interface";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { InlineError } from "@/src/app/components/inline-error";
 import Skeleton from "@/src/app/components/skeleton";

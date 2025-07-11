@@ -1,5 +1,5 @@
-import { LoadingAnimation } from "../components/loading-animation";
-import { PageWrapper } from "../components/page-wrapper";
+import { LoadingAnimation } from "@/src/app/components/loading-animation";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
 
 export default function Loading() {
   return (

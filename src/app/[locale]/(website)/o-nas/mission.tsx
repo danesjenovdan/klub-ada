@@ -5,9 +5,9 @@ import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Paragraph } from "@/src/app/components/paragraph";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import mission from "../../../../public/assets/mission.webp";
-import ada from "../../../../public/assets/ada-lovelace.webp";
-import beginning from "../../../../public/assets/beginning-story.webp";
+import mission from "../../../../../public/assets/mission.webp";
+import ada from "../../../../../public/assets/ada-lovelace.webp";
+import beginning from "../../../../../public/assets/beginning-story.webp";
 
 export function Mission() {
   const textVariants = {

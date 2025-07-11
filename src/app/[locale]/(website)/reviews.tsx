@@ -1,7 +1,7 @@
-import { Heading } from "../components/heading";
-import { PageWrapper } from "../components/page-wrapper";
-import ReviewComponent from "../components/review-component";
-import { LinkButton } from "../components/link-button";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import ReviewComponent from "@/src/app/components/review-component";
+import { LinkButton } from "@/src/app/components/link-button";
 
 const reviews = [
   {

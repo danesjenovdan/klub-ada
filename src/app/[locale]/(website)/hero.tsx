@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { Card } from "../components/card";
-import { Heading } from "../components/heading";
-import { PageWrapper } from "../components/page-wrapper";
-import { Paragraph } from "../components/paragraph";
-import { CtaLink } from "../components/cta-link";
-import hero from "../../../public/assets/hero.webp";
+import { Card } from "@/src/app/components/card";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Paragraph } from "@/src/app/components/paragraph";
+import { CtaLink } from "@/src/app/components/cta-link";
+import hero from "../../../../public/assets/hero.webp";
 
 export function Hero() {
   return (
