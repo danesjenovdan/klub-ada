@@ -1,6 +1,48 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "Blog": {
+    "top_blogs": {
+      "title": "Najnovejše objave",
+      "cta": "Preberi naš blog"
+    },
+    "description": "Preberite naše najnovejše objave in novice."
+  },
+  "Reviews": {
+    "title": "Izjave naših članic in partnerjev",
+    "cta": "Postani partner"
+  },
+  "Partners": {
+    "logos": {
+      "title": "Podporniki & Partnerji"
+    }
+  },
+  "Activities": {
+    "title": "Aktivnosti",
+    "description": "Preberi si vse aktivnosti, ki jih ponujamo.",
+    "cta": "Koledar aktivnosti"
+  },
+  "Discord": {
+    "title": "Pridruži se naši skupnosti",
+    "description": "Naša Discord platforma je varen prostor za izmenjavo idej, zanimivih tem, dogodkov, uporabnih virov in priložnosti za osebni in karierni razvoj.",
+    "cta": "Pridruži se nam"
+  },
+  "Hero": {
+    "title": "Skupnost žensk v tehnologiji",
+    "description": "Klub Ada organizira dogodke, ki so namenjeni mreženju in deljenju znanja, kariernemu in osebnemu razvoju za dijakinje, študentke, zaposlene in vse, ki jih zanima področje tehnologije.",
+    "cta_event": "Pridi na dogodek",
+    "cta_partners": "Postani partner",
+    "image_alt": "Slika dogodka"
+  },
+  "Events": {
+    "title_next_event": "Pridi na naš naslednji dogodek",
+    "coming_soon": "COMING SOON!",
+    "all_events": "Vsi dogodki",
+    "cta": "Prijavi se"
+  },
+  "NotFound": {
+    "description": "O ne! Stran ni bila najdena.",
+    "back_button": "Nazaj na glavno stran"
+  },
+  "Common": {
+    "image_alt": "Slika"
   }
 }

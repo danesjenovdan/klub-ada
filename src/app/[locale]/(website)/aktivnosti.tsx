@@ -9,11 +9,13 @@ import imageLoader from "@/src/app/utils/image-loader";
 import { LinkButton } from "@/src/app/components/link-button";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import Skeleton from "@/src/app/components/skeleton";
+import { useTranslations } from "next-intl";
 
 const ACTIVITIES_QUERY = `*[
   _type == "activity"] | order(_updatedAt desc)`;
 
 export function Aktivnosti() {
+  const t = useTranslations();
   const { data, error, isLoading } = useSanityData({
     query: ACTIVITIES_QUERY,
   });
@@ -30,10 +32,8 @@ export function Aktivnosti() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
-              <Heading size="lg">{"Aktivnosti"}</Heading>
-              <Paragraph size="lg">
-                {"Preberi si vse aktivnosti, ki jih ponujamo."}
-              </Paragraph>
+              <Heading size="lg">{t("Activities.title")}</Heading>
+              <Paragraph size="lg">{t("Activities.description")}</Paragraph>
             </div>
             <div>
               <LinkButton
@@ -43,7 +43,7 @@ export function Aktivnosti() {
                 isExternal
                 showIcon
               >
-                Koledar aktivnosti
+                {t("Activities.cta")}
               </LinkButton>
             </div>
           </div>
@@ -63,7 +63,7 @@ export function Aktivnosti() {
                       title={name}
                       description={description}
                       imageSrc={imageSrc}
-                      imageAlt={activityImage.alt || "Placeholder alt"}
+                      imageAlt={activityImage.alt || t("Common.image_alt")}
                     />
                   </div>
                 );

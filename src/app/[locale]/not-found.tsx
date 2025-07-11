@@ -4,8 +4,11 @@ import { LinkButton } from "@/src/app/components/link-button";
 import { Navbar } from "@/src/app/components/navbar";
 import { Footer } from "@/src/app/components/footer";
 import { Paragraph } from "@/src/app/components/paragraph";
+import { useTranslations } from "next-intl";
 
 export default function NotFound() {
+  const t = useTranslations("NotFound");
+
   return (
     <>
       <Navbar />
@@ -19,9 +22,9 @@ export default function NotFound() {
             className="w-full max-w-[457px]"
           />
           <Paragraph size="xl" weight="bold" className="text-center">
-            {"O ne! Stran ni bila najdena."}
+            {t("description")}
           </Paragraph>
-          <LinkButton href="/">{"Nazaj na glavno stran"}</LinkButton>
+          <LinkButton href="/">{t("back_button")}</LinkButton>
         </div>
       </PageWrapper>
       <Footer />

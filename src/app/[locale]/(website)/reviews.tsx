@@ -2,6 +2,7 @@ import { Heading } from "@/src/app/components/heading";
 import { PageWrapper } from "@/src/app/components/page-wrapper";
 import ReviewComponent from "@/src/app/components/review-component";
 import { LinkButton } from "@/src/app/components/link-button";
+import { useTranslations } from "next-intl";
 
 const reviews = [
   {
@@ -60,16 +61,18 @@ const reviews = [
   },
 ];
 export function Reviews() {
+  const t = useTranslations("Reviews");
+
   return (
     <PageWrapper bgColor="bg-blue">
       <div className="flex flex-col gap-8 md:gap-16">
         <div className="flex flex-col gap-6 md:gap-8">
           <div className="max-w-sm md:max-w-2xl">
-            <Heading size="lg">{"Izjave naših članic in partnerjev"}</Heading>
+            <Heading size="lg">{t("title")}</Heading>
           </div>
           <div className="">
             <LinkButton size="md" variant="secondary" href="/partnerstvo">
-              Postani partner
+              {t("cta")}
             </LinkButton>
           </div>
         </div>

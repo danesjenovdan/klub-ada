@@ -8,6 +8,7 @@ import { Post } from "@/src/app/utils/interface";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { InlineError } from "@/src/app/components/inline-error";
 import Skeleton from "@/src/app/components/skeleton";
+import { useTranslations } from "next-intl";
 
 const PINNED_POSTS_QUERY = `*[_type == "post" && pinned] {
   title,
@@ -21,6 +22,7 @@ const PINNED_POSTS_QUERY = `*[_type == "post" && pinned] {
 }`;
 
 export function TopBlogs() {
+  const t = useTranslations("Blog");
   const { data, error, isLoading } = useSanityData({
     query: PINNED_POSTS_QUERY,
   });
@@ -32,7 +34,7 @@ export function TopBlogs() {
       <div className="flex flex-col gap-8 md:gap-16">
         <div className="flex flex-col gap-6 md:gap-8">
           <div className="max-w-sm md:max-w-2xl">
-            <Heading size="lg">Najnovejše objave</Heading>
+            <Heading size="lg">{t("top_blogs.title")}</Heading>
           </div>
           <div className="">
             <LinkButton
@@ -41,7 +43,7 @@ export function TopBlogs() {
               href="
             /blog"
             >
-              Preberi naš blog
+              {t("top_blogs.cta")}
             </LinkButton>
           </div>
         </div>

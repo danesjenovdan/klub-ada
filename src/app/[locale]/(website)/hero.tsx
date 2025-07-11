@@ -5,20 +5,18 @@ import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Paragraph } from "@/src/app/components/paragraph";
 import { CtaLink } from "@/src/app/components/cta-link";
 import hero from "../../../../public/assets/hero.webp";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
+  const t = useTranslations("Hero");
   return (
     <PageWrapper hasNoTopPadding hasNoBottomPadding>
       <div className="flex flex-col gap-4 md:flex-row pt-4">
         <div className="flex flex-col gap-4 shrink-1 basis-1/2 lg:basis-2/5">
           <Card bgColor="bg-white">
             <div className="flex flex-col h-full justify-between gap-8">
-              <Heading size="lg">{"Skupnost žensk v tehnologiji"}</Heading>
-              <Paragraph size="lg">
-                {
-                  "Klub Ada organizira dogodke, ki so namenjeni mreženju in deljenju znanja, kariernemu in osebnemu razvoju za dijakinje, študentke, zaposlene in vse, ki jih zanima področje tehnologije."
-                }
-              </Paragraph>
+              <Heading size="lg">{t("title")}</Heading>
+              <Paragraph size="lg">{t("description")}</Paragraph>
             </div>
           </Card>
           <div className="block md:hidden">
@@ -34,11 +32,11 @@ export function Hero() {
           </div>
           <div className="flex flex-row gap-4">
             <div className="basis-1/2">
-              <CtaLink label="Pridi na dogodek" color="red" href="/dogodki" />
+              <CtaLink label={t("cta_event")} color="red" href="/dogodki" />
             </div>
             <div className="basis-1/2">
               <CtaLink
-                label="Postani partner"
+                label={t("cta_partners")}
                 color="blue"
                 href="/partnerstvo"
               />
@@ -50,7 +48,7 @@ export function Hero() {
             src={hero}
             width={700}
             height={525}
-            alt="Hero picture"
+            alt={t("image_alt")}
             className="rounded-2xl w-full h-full object-cover"
             placeholder="blur"
           />

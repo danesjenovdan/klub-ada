@@ -5,8 +5,10 @@ import { Paragraph } from "@/src/app/components/paragraph";
 import { LinkButton } from "@/src/app/components/link-button";
 import { Card } from "@/src/app/components/card";
 import discordImage from "../../../../public/assets/discord-image.webp";
+import { useTranslations } from "next-intl";
 
 export function Discord() {
+  const t = useTranslations("Discord");
   return (
     <PageWrapper>
       <>
@@ -31,13 +33,11 @@ export function Discord() {
                 className="object-cover"
               />
               <Heading size="sm" className="max-w-72">
-                {"Pridruži se naši skupnosti"}
+                {t("title")}
               </Heading>
 
               <Paragraph size="lg" className="max-w-md">
-                {
-                  "Naša Discord platforma je varen prostor za izmenjavo idej, zanimivih tem, dogodkov, uporabnih virov in priložnosti za osebni in karierni razvoj."
-                }
+                {t("description")}
               </Paragraph>
               <div>
                 <LinkButton
@@ -47,7 +47,7 @@ export function Discord() {
                   isExternal
                   showIcon
                 >
-                  Pridruži se nam
+                  {t("cta")}
                 </LinkButton>
               </div>
             </div>

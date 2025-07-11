@@ -13,6 +13,7 @@ import { LoadingAnimation } from "@/src/app/components/loading-animation";
 import { InlineError } from "@/src/app/components/inline-error";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 interface EventData {
   title: string;
@@ -28,6 +29,7 @@ const NEXT_EVENT_QUERY = `*[
 ] | order(eventTime) [0] {title, description, eventImage, location, applyLink, eventTime}`;
 
 function NextEventContent() {
+  const t = useTranslations();
   const params = useMemo(
     () => ({ today: new Date().toISOString().split("T")[0] }),
     []
@@ -48,7 +50,7 @@ function NextEventContent() {
   if (!data) {
     return (
       <div className="w-full flex items-center justify-center">
-        <Heading>COMING SOON!</Heading>
+        <Heading>{t("Events.coming_soon")}</Heading>
       </div>
     );
   }
@@ -74,7 +76,7 @@ function NextEventContent() {
           src={imageSrc}
           width={500}
           height={500}
-          alt={nextEvent.eventImage.alt || "Placeholder alt"}
+          alt={nextEvent.eventImage.alt || t("Common.image_alt")}
           className="w-full object-cover aspect-square rounded-2xl"
         />
       </div>
@@ -96,7 +98,7 @@ function NextEventContent() {
               href={nextEvent.applyLink}
               isExternal
             >
-              Prijavi se
+              {t("Events.cta")}
             </LinkButton>
           )}
         </div>
@@ -106,18 +108,19 @@ function NextEventContent() {
 }
 export function NextEvent() {
   const pathname = usePathname();
+  const t = useTranslations("Events");
 
   return (
     <PageWrapper bgColor="bg-red">
       <div id="next-event" className="flex flex-col gap-8 md:gap-16">
         <div className="flex flex-col gap-6 md:gap-8">
           <div className="max-w-sm md:max-w-xl">
-            <Heading size="lg">{"Pridi na naš naslednji dogodek!"}</Heading>
+            <Heading size="lg">{t("title_next_event")}</Heading>
           </div>
           {pathname !== "/dogodki" && (
             <div className="">
               <LinkButton size="md" variant="secondary" href="/dogodki">
-                Vsi dogodki
+                {t("all_events")}
               </LinkButton>
             </div>
           )}
