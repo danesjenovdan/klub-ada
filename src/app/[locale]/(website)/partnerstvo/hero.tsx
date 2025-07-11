@@ -4,8 +4,10 @@ import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Paragraph } from "@/src/app/components/paragraph";
 import Image from "next/image";
 import partners from "../../../../../public/assets/partners-image.webp";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
+  const t = useTranslations("Partners");
   return (
     <PageWrapper>
       <div className="flex flex-col pb-4 md:pb-14 md:px-16 gap-6 items-center">
@@ -19,17 +21,15 @@ export function Hero() {
             className="w-[80px] md:w-[120px] lg:w-[160]"
           />
           <Heading size="lg" className="text-center">
-            {"Postani partner Kluba Ada"}
+            {t("title")}
           </Heading>
         </div>
         <Paragraph size="lg" className="max-w-2xl text-center">
-          {
-            "Partnerstvo s Klubom Ada ponuja priložnost za sodelovanje pri oblikovanju dogodkov in promocijskih aktivnostih. Sodelovanje omogoča dostop do skupnosti, ki združuje ženske z različnimi stopnjami znanja in izkušnjami na področju tehnologije."
-          }
+          {t("description")}
         </Paragraph>
         <div className="">
           <LinkButton size="md" variant="secondary" href="#become-partner">
-            {"Postani partner"}
+            {t("cta")}
           </LinkButton>
         </div>
       </div>

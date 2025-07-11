@@ -11,8 +11,48 @@
     "cta": "Postani partner"
   },
   "Partners": {
+    "title": "Postani partner Kluba Ada",
+    "description": "Partnerstvo s Klubom Ada ponuja priložnost za sodelovanje pri oblikovanju dogodkov in promocijskih aktivnostih. Sodelovanje omogoča dostop do skupnosti, ki združuje ženske z različnimi stopnjami znanja in izkušnjami na področju tehnologije.",
+    "join": {
+      "title": "Vas zanima sodelovanje?",
+      "write_to_us": "Za več informacij nam lahko pišete na "
+    },
+    "cta": "Postani partner",
+    "why": {
+      "title": "Zakaj postati partner?",
+      "description": "Verjamemo, da je povezovanje ključ do rasti in uspeha. Naša prizadevanja za spodbujanje žensk v tehnologiji se ne bi mogla uresničiti brez podpore partnerjev, ki delijo naše vrednote in vizijo.",
+      "description2": "Naša misija je ustvariti vključujoče okolje za ženske, ki delujejo v tehnologiji z organizacijo dogodkov v živo, programerskih uric, knjižnega kluba, izobraževalnih vsebin, mentorstva, Discord skupnosti, in se več.",
+      "benefits_title": "S partnerstvom lahko pridobite naslednje:",
+      "benefits": [
+        "Povečana prepoznavnost vašega podjetja.",
+        "Dostop do vrhunskega talenta.",
+        "Ustvarjanje pozitivnega vpliva na družbo."
+      ]
+    },
+    "collaboration": {
+      "title": "Možnosti sodelovanja",
+      "options": [
+        "Predstavitev in sodelovanje pri oblikovanju vsebine dogodkov.",
+        "Objava zaposlitvenih oglasov na naših platformah.",
+        "Programerski dogodki in mreženje.",
+        "Deljenje promocijskega materiala na dogodkih.",
+        "Povečanje prepoznavnosti vaše blagovne znamke.",
+        "Druge oblike sodelovanja po dogovoru."
+      ]
+    },
+    "stats": {
+      "title": "Vpliv Kluba Ada v številkah",
+      "insta_followers": "sledilk in sledilcev na Instagramu",
+      "linkedin_followers": "sledilk in sledilcev na LinkedInu",
+      "newsletter": "prijavljenih na novičnik",
+      "discord_members": "članic v Discord skupini",
+      "companies": "podjetij, ki so nas do sedaj podprla"
+    },
     "logos": {
-      "title": "Podporniki & Partnerji"
+      "title": "Podporniki & Partnerji",
+      "gold_partners": "Zlati partnerji",
+      "silver_partners": "Srebrni partnerji",
+      "project_partners": "Projektni partnerji"
     }
   },
   "Activities": {

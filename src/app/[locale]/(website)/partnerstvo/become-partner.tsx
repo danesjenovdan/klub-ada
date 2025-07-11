@@ -2,16 +2,19 @@ import { Heading } from "@/src/app/components/heading";
 import { LinkButton } from "@/src/app/components/link-button";
 import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Paragraph } from "@/src/app/components/paragraph";
+import { useTranslations } from "next-intl";
 
 export function BecomePartner() {
+  const t = useTranslations("Partners");
+
   return (
     <PageWrapper>
       <div className="flex p-8 md:p-16 lg:p-20 bg-blue grow rounded-2xl border border-black">
         <div className="flex flex-col gap-10 md:flex-row justify-between items-center w-full">
           <div className="flex flex-col gap-3 md:gap-6">
-            <Heading size="lg">{"Vas zanima sodelovanje?"}</Heading>
+            <Heading size="lg">{t("join.title")}</Heading>
             <Paragraph size="xl">
-              {"Za več informacij nam lahko pišete na "}
+              {t("join.write_to_us")}
               <a
                 href="mailto:info@klub-ada.si"
                 className="text-white font-medium"
@@ -28,7 +31,7 @@ export function BecomePartner() {
               isExternal
               showIcon
             >
-              {"Postani partner"}
+              {t("cta")}
             </LinkButton>
           </div>
         </div>

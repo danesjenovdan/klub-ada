@@ -1,9 +1,11 @@
 import { Heading } from "@/src/app/components/heading";
 import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { StatsCard } from "@/src/app/components/stats-card";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 export function Statistics() {
+  const t = useTranslations("Partners.stats");
   return (
     <PageWrapper>
       <div
@@ -18,19 +20,16 @@ export function Statistics() {
           className="max-h-100 w-auto object-cover"
         />
         <Heading size="lg" className="text-center max-w-md">
-          {"Vpliv Kluba Ada v številkah"}
+          {t("title")}
         </Heading>
       </div>
       <div>
         <div className="grid gap-4 md:gap-8 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-          <StatsCard number="430+" label="sledilk in sledilcev na Instagramu" />
-          <StatsCard number="380+" label="sledilk in sledilcev na LinkedInu" />
-          <StatsCard number="200+" label="prijavljenih na novičnik" />
-          <StatsCard number="120+" label="članic v Discord skupini" />
-          <StatsCard
-            number="12+"
-            label="podjetij, ki so nas do sedaj podprla"
-          />
+          <StatsCard number="430+" label={t("insta_followers")} />
+          <StatsCard number="380+" label={t("linkedin_followers")} />
+          <StatsCard number="200+" label={t("newsletter")} />
+          <StatsCard number="120+" label={t("discord_members")} />
+          <StatsCard number="12+" label={t("companies")} />
         </div>
       </div>
     </PageWrapper>

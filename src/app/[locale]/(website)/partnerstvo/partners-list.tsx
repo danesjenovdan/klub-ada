@@ -1,14 +1,16 @@
 import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Paragraph } from "@/src/app/components/paragraph";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 export function PartnersList() {
+  const t = useTranslations("Partners.logos");
   return (
     <PageWrapper>
       <div className="flex flex-col gap-20 md:gap-28">
         {/* Gold Partners */}
         <div className="flex flex-col gap-4 md:gap-8 items-center justify-center">
-          <Paragraph size="xl">Zlati partnerji</Paragraph>
+          <Paragraph size="xl">{t("gold_partners")}</Paragraph>
           <Image
             src="/assets/logo-teads.svg"
             alt="Outbrain logo"
@@ -20,7 +22,7 @@ export function PartnersList() {
 
         {/* Silver Partners */}
         <div className="flex flex-col gap-4 md:gap-8 items-center justify-center">
-          <Paragraph size="xl">Srebrni partnerji</Paragraph>
+          <Paragraph size="xl">{t("silver_partners")}</Paragraph>
           <div className="flex md:flex-row flex-col gap-8 md:gap-16 items-center justify-center">
             <Image
               src="/assets/logo-celtra.svg"
@@ -41,7 +43,7 @@ export function PartnersList() {
 
         {/* Project Partners */}
         <div className="flex flex-col gap-4 md:gap-8 items-center justify-center">
-          <Paragraph size="xl">Projektni partnerji</Paragraph>
+          <Paragraph size="xl">{t("project_partners")}</Paragraph>
           <div className="flex md:flex-row flex-col gap-8 md:gap-16 items-center justify-center">
             <Image
               src="/assets/logo-impact-hub-lj.svg"
