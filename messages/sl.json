@@ -1,5 +1,7 @@
 {
   "Blog": {
+    "title": "Preberi naše članke",
+    "description_long": "Preberi povzetke dogodkov, uporabne nasvete za iskanje službe, priprave na tehnični intervju, predloge knjig in še več.",
     "top_blogs": {
       "title": "Najnovejše objave",
       "cta": "Preberi naš blog"

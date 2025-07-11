@@ -10,6 +10,7 @@ import { Filters } from "./filters";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { InlineError } from "@/src/app/components/inline-error";
 import { LoadingAnimation } from "@/src/app/components/loading-animation";
+import { useTranslations } from "next-intl";
 
 const getBlogQuery = (category: string | null) => {
   const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";
@@ -28,6 +29,7 @@ categories[]-> {
 };
 
 export default function Blogs() {
+  const t = useTranslations("Blog");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const params = useMemo(
     () => ({ category: selectedCategory }),
@@ -52,13 +54,11 @@ export default function Blogs() {
             className="w-[80px] md:w-[120px] lg:w-[160]"
           />
           <Heading size="lg" className="max-w-xl text-center">
-            {"Preberi naše članke"}
+            {t("title")}
           </Heading>
         </div>
         <Paragraph size="lg" className="max-w-xl text-center">
-          {
-            "Preberi povzetke dogodkov, uporabne nasvete za iskanje službe, priprave na tehnični intervju, predloge knjig in še več."
-          }
+          {t("description_long")}
         </Paragraph>
         <Filters
           selectedCategory={selectedCategory}
