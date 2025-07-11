@@ -8,7 +8,7 @@ import { Paragraph } from "@/src/app/components/paragraph";
 import imageLoader from "@/src/app/utils/image-loader";
 import { LinkButton } from "@/src/app/components/link-button";
 import { formatDate, formatTime } from "@/src/app/utils/date";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/src/i18n/navigation";
 import { LoadingAnimation } from "@/src/app/components/loading-animation";
 import { InlineError } from "@/src/app/components/inline-error";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
