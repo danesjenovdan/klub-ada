@@ -2,8 +2,8 @@ import Image from "next/image";
 import { Paragraph } from "./paragraph";
 import { Heading } from "./heading";
 import { IconBrandLinkedinFilled } from "@tabler/icons-react";
-import { TeamMember } from "../utils/interface";
-import imageLoader from "../utils/image-loader";
+import { TeamMember } from "../../utils/interface";
+import imageLoader from "../../utils/image-loader";
 
 interface TeamMemberProps {
   member: TeamMember;

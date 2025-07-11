@@ -4,8 +4,10 @@ import { Link } from "./link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
 import { useEffect, useState } from "react";
 import { LinkButton } from "./link-button";
+import { useTranslations } from "next-intl";
 
 export function NavbarMenu() {
+  const t = useTranslations("Pages");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -41,21 +43,21 @@ export function NavbarMenu() {
         <ol className="flex flex-col gap-4">
           <li>
             <Link variant="secondary" href="/o-nas">
-              O nas
+              {t("about_us")}
             </Link>
           </li>
           <li>
             <Link variant="secondary" href="/blog">
-              Blog
+              {t("blog")}
             </Link>
           </li>
           <li>
             <Link variant="secondary" href="/partnerstvo">
-              Partnerstva
+              {t("partners")}
             </Link>
           </li>
         </ol>
-        <LinkButton href="/dogodki">Vsi dogodki</LinkButton>
+        <LinkButton href="/dogodki">{t("events_all")}</LinkButton>
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ export default function Hero() {
         </Paragraph>
 
         <LinkButton size="md" variant="secondary" href="#next-event">
-          {t("cta.next_event")}
+          {t("cta_next_event")}
         </LinkButton>
       </div>
       <div className="flex flex-col gap-2 md:gap-4">

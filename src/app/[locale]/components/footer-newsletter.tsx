@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import { Button } from "./button";
+import { useTranslations } from "next-intl";
 
 export default function FooterNewsletter() {
+  const t = useTranslations("Footer.newsletter");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState("");
@@ -12,7 +14,7 @@ export default function FooterNewsletter() {
     e.preventDefault();
 
     if (!email || !consent) {
-      setStatus("Prosimo, vnesite e-naslov in potrdite soglasje.");
+      setStatus(t("status_missing_info"));
       return;
     }
 
@@ -29,14 +31,14 @@ export default function FooterNewsletter() {
 
       const data = await response.json();
       if (response.ok) {
-        setStatus("Hvala za prijavo 💗");
+        setStatus(t("status_success"));
         setEmail("");
         setConsent(false);
       } else {
-        setStatus(data.error || "Napaka pri prijavi.");
+        setStatus(data.error || t("status_error"));
       }
     } catch (error) {
-      setStatus("Napaka pri prijavi.");
+      setStatus(t("status_error"));
     }
   };
 
@@ -46,13 +48,13 @@ export default function FooterNewsletter() {
         <div className="flex items-center">
           <input
             type="email"
-            placeholder="Vpiši svoj e-naslov"
+            placeholder={t("email_placeholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full h-11 py-2 px-4 bg-white text-black border border-black rounded-lg"
           />
           <div className="m-1 mr-2">
-            <Button type="submit">Prijavi se</Button>
+            <Button type="submit">{t("cta")}</Button>
           </div>
         </div>
 
@@ -65,8 +67,7 @@ export default function FooterNewsletter() {
             className="w-4 h-4 border border-black rounded-lg cursor-pointer"
           />
           <label htmlFor="consent" className="text-md ml-2">
-            Strinjam se, da mi Klub Ada po e-pošti pošilja novičnik in druga
-            obvestila.
+            {t("consent")}
           </label>
         </div>
       </form>

@@ -1,5 +1,5 @@
-import { Link as NextLink } from "../../i18n/navigation";
-import { ForwardRefComponent, PropsOf } from "../utils/polymorphic";
+import { Link as NextLink } from "../../../i18n/navigation";
+import { ForwardRefComponent, PropsOf } from "../../utils/polymorphic";
 import { forwardRef } from "react";
 import { tv } from "tailwind-variants";
 

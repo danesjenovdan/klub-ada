@@ -9,8 +9,10 @@ import { Link } from "./link";
 import { Card } from "./card";
 import FooterNewsletter from "./footer-newsletter";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function Footer() {
+  const t = useTranslations();
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
@@ -29,22 +31,22 @@ export function Footer() {
       <div className="flex flex-col pt-8 px-7 md:pt-16 md:px-14 bg-beige rounded-t-2xl">
         <div className="flex flex-col lg:flex-row justify-between gap-6">
           <Heading size="sm" className="max-w-80">
-            {"Skupnost žensk v tehnologiji"}
+            {t("Footer.title")}
           </Heading>
           <div className="flex flex-col grow max-w-3xl gap-4">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="basis-8/12">
                 <CtaLink
-                  label="Pridruži se Discord skupini"
+                  label={t("Footer.cta_discord")}
                   color="yellow"
-                  description="Varen prostor za izmenjavo idej, dogodkov, zaposlitev in priložnosti za osebni in karierni razvoj."
+                  description={t("Footer.description_discord")}
                   href="https://forms.gle/iRmFfg7Amn3YchM2A"
                   isExternal
                 />
               </div>
               <div className="basis-4/12">
                 <CtaLink
-                  label="Postani partner"
+                  label={t("Partners.cta")}
                   color="blue"
                   href="/partnerstvo"
                 />
@@ -53,13 +55,17 @@ export function Footer() {
 
             <div className="flex flex-col md:flex-row gap-4">
               <div className="basis-4/12">
-                <CtaLink label="Pridi na dogodek" color="red" href="/dogodki" />
+                <CtaLink
+                  label={t("Footer.cta_events")}
+                  color="red"
+                  href="/dogodki"
+                />
               </div>
               <div className="basis-8/12">
                 <Card>
                   <div className="flex flex-col gap-4">
                     <Paragraph size="xl" weight="bold">
-                      Prijavi se na novičnik
+                      {t("Footer.cta_newsletter")}
                     </Paragraph>
                     <FooterNewsletter />
                   </div>
@@ -84,12 +90,12 @@ export function Footer() {
         <div className="flex flex-col md:flex-row gap-10 lg:gap-24">
           <div className="flex flex-col gap-2">
             <Paragraph size="lg" weight="bold">
-              {"O nas"}
+              {t("Pages.about_us")}
             </Paragraph>
             <div className="flex flex-col gap-2">
               <div>
                 <Link variant="secondary" href="/o-nas">
-                  {"Spoznaj Klub Ada"}
+                  {t("Pages.about_us_description")}
                 </Link>
               </div>
             </div>
@@ -97,22 +103,22 @@ export function Footer() {
 
           <div className="flex flex-col gap-2">
             <Paragraph size="lg" weight="bold">
-              {"Aktivnosti"}
+              {t("Pages.activities")}
             </Paragraph>
             <div className="flex flex-col gap-2">
               <div>
                 <Link variant="secondary" href="/dogodki">
-                  {"Dogodki"}
+                  {t("Pages.events")}
                 </Link>
               </div>
               <div>
                 <Link variant="secondary" href="/blog">
-                  {"Blog"}
+                  {t("Pages.blog")}
                 </Link>
               </div>
               <div>
                 <Link variant="secondary" href="/partnerstvo">
-                  {"Partnerstva"}
+                  {t("Pages.partners")}
                 </Link>
               </div>
             </div>
@@ -120,7 +126,7 @@ export function Footer() {
 
           <div className="flex flex-col gap-2">
             <Paragraph size="lg" weight="bold">
-              {"Pridruži se nam"}
+              {t("Footer.cta")}
             </Paragraph>
             <div className="flex flex-col gap-2">
               <div>
@@ -129,7 +135,7 @@ export function Footer() {
                   href="https://forms.gle/camdd2joyHi9kAZt5"
                   isExternal
                 >
-                  {"Discord"}
+                  {t("Common.discord")}
                 </Link>
               </div>
               <div>
@@ -138,7 +144,7 @@ export function Footer() {
                   href="https://www.linkedin.com/company/klub-ada/posts/"
                   isExternal
                 >
-                  {"LinkedIn"}
+                  {t("Common.linkedin")}
                 </Link>
               </div>
               <div>
@@ -147,7 +153,7 @@ export function Footer() {
                   href="https://www.instagram.com/klub_ada/"
                   isExternal
                 >
-                  {"Instagram"}
+                  {t("Common.instagram")}
                 </Link>
               </div>
             </div>

@@ -1,10 +1,11 @@
 import React from "react";
-import { Post } from "../utils/interface";
+import { Post } from "../../utils/interface";
 import { Heading } from "./heading";
 import { Paragraph } from "./paragraph";
 import Image from "next/image";
-import imageLoader from "../utils/image-loader";
+import imageLoader from "../../utils/image-loader";
 import { Link, linkBase } from "./link";
+import { useTranslations } from "next-intl";
 
 interface LinkDivProps {
   /**
@@ -27,6 +28,7 @@ interface Props {
   post: Post;
 }
 const PostComponent = ({ post }: Props) => {
+  const t = useTranslations("Blog");
   const imageSrc = imageLoader(post.mainImage);
 
   return (
@@ -56,7 +58,7 @@ const PostComponent = ({ post }: Props) => {
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <LinkDiv variant="secondary">Preberi blog</LinkDiv>
+              <LinkDiv variant="secondary">{t("cta_blog_post")}</LinkDiv>
             </div>
             <Image
               src="/assets/chevron-right.svg"

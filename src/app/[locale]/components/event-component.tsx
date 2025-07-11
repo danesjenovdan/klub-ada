@@ -9,6 +9,7 @@ import { formatDate } from "../../utils/date";
 import { Link } from "./link";
 import { useSanityData } from "../../utils/use-sanity-data";
 import { LinkDiv } from "./post-component";
+import { useTranslations } from "next-intl";
 
 const EVENT_BLOG_QUERY = `*[_type == "post" && event._ref == $eventId] {
   slug,
@@ -21,6 +22,7 @@ interface Props {
   event: Event;
 }
 export default function EventComponent({ event }: Props) {
+  const t = useTranslations("Blog");
   const imageSrc = imageLoader(event.eventImage);
   const formattedDate = formatDate(event.eventTime);
   const params = useMemo(() => ({ eventId: event._id }), []);
@@ -50,7 +52,7 @@ export default function EventComponent({ event }: Props) {
         <div className="flex items-center justify-between">
           <div>
             {blogPost?.length > 0 && (
-              <LinkDiv variant="secondary">Preberi blog</LinkDiv>
+              <LinkDiv variant="secondary">{t("cta_blog_post")}</LinkDiv>
             )}
           </div>
           {blogPost.length > 0 && (

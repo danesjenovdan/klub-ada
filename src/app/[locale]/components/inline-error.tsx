@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { Paragraph } from "./paragraph";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 
 type InloneErrorProps = {
   label?: string;
   hasBox?: boolean;
 };
 export function InlineError({ label, hasBox = false }: InloneErrorProps) {
+  const t = useTranslations("Common");
   return (
     <div
       className={clsx(
@@ -22,7 +24,7 @@ export function InlineError({ label, hasBox = false }: InloneErrorProps) {
         className="w-[176px]"
       />
       <Paragraph size="lg" className="text-center max-w-[332px]">
-        {label || "Nekaj je šlo narobe. Prosim poskusi kasneje."}
+        {label || t("error_fallback")}
       </Paragraph>
     </div>
   );

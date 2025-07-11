@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { ForwardRefComponent, PropsOf } from "../utils/polymorphic";
+import { ForwardRefComponent, PropsOf } from "../../utils/polymorphic";
 import { tv } from "tailwind-variants";
 import clsx from "clsx";
 

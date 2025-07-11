@@ -1,8 +1,8 @@
-import { Link as NextLink } from "../../i18n/navigation";
+import { Link as NextLink } from "../../../i18n/navigation";
 import { forwardRef } from "react";
 import { LinkOptions } from "./link";
 import { baseButton, ButtonOptions } from "./button";
-import { ForwardRefComponent, PropsOf } from "../utils/polymorphic";
+import { ForwardRefComponent, PropsOf } from "../../utils/polymorphic";
 import { tv } from "tailwind-variants";
 import { IconArrowRight } from "@tabler/icons-react";
 
