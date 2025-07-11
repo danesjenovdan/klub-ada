@@ -94,10 +94,14 @@
     "image_alt": "Slika dogodka"
   },
   "Events": {
+    "title": "Dogodki",
+    "description": "Pridruži se nam na neformalnih druženjih, kjer obravnavamo različne karierne in tehnične teme, gostimo strokovnjakinje in strokovnjake iz industrije ter se družimo in izmenjujemo ideje v sproščenem okolju ob prigrizkih in pijači.",
     "title_next_event": "Pridi na naš naslednji dogodek",
     "coming_soon": "COMING SOON!",
+    "title_past_events": "Pretekli dogodki",
     "all_events": "Vsi dogodki",
-    "cta": "Prijavi se"
+    "cta": "Prijavi se",
+    "cta_next_event": "Naslednji dogodek"
   },
   "NotFound": {
     "description": "O ne! Stran ni bila najdena.",

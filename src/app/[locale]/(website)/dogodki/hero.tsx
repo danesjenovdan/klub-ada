@@ -7,8 +7,10 @@ import dogodek1 from "../../../../../public/assets/dogodek-1.webp";
 import dogodek2 from "../../../../../public/assets/dogodek-2.webp";
 import dogodek3 from "../../../../../public/assets/dogodek-3.webp";
 import dogodek4 from "../../../../../public/assets/dogodek-4.webp";
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
+  const t = useTranslations("Events");
   return (
     <PageWrapper>
       <div className="flex flex-col pb-10 md:pb-20 md:px-16 gap-6 items-center">
@@ -21,17 +23,15 @@ export default function Hero() {
             className="w-[80px] md:w-[120px] lg:w-[160]"
           />
           <Heading size="lg" className="text-center">
-            {"Dogodki"}
+            {t("title")}
           </Heading>
         </div>
         <Paragraph size="lg" className="max-w-xl text-center">
-          {
-            "Pridruži se nam na neformalnih druženjih, kjer obravnavamo različne karierne in tehnične teme, gostimo strokovnjakinje in strokovnjake iz industrije ter se družimo in izmenjujemo ideje v sproščenem okolju ob prigrizkih in pijači."
-          }
+          {t("description")}
         </Paragraph>
 
         <LinkButton size="md" variant="secondary" href="#next-event">
-          {"Naslednji dogodek"}
+          {t("cta.next_event")}
         </LinkButton>
       </div>
       <div className="flex flex-col gap-2 md:gap-4">

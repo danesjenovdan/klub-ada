@@ -9,6 +9,7 @@ import { InlineError } from "@/src/app/components/inline-error";
 import Skeleton from "@/src/app/components/skeleton";
 import { Paragraph } from "@/src/app/components/paragraph";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 const GET_PAST_EVENTS_QUERY = `*[
   _type == "event" && eventTime <= $today
@@ -56,11 +57,12 @@ function PastEventsContent() {
   ));
 }
 export default function PastEvents() {
+  const t = useTranslations("Events");
   return (
     <PageWrapper>
       <div className="flex flex-col gap-8 md:gap-16">
         <div className="max-w-sm md:max-w-2xl">
-          <Heading size="lg">Pretekli dogodki</Heading>
+          <Heading size="lg">{t("title_past_events")}</Heading>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
