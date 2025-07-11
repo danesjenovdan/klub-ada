@@ -1,15 +1,15 @@
-import { Heading } from "@/app/components/heading";
-import { PageWrapper } from "@/app/components/page-wrapper";
-import { Paragraph } from "@/app/components/paragraph";
-import { Post } from "@/app/utils/interface";
-import PostComponent from "@/app/components/post-component";
-import { NewsletterComponent } from "@/app/components/newsletter-component";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Paragraph } from "@/src/app/components/paragraph";
+import { Post } from "@/src/app/utils/interface";
+import PostComponent from "@/src/app/components/post-component";
+import { NewsletterComponent } from "@/src/app/components/newsletter-component";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Filters } from "./filters";
-import { useSanityData } from "@/app/utils/use-sanity-data";
-import { InlineError } from "@/app/components/inline-error";
-import { LoadingAnimation } from "@/app/components/loading-animation";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
+import { InlineError } from "@/src/app/components/inline-error";
+import { LoadingAnimation } from "@/src/app/components/loading-animation";
 
 const getBlogQuery = (category: string | null) => {
   const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";

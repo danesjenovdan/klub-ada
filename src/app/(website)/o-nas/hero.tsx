@@ -1,8 +1,8 @@
-import { Heading } from "@/app/components/heading";
-import { LinkButton } from "@/app/components/link-button";
-import { PageWrapper } from "@/app/components/page-wrapper";
+import { Heading } from "@/src/app/components/heading";
+import { LinkButton } from "@/src/app/components/link-button";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
 import Image from "next/image";
-import team from "../../../public/assets/team.webp";
+import team from "../../../../public/assets/team.webp";
 
 export function Hero() {
   return (

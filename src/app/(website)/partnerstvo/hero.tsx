@@ -1,9 +1,9 @@
-import { Heading } from "@/app/components/heading";
-import { LinkButton } from "@/app/components/link-button";
-import { PageWrapper } from "@/app/components/page-wrapper";
-import { Paragraph } from "@/app/components/paragraph";
+import { Heading } from "@/src/app/components/heading";
+import { LinkButton } from "@/src/app/components/link-button";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Paragraph } from "@/src/app/components/paragraph";
 import Image from "next/image";
-import partners from "../../../public/assets/partners-image.webp";
+import partners from "../../../../public/assets/partners-image.webp";
 
 export function Hero() {
   return (

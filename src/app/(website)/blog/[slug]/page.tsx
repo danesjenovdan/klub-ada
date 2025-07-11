@@ -1,20 +1,20 @@
 "use client";
 
-import { Footer } from "@/app/components/footer";
-import { Paragraph } from "@/app/components/paragraph";
-import imageLoader from "@/app/utils/image-loader";
+import { Footer } from "@/src/app/components/footer";
+import { Paragraph } from "@/src/app/components/paragraph";
+import imageLoader from "@/src/app/utils/image-loader";
 import Image from "next/image";
-import { Heading } from "@/app/components/heading";
-import { PageWrapper } from "@/app/components/page-wrapper";
-import { Post } from "@/app/utils/interface";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Post } from "@/src/app/utils/interface";
 import { client } from "@/sanity/lib/client";
 import { PortableText, PortableTextComponents } from "next-sanity";
 import React, { useMemo } from "react";
-import { formatDate } from "@/app/utils/date";
+import { formatDate } from "@/src/app/utils/date";
 import { useParams } from "next/navigation";
-import { useSanityData } from "@/app/utils/use-sanity-data";
-import { LoadingAnimation } from "@/app/components/loading-animation";
-import { InlineError } from "@/app/components/inline-error";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
+import { LoadingAnimation } from "@/src/app/components/loading-animation";
+import { InlineError } from "@/src/app/components/inline-error";
 
 const GET_BLOG_POST = `*[_type == "post" && slug.current == $slug][0] {
   title,

@@ -4,7 +4,7 @@ import { Heading } from "../components/heading";
 import { PageWrapper } from "../components/page-wrapper";
 import { Paragraph } from "../components/paragraph";
 import { CtaLink } from "../components/cta-link";
-import hero from "../../public/assets/hero.webp";
+import hero from "../../../public/assets/hero.webp";
 
 export function Hero() {
   return (

@@ -1,4 +1,4 @@
-import { Footer } from "@/app/components/footer";
+import { Footer } from "@/src/app/components/footer";
 import { Collaboration } from "./collaboration";
 import { Hero } from "./hero";
 import { Statistics } from "./statistics";

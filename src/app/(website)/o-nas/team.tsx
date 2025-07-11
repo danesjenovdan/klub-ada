@@ -1,12 +1,12 @@
 "use client";
 
-import { Heading } from "@/app/components/heading";
-import { InlineError } from "@/app/components/inline-error";
-import { LoadingAnimation } from "@/app/components/loading-animation";
-import { PageWrapper } from "@/app/components/page-wrapper";
-import TeamMemberComponent from "@/app/components/team-member-component";
-import { TeamMember } from "@/app/utils/interface";
-import { useSanityData } from "@/app/utils/use-sanity-data";
+import { Heading } from "@/src/app/components/heading";
+import { InlineError } from "@/src/app/components/inline-error";
+import { LoadingAnimation } from "@/src/app/components/loading-animation";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import TeamMemberComponent from "@/src/app/components/team-member-component";
+import { TeamMember } from "@/src/app/utils/interface";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import Image from "next/image";
 import { Suspense } from "react";
 

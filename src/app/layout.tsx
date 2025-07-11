@@ -24,11 +24,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const locales = ['si', 'en'];
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <head>

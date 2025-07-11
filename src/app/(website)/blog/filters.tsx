@@ -1,6 +1,6 @@
 "use client";
 
-import { useSanityData } from "@/app/utils/use-sanity-data";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import clsx from "clsx";
 
 const FILTERS_QUERY = `*[_type == "category"] {

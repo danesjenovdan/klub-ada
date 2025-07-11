@@ -1,13 +1,13 @@
 "use client";
 
-import EventComponent from "@/app/components/event-component";
-import { Heading } from "@/app/components/heading";
-import { PageWrapper } from "@/app/components/page-wrapper";
+import EventComponent from "@/src/app/components/event-component";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
 import { Event } from "../../utils/interface";
-import { useSanityData } from "@/app/utils/use-sanity-data";
-import { InlineError } from "@/app/components/inline-error";
-import Skeleton from "@/app/components/skeleton";
-import { Paragraph } from "@/app/components/paragraph";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
+import { InlineError } from "@/src/app/components/inline-error";
+import Skeleton from "@/src/app/components/skeleton";
+import { Paragraph } from "@/src/app/components/paragraph";
 import { useMemo } from "react";
 
 const GET_PAST_EVENTS_QUERY = `*[

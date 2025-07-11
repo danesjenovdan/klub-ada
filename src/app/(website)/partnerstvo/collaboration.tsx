@@ -1,7 +1,7 @@
-import { Button } from "@/app/components/button";
-import { Heading } from "@/app/components/heading";
-import { PageWrapper } from "@/app/components/page-wrapper";
-import { Paragraph } from "@/app/components/paragraph";
+import { Button } from "@/src/app/components/button";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Paragraph } from "@/src/app/components/paragraph";
 import Image from "next/image";
 
 export function Collaboration() {

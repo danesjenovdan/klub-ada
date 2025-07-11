@@ -1,6 +1,6 @@
-import { Heading } from "@/app/components/heading";
-import { PageWrapper } from "@/app/components/page-wrapper";
-import { Paragraph } from "@/app/components/paragraph";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { Paragraph } from "@/src/app/components/paragraph";
 import Image from "next/image";
 
 export function PartnersList() {

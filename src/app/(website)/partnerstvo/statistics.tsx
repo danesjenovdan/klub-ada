@@ -1,6 +1,6 @@
-import { Heading } from "@/app/components/heading";
-import { PageWrapper } from "@/app/components/page-wrapper";
-import { StatsCard } from "@/app/components/stats-card";
+import { Heading } from "@/src/app/components/heading";
+import { PageWrapper } from "@/src/app/components/page-wrapper";
+import { StatsCard } from "@/src/app/components/stats-card";
 import Image from "next/image";
 
 export function Statistics() {

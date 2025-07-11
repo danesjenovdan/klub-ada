@@ -4,7 +4,7 @@ import { PageWrapper } from "../components/page-wrapper";
 import { Paragraph } from "../components/paragraph";
 import { LinkButton } from "../components/link-button";
 import { Card } from "../components/card";
-import discordImage from "../../public/assets/discord-image.webp";
+import discordImage from "../../../public/assets/discord-image.webp";
 
 export function Discord() {
   return (
