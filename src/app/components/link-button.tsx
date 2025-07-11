@@ -1,4 +1,4 @@
-import NextLink from "next/link";
+import { Link as NextLink } from "../../i18n/navigation";
 import { forwardRef } from "react";
 import { LinkOptions } from "./link";
 import { baseButton, ButtonOptions } from "./button";
