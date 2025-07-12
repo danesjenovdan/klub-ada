@@ -13,16 +13,33 @@ import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schema } from "./sanity/schemaTypes";
 import { structure } from "./sanity/structure";
 
-export default defineConfig({
-  basePath: "/studio",
-  projectId,
-  dataset,
-  // Add and edit the content schema in the './sanity/schemaTypes' folder
-  schema,
-  plugins: [
-    structureTool({ structure }),
-    // Vision is for querying with GROQ from inside the Studio
-    // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({ defaultApiVersion: apiVersion }),
-  ],
-});
+export default defineConfig([
+  {
+    name: "KlubAda",
+    basePath: "/sl/studio",
+    projectId,
+    dataset,
+    // Add and edit the content schema in the './sanity/schemaTypes' folder
+    schema,
+    plugins: [
+      structureTool({ structure }),
+      // Vision is for querying with GROQ from inside the Studio
+      // https://www.sanity.io/docs/the-vision-plugin
+      visionTool({ defaultApiVersion: apiVersion }),
+    ],
+  },
+  {
+    name: "KlubAdaEng",
+    basePath: "/en/studio",
+    projectId,
+    dataset,
+    // Add and edit the content schema in the './sanity/schemaTypes' folder
+    schema,
+    plugins: [
+      structureTool({ structure }),
+      // Vision is for querying with GROQ from inside the Studio
+      // https://www.sanity.io/docs/the-vision-plugin
+      visionTool({ defaultApiVersion: apiVersion }),
+    ],
+  },
+]);
