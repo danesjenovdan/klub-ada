@@ -1,0 +1,146 @@
+{
+  "Blog": {
+    "title": "Preberi naše članke",
+    "description_long": "Preberi povzetke dogodkov, uporabne nasvete za iskanje službe, priprave na tehnični intervju, predloge knjig in še več.",
+    "top_blogs": {
+      "title": "Najnovejše objave",
+      "cta": "Preberi naš blog"
+    },
+    "cta_blog_post": "Preberi blog",
+    "description": "Preberite naše najnovejše objave in novice."
+  },
+  "Reviews": {
+    "title": "Izjave naših članic in partnerjev",
+    "cta": "Postani partner"
+  },
+  "Partners": {
+    "title": "Postani partner Kluba Ada",
+    "description": "Partnerstvo s Klubom Ada ponuja priložnost za sodelovanje pri oblikovanju dogodkov in promocijskih aktivnostih. Sodelovanje omogoča dostop do skupnosti, ki združuje ženske z različnimi stopnjami znanja in izkušnjami na področju tehnologije.",
+    "join": {
+      "title": "Vas zanima sodelovanje?",
+      "write_to_us": "Za več informacij nam lahko pišete na "
+    },
+    "cta": "Postani partner",
+    "why": {
+      "title": "Zakaj postati partner?",
+      "description": "Verjamemo, da je povezovanje ključ do rasti in uspeha. Naša prizadevanja za spodbujanje žensk v tehnologiji se ne bi mogla uresničiti brez podpore partnerjev, ki delijo naše vrednote in vizijo.",
+      "description2": "Naša misija je ustvariti vključujoče okolje za ženske, ki delujejo v tehnologiji z organizacijo dogodkov v živo, programerskih uric, knjižnega kluba, izobraževalnih vsebin, mentorstva, Discord skupnosti, in se več.",
+      "benefits_title": "S partnerstvom lahko pridobite naslednje:",
+      "benefits": [
+        "Povečana prepoznavnost vašega podjetja.",
+        "Dostop do vrhunskega talenta.",
+        "Ustvarjanje pozitivnega vpliva na družbo."
+      ]
+    },
+    "collaboration": {
+      "title": "Možnosti sodelovanja",
+      "options": [
+        "Predstavitev in sodelovanje pri oblikovanju vsebine dogodkov.",
+        "Objava zaposlitvenih oglasov na naših platformah.",
+        "Programerski dogodki in mreženje.",
+        "Deljenje promocijskega materiala na dogodkih.",
+        "Povečanje prepoznavnosti vaše blagovne znamke.",
+        "Druge oblike sodelovanja po dogovoru."
+      ]
+    },
+    "stats": {
+      "title": "Vpliv Kluba Ada v številkah",
+      "insta_followers": "sledilk in sledilcev na Instagramu",
+      "linkedin_followers": "sledilk in sledilcev na LinkedInu",
+      "newsletter": "prijavljenih na novičnik",
+      "discord_members": "članic v Discord skupini",
+      "companies": "podjetij, ki so nas do sedaj podprla"
+    },
+    "logos": {
+      "title": "Podporniki & Partnerji",
+      "gold_partners": "Zlati partnerji",
+      "silver_partners": "Srebrni partnerji",
+      "project_partners": "Projektni partnerji"
+    }
+  },
+  "Activities": {
+    "title": "Aktivnosti",
+    "description": "Preberi si vse aktivnosti, ki jih ponujamo.",
+    "cta": "Koledar aktivnosti"
+  },
+  "AboutUs": {
+    "title": "Navdušujemo ženske nad tehnologijo in jih podpiramo na karierni poti.",
+    "meet_the_team": "Spoznaj ekipo",
+    "mission": {
+      "title": "Misija",
+      "subtitle": "Navduševati ženske nad tehnologijo ter jim nuditi podporo in vire za razvoj veščin, mreženje ter rast na kariernem področju.",
+      "description": "Naše aktivnosti so zasnovane tako, da ustvarjajo varno in spodbudno okolje, kjer lahko udeleženke delijo ideje, izkušnje in se vključujejo v pogovore."
+    },
+    "story": {
+      "title": "Zgodba o našem začetku",
+      "subtitle": "Klub Ada je nastal iz želje po povezovanju žensk na področju, kjer smo pogosto v manjšini, kar prinaša edinstvene izzive in dileme.",
+      "description": "Zaradi teh izkušenj se pogosto počutimo, kot da v ta prostor ne spadamo. Z našimi aktivnostmi želimo poudariti, da je tehnologija prostor, kjer smo dobrodošle in kjer je naš glas pomemben."
+    },
+    "name": {
+      "title": "Od kod ime Klub Ada?",
+      "subtitle": "Navdih za ime smo našli v pionirki računalništva Adi Lovelace - matematičarki, pisateljici in prvi programerki.",
+      "description": "V 19. stoletju je za analitični stroj Charlesa Babbaga, predhodnika sodobnega računalnika, zapisala prvi algoritem. Ada Lovelace je dokaz, da so ženske že od začetka sooblikovale tehnologijo, njen vpliv pa nas navdihuje tudi danes, ko skupaj gradimo prihodnost."
+    },
+    "our": "Naša",
+    "team": "ekipa"
+  },
+  "Discord": {
+    "title": "Pridruži se naši skupnosti",
+    "description": "Naša Discord platforma je varen prostor za izmenjavo idej, zanimivih tem, dogodkov, uporabnih virov in priložnosti za osebni in karierni razvoj.",
+    "cta": "Pridruži se nam"
+  },
+  "Hero": {
+    "title": "Skupnost žensk v tehnologiji",
+    "description": "Klub Ada organizira dogodke, ki so namenjeni mreženju in deljenju znanja, kariernemu in osebnemu razvoju za dijakinje, študentke, zaposlene in vse, ki jih zanima področje tehnologije.",
+    "cta_event": "Pridi na dogodek",
+    "cta_partners": "Postani partner",
+    "image_alt": "Slika dogodka"
+  },
+  "Events": {
+    "title": "Dogodki",
+    "description": "Pridruži se nam na neformalnih druženjih, kjer obravnavamo različne karierne in tehnične teme, gostimo strokovnjakinje in strokovnjake iz industrije ter se družimo in izmenjujemo ideje v sproščenem okolju ob prigrizkih in pijači.",
+    "title_next_event": "Pridi na naš naslednji dogodek",
+    "coming_soon": "COMING SOON!",
+    "title_past_events": "Pretekli dogodki",
+    "all_events": "Vsi dogodki",
+    "cta": "Prijavi se",
+    "cta_next_event": "Naslednji dogodek"
+  },
+  "NotFound": {
+    "description": "O ne! Stran ni bila najdena.",
+    "back_button": "Nazaj na glavno stran"
+  },
+  "Common": {
+    "image_alt": "Slika",
+    "error_fallback": "Nekaj je šlo narobe. Prosim poskusi kasneje.",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "discord": "Discord"
+  },
+  "Footer": {
+    "title": "Skupnost žensk v tehnologiji",
+    "cta": "Pridruži se nam",
+    "cta_discord": "Pridruži se Discord skupini",
+    "description_discord": "Varen prostor za izmenjavo idej, dogodkov, zaposlitev in priložnosti za osebni in karierni razvoj.",
+    "cta_newsletter": "Prijavi se na novičnik",
+    "cta_events": "Pridi na dogodek",
+    "newsletter": {
+      "description": "S prijavo na naš novičnik boš prejela vabila na prihajajoče dogodke in povzetke dogodkov, uporabne nasvete, povezave do drugih koristnih virov, kot so hekatoni, karierni dogodki, zaposlitvene priložnosti in še več.",
+      "email_placeholder": "Vpiši svoj e-naslov",
+      "consent": "Strinjam se, da mi Klub Ada po e-pošti pošilja novičnik in druga obvestila.",
+      "cta": "Prijavi se",
+      "status_error": "Napaka pri prijavi.",
+      "status_success": "Hvala za prijavo 💗",
+      "status_missing_info": "Prosimo, vnesite e-naslov in potrdite soglasje."
+    }
+  },
+  "Pages": {
+    "about_us": "O nas",
+    "about_us_description": "Spoznaj Klub Ada",
+    "activities": "Aktivnosti",
+    "events": "Dogodki",
+    "events_all": "Vsi dogodki",
+    "blog": "Blog",
+    "partners": "Partnerstva"
+  }
+}
