@@ -13,7 +13,7 @@ import { LoadingAnimation } from "@/src/app/[locale]/components/loading-animatio
 import { InlineError } from "@/src/app/[locale]/components/inline-error";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface EventData {
   title: string;
@@ -25,13 +25,14 @@ interface EventData {
 }
 
 const NEXT_EVENT_QUERY = `*[
-  _type == "event" && eventTime >= $today
+  _type == "event" && language == $language && eventTime >= $today
 ] | order(eventTime) [0] {title, description, eventImage, location, applyLink, eventTime}`;
 
 function NextEventContent() {
   const t = useTranslations();
+  const locale = useLocale();
   const params = useMemo(
-    () => ({ today: new Date().toISOString().split("T")[0] }),
+    () => ({ today: new Date().toISOString().split("T")[0], language: locale }),
     []
   );
   const { data, error, isLoading } = useSanityData({

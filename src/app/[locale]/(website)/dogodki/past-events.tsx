@@ -9,22 +9,23 @@ import { InlineError } from "@/src/app/[locale]/components/inline-error";
 import Skeleton from "@/src/app/[locale]/components/skeleton";
 import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import { useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const GET_PAST_EVENTS_QUERY = `*[
-  _type == "event" && eventTime <= $today
+  _type == "event" && language == $language && eventTime <= $today
 ] | order(eventTime desc) {
 title,
 description,
 eventImage,
-slug,
 eventTime,
 _id,
 }`;
 
 function PastEventsContent() {
+  const locale = useLocale();
+  const t = useTranslations("Events");
   const params = useMemo(
-    () => ({ today: new Date().toISOString().split("T")[0] }),
+    () => ({ today: new Date().toISOString().split("T")[0], language: locale }),
     []
   );
   const { data, error, isLoading } = useSanityData({
@@ -47,7 +48,7 @@ function PastEventsContent() {
   const events = (data || []) as Event[];
 
   if (!events.length) {
-    return <Paragraph>Na žalost ne najdemo nobenih dogodkov.</Paragraph>;
+    return <Paragraph>{t("no_events_found")}</Paragraph>;
   }
 
   return events.map((event) => (
