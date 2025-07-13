@@ -10,7 +10,7 @@ import { InlineError } from "@/src/app/[locale]/components/inline-error";
 import Skeleton from "@/src/app/[locale]/components/skeleton";
 import { useLocale, useTranslations } from "next-intl";
 
-const PINNED_POSTS_QUERY = `*[_type == "post" && pinned] {
+const PINNED_POSTS_QUERY = `*[_type == "post" && language == $language && pinned] {
   title,
   slug,
   mainImage,

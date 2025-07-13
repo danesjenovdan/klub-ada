@@ -14,7 +14,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 const getBlogQuery = (category: string | null) => {
   const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";
-  return `*[_type == "post" ${
+  return `*[_type == "post" && language == $language ${
     category ? optionalCategoryFilter : ""
   }] | order(pinned asc) {
 title,
