@@ -16,6 +16,12 @@ export const teamMemberType = defineType({
       type: "string",
     }),
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
+    defineField({
       name: "image",
       type: "image",
       options: {

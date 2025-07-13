@@ -7,11 +7,11 @@ import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
 import TeamMemberComponent from "@/src/app/[locale]/components/team-member-component";
 import { TeamMember } from "@/src/app/utils/interface";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { Suspense } from "react";
 
-const TEAM_MEMBERS_QUERY = `*[_type == "teamMember"]| order(_createdAt){
+const TEAM_MEMBERS_QUERY = `*[_type == "teamMember" && language == $language]| order(_createdAt){
   image,
   name,
   role,
@@ -22,8 +22,10 @@ const TEAM_MEMBERS_QUERY = `*[_type == "teamMember"]| order(_createdAt){
 }`;
 
 function TeamMembers() {
+  const locale = useLocale();
   const { data, error } = useSanityData({
     query: TEAM_MEMBERS_QUERY,
+    params: { language: locale },
   });
 
   const teamMembers = (data || []) as TeamMember[];
