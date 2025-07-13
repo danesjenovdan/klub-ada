@@ -10,11 +10,11 @@ import { Filters } from "./filters";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { InlineError } from "@/src/app/[locale]/components/inline-error";
 import { LoadingAnimation } from "@/src/app/[locale]/components/loading-animation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const getBlogQuery = (category: string | null) => {
   const optionalCategoryFilter = "&& $category in (categories[]->slug.current)";
-  return `*[_type == "post" ${
+  return `*[_type == "post" && language == $language ${
     category ? optionalCategoryFilter : ""
   }] | order(pinned asc) {
 title,
@@ -23,16 +23,17 @@ mainImage,
 categories[]-> {
   _id,
   slug,
-  title,
+  'label': coalesce(title[$language], title.sl)
 }
 }`;
 };
 
 export default function Blogs() {
   const t = useTranslations("Blog");
+  const locale = useLocale();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const params = useMemo(
-    () => ({ category: selectedCategory }),
+    () => ({ category: selectedCategory, language: locale }),
     [selectedCategory]
   );
   const { data, error, isLoading } = useSanityData({

@@ -6,6 +6,7 @@
       "title": "Latest posts",
       "cta": "Read our blog"
     },
+    "all": "ALL",
     "cta_blog_post": "Read blog",
     "description": "Read our latest posts and news."
   },
@@ -98,6 +99,7 @@
   },
   "Events": {
     "title": "Events",
+    "no_events_found": "Unfortunately, no events were found.",
     "description": "Join us at informal gatherings where we discuss various career and technical topics, host experts from the industry, and socialize and exchange ideas in a relaxed atmosphere with snacks and drinks.",
     "title_next_event": "Join our next event",
     "coming_soon": "COMING SOON!",

@@ -5,7 +5,7 @@ export interface Post {
   };
   publishedAt: string;
   body: any;
-  categories: { title: string }[];
+  categories: { label: string }[];
   _id: string;
   mainImage: any;
 }

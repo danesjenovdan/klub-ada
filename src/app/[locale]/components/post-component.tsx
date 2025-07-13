@@ -46,11 +46,11 @@ const PostComponent = ({ post }: Props) => {
             <div className="flex gap-2">
               {post.categories.map((category) => (
                 <Paragraph
-                  key={category.title}
+                  key={category.label}
                   size="xs"
                   className="py-1 px-2 text-white font-semibold bg-pink border border-black rounded-lg"
                 >
-                  {category.title}
+                  {category.label}
                 </Paragraph>
               ))}
             </div>

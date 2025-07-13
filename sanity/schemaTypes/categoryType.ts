@@ -6,19 +6,31 @@ export const categoryType = defineType({
   title: "Category",
   type: "document",
   icon: TagIcon,
+  preview: {
+    select: {
+      title: "title",
+    },
+    prepare(selection) {
+      const { title } = selection;
+      return { title: title.sl };
+    },
+  },
   fields: [
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
+      type: "object",
+      fields: [
+        { name: "en", type: "string", validation: (Rule) => Rule.required() },
+        { name: "sl", type: "string", validation: (Rule) => Rule.required() },
+      ],
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "title.sl",
       },
       validation: (Rule) => Rule.required(),
     }),

@@ -6,6 +6,7 @@
       "title": "Najnovejše objave",
       "cta": "Preberi naš blog"
     },
+    "all": "VSE",
     "cta_blog_post": "Preberi blog",
     "description": "Preberite naše najnovejše objave in novice."
   },
@@ -98,6 +99,7 @@
   },
   "Events": {
     "title": "Dogodki",
+    "no_events_found": "Na žalost ne najdemo nobenih dogodkov.",
     "description": "Pridruži se nam na neformalnih druženjih, kjer obravnavamo različne karierne in tehnične teme, gostimo strokovnjakinje in strokovnjake iz industrije ter se družimo in izmenjujemo ideje v sproščenem okolju ob prigrizkih in pijači.",
     "title_next_event": "Pridi na naš naslednji dogodek",
     "coming_soon": "COMING SOON!",

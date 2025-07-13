@@ -9,15 +9,17 @@ import imageLoader from "@/src/app/utils/image-loader";
 import { LinkButton } from "@/src/app/[locale]/components/link-button";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import Skeleton from "@/src/app/[locale]/components/skeleton";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const ACTIVITIES_QUERY = `*[
-  _type == "activity"] | order(_updatedAt desc)`;
+  _type == "activity" && language == $language] | order(_updatedAt desc)`;
 
 export function Aktivnosti() {
   const t = useTranslations();
+  const locale = useLocale();
   const { data, error, isLoading } = useSanityData({
     query: ACTIVITIES_QUERY,
+    params: { language: locale },
   });
 
   const activities = (data || []) as SanityDocument[];

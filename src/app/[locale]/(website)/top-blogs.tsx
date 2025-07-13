@@ -8,23 +8,25 @@ import { Post } from "@/src/app/utils/interface";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { InlineError } from "@/src/app/[locale]/components/inline-error";
 import Skeleton from "@/src/app/[locale]/components/skeleton";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
-const PINNED_POSTS_QUERY = `*[_type == "post" && pinned] {
+const PINNED_POSTS_QUERY = `*[_type == "post" && language == $language && pinned] {
   title,
   slug,
   mainImage,
   categories[]-> {
     _id,
     slug,
-    title,
+    'label': coalesce(title[$language], title.sl)
   }
 }`;
 
 export function TopBlogs() {
   const t = useTranslations("Blog");
+  const locale = useLocale();
   const { data, error, isLoading } = useSanityData({
     query: PINNED_POSTS_QUERY,
+    params: { language: locale },
   });
 
   const pinnedPosts = (data || []) as Post[];

@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { LoadingAnimation } from "@/src/app/[locale]/components/loading-animation";
 import { InlineError } from "@/src/app/[locale]/components/inline-error";
+import { useLocale } from "next-intl";
 
 const GET_BLOG_POST = `*[_type == "post" && slug.current == $slug][0] {
   title,
@@ -25,14 +26,15 @@ const GET_BLOG_POST = `*[_type == "post" && slug.current == $slug][0] {
   categories[]-> {
     _id,
     slug,
-    title,
+    'label': coalesce(title[$language], title.sl)
   }
 }`;
 
 // Blog Article Component
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
-  const params = useMemo(() => ({ slug }), []);
+  const locale = useLocale();
+  const params = useMemo(() => ({ slug, language: locale }), []);
   const { data, error, isLoading } = useSanityData({
     query: GET_BLOG_POST,
     params,
@@ -171,9 +173,9 @@ const BlogArticle = () => {
                 <Paragraph
                   size="xs"
                   className="py-1 px-2 text-white font-semibold bg-pink border border-black rounded-lg"
-                  key={category.title}
+                  key={category.label}
                 >
-                  {category.title}
+                  {category.label}
                 </Paragraph>
               ))}
             </div>

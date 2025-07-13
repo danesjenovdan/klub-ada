@@ -2,9 +2,10 @@
 
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import clsx from "clsx";
+import { useLocale, useTranslations } from "next-intl";
 
 const FILTERS_QUERY = `*[_type == "category"] {
-  title,
+  'label': coalesce(title[$language], title.sl),
   slug
 }`;
 
@@ -29,7 +30,7 @@ function Filter({ isSelected, label, handleSelectFilter }: FilterProps) {
 }
 
 type CategoryType = {
-  title: string;
+  label: string;
   _id: string;
   slug: {
     current: string;
@@ -43,23 +44,28 @@ export function Filters({
   selectedCategory,
   setSelectedCategoryAction,
 }: FiltersProps) {
+  const locale = useLocale();
+  const t = useTranslations("Blog");
   const { data } = useSanityData({
     query: FILTERS_QUERY,
+    params: { language: locale },
   });
 
+  console.log(locale);
   const categories = (data || []) as CategoryType[];
 
+  console.log("Categories:", categories);
   return (
     <div className="flex flex-wrap gap-2 justify-center md:justify-start">
       <Filter
-        label="VSE"
+        label={t("all")}
         isSelected={selectedCategory === null}
         handleSelectFilter={() => setSelectedCategoryAction(null)}
       />
-      {categories.map((category) => (
+      {categories.map((category, index) => (
         <Filter
-          key={category.title}
-          label={category.title}
+          key={index}
+          label={category.label}
           isSelected={selectedCategory === category.slug.current}
           handleSelectFilter={() =>
             setSelectedCategoryAction(category.slug.current)
