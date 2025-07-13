@@ -14,11 +14,10 @@ export const eventType = defineType({
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
-      name: "slug",
-      type: "slug",
-      options: {
-        source: "title",
-      },
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
     }),
     defineField({
       name: "description",
@@ -51,10 +50,6 @@ export const eventType = defineType({
     defineField({
       name: "applyLink",
       title: "Apply Link",
-      type: "string",
-    }),
-    defineField({
-      name: "blog",
       type: "string",
     }),
     defineField({
