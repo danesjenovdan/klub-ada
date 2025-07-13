@@ -12,6 +12,12 @@ export const activityType = defineType({
       type: "string",
     }),
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
+    defineField({
       name: "description",
       type: "string",
     }),
