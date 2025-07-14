@@ -117,7 +117,9 @@
     "error_fallback": "Something went wrong. Please try again later.",
     "instagram": "Instagram",
     "linkedin": "LinkedIn",
-    "discord": "Discord"
+    "discord": "Discord",
+    "english": "English",
+    "slovene": "Slovene"
   },
   "Footer": {
     "title": "A community of women in technology",
@@ -126,6 +128,7 @@
     "description_discord": "A safe space for exchanging ideas, events, job opportunities and opportunities for personal and career development.",
     "cta_newsletter": "Subscribe to newsletter",
     "cta_events": "Join an event",
+    "change_language": "Change language",
     "newsletter": {
       "description": "By subscribing to our newsletter, you’ll receive invitations to upcoming events and event summaries, useful tips, links to other helpful resources like hackathons, career events, job opportunities, and more.",
       "email_placeholder": "Enter your email address",
