@@ -18,7 +18,12 @@ export function LanguageDialog() {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button variant="secondary" size="sm" iconRight={IconLanguage}>
+        <Button
+          variant="secondary"
+          size="sm"
+          iconRight={IconLanguage}
+          className="self-start"
+        >
           {locale === "en" ? t("Common.english") : t("Common.slovene")}
         </Button>
       </Dialog.Trigger>
