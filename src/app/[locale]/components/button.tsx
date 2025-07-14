@@ -1,6 +1,7 @@
 import { ElementType, forwardRef } from "react";
 import { ForwardRefComponent, PropsOf } from "../../utils/polymorphic";
 import { tv } from "tailwind-variants";
+import clsx from "clsx";
 
 export const baseButton = tv({
   base: "inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium text-center whitespace-nowrap outline-none",
@@ -61,6 +62,7 @@ export const Button = forwardRef(
       isDisabled = false,
       disabled: hasHtmlDisabledProp,
       iconRight: IconRight,
+      className,
       ...rest
     },
     forwardedRef
@@ -72,11 +74,14 @@ export const Button = forwardRef(
         ref={forwardedRef}
         type={type}
         disabled={shouldBeDisabled}
-        className={baseButton({
-          size,
-          variant,
-          disabled: shouldBeDisabled,
-        })}
+        className={clsx(
+          baseButton({
+            size,
+            variant,
+            disabled: shouldBeDisabled,
+          }),
+          className
+        )}
         {...rest}
       >
         {children}
