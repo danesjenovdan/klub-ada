@@ -29,7 +29,7 @@ export function LanguageDialog() {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed bg-black opacity-50 inset-0 z-30" />
-        <Dialog.Content className="fixed max-w-full flex flex-col z-30 p-8 pr-12 bg-white border border-black rounded-xl top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
+        <Dialog.Content className="border-b-0 md:border-b-1 fixed w-full md:w-auto rounded-t-xl left-0 bottom-0 max-w-full flex flex-col z-30 p-8 pr-12 bg-white border border-black md:rounded-xl md:left-[50%] md:bottom-[50%] md:-translate-x-1/2 md:translate-y-1/2">
           <Dialog.Close className="absolute top-3 right-3">
             <XMarkIcon className="w-6 h-6" />
           </Dialog.Close>
