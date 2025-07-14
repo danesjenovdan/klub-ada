@@ -2,9 +2,9 @@ import { Heading } from "@/src/app/[locale]/components/heading";
 import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
 import ReviewComponent from "@/src/app/[locale]/components/review-component";
 import { LinkButton } from "@/src/app/[locale]/components/link-button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
-const reviews = [
+const reviewsSl = [
   {
     id: 1,
     paragraph:
@@ -60,8 +60,68 @@ const reviews = [
     href: "https://www.linkedin.com/in/tamara-demir/",
   },
 ];
+
+const reviewsEn = [
+  {
+    id: 1,
+    paragraph:
+      '"First, I met Simona, the co-founder of Klub Ada. She was a finalist for Engineer of the Year 2023 and left quite an impression on me as a young, charming, yet extremely ambitious engineer. Since I myself am also part of the engineering circle, where we have a Women in STEM team at Danfoss, Simona and I got in touch and agreed to collaborate on a panel discussion titled “Code for Success: A Career Planning Workshop in Technology!”',
+    emphasis:
+      "Klub Ada inspires both the young and the not-so-young. They are an enthusiastic team with lots of ideas, which they easily turn into successful events and projects throughout the year. They do things with heart. That's why I support them and wish them continued success in the future!",
+    image: "/assets/tamara-stumperger.webp",
+    alt: "Tamara Stumperger profile picture",
+    title:
+      "Tamara Štumperger, Supplier Quality System Senior Manager @ Danfoss",
+    href: "https://www.linkedin.com/in/tamarastumperger/",
+  },
+  {
+    id: 2,
+    paragraph:
+      '"So far I have only attended one event, but it impressed me. The event was excellently organized, with relevant topics and amazing guest speakers. I met women with similar experiences, which gave me motivation to continue learning and working. I’m happy that such a community exists here, where you can find support and advice for your career path.',
+    emphasis:
+      'I also recommend joining the Discord community for even more connections and exchange of experiences."',
+    image: "/assets/marusa-kerpan.webp",
+    alt: "Marusa Kerpan profile picture",
+    title: "Maruša Kerpan, Automation Engineer @ Domel",
+    href: "https://www.linkedin.com/in/maru%C5%A1a-kerpan-1196782aa/",
+  },
+  {
+    id: 3,
+    paragraph: '"I have been attending Klub Ada events from the beginning.',
+    emphasis:
+      'Attending the workshops gave me the opportunity to connect with other women in technology, gain new knowledge, and above all, the confidence to continue my career."',
+    image: "/assets/jana-vovk.webp",
+    alt: "Jana Vovk profile picture",
+    title: "Jana Vovk, Student @ FRI",
+    href: "https://www.fri.uni-lj.si/sl/novice/novica/uspeh-studentov-fri-na-vseslovenskem-hackathonu",
+  },
+  {
+    id: 4,
+    paragraph:
+      '"A few months ago, I needed advice on finding my first job, and honestly, hats off for all the help, support, and guidance I received. The events themselves are also a great way to spend time in the company of ambitious and positively minded women in technology. The Klub Ada Discord community is a real treasure trove for anyone looking for motivation, a job, education, or just a good book.',
+    emphasis: 'My experience with Klub Ada is 100% positive!"',
+    image: "/assets/nika-likar.webp",
+    alt: "Nika Likar profile picture",
+    title: "Nika Likar, UX Designer @ Omnia8",
+    href: "https://www.linkedin.com/in/nika-likar-6b8b9a217/",
+  },
+  {
+    id: 5,
+    paragraph:
+      '"With the help of Klub Ada, I learned about many interesting events that allowed me to socialize and make new friendships with amazing women from the IT world. Most recently, we even met in Berlin and spent a wonderful day together at a conference.',
+    emphasis:
+      'It’s truly a wonderful feeling to be part of an association where like-minded women support, understand, and encourage you."',
+    image: "/assets/tamara-demir.webp",
+    alt: "Tamara Demir profile picture",
+    title: "Tamara Demir, Web Developer @ ENKI",
+    href: "https://www.linkedin.com/in/tamara-demir/",
+  },
+];
+
 export function Reviews() {
   const t = useTranslations("Reviews");
+  const locale = useLocale();
+  const reviews = locale === "en" ? reviewsEn : reviewsSl;
 
   return (
     <PageWrapper bgColor="bg-blue">
