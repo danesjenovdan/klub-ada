@@ -9,7 +9,8 @@ import { Link } from "./link";
 import { Card } from "./card";
 import FooterNewsletter from "./footer-newsletter";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { LanguageDialog } from "./language-dialog";
 
 export function Footer() {
   const t = useTranslations();
@@ -86,6 +87,7 @@ export function Footer() {
             />
           </a>
           <Paragraph size="sm">{"info@klub-ada.si"}</Paragraph>
+          <LanguageDialog />
         </div>
         <div className="flex flex-col md:flex-row gap-10 lg:gap-24">
           <div className="flex flex-col gap-2">

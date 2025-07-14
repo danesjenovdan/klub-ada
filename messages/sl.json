@@ -117,7 +117,9 @@
     "error_fallback": "Nekaj je šlo narobe. Prosim poskusi kasneje.",
     "instagram": "Instagram",
     "linkedin": "LinkedIn",
-    "discord": "Discord"
+    "discord": "Discord",
+    "english": "Angleščina",
+    "slovene": "Slovenščina"
   },
   "Footer": {
     "title": "Skupnost žensk v tehnologiji",
@@ -126,6 +128,7 @@
     "description_discord": "Varen prostor za izmenjavo idej, dogodkov, zaposlitev in priložnosti za osebni in karierni razvoj.",
     "cta_newsletter": "Prijavi se na novičnik",
     "cta_events": "Pridi na dogodek",
+    "change_language": "Spremeni jezik",
     "newsletter": {
       "description": "S prijavo na naš novičnik boš prejela vabila na prihajajoče dogodke in povzetke dogodkov, uporabne nasvete, povezave do drugih koristnih virov, kot so hekatoni, karierni dogodki, zaposlitvene priložnosti in še več.",
       "email_placeholder": "Vpiši svoj e-naslov",
