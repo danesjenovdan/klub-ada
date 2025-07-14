@@ -5,10 +5,14 @@ import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import { LinkButton } from "@/src/app/[locale]/components/link-button";
 import { Card } from "@/src/app/[locale]/components/card";
 import discordImage from "../../../../public/assets/discord-image.webp";
-import { useTranslations } from "next-intl";
+import discordImageEn from "../../../../public/assets/discord-image-en.webp";
+import { useLocale, useTranslations } from "next-intl";
 
 export function Discord() {
   const t = useTranslations("Discord");
+  const locale = useLocale();
+
+  const discordImageSrc = locale === "en" ? discordImageEn : discordImage;
   return (
     <PageWrapper>
       <>
@@ -16,7 +20,7 @@ export function Discord() {
           <div className="flex flex-col-reverse lg:flex-row items-left lg:items-center justify-start gap-5 md:gap-10">
             <div className="h-full lg:basis-3/5">
               <Image
-                src={discordImage}
+                src={discordImageSrc}
                 width={800}
                 height={800}
                 alt="Discord Image"
