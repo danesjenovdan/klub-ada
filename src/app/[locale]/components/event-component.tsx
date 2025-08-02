@@ -25,7 +25,7 @@ export default function EventComponent({ event }: Props) {
   const t = useTranslations("Blog");
   const imageSrc = imageLoader(event.eventImage);
   const formattedDate = formatDate(event.eventTime);
-  const params = useMemo(() => ({ eventId: event._id }), []);
+  const params = useMemo(() => ({ eventId: event._id }), [event._id]);
   const { data } = useSanityData({
     query: EVENT_BLOG_QUERY,
     params,
