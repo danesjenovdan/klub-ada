@@ -34,7 +34,7 @@ const GET_BLOG_POST = `*[_type == "post" && slug.current == $slug][0] {
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
   const locale = useLocale();
-  const params = useMemo(() => ({ slug, language: locale }), []);
+  const params = useMemo(() => ({ slug, language: locale }), [slug, locale]);
   const { data, error, isLoading } = useSanityData({
     query: GET_BLOG_POST,
     params,

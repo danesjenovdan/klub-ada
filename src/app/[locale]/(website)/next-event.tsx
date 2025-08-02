@@ -33,7 +33,7 @@ function NextEventContent() {
   const locale = useLocale();
   const params = useMemo(
     () => ({ today: new Date().toISOString().split("T")[0], language: locale }),
-    []
+    [locale]
   );
   const { data, error, isLoading } = useSanityData({
     query: NEXT_EVENT_QUERY,

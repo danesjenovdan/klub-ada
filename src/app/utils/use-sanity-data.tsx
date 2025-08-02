@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 type SanityError = {
   description?: string;
@@ -13,15 +13,17 @@ export function useSanityData({ query, params }: UseSanityDataParams) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const memoizedParams = useMemo(() => params, [JSON.stringify(params)]);
+
   useEffect(() => {
     client
-      .fetch(query, { ...params })
+      .fetch(query, { ...memoizedParams })
       .then((data) => {
         setData(data);
       })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
-  }, [params]);
+  }, [query, memoizedParams]);
 
   return {
     data,
