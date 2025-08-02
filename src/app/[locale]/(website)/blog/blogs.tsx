@@ -34,7 +34,7 @@ export default function Blogs() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const params = useMemo(
     () => ({ category: selectedCategory, language: locale }),
-    [selectedCategory]
+    [selectedCategory, locale]
   );
   const { data, error, isLoading } = useSanityData({
     query: getBlogQuery(selectedCategory),
