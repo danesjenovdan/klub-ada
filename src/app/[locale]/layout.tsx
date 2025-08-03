@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "Klub Ada",
     images: [
       {
-        url: "/assets/og-image.png",
+        url: "/assets/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Klub Ada - Women in Tech Community",
