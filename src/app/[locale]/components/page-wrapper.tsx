@@ -2,7 +2,13 @@ import clsx from "clsx";
 
 type PageWrapperProps = {
   children: string | JSX.Element | JSX.Element[];
-  bgColor?: "bg-white" | "bg-beige" | "bg-red" | "bg-blue" | "bg-pink";
+  bgColor?:
+    | "bg-white"
+    | "bg-beige"
+    | "bg-red"
+    | "bg-blue"
+    | "bg-pink"
+    | "bg-black";
   hasNoTopPadding?: boolean;
   hasNoBottomPadding?: boolean;
 };
