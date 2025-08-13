@@ -154,15 +154,15 @@
     "location": "Location: Ljubljana, TBD",
     "main_cta": "Save the date",
     "numbers": {
-      "title": "AdaHack 2023 in numbers",
-      "participants": "{{count}} participants",
-      "sponsors": "{{count}} sponsors",
-      "ratios": "{{count}} women:men"
+      "title": "AdaHack 2023 <numbers>in numbers</numbers>",
+      "participants": "participants",
+      "sponsors": "sponsors",
+      "ratios": "women:men"
     },
     "timeline": "Timeline",
     "prize_money": "Prize money",
     "winner": "Winner",
-    "challenge": "Challenge #{{number}}",
+    "challenge": "Challenge #{number}",
     "theme_tbd": "Theme: TBD",
     "faq": {
       "title": "Frequently Asked Questions"

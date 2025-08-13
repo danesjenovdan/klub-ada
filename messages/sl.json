@@ -154,15 +154,15 @@
     "location": "Lokacija: Ljubljana, TBD",
     "main_cta": "Naroči se na obvestila",
     "numbers": {
-      "title": "AdaHack 2023 v številkah",
-      "participants": "{{count}} udeležencev",
-      "sponsors": "{{count}} sponzorjev",
-      "ratios": "{{count}} žensk:moških"
+      "title": "AdaHack 2023 <numbers>v številkah</numbers>",
+      "participants": "udeležencev",
+      "sponsors": "sponzorjev",
+      "ratios": "žensk:moških"
     },
     "timeline": "Časovnica",
     "prize_money": "Denarna nagrada",
     "winner": "1. mesto",
-    "challenge": "Izziv #{{number}}",
+    "challenge": "Izziv #{number}",
     "theme_tbd": "Tema: TBD",
     "faq": {
       "title": "Pogosta vprašanja"

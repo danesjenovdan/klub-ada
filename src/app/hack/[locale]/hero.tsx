@@ -13,8 +13,9 @@ export function Hero() {
   const formattedTime = `${formatDayOfDate(startDate)} - ${formatDate(endDate)}`;
 
   const t = useTranslations("Hackathon");
+
   return (
-    <div className="box-border max-w-full relative">
+    <section className="box-border bg-[#000] max-w-full relative">
       <UnicornScene
         projectId="37S3ad8JDraTZQd2BVQn"
         width="100%"
@@ -36,6 +37,6 @@ export function Hero() {
           {t("main_cta")}
         </Button>
       </div>
-    </div>
+    </section>
   );
 }
