@@ -61,6 +61,8 @@ const config: Config = {
       },
       boxShadow: {
         button: "-4px 4px var(--color-black)",
+        hackButton: "0px 0px 24px rgba(255, 87, 87, 0.32)",
+        hackButtonSecondary: "0px 0px 24px rgba(255, 255, 255, 0.32)",
         yellow: "-7px 7px var(--color-yellow)",
         blue: "-7px 7px var(--color-blue)",
         pink: "-7px 7px var(--color-pink)",
