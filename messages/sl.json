@@ -147,5 +147,45 @@
     "events_all": "Vsi dogodki",
     "blog": "Blog",
     "partners": "Partnerstva"
+  },
+  "Hackathon": {
+    "title": "AdaHack",
+    "slogan": "Code for change",
+    "location": "Lokacija: Ljubljana, TBD",
+    "main_cta": "Naroči se na obvestila",
+    "numbers": {
+      "title": "AdaHack 2023 v številkah",
+      "participants": "{{count}} udeležencev",
+      "sponsors": "{{count}} sponzorjev",
+      "ratios": "{{count}} žensk:moških"
+    },
+    "timeline": "Časovnica",
+    "prize_money": "Denarna nagrada",
+    "winner": "1. mesto",
+    "challenge": "Izziv #{{number}}",
+    "theme_tbd": "Tema: TBD",
+    "faq": {
+      "title": "Pogosta vprašanja"
+    },
+    "sponsors": {
+      "title": "Naši sponzorji",
+      "gold": "Zlati sponzorji",
+      "silver": "Srebrni sponzorji",
+      "bronze": "Bronasti sponzorji",
+      "media": "Medijski partnerji",
+      "cta": "Postani sponzor"
+    },
+    "call_to_action": {
+      "title": "Pridruži se nam",
+      "description": "Spektakularno bo!"
+    },
+    "footer": {
+      "ada": "Klub Ada",
+      "homepage": "Domov",
+      "join_us": "Pridruži se nam",
+      "discord": "Discord",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    }
   }
 }

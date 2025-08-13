@@ -147,5 +147,45 @@
     "events_all": "All events",
     "blog": "Blog",
     "partners": "Partnerships"
+  },
+  "Hackathon": {
+    "title": "AdaHack",
+    "slogan": "Code for change",
+    "location": "Location: Ljubljana, TBD",
+    "main_cta": "Save the date",
+    "numbers": {
+      "title": "AdaHack 2023 in numbers",
+      "participants": "{{count}} participants",
+      "sponsors": "{{count}} sponsors",
+      "ratios": "{{count}} women:men"
+    },
+    "timeline": "Timeline",
+    "prize_money": "Prize money",
+    "winner": "Winner",
+    "challenge": "Challenge #{{number}}",
+    "theme_tbd": "Theme: TBD",
+    "faq": {
+      "title": "Frequently Asked Questions"
+    },
+    "sponsors": {
+      "title": "Our sponsors",
+      "gold": "Gold sponsors",
+      "silver": "Silver sponsors",
+      "bronze": "Bronze sponsors",
+      "media": "Media partners",
+      "cta": "Become a sponsor"
+    },
+    "call_to_action": {
+      "title": "Join us",
+      "description": "It will be spectaculat"
+    },
+    "footer": {
+      "ada": "Klub Ada",
+      "homepage": "Homepage",
+      "join_us": "Join us",
+      "discord": "Discord",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    }
   }
 }
