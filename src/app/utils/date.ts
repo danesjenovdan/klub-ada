@@ -12,5 +12,5 @@ export const formatDayOfDate = (date: string) => {
 export const formatTime = (dateTime: string) => {
   const hour = format(dateTime, "H", { locale: sl });
   const minutes = format(dateTime, "mm", { locale: sl });
-  return `ob ${hour}.${minutes}`;
+  return `${hour}.${minutes}`;
 };

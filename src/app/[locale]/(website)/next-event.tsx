@@ -25,7 +25,7 @@ interface EventData {
 }
 
 const NEXT_EVENT_QUERY = `*[
-  _type == "event" && language == $language && eventTime >= $today
+  _type == "event" && language == $language && eventTime <= $today
 ] | order(eventTime) [0] {title, description, eventImage, location, applyLink, eventTime}`;
 
 function NextEventContent() {
@@ -68,7 +68,7 @@ function NextEventContent() {
   const imageSrc = imageLoader(nextEvent.eventImage);
   const date = formatDate(nextEvent.eventTime);
   const time = formatTime(nextEvent.eventTime);
-  const formattedDateAndTime = [date, time].join(" ");
+  const formattedDateAndTime = [date, time].join(` ${t("Events.at")} `);
 
   return (
     <div className="w-full md:flex gap-8 md:items-center">

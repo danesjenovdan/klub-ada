@@ -106,7 +106,8 @@
     "title_past_events": "Pretekli dogodki",
     "all_events": "Vsi dogodki",
     "cta": "Prijavi se",
-    "cta_next_event": "Naslednji dogodek"
+    "cta_next_event": "Naslednji dogodek",
+    "at": "ob"
   },
   "NotFound": {
     "description": "O ne! Stran ni bila najdena.",
@@ -160,6 +161,8 @@
       "ratios": "žensk:moških"
     },
     "timeline": "Časovnica",
+    "saturday": "Sobota",
+    "sunday": "Nedelja",
     "prize_money": "Denarna nagrada",
     "winner": "1. mesto",
     "challenge": "Izziv #{number}",

@@ -11,7 +11,7 @@ export function Stats() {
 
   return (
     <PageWrapper>
-      <div className="flex flex-col gap-8 items-center w-full py-20">
+      <div className="flex flex-col gap-8 items-center w-full py-4 md:py-5 lg:py-10">
         <Heading
           className="font-paragraph"
           color="white"

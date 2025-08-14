@@ -106,7 +106,8 @@
     "title_past_events": "Past events",
     "all_events": "All events",
     "cta": "Sign up",
-    "cta_next_event": "Next event"
+    "cta_next_event": "Next event",
+    "at": "at"
   },
   "NotFound": {
     "description": "Oh no! Page not found.",
@@ -160,6 +161,8 @@
       "ratios": "women:men"
     },
     "timeline": "Timeline",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
     "prize_money": "Prize money",
     "winner": "Winner",
     "challenge": "Challenge #{number}",
