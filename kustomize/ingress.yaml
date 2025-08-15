@@ -9,10 +9,21 @@ spec:
   tls:
     - hosts:
         - klub-ada.lb.djnd.si
+        - hack.klub-ada.si
         - klub-ada.si
       secretName: klub-ada-tls
   rules:
     - host: klub-ada.lb.djnd.si
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: klub-ada
+                port:
+                  number: 3000
+    - host: hack.klub-ada.si
       http:
         paths:
           - path: /
