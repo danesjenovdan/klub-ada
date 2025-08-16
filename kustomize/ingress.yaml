@@ -9,9 +9,20 @@ spec:
   tls:
     - hosts:
         - klub-ada-staging.lb.djnd.si
+        - hack.klub-ada-staging.lb.djnd.si
       secretName: klub-ada-staging-tls
   rules:
     - host: klub-ada-staging.lb.djnd.si
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: klub-ada-staging
+                port:
+                  number: 3000
+    - host: hack.klub-ada-staging.lb.djnd.si
       http:
         paths:
           - path: /
