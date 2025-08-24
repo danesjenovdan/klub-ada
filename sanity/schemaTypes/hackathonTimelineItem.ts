@@ -25,6 +25,7 @@ export const hackathonTimelineItem = defineType({
         dateFormat: "YYYY-MM-DD",
         timeFormat: "HH:mm",
         timeStep: 15,
+        // displayTimeZone: "Europe/Berlin",
       },
     }),
   ],
