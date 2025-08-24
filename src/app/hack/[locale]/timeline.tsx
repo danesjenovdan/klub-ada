@@ -85,7 +85,7 @@ export function Timeline() {
         >
           {t("timeline")}
         </Heading>
-        <div className="flex flex-wrap max-w-[900px] gap-6 w-full">
+        <div className="flex flex-wrap max-w-[1000px] gap-6 w-full">
           <div className="shrink-0 grow min-w-[300px] border border-red shadow-shineRed rounded-lg p-8 flex flex-col gap-4">
             <Heading size="sm" color="white">
               {t("saturday")}

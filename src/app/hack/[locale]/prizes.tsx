@@ -50,7 +50,6 @@ export function PrizeItem({
 
 export function Prizes() {
   const t = useTranslations("Hackathon");
-  const locale = useLocale();
 
   const challenges = [
     t("challenges.1"),
@@ -70,7 +69,7 @@ export function Prizes() {
         >
           {t("prizes")}
         </Heading>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 max-w-[1000px] w-full">
           <div className="w-full">
             <PrizeItem amount={2000} title={t("winner")} isMain />
           </div>
