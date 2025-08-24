@@ -163,10 +163,15 @@
     "timeline": "Časovnica",
     "saturday": "Sobota",
     "sunday": "Nedelja",
-    "prize_money": "Denarna nagrada",
+    "prizes": "Nagrade",
+    "challenges": {
+      "1": "Tema: TBD",
+      "2": "Tema: TBD",
+      "3": "Tema: TBD",
+      "4": "Tema: TBD"
+    },
     "winner": "1. mesto",
     "challenge": "Izziv #{number}",
-    "theme_tbd": "Tema: TBD",
     "faq": {
       "title": "Pogosta vprašanja"
     },

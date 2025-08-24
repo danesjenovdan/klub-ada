@@ -163,10 +163,15 @@
     "timeline": "Timeline",
     "saturday": "Saturday",
     "sunday": "Sunday",
-    "prize_money": "Prize money",
-    "winner": "Winner",
+    "prizes": "Prizes",
+    "challenges": {
+      "1": "Topic: TBD",
+      "2": "Topic: TBD",
+      "3": "Topic: TBD",
+      "4": "Topic: TBD"
+    },
+    "winner": "First place",
     "challenge": "Challenge #{number}",
-    "theme_tbd": "Theme: TBD",
     "faq": {
       "title": "Frequently Asked Questions"
     },
