@@ -3,6 +3,7 @@ import { Hero } from "./hero";
 import { Stats } from "./stats";
 import { Timeline } from "./timeline";
 import { Prizes } from "./prizes";
+import { Faq } from "./faq";
 
 export default function Page() {
   const t = useTranslations("Activities");
@@ -12,6 +13,7 @@ export default function Page() {
       <Stats />
       <Timeline />
       <Prizes />
+      <Faq />
     </>
   );
 }

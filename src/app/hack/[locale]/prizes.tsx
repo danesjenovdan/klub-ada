@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { PageWrapper } from "./components/page-wrapper";
 import { Heading } from "../../[locale]/components/heading";
 import { Paragraph } from "../../[locale]/components/paragraph";
