@@ -27,7 +27,7 @@ function FaqItem({ question, answer, isOpen, onChangeOpen }: FaqItemProps) {
   return (
     <div
       className={clsx("border rounded-md p-6 cursor-pointer", {
-        "border-red": isOpen,
+        "border-red shadow-shineStrongRed": isOpen,
         "border-gray500": !isOpen,
       })}
       onClick={onChangeOpen}
@@ -70,7 +70,6 @@ function FaqItem({ question, answer, isOpen, onChangeOpen }: FaqItemProps) {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            // className="pt-2"
             initial="collapsed"
             animate="open"
             exit="collapsed"

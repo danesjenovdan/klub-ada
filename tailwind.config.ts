@@ -62,6 +62,7 @@ const config: Config = {
       boxShadow: {
         button: "-4px 4px var(--color-black)",
         shineRed: "0px 0px 24px rgba(255, 87, 87, 0.32)",
+        shineStrongRed: "0px 0px 50px rgba(255, 87, 87, 0.40)",
         shineWhite: "0px 0px 24px rgba(255, 255, 255, 0.32)",
         yellow: "-7px 7px var(--color-yellow)",
         blue: "-7px 7px var(--color-blue)",
