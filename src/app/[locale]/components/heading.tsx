@@ -4,7 +4,7 @@ import { tv } from "tailwind-variants";
 import clsx from "clsx";
 
 const baseHeading = tv({
-  base: "font-heading m-0 break-words",
+  base: "font-heading m-0 break-words select-none",
   variants: {
     size: {
       lg: "text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight",

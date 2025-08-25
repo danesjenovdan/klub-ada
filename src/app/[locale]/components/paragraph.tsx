@@ -4,7 +4,7 @@ import { tv } from "tailwind-variants";
 import clsx from "clsx";
 
 const baseParagraph = tv({
-  base: "font-paragraph m-0 break-words text-wrap",
+  base: "font-paragraph m-0 break-words text-wrap select-none",
   variants: {
     size: {
       xs: "text-[10px] md:text-xs",

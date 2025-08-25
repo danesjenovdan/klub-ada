@@ -4,7 +4,7 @@ import { tv } from "tailwind-variants";
 import clsx from "clsx";
 
 export const baseButton = tv({
-  base: "inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium text-center whitespace-nowrap outline-none",
+  base: "inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium text-center whitespace-nowrap outline-none select-none",
   variants: {
     size: {
       sm: "text-sm h-8 py-1 px-4",
