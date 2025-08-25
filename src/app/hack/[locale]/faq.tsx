@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { PageWrapper } from "./components/page-wrapper";
 import { Heading } from "../../[locale]/components/heading";
@@ -25,30 +26,71 @@ type FaqItemProps = {
 function FaqItem({ question, answer, isOpen, onChangeOpen }: FaqItemProps) {
   return (
     <div
-      className={clsx(
-        "border rounded-md flex flex-col gap-2 p-6 cursor-pointer",
-        {
-          "border-red": isOpen,
-          "border-gray500": !isOpen,
-        }
-      )}
+      className={clsx("border rounded-md p-6 cursor-pointer", {
+        "border-red": isOpen,
+        "border-gray500": !isOpen,
+      })}
       onClick={onChangeOpen}
     >
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full pb-2">
         <Heading size="xs" color="white">
           {question}
         </Heading>
-        {isOpen ? (
-          <IconMinus size={24} className="text-red" />
-        ) : (
-          <IconPlus size={24} className="text-gray500" />
-        )}
+        <div className="relative w-6 h-6 flex items-center justify-center">
+          <motion.div
+            initial={false}
+            animate={{
+              opacity: isOpen ? 1 : 0,
+              scale: isOpen ? 1 : 0,
+            }}
+            transition={{ duration: 0.2 }}
+            className="absolute"
+          >
+            <IconMinus
+              className={isOpen ? "text-red" : "text-gray500"}
+              size={24}
+            />
+          </motion.div>
+          <motion.div
+            initial={false}
+            animate={{
+              opacity: isOpen ? 0 : 1,
+              scale: isOpen ? 0 : 1,
+            }}
+            transition={{ duration: 0.2 }}
+            className="absolute"
+          >
+            <IconPlus
+              className={isOpen ? "text-red" : "text-gray500"}
+              size={24}
+            />
+          </motion.div>
+        </div>
       </div>
-      {isOpen && (
-        <Paragraph size="lg" color="lightGray">
-          {answer}
-        </Paragraph>
-      )}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            // className="pt-2"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            variants={{
+              open: { opacity: 1, height: "auto" },
+              collapsed: { opacity: 0, height: 0 },
+            }}
+            transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+          >
+            <motion.div
+              variants={{ collapsed: { scale: 0.9 }, open: { scale: 1 } }}
+              transition={{ duration: 0.8 }}
+            >
+              <Paragraph size="lg" color="lightGray">
+                {answer}
+              </Paragraph>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
