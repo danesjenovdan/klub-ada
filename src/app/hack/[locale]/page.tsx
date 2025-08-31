@@ -5,6 +5,7 @@ import { Timeline } from "./timeline";
 import { Prizes } from "./prizes";
 import { Faq } from "./faq";
 import { Sponsors } from "./sponsors";
+import { CallToAction } from "./call-to-action";
 
 export default function Page() {
   const t = useTranslations("Activities");
@@ -16,6 +17,7 @@ export default function Page() {
       <Prizes />
       <Faq />
       <Sponsors />
+      <CallToAction />
     </>
   );
 }

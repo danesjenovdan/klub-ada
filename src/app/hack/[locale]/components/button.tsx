@@ -14,6 +14,7 @@ export const baseButton = tv({
     variant: {
       primary: "border border-red text-white text-start shadow-shineRed", // md:shadow-none transition-all duration-200 ease-in-out transform hover:shadow-hackButton",
       secondary: "border border-white text-white text-start shadow-shineWhite", // md:shadow-none transition-all duration-200 ease-in-out transform hover:shadow-hackButtonSecondary",
+      tertiary: "bg-black text-white text-start",
     },
     disabled: {
       true: "cursor-not-allowed bg-gray300 border border-gray700 text-white",
@@ -31,7 +32,7 @@ export interface ButtonOptions {
    * Sets the style variant of the button
    * @default 'primary'
    */
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "tertiary";
   /**
    * If `true` the button will be disabled
    * @default false
