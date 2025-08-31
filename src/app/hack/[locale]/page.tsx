@@ -6,6 +6,7 @@ import { Prizes } from "./prizes";
 import { Faq } from "./faq";
 import { Sponsors } from "./sponsors";
 import { CallToAction } from "./call-to-action";
+import { Footer } from "./footer";
 
 export default function Page() {
   const t = useTranslations("Activities");
@@ -18,6 +19,7 @@ export default function Page() {
       <Faq />
       <Sponsors />
       <CallToAction />
+      <Footer />
     </>
   );
 }
