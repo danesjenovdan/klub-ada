@@ -12,6 +12,8 @@ import outfit from "../../../../public/assets/hackathon/outfit.svg";
 import smartis from "../../../../public/assets/hackathon/smartis.svg";
 import clsx from "clsx";
 import Image from "next/image";
+import { Button } from "./components/button";
+import { IconArrowRight } from "@tabler/icons-react";
 
 type SponsorItemProps = {
   image: string;
@@ -152,6 +154,7 @@ export function Sponsors() {
             </div>
           </div>
         </div>
+        <Button iconRight={IconArrowRight}>{t("sponsors.cta")}</Button>
       </div>
     </PageWrapper>
   );
