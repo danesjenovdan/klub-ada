@@ -106,7 +106,8 @@
     "title_past_events": "Pretekli dogodki",
     "all_events": "Vsi dogodki",
     "cta": "Prijavi se",
-    "cta_next_event": "Naslednji dogodek"
+    "cta_next_event": "Naslednji dogodek",
+    "at": "ob"
   },
   "NotFound": {
     "description": "O ne! Stran ni bila najdena.",
@@ -147,5 +148,52 @@
     "events_all": "Vsi dogodki",
     "blog": "Blog",
     "partners": "Partnerstva"
+  },
+  "Hackathon": {
+    "title": "AdaHack",
+    "slogan": "Code for change",
+    "location": "Lokacija: Ljubljana, TBD",
+    "main_cta": "Naroči se na obvestila",
+    "numbers": {
+      "title": "AdaHack 2023 <numbers>v številkah</numbers>",
+      "participants": "udeležencev",
+      "sponsors": "sponzorjev",
+      "ratios": "žensk:moških"
+    },
+    "timeline": "Časovnica",
+    "saturday": "Sobota",
+    "sunday": "Nedelja",
+    "prizes": "Nagrade",
+    "challenges": {
+      "1": "Tema: TBD",
+      "2": "Tema: TBD",
+      "3": "Tema: TBD",
+      "4": "Tema: TBD"
+    },
+    "winner": "1. mesto",
+    "challenge": "Izziv #{number}",
+    "faq": {
+      "title": "Pogosta vprašanja"
+    },
+    "sponsors": {
+      "title": "Naši sponzorji",
+      "gold": "Zlati sponzorji",
+      "silver": "Srebrni sponzorji",
+      "bronze": "Bronasti sponzorji",
+      "media": "Medijski partnerji",
+      "cta": "Postani sponzor"
+    },
+    "call_to_action": {
+      "title": "Pridruži se nam v reševanju realističnih izzivov!",
+      "description": "Pridi in spoznaj ljudi s podobnimi interesi, poveži se s podjetji v središču tehnološke scene v Sloveniji in ustvari nekaj novega."
+    },
+    "footer": {
+      "ada": "Klub Ada",
+      "homepage": "Domov",
+      "join_us": "Pridruži se nam",
+      "discord": "Discord",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    }
   }
 }

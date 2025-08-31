@@ -54,7 +54,6 @@ export function Filters({
   console.log(locale);
   const categories = (data || []) as CategoryType[];
 
-  console.log("Categories:", categories);
   return (
     <div className="flex flex-wrap gap-2 justify-center md:justify-start">
       <Filter

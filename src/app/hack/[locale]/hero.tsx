@@ -1,59 +1,42 @@
-import Image from "next/image";
-import { Card } from "@/src/app/[locale]/components/card";
-import { Heading } from "@/src/app/[locale]/components/heading";
 import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
 import { Paragraph } from "@/src/app/[locale]/components/paragraph";
-import { CtaLink } from "@/src/app/[locale]/components/cta-link";
-import hero from "../../../../public/assets/hero.webp";
 import { useTranslations } from "next-intl";
+import { Button } from "./components/button";
+import { IconArrowRight } from "@tabler/icons-react";
+import { formatDate, formatDayOfDate } from "../../utils/date";
+import UnicornScene from "unicornstudio-react/next";
 
 export function Hero() {
-  const t = useTranslations("Hero");
+  const startDate = "2025-11-28";
+  const endDate = "2025-11-29";
+
+  const formattedTime = `${formatDayOfDate(startDate)} - ${formatDate(endDate)}`;
+
+  const t = useTranslations("Hackathon");
+
   return (
-    <PageWrapper bgColor="bg-black" hasNoTopPadding hasNoBottomPadding>
-      <div className="flex flex-col gap-4 md:flex-row pt-4">
-        <div className="flex flex-col gap-4 shrink-1 basis-1/2 lg:basis-2/5">
-          <Card bgColor="bg-white">
-            <div className="flex flex-col h-full justify-between gap-8">
-              <Heading size="lg">{t("title")}</Heading>
-              <Paragraph size="lg">{t("description")}</Paragraph>
-            </div>
-          </Card>
-          <div className="block md:hidden">
-            <Image
-              priority
-              src={hero}
-              width={768}
-              height={150}
-              alt="Hero picture"
-              className="rounded-2xl max-h-52 object-cover"
-              placeholder="blur"
-            />
-          </div>
-          <div className="flex flex-row gap-4">
-            <div className="basis-1/2">
-              <CtaLink label={t("cta_event")} color="red" href="/dogodki" />
-            </div>
-            <div className="basis-1/2">
-              <CtaLink
-                label={t("cta_partners")}
-                color="blue"
-                href="/partnerstvo"
-              />
-            </div>
-          </div>
+    <section className="box-border bg-[#000] max-w-full relative">
+      <UnicornScene
+        projectId="37S3ad8JDraTZQd2BVQn"
+        width="100%"
+        height="100vh"
+      />
+      <div className="absolute top-0 left-0 bottom-0 right-0 flex flex-col gap-8 px-5 md:px-20 py-10 md:py-20 items-center justify-center">
+        <div>
+          <h1 className="font-paragraph font-extrabold text-white text-7xl text-center tracking-tight">
+            {t("title")}
+          </h1>
+          <h1 className="font-paragraph font-extrabold text-white text-7xl text-center tracking-tight">
+            {t("slogan")}
+          </h1>
         </div>
-        <div className="hidden md:block grow basis-1/2 lg:basis-3/5">
-          <Image
-            src={hero}
-            width={700}
-            height={525}
-            alt={t("image_alt")}
-            className="rounded-2xl w-full h-full object-cover"
-            placeholder="blur"
-          />
-        </div>
+        <Paragraph size="xl" color="white" weight="semiBold">
+          {`${formattedTime} 📍 ${t("location")}`}
+        </Paragraph>
+        <Button variant="primary" iconRight={IconArrowRight} size="lg">
+          {t("main_cta")}
+        </Button>
       </div>
-    </PageWrapper>
+    </section>
   );
 }
