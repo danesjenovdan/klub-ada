@@ -1,8 +1,5 @@
-import { PageWrapper } from "@/src/app/[locale]/components/page-wrapper";
 import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import { useTranslations } from "next-intl";
-import { Button } from "./components/button";
-import { IconArrowRight } from "@tabler/icons-react";
 import { formatDate, formatDayOfDate } from "../../utils/date";
 import UnicornScene from "unicornstudio-react/next";
 import { LinkButton } from "./components/link-button";

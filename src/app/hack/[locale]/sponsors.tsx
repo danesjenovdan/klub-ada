@@ -12,8 +12,6 @@ import outfit from "../../../../public/assets/hackathon/outfit.svg";
 import smartis from "../../../../public/assets/hackathon/smartis.svg";
 import clsx from "clsx";
 import Image from "next/image";
-import { Button } from "./components/button";
-import { IconArrowRight } from "@tabler/icons-react";
 import { LinkButton } from "./components/link-button";
 
 type SponsorItemProps = {
