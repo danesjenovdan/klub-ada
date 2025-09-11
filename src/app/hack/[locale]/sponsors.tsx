@@ -13,17 +13,22 @@ import smartis from "../../../../public/assets/hackathon/smartis.svg";
 import clsx from "clsx";
 import Image from "next/image";
 import { LinkButton } from "./components/link-button";
+import { Link } from "@/src/i18n/navigation";
 
 type SponsorItemProps = {
   image: string;
   name: string;
+  link: string;
   type: "gold" | "silver" | "bronze" | "media";
 };
-export function SponsorItem({ image, name, type }: SponsorItemProps) {
+export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
   return (
-    <div
+    <Link
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
       className={clsx(
-        "rounded-md p-5 shrink-0 flex w-full md:w-72 min-h-30 md:min-h-30 items-center justify-center",
+        "rounded-md p-5 shrink-0 flex w-full md:w-72 min-h-30 md:min-h-30 items-center justify-center hover:scale-105 transition-transform duration-200",
         {
           "border-yellow border": type === "gold",
           "border-blue border": type === "silver",
@@ -33,7 +38,7 @@ export function SponsorItem({ image, name, type }: SponsorItemProps) {
       )}
     >
       <Image src={image} alt={name} />
-    </div>
+    </Link>
   );
 }
 
@@ -41,14 +46,16 @@ export function Sponsors() {
   const t = useTranslations("Hackathon");
 
   const goldSponsors = [
-    { name: "Smartis", image: smartis },
-    { name: "Agiledrop", image: agiledrop },
-    { name: "Epilog", image: epilog },
+    { name: "Smartis", image: smartis, link: "https://smartis.si/" },
+    { name: "Agiledrop", image: agiledrop, link: "https://agiledrop.si/" },
+    { name: "Epilog", image: epilog, link: "https://www.epilog.net/en/" },
   ];
-  const silverSponsors = [{ name: "Abelium", image: abelium }];
+  const silverSponsors = [
+    { name: "Abelium", image: abelium, link: "https://abelium.si/" },
+  ];
   const bronzeSponsors = [
-    { name: "Celtra", image: celtra },
-    { name: "Outfit", image: outfit },
+    { name: "Celtra", image: celtra, link: "https://celtra.com/" },
+    { name: "Outfit7", image: outfit, link: "https://outfit7.com/" },
   ];
   // const mediaPartners = [];
 
@@ -74,11 +81,12 @@ export function Sponsors() {
               {t("sponsors.gold")}
             </Paragraph>
             <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-              {goldSponsors.map(({ name, image }, index) => (
+              {goldSponsors.map(({ name, image, link }, index) => (
                 <SponsorItem
                   key={index}
                   image={image}
                   name={name}
+                  link={link}
                   type="gold"
                 />
               ))}
@@ -94,11 +102,12 @@ export function Sponsors() {
               {t("sponsors.silver")}
             </Paragraph>
             <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-              {silverSponsors.map(({ name, image }, index) => (
+              {silverSponsors.map(({ name, image, link }, index) => (
                 <SponsorItem
                   key={index}
                   image={image}
                   name={name}
+                  link={link}
                   type="silver"
                 />
               ))}
@@ -114,11 +123,12 @@ export function Sponsors() {
               {t("sponsors.bronze")}
             </Paragraph>
             <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-              {bronzeSponsors.map(({ name, image }, index) => (
+              {bronzeSponsors.map(({ name, image, link }, index) => (
                 <SponsorItem
                   key={index}
                   image={image}
                   name={name}
+                  link={link}
                   type="bronze"
                 />
               ))}
@@ -134,11 +144,12 @@ export function Sponsors() {
               {t("sponsors.media")}
             </Paragraph>
             <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-              {bronzeSponsors.map(({ name, image }, index) => (
+              {bronzeSponsors.map(({ name, image, link }, index) => (
                 <SponsorItem
                   key={index}
                   image={image}
                   name={name}
+                  link={link}
                   type="media"
                 />
               ))}
