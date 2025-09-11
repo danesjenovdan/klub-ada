@@ -7,17 +7,25 @@ import { Paragraph } from "../../[locale]/components/paragraph";
 import { useSanityData } from "../../utils/use-sanity-data";
 import { formatTime } from "../../utils/date";
 import clsx from "clsx";
-import { isWithinInterval, parseISO, isSameDay } from "date-fns";
+import {
+  isWithinInterval,
+  parseISO,
+  isSameDay,
+  isAfter,
+  startOfDay,
+  endOfDay,
+} from "date-fns";
 
 const GET_TIMELINE_ITEMS = `*[
   _type == "hackathonTimelineItem"
 ] | order(time) {
   'title': coalesce(label[$language], label.sl),
-  time
+  time,
+  endTime
 }`;
 
-const DAY_ONE = "2025-11-28";
-const DAY_TWO = "2025-08-14";
+const DAY_ONE = "2025-11-22";
+const DAY_TWO = "2025-11-23";
 
 const isNow = (time: string, endTime?: string) => {
   const now = new Date();
@@ -60,6 +68,8 @@ export function TimelineItem({
   );
 }
 
+type TimelineProps = TimelineItemProps & { endTime?: string };
+
 export function Timeline() {
   const t = useTranslations("Hackathon");
   const locale = useLocale();
@@ -68,12 +78,31 @@ export function Timeline() {
     params: { language: locale },
   });
 
-  const items = (data || []) as TimelineItemProps[];
-  console.log(items);
+  const items = (data || []) as TimelineProps[];
+
+  const dayOneStart = startOfDay(parseISO(DAY_ONE));
+  const dayOneEnd = endOfDay(parseISO(DAY_ONE));
+  const dayTwoStart = startOfDay(parseISO(DAY_TWO));
+  const dayTwoEnd = endOfDay(parseISO(DAY_TWO));
+
   const dayOneItems =
-    items?.filter(({ time }) => time.split("T")[0] === DAY_ONE) || [];
+    items?.filter(({ time }) => {
+      const eventDate = parseISO(time);
+      return isWithinInterval(eventDate, {
+        start: dayOneStart,
+        end: dayOneEnd,
+      });
+    }) || [];
+
   const dayTwoItems =
-    items?.filter(({ time }) => time.split("T")[0] === DAY_TWO) || [];
+    items?.filter(({ time }) => {
+      const eventDate = parseISO(time);
+      return isWithinInterval(eventDate, {
+        start: dayTwoStart,
+        end: dayTwoEnd,
+      });
+    }) || [];
+
   return (
     <PageWrapper>
       <div className="flex flex-col gap-8 md:gap-14 items-center w-full py-4 md:py-5 lg:py-10">
@@ -91,9 +120,9 @@ export function Timeline() {
               {t("saturday")}
             </Heading>
             <div>
-              {dayOneItems.map(({ time, title }, index) => {
-                const formattedTime = formatTime(time);
-                const nextTime = dayOneItems[index + 1]?.time;
+              {dayOneItems.map(({ time, endTime, title }, index) => {
+                const formattedTime = `${formatTime(time)} ${endTime ? `- ${formatTime(endTime)}` : ""}`;
+                const nextTime = endTime || dayOneItems[index + 1]?.time;
                 const isNowTime = isNow(time, nextTime);
                 return (
                   <TimelineItem
@@ -111,9 +140,9 @@ export function Timeline() {
               {t("sunday")}
             </Heading>
             <div>
-              {dayTwoItems.map(({ time, title }, index) => {
-                const formattedTime = formatTime(time);
-                const nextTime = dayTwoItems[index + 1]?.time;
+              {dayTwoItems.map(({ time, endTime, title }, index) => {
+                const formattedTime = `${formatTime(time)} ${endTime ? `- ${formatTime(endTime)}` : ""}`;
+                const nextTime = endTime || dayTwoItems[index + 1]?.time;
                 const isNowTime = isNow(time, nextTime);
                 return (
                   <TimelineItem

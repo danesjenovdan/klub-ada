@@ -28,6 +28,16 @@ export const hackathonTimelineItem = defineType({
         // displayTimeZone: "Europe/Berlin",
       },
     }),
+    defineField({
+      name: "endTime",
+      title: "End Time",
+      type: "datetime",
+      options: {
+        timeFormat: "HH:mm",
+        timeStep: 15,
+        // displayTimeZone: "Europe/Berlin",
+      },
+    }),
   ],
   preview: {
     select: {
