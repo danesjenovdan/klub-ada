@@ -21,10 +21,9 @@ export function PrizeItem({
   return (
     <div
       className={clsx(
-        "rounded-md p-8 gap-2 shrink-0 grow flex flex-col min-w-56 min-h-44 md:min-h-48 items-center justify-center",
+        "rounded-md p-8 gap-2 shrink-0 grow flex border-red border flex-col min-w-56 min-h-44 md:min-h-48 items-center justify-center",
         {
-          "border-red border": !isMain,
-          "bg-red": isMain,
+          "bg-[rgba(255,87,87,0.16)] shadow-shineRed": isMain,
         }
       )}
     >
