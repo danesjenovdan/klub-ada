@@ -43,20 +43,12 @@ export function Sponsors() {
   const goldSponsors = [
     { name: "Smartis", image: smartis },
     { name: "Agiledrop", image: agiledrop },
-    { name: "Smartis", image: smartis },
-    { name: "Agiledrop", image: agiledrop },
-  ];
-  const silverSponsors = [
     { name: "Epilog", image: epilog },
-    { name: "Abelium", image: abelium },
-    { name: "Smartis", image: smartis },
-    { name: "Agiledrop", image: agiledrop },
   ];
+  const silverSponsors = [{ name: "Abelium", image: abelium }];
   const bronzeSponsors = [
     { name: "Celtra", image: celtra },
     { name: "Outfit", image: outfit },
-    { name: "Smartis", image: smartis },
-    { name: "Agiledrop", image: agiledrop },
   ];
   // const mediaPartners = [];
 
@@ -132,7 +124,7 @@ export function Sponsors() {
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-3 items-center w-full">
+          {/* <div className="flex flex-col gap-3 items-center w-full">
             <Paragraph
               size="xl"
               weight="medium"
@@ -151,7 +143,7 @@ export function Sponsors() {
                 />
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
         <LinkButton isExternal href="https://klub-ada.si/partnerstvo" showIcon>
           {t("sponsors.cta")}
