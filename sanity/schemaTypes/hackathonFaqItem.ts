@@ -27,6 +27,12 @@ export const hackathonFaqItem = defineType({
       ],
       validation: (Rule: any) => Rule.required(),
     }),
+    defineField({
+      title: "Order",
+      name: "order",
+      type: "number",
+      validation: (Rule: any) => Rule.required(),
+    }),
   ],
   preview: {
     select: {

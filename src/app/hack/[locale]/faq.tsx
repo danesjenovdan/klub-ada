@@ -12,7 +12,7 @@ import { IconMinus, IconPlus } from "@tabler/icons-react";
 
 const GET_FAQ_ITEMS = `*[
   _type == "hackathonFaqItem"
-] {
+] | order(order asc) {
   'question': coalesce(question[$language], question.sl),
   'answer': coalesce(answer[$language], answer.sl)
 }`;
