@@ -5,6 +5,7 @@ import { Button } from "./components/button";
 import { IconArrowRight } from "@tabler/icons-react";
 import { formatDate, formatDayOfDate } from "../../utils/date";
 import UnicornScene from "unicornstudio-react/next";
+import { LinkButton } from "./components/link-button";
 
 export function Hero() {
   const startDate = "2025-11-22";
@@ -33,7 +34,10 @@ export function Hero() {
           preload="metadata"
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23000000'/%3E%3C/svg%3E"
         >
-          <source src="/assets/hackathon/hackathon-loop.webm" type="video/webm" />
+          <source
+            src="/assets/hackathon/hackathon-loop.webm"
+            type="video/webm"
+          />
         </video>
       </div>
       <div className="absolute top-0 left-0 bottom-0 right-0 flex flex-col gap-8 px-5 md:px-20 py-10 md:py-20 items-center justify-center">
@@ -61,9 +65,15 @@ export function Hero() {
             {`📍 ${t("location")}`}
           </Paragraph>
         </div>
-        <Button variant="primary" iconRight={IconArrowRight} size="lg">
+        <LinkButton
+          variant="primary"
+          showIcon
+          size="lg"
+          isExternal
+          href="https://www.eventbrite.com/e/hekaton-adahack-code-for-change-tickets-1686598053179"
+        >
           {t("main_cta")}
-        </Button>
+        </LinkButton>
       </div>
     </section>
   );

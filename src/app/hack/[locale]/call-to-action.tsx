@@ -3,6 +3,7 @@ import { PageWrapper } from "./components/page-wrapper";
 import { Heading } from "../../[locale]/components/heading";
 import { Paragraph } from "../../[locale]/components/paragraph";
 import { Button } from "./components/button";
+import { LinkButton } from "./components/link-button";
 
 export function CallToAction() {
   const t = useTranslations("Hackathon");
@@ -16,7 +17,13 @@ export function CallToAction() {
         <Paragraph size="xl" weight="medium" color="white" textAlign="center">
           {t("call_to_action.description")}
         </Paragraph>
-        <Button variant="tertiary">{t("main_cta")}</Button>
+        <LinkButton
+          variant="tertiary"
+          isExternal
+          href="https://www.eventbrite.com/e/hekaton-adahack-code-for-change-tickets-1686598053179"
+        >
+          {t("main_cta")}
+        </LinkButton>
       </div>
     </PageWrapper>
   );

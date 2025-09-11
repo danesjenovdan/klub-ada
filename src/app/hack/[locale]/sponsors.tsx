@@ -14,6 +14,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { Button } from "./components/button";
 import { IconArrowRight } from "@tabler/icons-react";
+import { LinkButton } from "./components/link-button";
 
 type SponsorItemProps = {
   image: string;
@@ -154,7 +155,9 @@ export function Sponsors() {
             </div>
           </div>
         </div>
-        <Button iconRight={IconArrowRight}>{t("sponsors.cta")}</Button>
+        <LinkButton isExternal href="https://klub-ada.si/partnerstvo" showIcon>
+          {t("sponsors.cta")}
+        </LinkButton>
       </div>
     </PageWrapper>
   );
