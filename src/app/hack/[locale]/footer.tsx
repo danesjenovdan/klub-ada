@@ -13,7 +13,11 @@ export function Footer() {
     <div className="bg-[#000] box-border max-w-full flex flex-col">
       <div className="flex flex-col-reverse items-center gap-10 md:flex-row px-7 pb-16 pt-8 md:px-14 justify-between">
         <div className="flex flex-col gap-4 items-center md:items-start">
-          <a href="/" rel="noopener noreferrer">
+          <a
+            href="https://klub-ada.si"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               src="/assets/hackathon/logo-obris.svg"
               width={80}
