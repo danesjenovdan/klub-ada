@@ -7,8 +7,8 @@ import { formatDate, formatDayOfDate } from "../../utils/date";
 import UnicornScene from "unicornstudio-react/next";
 
 export function Hero() {
-  const startDate = "2025-11-28";
-  const endDate = "2025-11-29";
+  const startDate = "2025-11-22";
+  const endDate = "2025-11-23";
 
   const formattedTime = `${formatDayOfDate(startDate)} - ${formatDate(endDate)}`;
 
@@ -30,9 +30,22 @@ export function Hero() {
             {t("slogan")}
           </h1>
         </div>
-        <Paragraph size="xl" color="white" weight="semiBold">
+        <Paragraph
+          className="hidden md:block"
+          size="xl"
+          color="white"
+          weight="semiBold"
+        >
           {`${formattedTime} 📍 ${t("location")}`}
         </Paragraph>
+        <div className="flex flex-col items-center md:hidden">
+          <Paragraph size="xl" color="white" weight="semiBold">
+            {formattedTime}
+          </Paragraph>
+          <Paragraph size="xl" color="white" weight="semiBold">
+            {`📍 ${t("location")}`}
+          </Paragraph>
+        </div>
         <Button variant="primary" iconRight={IconArrowRight} size="lg">
           {t("main_cta")}
         </Button>
