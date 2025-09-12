@@ -37,18 +37,18 @@ export function Hero() {
           />
         </video>
       </div>
-      <div className="absolute top-0 left-0 bottom-0 right-0 flex flex-col gap-8 px-5 md:px-20 py-10 md:py-20 items-center justify-center">
+      <div className="absolute top-0 left-0 bottom-0 right-0 flex flex-col gap-4 md:gap-7 px-5 md:px-20 py-10 md:py-20 items-center justify-center">
         <div>
-          <h1 className="font-paragraph font-extrabold text-white text-7xl text-center tracking-tight">
+          <h1 className="font-paragraph font-extrabold text-white md:text-6xl text-5xl text-center tracking-tight">
             {t("title")}
           </h1>
-          <h1 className="font-paragraph font-extrabold text-white text-7xl text-center tracking-tight">
+          <h1 className="font-paragraph font-extrabold text-white md:text-6xl text-5xl text-center tracking-tight">
             {t("slogan")}
           </h1>
         </div>
         <Paragraph
           className="hidden md:block"
-          size="xl"
+          size="lg"
           color="white"
           weight="semiBold"
         >
@@ -58,7 +58,12 @@ export function Hero() {
           <Paragraph size="xl" color="white" weight="semiBold">
             {formattedTime}
           </Paragraph>
-          <Paragraph size="xl" color="white" weight="semiBold">
+          <Paragraph
+            size="xl"
+            color="white"
+            weight="semiBold"
+            className="text-center"
+          >
             {`📍 ${t("location")}`}
           </Paragraph>
         </div>
