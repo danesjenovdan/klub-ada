@@ -9,6 +9,7 @@ import epilog from "../../../../public/assets/hackathon/epilog.png";
 import abelium from "../../../../public/assets/hackathon/abelium.svg";
 import celtra from "../../../../public/assets/hackathon/celtra.svg";
 import outfit from "../../../../public/assets/hackathon/outfit.svg";
+import stf from "../../../../public/assets/hackathon/stf.svg";
 import smartis from "../../../../public/assets/hackathon/smartis.png";
 import clsx from "clsx";
 import Image from "next/image";
@@ -20,15 +21,8 @@ type SponsorItemProps = {
   name: string;
   link: string;
   type: "gold" | "silver" | "bronze" | "media";
-  height?: string; // Optional custom height
 };
-export function SponsorItem({
-  image,
-  name,
-  link,
-  type,
-  height = "h-12",
-}: SponsorItemProps) {
+export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
   return (
     <Link
       href={link}
@@ -44,11 +38,7 @@ export function SponsorItem({
         }
       )}
     >
-      <Image
-        src={image}
-        alt={name}
-        className={`${height} w-auto object-contain`}
-      />
+      <Image src={image} alt={name} />
     </Link>
   );
 }
@@ -61,19 +51,16 @@ export function Sponsors() {
       name: "Smartis",
       image: smartis,
       link: "https://smartis.si/",
-      height: "h-16",
     },
     {
       name: "Agiledrop",
       image: agiledrop,
       link: "https://agiledrop.si/",
-      height: "h-10",
     },
     {
       name: "Epilog",
       image: epilog,
       link: "https://www.epilog.net/en/",
-      height: "h-12",
     },
   ];
   const silverSponsors = [
@@ -81,7 +68,6 @@ export function Sponsors() {
       name: "Abelium",
       image: abelium,
       link: "https://abelium.si/",
-      height: "h-10",
     },
   ];
   const bronzeSponsors = [
@@ -89,13 +75,16 @@ export function Sponsors() {
       name: "Celtra",
       image: celtra,
       link: "https://celtra.com/",
-      height: "h-14",
     },
     {
       name: "Outfit7",
       image: outfit,
       link: "https://outfit7.com/",
-      height: "h-8",
+    },
+    {
+      name: "Slovenski tehnološki forum",
+      image: stf,
+      link: "https://www.tehnoloski-forum.si/",
     },
   ];
   // const mediaPartners = [];
@@ -122,14 +111,13 @@ export function Sponsors() {
               {t("sponsors.gold")}
             </Paragraph>
             <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-              {goldSponsors.map(({ name, image, link, height }, index) => (
+              {goldSponsors.map(({ name, image, link }, index) => (
                 <SponsorItem
                   key={index}
                   image={image}
                   name={name}
                   link={link}
                   type="gold"
-                  height={height}
                 />
               ))}
             </div>
@@ -144,14 +132,13 @@ export function Sponsors() {
               {t("sponsors.silver")}
             </Paragraph>
             <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-              {silverSponsors.map(({ name, image, link, height }, index) => (
+              {silverSponsors.map(({ name, image, link }, index) => (
                 <SponsorItem
                   key={index}
                   image={image}
                   name={name}
                   link={link}
                   type="silver"
-                  height={height}
                 />
               ))}
             </div>
@@ -166,14 +153,13 @@ export function Sponsors() {
               {t("sponsors.bronze")}
             </Paragraph>
             <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-              {bronzeSponsors.map(({ name, image, link, height }, index) => (
+              {bronzeSponsors.map(({ name, image, link }, index) => (
                 <SponsorItem
                   key={index}
                   image={image}
                   name={name}
                   link={link}
                   type="bronze"
-                  height={height}
                 />
               ))}
             </div>
