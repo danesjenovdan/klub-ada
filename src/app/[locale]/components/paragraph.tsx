@@ -33,6 +33,7 @@ const baseParagraph = tv({
       lightGray: "text-gray500",
       pink: "text-pink",
       blue: "text-blue",
+      red: "text-red",
     },
     truncate: {
       true: "truncate",
@@ -57,7 +58,7 @@ interface ParagraphOptions {
    * Sets the line hight of the paragraph
    * @default 'black'
    */
-  color?: "black" | "white" | "gray" | "lightGray" | "pink" | "blue";
+  color?: "black" | "white" | "gray" | "lightGray" | "pink" | "blue" | "red";
   /**
    * Truncates the paragraph if true
    */
