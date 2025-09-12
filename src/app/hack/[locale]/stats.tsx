@@ -11,7 +11,7 @@ export function Stats() {
 
   return (
     <PageWrapper>
-      <div className="flex flex-col gap-8 items-center w-full py-4 md:py-5 lg:py-10">
+      <div className="flex flex-col gap-8 md:gap-14 items-center w-full py-4 md:py-5 lg:py-10">
         <Heading
           className="font-paragraph"
           color="white"
@@ -32,7 +32,7 @@ export function Stats() {
             ),
           })}
         </Heading>
-        <div className="flex gap-6 flex-wrap items-stretch justify-center w-full">
+        <div className="flex gap-4 md:gap-6 flex-wrap items-stretch justify-center w-full px-4 md:px-0">
           <ImageStat
             src={stat1Src}
             label={t("numbers.participants")}
