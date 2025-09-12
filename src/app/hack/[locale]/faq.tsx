@@ -32,16 +32,16 @@ function FaqItem({ question, answer, isOpen, onChangeOpen }: FaqItemProps) {
       })}
       onClick={onChangeOpen}
     >
-      <div className="flex justify-between w-full pb-2">
-        <Heading size="xs" color="white">
+      <div className="flex justify-between w-full">
+        <Paragraph size="xl" weight="bold" color="white">
           {question}
-        </Heading>
+        </Paragraph>
         <div className="relative w-6 h-6 flex items-center justify-center">
           <motion.div
             initial={false}
             animate={{
-              opacity: isOpen ? 1 : 0,
-              scale: isOpen ? 1 : 0,
+              opacity: isOpen ? 1 : 0.9,
+              scale: isOpen ? 1 : 0.9,
             }}
             transition={{ duration: 0.2 }}
             className="absolute"
@@ -79,10 +79,7 @@ function FaqItem({ question, answer, isOpen, onChangeOpen }: FaqItemProps) {
             }}
             transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
           >
-            <motion.div
-              variants={{ collapsed: { scale: 0.9 }, open: { scale: 1 } }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div transition={{ duration: 0.8 }}>
               <Paragraph size="lg" color="lightGray">
                 {answer}
               </Paragraph>

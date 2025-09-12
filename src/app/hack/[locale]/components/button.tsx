@@ -12,9 +12,12 @@ export const baseButton = tv({
       lg: "text-lg h-14 py-3 px-6",
     },
     variant: {
-      primary: "border border-red text-white text-start shadow-shineRed", // md:shadow-none transition-all duration-200 ease-in-out transform hover:shadow-hackButton",
-      secondary: "border border-white text-white text-start shadow-shineWhite", // md:shadow-none transition-all duration-200 ease-in-out transform hover:shadow-hackButtonSecondary",
-      tertiary: "bg-black text-white text-start",
+      primary:
+        "border border-red text-white text-start shadow-shineRed transition-all duration-200 ease-in-out transform hover:bg-red hover:shadow-shineStrongRed",
+      secondary:
+        "border border-white text-white text-start shadow-shineWhite transition-all duration-200 ease-in-out transform hover:bg-red hover:border-red hover:shadow-shineStrongRed",
+      tertiary:
+        "bg-black text-white text-start transition-all duration-200 ease-in-out transform hover:bg-red",
     },
     disabled: {
       true: "cursor-not-allowed bg-gray300 border border-gray700 text-white",

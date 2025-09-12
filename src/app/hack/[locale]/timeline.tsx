@@ -115,7 +115,7 @@ export function Timeline() {
           {t("timeline")}
         </Heading>
         <div className="flex flex-wrap max-w-[1000px] gap-6 w-full">
-          <div className="shrink-0 grow min-w-[300px] border border-red shadow-shineRed rounded-lg p-8 flex flex-col gap-4">
+          <div className="shrink-0 grow min-w-[300px] border border-red shadow-shineRed rounded-lg p-6 flex flex-col gap-4">
             <Heading size="sm" color="white">
               {t("saturday")}
             </Heading>
@@ -135,7 +135,7 @@ export function Timeline() {
               })}
             </div>
           </div>
-          <div className="shrink-0 grow min-w-[300px] border border-red shadow-shineRed rounded-lg p-8 flex flex-col gap-4">
+          <div className="shrink-0 grow min-w-[300px] border border-red shadow-shineRed rounded-lg p-6 flex flex-col gap-4">
             <Heading size="sm" color="white">
               {t("sunday")}
             </Heading>
