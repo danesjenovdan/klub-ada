@@ -5,11 +5,12 @@ import { PageWrapper } from "./components/page-wrapper";
 import { Heading } from "../../[locale]/components/heading";
 import { Paragraph } from "../../[locale]/components/paragraph";
 import agiledrop from "../../../../public/assets/hackathon/agiledrop.svg";
-import epilog from "../../../../public/assets/hackathon/epilog.svg";
+import epilog from "../../../../public/assets/hackathon/epilog.png";
 import abelium from "../../../../public/assets/hackathon/abelium.svg";
 import celtra from "../../../../public/assets/hackathon/celtra.svg";
 import outfit from "../../../../public/assets/hackathon/outfit.svg";
-import smartis from "../../../../public/assets/hackathon/smartis.svg";
+import stf from "../../../../public/assets/hackathon/stf.svg";
+import smartis from "../../../../public/assets/hackathon/smartis.png";
 import clsx from "clsx";
 import Image from "next/image";
 import { LinkButton } from "./components/link-button";
@@ -46,16 +47,45 @@ export function Sponsors() {
   const t = useTranslations("Hackathon");
 
   const goldSponsors = [
-    { name: "Smartis", image: smartis, link: "https://smartis.si/" },
-    { name: "Agiledrop", image: agiledrop, link: "https://agiledrop.si/" },
-    { name: "Epilog", image: epilog, link: "https://www.epilog.net/en/" },
+    {
+      name: "Smartis",
+      image: smartis,
+      link: "https://smartis.si/",
+    },
+    {
+      name: "Agiledrop",
+      image: agiledrop,
+      link: "https://agiledrop.si/",
+    },
+    {
+      name: "Epilog",
+      image: epilog,
+      link: "https://www.epilog.net/en/",
+    },
   ];
   const silverSponsors = [
-    { name: "Abelium", image: abelium, link: "https://abelium.si/" },
+    {
+      name: "Abelium",
+      image: abelium,
+      link: "https://abelium.si/",
+    },
   ];
   const bronzeSponsors = [
-    { name: "Celtra", image: celtra, link: "https://celtra.com/" },
-    { name: "Outfit7", image: outfit, link: "https://outfit7.com/" },
+    {
+      name: "Celtra",
+      image: celtra,
+      link: "https://celtra.com/",
+    },
+    {
+      name: "Outfit7",
+      image: outfit,
+      link: "https://outfit7.com/",
+    },
+    {
+      name: "Slovenski tehnološki forum",
+      image: stf,
+      link: "https://www.tehnoloski-forum.si/",
+    },
   ];
   // const mediaPartners = [];
 
