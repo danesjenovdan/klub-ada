@@ -36,10 +36,10 @@ export function Stats() {
           <ImageStat
             src={stat1Src}
             label={t("numbers.participants")}
-            stat="40"
+            stat="80"
           />
-          <ImageStat src={stat2Src} label={t("numbers.sponsors")} stat="6" />
-          <ImageStat src={stat3Src} label={t("numbers.ratios")} stat="50:50" />
+          <ImageStat src={stat2Src} label={t("numbers.sponsors")} stat="11" />
+          <ImageStat src={stat3Src} label={t("numbers.awards")} stat="3500€" />
         </div>
       </div>
     </PageWrapper>
