@@ -4,20 +4,26 @@ import { useTranslations } from "next-intl";
 import { PageWrapper } from "./components/page-wrapper";
 import { Heading } from "../../[locale]/components/heading";
 import { Paragraph } from "../../[locale]/components/paragraph";
-import agiledrop from "../../../../public/assets/hackathon/agiledrop.svg";
 import epilog from "../../../../public/assets/hackathon/epilog.png";
 import abelium from "../../../../public/assets/hackathon/abelium.svg";
 import celtra from "../../../../public/assets/hackathon/celtra.svg";
 import outfit from "../../../../public/assets/hackathon/outfit.svg";
+import istenic from "../../../../public/assets/hackathon/istenic.svg";
+import leone from "../../../../public/assets/hackathon/leone.svg";
+import nord from "../../../../public/assets/hackathon/nord.svg";
+import redbull from "../../../../public/assets/hackathon/red bull.svg";
 import stf from "../../../../public/assets/hackathon/stf.svg";
 import smartis from "../../../../public/assets/hackathon/smartis.png";
+import sazu from "../../../../public/assets/hackathon/sazu.svg";
+import leanix from "../../../../public/assets/hackathon/leanix.svg";
+import impactHub from "../../../../public/assets/impact-hub-logo.webp";
 import clsx from "clsx";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { LinkButton } from "./components/link-button";
 import { Link } from "@/src/i18n/navigation";
 
 type SponsorItemProps = {
-  image: string;
+  image: string | StaticImageData;
   name: string;
   link: string;
   type: "gold" | "silver" | "bronze" | "media";
@@ -29,12 +35,14 @@ export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
       target="_blank"
       rel="noopener noreferrer"
       className={clsx(
-        "rounded-md p-5 shrink-0 flex w-full md:w-72 min-h-30 md:min-h-30 items-center justify-center hover:scale-105 transition-transform duration-200",
+        "rounded-md p-5 shrink-0 flex w-full items-center justify-center hover:scale-105 transition-transform duration-200",
         {
           "border-yellow border": type === "gold",
           "border-blue border": type === "silver",
           "border-red border": type === "bronze",
           "border-gray border": type === "media",
+          "md:w-72 min-h-30 md:min-h-30": type !== "media",
+          "md:w-48 min-h-20 md:min-h-20": type === "media",
         }
       )}
     >
@@ -51,11 +59,6 @@ export function Sponsors() {
       name: "Smartis",
       image: smartis,
       link: "https://smartis.si/",
-    },
-    {
-      name: "Agiledrop",
-      image: agiledrop,
-      link: "https://agiledrop.si/",
     },
     {
       name: "Epilog",
@@ -86,8 +89,49 @@ export function Sponsors() {
       image: stf,
       link: "https://www.tehnoloski-forum.si/",
     },
+    {
+      name: "LeanIX",
+      image: leanix,
+      link: "https://www.leanix.net/",
+    },
   ];
-  // const mediaPartners = [];
+  const partners = [
+    {
+      name: "Penine Istenič",
+      image: istenic,
+      link: "https://www.istenic.si",
+    },
+    {
+      name: "Leone",
+      image: leone,
+      link: "https://www.leoneicecream.com",
+    },
+    {
+      name: "Nord",
+      image: nord,
+      link: "https://nordhardseltzer.si",
+    },
+    {
+      name: "Red Bull",
+      image: redbull,
+      link: "https://www.redbull.com/si-sl",
+    },
+    {
+      name: "ZRC SAZU",
+      image: sazu,
+      link: "https://zrc-sazu.si/sl",
+    },
+    {
+      name: "Impact hub Ljubljana",
+      image: impactHub,
+      link: "https://ljubljana.impacthub.net/",
+    },
+    // {
+    //   name: "Tehnološki park Ljubljana",
+    //   image: impactHub,
+    //   link: "https://www.tp-lj.si/sl",
+    // },
+  ];
 
   return (
     <PageWrapper>
@@ -164,7 +208,7 @@ export function Sponsors() {
               ))}
             </div>
           </div>
-          {/* <div className="flex flex-col gap-3 items-center w-full">
+          <div className="flex flex-col gap-3 items-center w-full">
             <Paragraph
               size="xl"
               weight="medium"
@@ -174,7 +218,7 @@ export function Sponsors() {
               {t("sponsors.media")}
             </Paragraph>
             <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-              {bronzeSponsors.map(({ name, image, link }, index) => (
+              {partners.map(({ name, image, link }, index) => (
                 <SponsorItem
                   key={index}
                   image={image}
@@ -184,7 +228,7 @@ export function Sponsors() {
                 />
               ))}
             </div>
-          </div> */}
+          </div>
         </div>
         <LinkButton isExternal href="https://klub-ada.si/partnerstvo" showIcon>
           {t("sponsors.cta")}
