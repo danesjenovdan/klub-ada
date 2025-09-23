@@ -41,9 +41,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body
-        className={`${anaheim.className} antialiased max-w-screen-2xl mx-auto`}
-      >
+      <body className={`${anaheim.className} antialiased mx-auto`}>
         <NextIntlClientProvider locale={locale}>
           {children}
         </NextIntlClientProvider>

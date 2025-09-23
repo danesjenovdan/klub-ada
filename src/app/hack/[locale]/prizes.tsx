@@ -50,12 +50,7 @@ export function PrizeItem({
 export function Prizes() {
   const t = useTranslations("Hackathon");
 
-  const challenges = [
-    t("challenges.1"),
-    t("challenges.2"),
-    t("challenges.3"),
-    t("challenges.4"),
-  ];
+  const challenges = [t("challenges.1"), t("challenges.2"), t("challenges.3")];
 
   return (
     <PageWrapper>

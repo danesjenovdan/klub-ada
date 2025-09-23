@@ -153,19 +153,19 @@
     "title": "AdaHack",
     "slogan": "Code for change",
     "location": "Epilog, 22a Tehnološki park, 1000 Ljubljana",
-    "main_cta": "Save the date",
+    "main_cta": "Sign up",
     "numbers": {
-      "title": "AdaHack 2023 <numbers>in numbers</numbers>",
+      "title": "AdaHack 2025 <numbers>in numbers</numbers>",
       "participants": "participants",
       "sponsors": "sponsors",
-      "ratios": "women:men"
+      "awards": "in awards"
     },
     "timeline": "Timeline",
     "saturday": "Saturday",
     "sunday": "Sunday",
     "prizes": "Prizes",
     "challenges": {
-      "1": "Topic: TBD",
+      "1": "EdTech for visually impaired by Abelium",
       "2": "Topic: TBD",
       "3": "Topic: TBD",
       "4": "Topic: TBD"
@@ -180,7 +180,7 @@
       "gold": "Gold sponsors",
       "silver": "Silver sponsors",
       "bronze": "Bronze sponsors",
-      "media": "Media & food partners",
+      "media": "Partners",
       "cta": "Work with us"
     },
     "call_to_action": {
