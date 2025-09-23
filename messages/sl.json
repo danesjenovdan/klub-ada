@@ -106,7 +106,8 @@
     "title_past_events": "Pretekli dogodki",
     "all_events": "Vsi dogodki",
     "cta": "Prijavi se",
-    "cta_next_event": "Naslednji dogodek"
+    "cta_next_event": "Naslednji dogodek",
+    "at": "ob"
   },
   "NotFound": {
     "description": "O ne! Stran ni bila najdena.",
@@ -147,5 +148,52 @@
     "events_all": "Vsi dogodki",
     "blog": "Blog",
     "partners": "Partnerstva"
+  },
+  "Hackathon": {
+    "title": "AdaHack",
+    "slogan": "Code for change",
+    "location": "Epilog, 22a Tehnološki park, 1000 Ljubljana",
+    "main_cta": "Prijavi se",
+    "numbers": {
+      "title": "AdaHack 2025 <numbers>v številkah</numbers>",
+      "participants": "udeležencev",
+      "sponsors": "sponzorjev",
+      "awards": "nagrad"
+    },
+    "timeline": "Časovnica",
+    "saturday": "Sobota",
+    "sunday": "Nedelja",
+    "prizes": "Nagrade",
+    "challenges": {
+      "1": "Edtech za slepe in slabovidne - Abelium",
+      "2": "Tema: TBD",
+      "3": "Tema: TBD",
+      "4": "Tema: TBD"
+    },
+    "winner": "1. mesto",
+    "challenge": "Izziv #{number}",
+    "faq": {
+      "title": "Pogosta vprašanja"
+    },
+    "sponsors": {
+      "title": "Naši sponzorji",
+      "gold": "Zlati sponzorji",
+      "silver": "Srebrni sponzorji",
+      "bronze": "Bronasti sponzorji",
+      "media": "Partnerji",
+      "cta": "Sodeluj z nami"
+    },
+    "call_to_action": {
+      "title": "Pridruži se nam v reševanju realističnih izzivov!",
+      "description": "Pridi in spoznaj ljudi s podobnimi interesi, poveži se s podjetji v središču tehnološke scene v Sloveniji in ustvari nekaj novega."
+    },
+    "footer": {
+      "ada": "Klub Ada",
+      "homepage": "Domov",
+      "join_us": "Pridruži se nam",
+      "discord": "Discord",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    }
   }
 }

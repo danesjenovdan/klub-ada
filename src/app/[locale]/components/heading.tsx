@@ -1,9 +1,10 @@
 import { forwardRef } from "react";
 import { ForwardRefComponent, PropsOf } from "../../utils/polymorphic";
 import { tv } from "tailwind-variants";
+import clsx from "clsx";
 
 const baseHeading = tv({
-  base: "font-heading m-0 break-words",
+  base: "font-heading m-0 break-words select-none",
   variants: {
     size: {
       lg: "text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight",
@@ -52,6 +53,7 @@ interface HeadingOptions {
    * @default 'left'
    */
   textAlign?: "left" | "center" | "right";
+  isSpan?: boolean;
 }
 
 type HeadingComponent = ForwardRefComponent<"h2", HeadingOptions>;
@@ -67,22 +69,30 @@ export const Heading = forwardRef(
       textAlign = "left",
       shouldTruncate,
       className,
+      isSpan = false,
       ...rest
     },
     forwardedRef
   ) => {
-    const HeadingElement = size === "lg" ? "h1" : size === "md" ? "h2" : "h3";
+    const HeadingElement = isSpan
+      ? "span"
+      : size === "lg"
+        ? "h1"
+        : size === "md"
+          ? "h2"
+          : "h3";
     return (
       <HeadingElement
         ref={forwardedRef}
-        className={
+        className={clsx(
           baseHeading({
             size,
             color,
             textAlign,
             truncate: shouldTruncate,
-          }) + ` ${className}`
-        }
+          }),
+          className
+        )}
         {...rest}
       >
         {children}

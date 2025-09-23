@@ -4,7 +4,7 @@ import { tv } from "tailwind-variants";
 import clsx from "clsx";
 
 const baseParagraph = tv({
-  base: "font-paragraph m-0 break-words text-wrap",
+  base: "font-paragraph m-0 break-words text-wrap select-none",
   variants: {
     size: {
       xs: "text-[10px] md:text-xs",
@@ -29,9 +29,11 @@ const baseParagraph = tv({
     color: {
       black: "text-black",
       white: "text-white",
-      gray: "gray300",
+      gray: "text-gray300",
+      lightGray: "text-gray500",
       pink: "text-pink",
       blue: "text-blue",
+      red: "text-red",
     },
     truncate: {
       true: "truncate",
@@ -56,7 +58,7 @@ interface ParagraphOptions {
    * Sets the line hight of the paragraph
    * @default 'black'
    */
-  color?: "black" | "white" | "gray" | "pink" | "blue";
+  color?: "black" | "white" | "gray" | "lightGray" | "pink" | "blue" | "red";
   /**
    * Truncates the paragraph if true
    */

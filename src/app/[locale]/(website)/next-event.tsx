@@ -68,7 +68,7 @@ function NextEventContent() {
   const imageSrc = imageLoader(nextEvent.eventImage);
   const date = formatDate(nextEvent.eventTime);
   const time = formatTime(nextEvent.eventTime);
-  const formattedDateAndTime = [date, time].join(" ");
+  const formattedDateAndTime = [date, time].join(` ${t("Events.at")} `);
 
   return (
     <div className="w-full md:flex gap-8 md:items-center">

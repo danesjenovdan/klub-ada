@@ -106,7 +106,8 @@
     "title_past_events": "Past events",
     "all_events": "All events",
     "cta": "Sign up",
-    "cta_next_event": "Next event"
+    "cta_next_event": "Next event",
+    "at": "at"
   },
   "NotFound": {
     "description": "Oh no! Page not found.",
@@ -147,5 +148,52 @@
     "events_all": "All events",
     "blog": "Blog",
     "partners": "Partnerships"
+  },
+  "Hackathon": {
+    "title": "AdaHack",
+    "slogan": "Code for change",
+    "location": "Epilog, 22a Tehnološki park, 1000 Ljubljana",
+    "main_cta": "Sign up",
+    "numbers": {
+      "title": "AdaHack 2025 <numbers>in numbers</numbers>",
+      "participants": "participants",
+      "sponsors": "sponsors",
+      "awards": "in awards"
+    },
+    "timeline": "Timeline",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "prizes": "Prizes",
+    "challenges": {
+      "1": "EdTech for visually impaired by Abelium",
+      "2": "Topic: TBD",
+      "3": "Topic: TBD",
+      "4": "Topic: TBD"
+    },
+    "winner": "First place",
+    "challenge": "Challenge #{number}",
+    "faq": {
+      "title": "Frequently Asked Questions"
+    },
+    "sponsors": {
+      "title": "Our sponsors",
+      "gold": "Gold sponsors",
+      "silver": "Silver sponsors",
+      "bronze": "Bronze sponsors",
+      "media": "Partners",
+      "cta": "Work with us"
+    },
+    "call_to_action": {
+      "title": "Join us and solve real world challenges!",
+      "description": "Come meet like minded people, connect with companies in the center of the tech scene in Slovenia, and build something new."
+    },
+    "footer": {
+      "ada": "Klub Ada",
+      "homepage": "Homepage",
+      "join_us": "Join us",
+      "discord": "Discord",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram"
+    }
   }
 }
