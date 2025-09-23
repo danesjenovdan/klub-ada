@@ -56,8 +56,15 @@ export function NavbarMenu() {
               {t("partners")}
             </Link>
           </li>
+          <li>
+            <Link variant="secondary" href="/dogodki">
+              {t("events")}
+            </Link>
+          </li>
         </ol>
-        <LinkButton href="/dogodki">{t("events_all")}</LinkButton>
+        <LinkButton href="https://hack.klub-ada.si">
+          {t("hackathon")}
+        </LinkButton>
       </div>
     </div>
   );
