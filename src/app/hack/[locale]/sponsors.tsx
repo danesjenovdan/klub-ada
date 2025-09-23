@@ -16,7 +16,8 @@ import stf from "../../../../public/assets/hackathon/stf.svg";
 import smartis from "../../../../public/assets/hackathon/smartis.png";
 import sazu from "../../../../public/assets/hackathon/sazu.svg";
 import leanix from "../../../../public/assets/hackathon/leanix.svg";
-import impactHub from "../../../../public/assets/impact-hub-logo.webp";
+import chipolo from "../../../../public/assets/hackathon/chipolo.svg";
+import impactHub from "../../../../public/assets/hackathon/impact hub.svg";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import { LinkButton } from "./components/link-button";
@@ -130,6 +131,11 @@ export function Sponsors() {
     //   name: "Tehnološki park Ljubljana",
     //   image: impactHub,
     //   link: "https://www.tp-lj.si/sl",
+    // },
+    // {
+    //   name: "Chipolo",
+    //   image: chipolo,
+    //   link: "https://chipolo.net/en/",
     // },
   ];
 
