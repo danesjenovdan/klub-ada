@@ -38,7 +38,7 @@ export function Stats() {
             label={t("numbers.participants")}
             stat="80"
           />
-          <ImageStat src={stat2Src} label={t("numbers.sponsors")} stat="11" />
+          <ImageStat src={stat2Src} label={t("numbers.sponsors")} stat="14" />
           <ImageStat src={stat3Src} label={t("numbers.awards")} stat="3500€" />
         </div>
       </div>
