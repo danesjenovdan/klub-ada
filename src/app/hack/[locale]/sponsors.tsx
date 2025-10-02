@@ -81,11 +81,6 @@ export function Sponsors() {
       link: "https://celtra.com/",
     },
     {
-      name: "Outfit7",
-      image: outfit,
-      link: "https://outfit7.com/",
-    },
-    {
       name: "Slovenski tehnološki forum",
       image: stf,
       link: "https://www.tehnoloski-forum.si/",
@@ -132,11 +127,11 @@ export function Sponsors() {
     //   image: impactHub,
     //   link: "https://www.tp-lj.si/sl",
     // },
-    // {
-    //   name: "Chipolo",
-    //   image: chipolo,
-    //   link: "https://chipolo.net/en/",
-    // },
+    {
+      name: "Chipolo",
+      image: chipolo,
+      link: "https://chipolo.net/en/",
+    },
   ];
 
   return (
