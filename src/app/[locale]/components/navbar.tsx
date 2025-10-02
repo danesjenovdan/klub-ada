@@ -44,10 +44,15 @@ export function Navbar() {
             {t("partners")}
           </Link>
         </li>
+        <li>
+          <Link variant="tertiary" href="/dogodki">
+            {t("events")}
+          </Link>
+        </li>
       </ol>
       <div className="hidden md:block">
-        <LinkButton size="md" href="/dogodki">
-          {t("events_all")}
+        <LinkButton size="md" isExternal href="https://hack.klub-ada.si">
+          {t("hackathon")}
         </LinkButton>
       </div>
       <NavbarMenu />
