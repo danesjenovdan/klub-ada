@@ -34,7 +34,7 @@ export function CallToAction() {
           variant="primary"
           showIcon
           isExternal
-          href="https://www.eventbrite.com/e/hekaton-adahack-code-for-change-tickets-1686598053179"
+          href="https://www.eventbrite.com/e/adahack-code-for-change-tickets-1758539983429"
         >
           {t("main_cta")}
         </LinkButton>
