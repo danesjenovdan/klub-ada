@@ -34,8 +34,8 @@ const reviewsSl = [
     emphasis:
       'Udeležba na delavnicah mi je dala priložnost, da se povežem z drugimi ženskami v tehnologiji, pridobim nova znanja in predvsem samozavest za nadaljevanje svoje kariere."',
     image: "/assets/jana-vovk.webp",
-    alt: "Jana Vovk profile picture",
-    title: "Jana Vovk, Student @ FRI",
+    alt: "Jana Volk profile picture",
+    title: "Jana Volk, Student @ FRI",
     href: "https://www.fri.uni-lj.si/sl/novice/novica/uspeh-studentov-fri-na-vseslovenskem-hackathonu",
   },
   {
@@ -91,8 +91,8 @@ const reviewsEn = [
     emphasis:
       'Attending the workshops gave me the opportunity to connect with other women in technology, gain new knowledge, and above all, the confidence to continue my career."',
     image: "/assets/jana-vovk.webp",
-    alt: "Jana Vovk profile picture",
-    title: "Jana Vovk, Student @ FRI",
+    alt: "Jana Volk profile picture",
+    title: "Jana Volk, Student @ FRI",
     href: "https://www.fri.uni-lj.si/sl/novice/novica/uspeh-studentov-fri-na-vseslovenskem-hackathonu",
   },
   {

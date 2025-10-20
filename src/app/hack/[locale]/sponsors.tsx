@@ -7,17 +7,23 @@ import { Paragraph } from "../../[locale]/components/paragraph";
 import epilog from "../../../../public/assets/hackathon/epilog.png";
 import abelium from "../../../../public/assets/hackathon/abelium.svg";
 import celtra from "../../../../public/assets/hackathon/celtra.svg";
-import outfit from "../../../../public/assets/hackathon/outfit.svg";
 import istenic from "../../../../public/assets/hackathon/istenic.svg";
 import leone from "../../../../public/assets/hackathon/leone.svg";
 import nord from "../../../../public/assets/hackathon/nord.svg";
 import redbull from "../../../../public/assets/hackathon/red bull.svg";
 import stf from "../../../../public/assets/hackathon/stf.svg";
 import smartis from "../../../../public/assets/hackathon/smartis.png";
+import calda from "../../../../public/assets/hackathon/calda.svg";
 import sazu from "../../../../public/assets/hackathon/sazu.svg";
 import leanix from "../../../../public/assets/hackathon/leanix.svg";
 import chipolo from "../../../../public/assets/hackathon/chipolo.svg";
 import impactHub from "../../../../public/assets/hackathon/impact hub.svg";
+import tehPark from "../../../../public/assets/hackathon/tehnoloski-park.svg";
+import arnes from "../../../../public/assets/hackathon/arnes.svg";
+import feelRooty from "../../../../public/assets/hackathon/feel-rooty.svg";
+import juicy from "../../../../public/assets/hackathon/juicy-marbles.svg";
+import ilirija from "../../../../public/assets/hackathon/ilirija.svg";
+import atlantic from "../../../../public/assets/hackathon/atlantic-groupa.svg";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import { LinkButton } from "./components/link-button";
@@ -66,12 +72,22 @@ export function Sponsors() {
       image: epilog,
       link: "https://www.epilog.net/en/",
     },
+    {
+      name: "Calda",
+      image: calda,
+      link: "https://www.thecalda.com/",
+    },
   ];
   const silverSponsors = [
     {
       name: "Abelium",
       image: abelium,
       link: "https://abelium.si/",
+    },
+    {
+      name: "Tehnološki park Ljubljana",
+      image: tehPark,
+      link: "https://www.tp-lj.si/sl",
     },
   ];
   const bronzeSponsors = [
@@ -89,6 +105,11 @@ export function Sponsors() {
       name: "LeanIX",
       image: leanix,
       link: "https://www.leanix.net/",
+    },
+    {
+      name: "Impact hub Ljubljana",
+      image: impactHub,
+      link: "https://ljubljana.impacthub.net/",
     },
   ];
   const partners = [
@@ -118,19 +139,34 @@ export function Sponsors() {
       link: "https://zrc-sazu.si/sl",
     },
     {
-      name: "Impact hub Ljubljana",
-      image: impactHub,
-      link: "https://ljubljana.impacthub.net/",
-    },
-    // {
-    //   name: "Tehnološki park Ljubljana",
-    //   image: impactHub,
-    //   link: "https://www.tp-lj.si/sl",
-    // },
-    {
       name: "Chipolo",
       image: chipolo,
       link: "https://chipolo.net/en/",
+    },
+    {
+      name: "Ilirija",
+      image: ilirija,
+      link: "https://www.ilirija.si/sl/",
+    },
+    {
+      name: "Juicy marbles",
+      image: juicy,
+      link: "https://eu.juicymarbles.com",
+    },
+    {
+      name: "Atlantic grupa",
+      image: atlantic,
+      link: "https://www.atlanticgrupa.com/en/",
+    },
+    {
+      name: "Arnes",
+      image: arnes,
+      link: "https://www.arnes.si",
+    },
+    {
+      name: "Feel rooty",
+      image: feelRooty,
+      link: "https://feelrooty.si/",
     },
   ];
 
