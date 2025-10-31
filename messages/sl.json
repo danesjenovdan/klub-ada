@@ -166,13 +166,13 @@
     "sunday": "Nedelja",
     "prizes": "Nagrade",
     "challenges": {
-      "1": "Edtech za slepe in slabovidne - Abelium",
-      "2": "AI za karierno rast - Smartis",
-      "3": "Tema: TBD",
-      "4": "Tema: TBD"
+      "1": "AI-opolnomočen učni pomočnik za slepe in slabovidne",
+      "2": "AI za karierno rast",
+      "3": "Optimizacija dostavnih poti",
+      "4": "Tvoj finančni pomočnik"
     },
     "winner": "1. mesto",
-    "challenge": "Izziv #{number}",
+    "challenge": "{company} izziv",
     "faq": {
       "title": "Pogosta vprašanja"
     },
@@ -182,6 +182,7 @@
       "silver": "Srebrni sponzorji",
       "bronze": "Bronasti sponzorji",
       "media": "Partnerji",
+      "support": "Podporniki",
       "cta": "Sodeluj z nami"
     },
     "call_to_action": {

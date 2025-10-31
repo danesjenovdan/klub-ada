@@ -166,13 +166,13 @@
     "sunday": "Sunday",
     "prizes": "Prizes",
     "challenges": {
-      "1": "EdTech for visually impaired by Abelium",
-      "2": "AI for career growth by Smartis",
-      "3": "Topic: TBD",
-      "4": "Topic: TBD"
+      "1": "AI-powered learning assistant for the visually impaired",
+      "2": "AI for career growth",
+      "3": "Delivery route optimization",
+      "4": "Your financial assistant"
     },
     "winner": "First place",
-    "challenge": "Challenge #{number}",
+    "challenge": "{company} challenge",
     "faq": {
       "title": "Frequently Asked Questions"
     },
@@ -182,6 +182,7 @@
       "silver": "Silver sponsors",
       "bronze": "Bronze sponsors",
       "media": "Partners",
+      "support": "Supporters",
       "cta": "Work with us"
     },
     "call_to_action": {
