@@ -50,7 +50,12 @@ export function PrizeItem({
 export function Prizes() {
   const t = useTranslations("Hackathon");
 
-  const challenges = [t("challenges.1"), t("challenges.2"), t("challenges.3")];
+  const challenges = [
+    { name: t("challenges.1"), company: "Abelium" },
+    { name: t("challenges.2"), company: "Smartis" },
+    { name: t("challenges.3"), company: "Epilog" },
+    { name: t("challenges.4"), company: "Calda" },
+  ];
 
   return (
     <PageWrapper>
@@ -68,12 +73,12 @@ export function Prizes() {
             <PrizeItem amount={2000} title={t("winner")} isMain />
           </div>
           <div className="flex items-stretch flex-wrap gap-4">
-            {challenges.map((challenge, index) => (
+            {challenges.map(({ name, company }, index) => (
               <PrizeItem
                 key={index}
                 amount={500}
-                title={t("challenge", { number: index + 1 })}
-                subtitle={challenge}
+                title={t("challenge", { company })}
+                subtitle={name}
               />
             ))}
           </div>
