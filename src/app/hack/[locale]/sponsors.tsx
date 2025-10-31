@@ -17,6 +17,8 @@ import calda from "../../../../public/assets/hackathon/calda.svg";
 import sazu from "../../../../public/assets/hackathon/sazu.svg";
 import leanix from "../../../../public/assets/hackathon/leanix.svg";
 import chipolo from "../../../../public/assets/hackathon/chipolo.svg";
+import deltahub from "../../../../public/assets/hackathon/deltahub.svg";
+import equalEyes from "../../../../public/assets/hackathon/equaleyes.svg";
 import impactHub from "../../../../public/assets/hackathon/impact hub.svg";
 import tehPark from "../../../../public/assets/hackathon/tehnoloski-park.svg";
 import arnes from "../../../../public/assets/hackathon/arnes.svg";
@@ -88,6 +90,11 @@ export function Sponsors() {
       name: "Tehnološki park Ljubljana",
       image: tehPark,
       link: "https://www.tp-lj.si/sl",
+    },
+    {
+      name: "Equaleyes",
+      image: equalEyes,
+      link: "https://equaleyes.com",
     },
   ];
   const bronzeSponsors = [
@@ -167,6 +174,11 @@ export function Sponsors() {
       name: "Feel rooty",
       image: feelRooty,
       link: "https://feelrooty.si/",
+    },
+    {
+      name: "DeltaHub",
+      image: deltahub,
+      link: "https://deltahub.io/",
     },
   ];
 
