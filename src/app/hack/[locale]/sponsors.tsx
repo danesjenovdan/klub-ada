@@ -26,6 +26,7 @@ import feelRooty from "../../../../public/assets/hackathon/feel-rooty.svg";
 import juicy from "../../../../public/assets/hackathon/juicy-marbles.svg";
 import ilirija from "../../../../public/assets/hackathon/ilirija.svg";
 import atlantic from "../../../../public/assets/hackathon/atlantic-groupa.svg";
+import banner from "../../../../public/assets/hackathon/banner.png";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import { LinkButton } from "./components/link-button";
@@ -276,6 +277,19 @@ export function Sponsors() {
                   type="media"
                 />
               ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-3 items-center w-full">
+            <Paragraph
+              size="xl"
+              weight="medium"
+              color="white"
+              textAlign="center"
+            >
+              {t("sponsors.support")}
+            </Paragraph>
+            <div className="rounded-md border-gray w-[60%] border p-5 shrink-0 flex items-center justify-center">
+              <Image src={banner} alt="banner" />
             </div>
           </div>
         </div>
