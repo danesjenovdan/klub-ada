@@ -197,6 +197,10 @@
       "more_help_description": "Check out the hints below.",
       "puzzle": "Coded message #{number}",
       "hint": "Hint #{number}",
+      "placeholder": "Enter solution here",
+      "cta": "Submit",
+      "success": "Congratulations! You have successfully completed the Treasure Hunt.",
+      "failure": "Incorrect solution. Please try again.",
       "puzzle_1": {
         "hint_1": "Browse through our Instagram posts and find the one with frequently asked questions and answers. The first part of the password might be hidden there.",
         "hint_2": "Try decrypting the puzzle password using Morse code.",

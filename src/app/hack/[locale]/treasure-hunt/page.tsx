@@ -10,6 +10,8 @@ import { LinkButton } from "../components/link-button";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useState } from "react";
 import { FaqItem } from "../faq";
+import { Button } from "../components/button";
+import { set } from "date-fns";
 
 export default function Page() {
   const t = useTranslations("Hackathon");
@@ -17,6 +19,22 @@ export default function Page() {
     puzzle: number | null;
     hint: number | null;
   }>({ puzzle: null, hint: null });
+  const [solution, setSolution] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSolutionSubmit = () => {
+    setIsLoading(true);
+    // Fake loading state hehe
+    setTimeout(() => {
+      if (["HEKAJMO_Z_RACKO", "hekajmo_z_racko"].includes(solution)) {
+        alert(t("treasure_hunt.success"));
+      } else {
+        alert(t("treasure_hunt.failure"));
+        setSolution("");
+      }
+      setIsLoading(false);
+    }, 2000);
+  };
 
   const uganka1 = [
     {
@@ -138,6 +156,22 @@ export default function Page() {
               >
                 {t("treasure_hunt.description")}
               </Paragraph>
+              <div className="flex gap-3 w-96 items-center">
+                <input
+                  type="email"
+                  placeholder={t("treasure_hunt.placeholder")}
+                  value={solution}
+                  onChange={(e) => setSolution(e.target.value)}
+                  className="w-full h-11 py-2 px-4 bg-white text-black border border-black rounded-lg"
+                />
+                <Button
+                  className="w-24"
+                  isDisabled={isLoading}
+                  onClick={handleSolutionSubmit}
+                >
+                  {isLoading ? "..." : t("treasure_hunt.cta")}
+                </Button>
+              </div>
             </div>
             “
             <h3 className="font-paragraph font-extrabold text-white text-xl sm:text-2xl md:text-2xl text-center tracking-tight max-w-2xl">
