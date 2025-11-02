@@ -189,6 +189,40 @@
       "title": "Join us and solve real world challenges!",
       "description": "Come meet like minded people, connect with companies in the center of the tech scene in Slovenia, and build something new."
     },
+    "treasure_hunt": {
+      "back": "Back",
+      "title": "Treasure hunt",
+      "description": "To make the wait for the hackathon go by faster, we have prepared a Treasure Hunt for you! Our duck has left behind coded messages scattered across our social media, posts, and website instead of footprints. Find 5 messages, decode them, and enter the complete password in the field below!",
+      "more_help": "Need more help?",
+      "more_help_description": "Check out the hints below.",
+      "puzzle": "Coded message #{number}",
+      "hint": "Hint #{number}",
+      "puzzle_1": {
+        "hint_1": "Browse through our Instagram posts and find the one with frequently asked questions and answers. The first part of the password might be hidden there.",
+        "hint_2": "Try decrypting the puzzle password using Morse code.",
+        "hint_3": "'.-' = A  '-..' = B and so on..."
+      },
+      "puzzle_2": {
+        "hint_1": "Remember our 'this or that' video on Instagram? Maybe something is hidden in the post description?",
+        "hint_2": "Have you ever heard of A1Z26 encryption? Try using it to decrypt the puzzle password.",
+        "hint_3": "1 = A  2 = B and so on..."
+      },
+      "puzzle_3": {
+        "hint_1": "Take a look at our AdaHack highlights on Instagram and find the clue among the workshop info from the hackathon.",
+        "hint_2": "Not quite sure how to solve the puzzle? Maybe the answer is hidden in ASCII codes.",
+        "hint_3": "65 = A  66 = B and so on..."
+      },
+      "puzzle_4": {
+        "hint_1": "If you’re having trouble finding the clue, look more closely through our hackathon website (hack.klub-ada.si).",
+        "hint_2": "The password is a bit shy, so you can only find it on a computer.",
+        "hint_3": "Look for the registration button and use your mouse to help you!"
+      },
+      "puzzle_5": {
+        "hint_1": "On the Instagram or YouTube channel of Klub Ada, find the video with highlights from the 2023 hackathon we organized and check if the code is nearby.",
+        "hint_2": "For the final puzzle, we used the ROT5 cipher — if you get stuck, you can always ask ChatGPT for help.",
+        "hint_3": "F = A  G = B and so on..."
+      }
+    },
     "footer": {
       "ada": "Klub Ada",
       "homepage": "Homepage",

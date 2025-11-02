@@ -1,8 +1,6 @@
 import { useTranslations } from "next-intl";
 import { PageWrapper } from "./components/page-wrapper";
-import { Heading } from "../../[locale]/components/heading";
 import { Paragraph } from "../../[locale]/components/paragraph";
-import { Button } from "./components/button";
 import { LinkButton } from "./components/link-button";
 import Image from "next/image";
 import racka from "../../../../public/assets/hackathon/racka.svg";

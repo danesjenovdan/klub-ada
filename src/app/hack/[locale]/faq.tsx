@@ -23,7 +23,12 @@ type FaqItemProps = {
   isOpen: boolean;
   onChangeOpen: () => void;
 };
-function FaqItem({ question, answer, isOpen, onChangeOpen }: FaqItemProps) {
+export function FaqItem({
+  question,
+  answer,
+  isOpen,
+  onChangeOpen,
+}: FaqItemProps) {
   return (
     <div
       className={clsx("border rounded-md p-6 cursor-pointer", {
