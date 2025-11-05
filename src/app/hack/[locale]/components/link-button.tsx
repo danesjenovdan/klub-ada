@@ -1,5 +1,5 @@
 import { Link as NextLink } from "../../../../i18n/navigation";
-import { forwardRef } from "react";
+import { ElementType, forwardRef } from "react";
 import { LinkOptions } from "./link";
 import { baseButton, ButtonOptions } from "./button";
 import { tv } from "tailwind-variants";
@@ -19,7 +19,11 @@ const linkButtonBase = tv({
 
 type ButtonLinkComponent = ForwardRefComponent<
   "a",
-  LinkOptions & Pick<ButtonOptions, "size" | "variant"> & { showIcon?: boolean }
+  LinkOptions &
+    Pick<ButtonOptions, "size" | "variant"> & {
+      showIcon?: boolean;
+      iconLeft?: ElementType;
+    }
 >;
 export type ButtonLinkProps = PropsOf<ButtonLinkComponent>;
 
@@ -32,6 +36,7 @@ export const LinkButton = forwardRef(
       size = "md",
       variant = "primary",
       showIcon = false,
+      iconLeft: IconLeft,
       ...restProps
     },
     forwardedRef
@@ -48,6 +53,7 @@ export const LinkButton = forwardRef(
         {...externalProps}
         {...restProps}
       >
+        {IconLeft && <IconLeft className="w-4 h-4" />}
         {children}
         {showIcon && (
           <IconArrowRight className="w-4 h-4 transform transition-transform duration-300 group-hover:-rotate-45" />
