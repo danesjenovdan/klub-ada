@@ -8,4 +8,4 @@ resources:
 images:
   - name: klub-ada
     newName: rg.fr-par.scw.cloud/djnd/klub-ada
-    newTag: '460ffb67e02bb085159bc8a8f817585a5244d795'
+    newTag: '0071314a35ae0d5c8dc0de850a73a6ce97c34cf2'
