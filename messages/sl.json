@@ -189,6 +189,44 @@
       "title": "Pridruži se nam v reševanju realističnih izzivov!",
       "description": "Pridi in spoznaj ljudi s podobnimi interesi, poveži se s podjetji v središču tehnološke scene v Sloveniji in ustvari nekaj novega."
     },
+    "treasure_hunt": {
+      "back": "Nazaj",
+      "title": "Lov na zaklad",
+      "description": "Da ti bo čakanje na hekaton hitreje minilo, smo zate pripravile Lov na zaklad! Naša račka je namesto stopinj pustila zakodirana sporočila, razpršena po naših socialnih omrežjih, objavah in spletni strani. Najdi 5 sporočil, jih odkodiraj in celotno geslo vpiši v polje spodaj!",
+      "more_help": "Potrebuješ več pomoči?",
+      "more_help_description": "Oglej si namige spodaj.",
+      "puzzle": "Uganka #{number}",
+      "hint": "Namig #{number}",
+      "placeholder": "Vpiši rešitev tukaj",
+      "cta": "Pošlji",
+      "success": "Čestitamo! Uspešno si zaključil Lov na zaklad.",
+      "failure": "Napačna rešitev. Poskusi znova.",
+      "puzzle_1": {
+        "hint_1": "Pobrskaj po naših Instagram objavah in poišči tisto s pogostimi vprašanji in odgovori. Morda se tam skriva prvi del gesla.",
+        "hint_2": "Geslo uganke poskusi dešifrirati z uporabo Morsejeve abecede.",
+        "hint_3": "'.-' = A  '-..' = B in tako dalje..."
+      },
+      "puzzle_2": {
+        "hint_1": "Se spomniš našega 'this or that' videa na Instagramu? Se morda kaj skriva v opisu objave?",
+        "hint_2": "Si že kdaj slišal(a) za A1Z26 šifriranje? Poskusi z njo dešifrirati geslo uganke.",
+        "hint_3": "1 = A  2 = B in tako dalje..."
+      },
+      "puzzle_3": {
+        "hint_1": "Pokukaj med naše highlighte AdaHack na Instagramu in poišči namig med informacijami o delavnicah na hekatonu.",
+        "hint_2": "Ti ni čisto jasno kako rešiti uganko? Morda se odgovor skriva v ASCII kodah.",
+        "hint_3": "65 = A  66 = B in tako dalje..."
+      },
+      "puzzle_4": {
+        "hint_1": "Če imaš težave pri iskanju namiga, malo bolj podrobno pobrskaj po naši spletni strani za hekaton (hack.klub-ada.si).",
+        "hint_2": "Geslo je malo sramežljivo, zato ga lahko najdeš le na računalniku.",
+        "hint_3": "Poišči gumb za prijavo in si pomagaj z miško!"
+      },
+      "puzzle_5": {
+        "hint_1": "Na Instagramu ali Youtube kanalu Kluba Ada poišči video z utrinki iz hekatona, ki smo ga organizirale 2023 in poglej, če je koda kje v bližini.",
+        "hint_2": "Za zadnjo uganko smo uporabile šifro ROT5, če se zatakne lahko vedno povprašaš ChatGPT za pomoč.",
+        "hint_3": "F = A  G = B in tako dalje..."
+      }
+    },
     "footer": {
       "ada": "Klub Ada",
       "homepage": "Domov",
