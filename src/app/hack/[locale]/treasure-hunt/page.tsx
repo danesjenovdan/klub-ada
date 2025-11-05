@@ -25,8 +25,9 @@ export default function Page() {
   const handleSolutionSubmit = () => {
     setIsLoading(true);
     // Fake loading state hehe
+    const fixedSolution = solution.replace(/[^A-Z0-9]+/gi, "").toLowerCase();
     setTimeout(() => {
-      if (["HEKAJMO_Z_RACKO", "hekajmo_z_racko"].includes(solution)) {
+      if (["hekajmozracko"].includes(fixedSolution)) {
         alert(t("treasure_hunt.success"));
       } else {
         alert(t("treasure_hunt.failure"));
