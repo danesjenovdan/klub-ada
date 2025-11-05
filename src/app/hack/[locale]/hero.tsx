@@ -13,11 +13,12 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[100vh] w-full flex flex-col gap-4 md:gap-7 px-5 md:px-20 py-10 md:py-20 items-center justify-center">
+      {/* TODO: enable ko bo treasure hunt live
       <div className="absolute top-4 right-4">
         <LinkButton showIcon href="/treasure-hunt" size="sm">
           {t("treasure_hunt.title")}
         </LinkButton>
-      </div>
+      </div> */}
       <div>
         <h1 className="font-paragraph font-extrabold text-white md:text-6xl text-5xl text-center tracking-tight">
           {t("title")}
