@@ -27,6 +27,9 @@ import juicy from "../../../../public/assets/hackathon/juicy-marbles.svg";
 import ilirija from "../../../../public/assets/hackathon/ilirija.svg";
 import atlantic from "../../../../public/assets/hackathon/atlantic-groupa.svg";
 import banner from "../../../../public/assets/hackathon/banner.png";
+import benatural from "../../../../public/assets/hackathon/2benatural.png";
+import nil from "../../../../public/assets/hackathon/nil.svg";
+import src from "../../../../public/assets/hackathon/SRC.svg";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import { LinkButton } from "./components/link-button";
@@ -97,6 +100,11 @@ export function Sponsors() {
       image: equalEyes,
       link: "https://equaleyes.com",
     },
+    {
+      name: "SRC",
+      image: src,
+      link: "https://www.src.si",
+    },
   ];
   const bronzeSponsors = [
     {
@@ -113,6 +121,11 @@ export function Sponsors() {
       name: "LeanIX",
       image: leanix,
       link: "https://www.leanix.net/",
+    },
+    {
+      name: "Nil",
+      image: nil,
+      link: "https://nil.com/sl/",
     },
     {
       name: "Impact hub Ljubljana",
@@ -180,6 +193,11 @@ export function Sponsors() {
       name: "DeltaHub",
       image: deltahub,
       link: "https://deltahub.io/",
+    },
+    {
+      name: "2benatural",
+      image: benatural,
+      link: "https://2benatural.si",
     },
   ];
 
