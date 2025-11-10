@@ -11,7 +11,6 @@ import { IconArrowLeft } from "@tabler/icons-react";
 import { useState } from "react";
 import { FaqItem } from "../faq";
 import { Button } from "../components/button";
-import { set } from "date-fns";
 
 export default function Page() {
   const t = useTranslations("Hackathon");
