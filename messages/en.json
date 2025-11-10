@@ -199,7 +199,7 @@
       "hint": "Hint #{number}",
       "placeholder": "Enter solution here",
       "cta": "Submit",
-      "success": "Congratulations! You have successfully completed the Treasure Hunt.",
+      "success": "Congratulations, hacker - you have discovered the secret of Ada Duck! Come to the hackathon and tell us the password to receive a special prize.",
       "failure": "Incorrect solution. Please try again.",
       "puzzle_1": {
         "hint_1": "Browse through our Instagram posts and find the one with frequently asked questions and answers. The first part of the password might be hidden there.",
