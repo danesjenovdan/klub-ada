@@ -21,7 +21,7 @@ export function PrizeItem({
   return (
     <div
       className={clsx(
-        "rounded-md p-8 gap-2 shrink-0 grow flex border-red border flex-col min-w-[48%] min-h-44 md:min-h-48 items-center justify-center",
+        "rounded-md p-8 gap-2 shrink-0 grow flex border-red border flex-col max-w-full min-w-[48%] min-h-44 md:min-h-48 items-center justify-center",
         {
           "bg-[rgba(255,87,87,0.16)] shadow-shineRed": isMain,
         }
@@ -31,7 +31,12 @@ export function PrizeItem({
         {title}
       </Paragraph>
       {subtitle && (
-        <Paragraph size="lg" color="lightGray">
+        <Paragraph
+          size="lg"
+          color="lightGray"
+          textAlign="center"
+          className="text-wrap"
+        >
           {subtitle}
         </Paragraph>
       )}

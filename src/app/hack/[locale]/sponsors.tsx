@@ -312,7 +312,7 @@ export function Sponsors() {
             >
               {t("sponsors.support")}
             </Paragraph>
-            <div className="rounded-md border-gray w-[60%] border p-5 shrink-0 flex items-center justify-center">
+            <div className="rounded-md border-gray w-full md:w-[60%] border p-5 shrink-0 flex items-center justify-center">
               <Image src={banner} alt="banner" />
             </div>
           </div>
