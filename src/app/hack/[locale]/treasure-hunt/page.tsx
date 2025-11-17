@@ -156,7 +156,7 @@ export default function Page() {
               >
                 {t("treasure_hunt.description")}
               </Paragraph>
-              <div className="flex gap-3 w-96 items-center">
+              <div className="flex flex-col md:flex-row gap-3 w-full max-w-96 items-center">
                 <input
                   type="email"
                   placeholder={t("treasure_hunt.placeholder")}

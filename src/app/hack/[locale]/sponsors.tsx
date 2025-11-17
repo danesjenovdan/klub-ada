@@ -28,6 +28,7 @@ import ilirija from "../../../../public/assets/hackathon/ilirija.svg";
 import atlantic from "../../../../public/assets/hackathon/atlantic-groupa.svg";
 import banner from "../../../../public/assets/hackathon/banner.png";
 import benatural from "../../../../public/assets/hackathon/2benatural.png";
+import svetMetraze from "../../../../public/assets/hackathon/svet metraze.svg";
 import nil from "../../../../public/assets/hackathon/nil.svg";
 import src from "../../../../public/assets/hackathon/SRC.svg";
 import clsx from "clsx";
@@ -198,6 +199,11 @@ export function Sponsors() {
       name: "2benatural",
       image: benatural,
       link: "https://2benatural.si",
+    },
+    {
+      name: "Svet metraze",
+      image: svetMetraze,
+      link: "https://svetmetraze.si/",
     },
   ];
 
