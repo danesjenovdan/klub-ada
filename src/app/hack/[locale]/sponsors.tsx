@@ -30,6 +30,7 @@ import banner from "../../../../public/assets/hackathon/banner.png";
 import benatural from "../../../../public/assets/hackathon/2benatural.png";
 import svetMetraze from "../../../../public/assets/hackathon/svet metraze.svg";
 import nil from "../../../../public/assets/hackathon/nil.svg";
+import lovable from "../../../../public/assets/hackathon/lovable.svg";
 import src from "../../../../public/assets/hackathon/SRC.svg";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
@@ -135,6 +136,11 @@ export function Sponsors() {
     },
   ];
   const partners = [
+    {
+      name: "Lovable",
+      image: lovable,
+      link: "https://lovable.dev/",
+    },
     {
       name: "Penine Istenič",
       image: istenic,
@@ -312,7 +318,7 @@ export function Sponsors() {
             >
               {t("sponsors.support")}
             </Paragraph>
-            <div className="rounded-md border-gray w-[60%] border p-5 shrink-0 flex items-center justify-center">
+            <div className="rounded-md border-gray w-full md:w-[60%] border p-5 shrink-0 flex items-center justify-center">
               <Image src={banner} alt="banner" />
             </div>
           </div>
