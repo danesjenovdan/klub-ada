@@ -27,7 +27,6 @@ import juicy from "../../../../public/assets/hackathon/juicy-marbles.svg";
 import ilirija from "../../../../public/assets/hackathon/ilirija.svg";
 import atlantic from "../../../../public/assets/hackathon/atlantic-groupa.svg";
 import banner from "../../../../public/assets/hackathon/banner.png";
-import benatural from "../../../../public/assets/hackathon/2benatural.png";
 import svetMetraze from "../../../../public/assets/hackathon/svet metraze.svg";
 import nil from "../../../../public/assets/hackathon/nil.svg";
 import lovable from "../../../../public/assets/hackathon/lovable.svg";
@@ -41,7 +40,7 @@ type SponsorItemProps = {
   image: string | StaticImageData;
   name: string;
   link: string;
-  type: "gold" | "silver" | "bronze" | "media";
+  type: "gold" | "silver" | "bronze" | "media" | "vibe";
 };
 export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
   return (
@@ -55,7 +54,7 @@ export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
           "border-yellow border": type === "gold",
           "border-blue border": type === "silver",
           "border-red border": type === "bronze",
-          "border-gray border": type === "media",
+          "border-gray border": ["media", "vibe"].includes(type),
           "md:w-72 min-h-30 md:min-h-30": type !== "media",
           "md:w-48 min-h-20 md:min-h-20": type === "media",
         }
@@ -137,11 +136,6 @@ export function Sponsors() {
   ];
   const partners = [
     {
-      name: "Lovable",
-      image: lovable,
-      link: "https://lovable.dev/",
-    },
-    {
       name: "Penine Istenič",
       image: istenic,
       link: "https://www.istenic.si",
@@ -200,11 +194,6 @@ export function Sponsors() {
       name: "DeltaHub",
       image: deltahub,
       link: "https://deltahub.io/",
-    },
-    {
-      name: "2benatural",
-      image: benatural,
-      link: "https://2benatural.si",
     },
     {
       name: "Svet metraze",
@@ -287,6 +276,22 @@ export function Sponsors() {
                 />
               ))}
             </div>
+          </div>
+          <div className="flex flex-col gap-3 items-center w-full">
+            <Paragraph
+              size="xl"
+              weight="medium"
+              color="white"
+              textAlign="center"
+            >
+              {t("sponsors.vibe_coding_partner")}
+            </Paragraph>
+            <SponsorItem
+              image={lovable}
+              name="Lovable"
+              link="https://lovable.dev/"
+              type="vibe"
+            />
           </div>
           <div className="flex flex-col gap-3 items-center w-full">
             <Paragraph
