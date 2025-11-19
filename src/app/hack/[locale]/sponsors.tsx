@@ -197,11 +197,6 @@ export function Sponsors() {
       link: "https://deltahub.io/",
     },
     {
-      name: "2benatural",
-      image: benatural,
-      link: "https://2benatural.si",
-    },
-    {
       name: "Svet metraze",
       image: svetMetraze,
       link: "https://svetmetraze.si/",
