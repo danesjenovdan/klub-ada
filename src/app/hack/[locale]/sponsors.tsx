@@ -41,7 +41,7 @@ type SponsorItemProps = {
   image: string | StaticImageData;
   name: string;
   link: string;
-  type: "gold" | "silver" | "bronze" | "media";
+  type: "gold" | "silver" | "bronze" | "media" | "vibe";
 };
 export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
   return (
@@ -55,7 +55,7 @@ export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
           "border-yellow border": type === "gold",
           "border-blue border": type === "silver",
           "border-red border": type === "bronze",
-          "border-gray border": type === "media",
+          "border-gray border": ["media", "vibe"].includes(type),
           "md:w-72 min-h-30 md:min-h-30": type !== "media",
           "md:w-48 min-h-20 md:min-h-20": type === "media",
         }
@@ -136,11 +136,6 @@ export function Sponsors() {
     },
   ];
   const partners = [
-    {
-      name: "Lovable",
-      image: lovable,
-      link: "https://lovable.dev/",
-    },
     {
       name: "Penine Istenič",
       image: istenic,
@@ -287,6 +282,22 @@ export function Sponsors() {
                 />
               ))}
             </div>
+          </div>
+          <div className="flex flex-col gap-3 items-center w-full">
+            <Paragraph
+              size="xl"
+              weight="medium"
+              color="white"
+              textAlign="center"
+            >
+              {t("sponsors.vibe_coding_partner")}
+            </Paragraph>
+            <SponsorItem
+              image={lovable}
+              name="Lovable"
+              link="https://lovable.dev/"
+              type="vibe"
+            />
           </div>
           <div className="flex flex-col gap-3 items-center w-full">
             <Paragraph
