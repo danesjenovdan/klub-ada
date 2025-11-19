@@ -27,7 +27,6 @@ import juicy from "../../../../public/assets/hackathon/juicy-marbles.svg";
 import ilirija from "../../../../public/assets/hackathon/ilirija.svg";
 import atlantic from "../../../../public/assets/hackathon/atlantic-groupa.svg";
 import banner from "../../../../public/assets/hackathon/banner.png";
-import benatural from "../../../../public/assets/hackathon/2benatural.png";
 import svetMetraze from "../../../../public/assets/hackathon/svet metraze.svg";
 import nil from "../../../../public/assets/hackathon/nil.svg";
 import lovable from "../../../../public/assets/hackathon/lovable.svg";
