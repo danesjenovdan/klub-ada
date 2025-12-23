@@ -16,7 +16,7 @@
     "@sanity/document-internationalization": "^3.3.3",
     "@sanity/icons": "^3.5.0",
     "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^3.65.1",
+    "@sanity/vision": "^3.99.0",
     "@tabler/icons-react": "^3.27.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
