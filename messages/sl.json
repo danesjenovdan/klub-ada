@@ -145,7 +145,7 @@
     "about_us_description": "Spoznaj Klub Ada",
     "activities": "Aktivnosti",
     "events": "Dogodki",
-    "hackathon": "AdaHack 2025",
+    "hackathon": "AdaHack 2026",
     "events_all": "Vsi dogodki",
     "blog": "Blog",
     "partners": "Partnerstva"
@@ -153,8 +153,8 @@
   "Hackathon": {
     "title": "AdaHack",
     "slogan": "Code for change",
-    "location": "Epilog, 22a Tehnološki park, 1000 Ljubljana",
-    "main_cta": "Prijavi se",
+    "location": "TBD, Ljubljana",
+    "main_cta": "Coming soon",
     "numbers": {
       "title": "AdaHack 2025 <numbers>v številkah</numbers>",
       "participants": "udeležencev",

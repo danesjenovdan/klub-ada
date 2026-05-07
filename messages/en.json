@@ -146,15 +146,15 @@
     "activities": "Activities",
     "events": "Events",
     "events_all": "All events",
-    "hackathon": "AdaHack 2025",
+    "hackathon": "AdaHack 2026",
     "blog": "Blog",
     "partners": "Partnerships"
   },
   "Hackathon": {
     "title": "AdaHack",
     "slogan": "Code for change",
-    "location": "Epilog, 22a Tehnološki park, 1000 Ljubljana",
-    "main_cta": "Sign up",
+    "location": "TBD, Ljubljana",
+    "main_cta": "Coming soon",
     "numbers": {
       "title": "AdaHack 2025 <numbers>in numbers</numbers>",
       "participants": "participants",
