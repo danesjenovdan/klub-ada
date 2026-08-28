@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/src/i18n/routing";
 import { anaheim } from "@/src/app/fonts";
 import "@/src/app/[locale]/globals.css";
+import { Navbar } from "./components/navbar";
 
 export const metadata: Metadata = {
   title: "Klub Ada - Hackathon",
@@ -34,15 +35,17 @@ export default async function RootLayout({
 }>) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
-
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
   return (
     <html lang={locale}>
-      <body className={`${anaheim.className} antialiased mx-auto`}>
+      <body
+        className={`${anaheim.className} antialiased mx-auto border-2 border-red`}
+      >
         <NextIntlClientProvider locale={locale}>
+          <Navbar />
           {children}
         </NextIntlClientProvider>
       </body>
