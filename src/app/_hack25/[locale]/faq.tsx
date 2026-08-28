@@ -97,7 +97,7 @@ export function FaqItem({
 }
 
 export function Faq() {
-  const t = useTranslations("Hackathon");
+  const t = useTranslations("Hackathon25");
   const locale = useLocale();
   const [isOpen, setIsOpen] = useState<number | null>(null);
   const { data } = useSanityData({

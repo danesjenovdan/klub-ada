@@ -7,7 +7,7 @@ import stat2Src from "../../../../public/assets/hack-stat-2.png";
 import stat3Src from "../../../../public/assets/hack-stat-3.png";
 
 export function Stats() {
-  const t = useTranslations("Hackathon");
+  const t = useTranslations("Hackathon25");
 
   return (
     <PageWrapper>

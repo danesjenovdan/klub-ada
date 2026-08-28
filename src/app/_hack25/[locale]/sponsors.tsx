@@ -57,7 +57,7 @@ export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
           "border-gray border": ["media", "vibe"].includes(type),
           "md:w-72 min-h-30 md:min-h-30": type !== "media",
           "md:w-48 min-h-20 md:min-h-20": type === "media",
-        }
+        },
       )}
     >
       <Image src={image} alt={name} />
@@ -66,7 +66,7 @@ export function SponsorItem({ image, name, link, type }: SponsorItemProps) {
 }
 
 export function Sponsors() {
-  const t = useTranslations("Hackathon");
+  const t = useTranslations("Hackathon25");
 
   const goldSponsors = [
     {
