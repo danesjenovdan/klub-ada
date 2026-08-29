@@ -11,7 +11,7 @@ export function Hero() {
 
   const formattedTime = `${formatDayOfDate(startDate)} - ${formatDate(endDate)}`;
 
-  const t = useTranslations("Hackathon");
+  const t = useTranslations("Hackathon25");
 
   return (
     <section className="relative min-h-[100vh] w-full flex flex-col gap-4 md:gap-7 px-5 md:px-20 py-10 md:py-20 items-center justify-center">
@@ -50,9 +50,7 @@ export function Hero() {
         </Paragraph>
       </div>
       <div className="relative group">
-        <button
-          className="relative px-8 py-4 bg-[#FF5757] hover:bg-[#FF5757]/90 text-white font-bold text-lg rounded-lg transition-all"
-        >
+        <button className="relative px-8 py-4 bg-[#FF5757] hover:bg-[#FF5757]/90 text-white font-bold text-lg rounded-lg transition-all">
           {t("main_cta")}
         </button>
 
@@ -72,37 +70,88 @@ export function Hero() {
 
         <style jsx>{`
           @keyframes wiggle1 {
-            0%, 100% { transform: translate(0, 0); }
-            20% { transform: translate(3px, -2px); }
-            40% { transform: translate(-2px, 3px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(-3px, -1px); }
+            0%,
+            100% {
+              transform: translate(0, 0);
+            }
+            20% {
+              transform: translate(3px, -2px);
+            }
+            40% {
+              transform: translate(-2px, 3px);
+            }
+            60% {
+              transform: translate(2px, 2px);
+            }
+            80% {
+              transform: translate(-3px, -1px);
+            }
           }
           @keyframes wiggle2 {
-            0%, 100% { transform: translate(0, 0); }
-            15% { transform: translate(-3px, 2px); }
-            35% { transform: translate(2px, -3px); }
-            55% { transform: translate(-2px, -2px); }
-            75% { transform: translate(3px, 1px); }
+            0%,
+            100% {
+              transform: translate(0, 0);
+            }
+            15% {
+              transform: translate(-3px, 2px);
+            }
+            35% {
+              transform: translate(2px, -3px);
+            }
+            55% {
+              transform: translate(-2px, -2px);
+            }
+            75% {
+              transform: translate(3px, 1px);
+            }
           }
           @keyframes wiggle3 {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(2px, 3px); }
-            50% { transform: translate(-3px, -2px); }
-            75% { transform: translate(3px, -1px); }
+            0%,
+            100% {
+              transform: translate(0, 0);
+            }
+            25% {
+              transform: translate(2px, 3px);
+            }
+            50% {
+              transform: translate(-3px, -2px);
+            }
+            75% {
+              transform: translate(3px, -1px);
+            }
           }
           @keyframes wiggle4 {
-            0%, 100% { transform: translate(0, 0); }
-            30% { transform: translate(-2px, 2px); }
-            60% { transform: translate(3px, -3px); }
-            90% { transform: translate(-1px, 2px); }
+            0%,
+            100% {
+              transform: translate(0, 0);
+            }
+            30% {
+              transform: translate(-2px, 2px);
+            }
+            60% {
+              transform: translate(3px, -3px);
+            }
+            90% {
+              transform: translate(-1px, 2px);
+            }
           }
           @keyframes wiggle5 {
-            0%, 100% { transform: translate(0, 0); }
-            20% { transform: translate(2px, -3px); }
-            45% { transform: translate(-3px, 2px); }
-            70% { transform: translate(1px, 3px); }
-            90% { transform: translate(-2px, -2px); }
+            0%,
+            100% {
+              transform: translate(0, 0);
+            }
+            20% {
+              transform: translate(2px, -3px);
+            }
+            45% {
+              transform: translate(-3px, 2px);
+            }
+            70% {
+              transform: translate(1px, 3px);
+            }
+            90% {
+              transform: translate(-2px, -2px);
+            }
           }
         `}</style>
       </div>

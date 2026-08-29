@@ -4,20 +4,15 @@ import clsx from "clsx";
 import { ForwardRefComponent, PropsOf } from "@/src/app/utils/polymorphic";
 
 export const baseButton = tv({
-  base: "inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-bold text-center whitespace-nowrap outline-none",
+  base: "inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium text-center whitespace-nowrap outline-none select-none",
   variants: {
     size: {
       sm: "text-sm h-8 py-1 px-4",
       md: "text-lg h-11 py-2 px-5",
-      lg: "text-lg h-14 py-3 px-6",
     },
     variant: {
-      primary:
-        "border border-red text-white text-start shadow-shineRed transition-all duration-200 ease-in-out transform hover:bg-red hover:shadow-shineStrongRed",
-      secondary:
-        "border border-white text-white text-start shadow-shineWhite transition-all duration-200 ease-in-out transform hover:bg-red hover:border-red hover:shadow-shineStrongRed",
-      tertiary:
-        "bg-black text-white text-start transition-all duration-200 ease-in-out transform hover:bg-red",
+      primary: "text-white bg-red text-start",
+      secondary: "border border-red text-red bg-white",
     },
     disabled: {
       true: "cursor-not-allowed bg-gray300 border border-gray700 text-white",
@@ -30,12 +25,12 @@ export interface ButtonOptions {
    * Sets the size of the button
    * @default 'md'
    */
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md";
   /**
    * Sets the style variant of the button
    * @default 'primary'
    */
-  variant?: "primary" | "secondary" | "tertiary";
+  variant?: "primary" | "secondary";
   /**
    * If `true` the button will be disabled
    * @default false
@@ -68,7 +63,7 @@ export const Button = forwardRef(
       className,
       ...rest
     },
-    forwardedRef
+    forwardedRef,
   ) => {
     const shouldBeDisabled = isDisabled || hasHtmlDisabledProp;
 
@@ -83,7 +78,7 @@ export const Button = forwardRef(
             variant,
             disabled: shouldBeDisabled,
           }),
-          className
+          className,
         )}
         {...rest}
       >
@@ -91,5 +86,5 @@ export const Button = forwardRef(
         {IconRight && <IconRight className="w-4 h-4" />}
       </button>
     );
-  }
+  },
 ) as PolymorphicButton;

@@ -150,6 +150,9 @@
     "blog": "Blog",
     "partners": "Partnerstva"
   },
+  "Hackathon": {
+    "main_cta": "Coming soon"
+  },
   "Hackathon25": {
     "title": "AdaHack",
     "slogan": "Code for change",
