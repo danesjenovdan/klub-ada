@@ -71,10 +71,10 @@ export function Window({ title, children, className }: WindowProps) {
     >
       <div
         onDoubleClick={() => setIsMinimised((wasMinimised) => !wasMinimised)}
-        className="flex items-center justify-between gap-2 h-8 shrink-0 px-1 m-0.5 bg-red select-none"
+        className="flex items-center justify-between gap-2 h-8 shrink-0 px-1 m-0.5 bg-[#0C0303] select-none"
       >
-        <span className="font-heading font-bold text-sm md:text-base text-white px-1 truncate">
-          {title}
+        <span className="uppercase font-bold text-sm md:text-base text-white px-1 truncate">
+          {`/ ${title}`}
         </span>
         <div className="flex items-center gap-1">
           <WindowButton
@@ -92,7 +92,7 @@ export function Window({ title, children, className }: WindowProps) {
       {!isMinimised && (
         <div
           className={clsx(
-            "grow min-h-0 overflow-y-auto m-0.5 mt-0 p-4 md:p-6 bg-beige text-black",
+            "grow min-h-0 overflow-y-auto m-0.5 mt-0 p-4 bg-[#0C0303] md:p-6 text-white",
             sunken,
           )}
         >
