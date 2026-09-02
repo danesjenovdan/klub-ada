@@ -13,7 +13,7 @@ import { FaqItem } from "../faq";
 import { Button } from "../components/button";
 
 export default function Page() {
-  const t = useTranslations("Hackathon");
+  const t = useTranslations("Hackathon25");
   const [isOpen, setIsOpen] = useState<{
     puzzle: number | null;
     hint: number | null;
