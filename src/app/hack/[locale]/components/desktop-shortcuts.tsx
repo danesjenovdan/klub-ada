@@ -17,7 +17,7 @@ export function DesktopShortcuts() {
 
   return (
     <>
-      <nav className="absolute z-10 top-3 left-2 md:top-8 md:left-8 flex flex-col gap-3">
+      <nav className="absolute z-10 top-3 left-2 md:top-8 md:left-8 flex flex-col gap-8">
         {NAV_PAGES.map((page) => (
           <DesktopShortcut
             key={page.href}
