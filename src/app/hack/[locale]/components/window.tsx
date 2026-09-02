@@ -65,7 +65,7 @@ export function Window({ title, children, className }: WindowProps) {
         raised,
         isMinimised
           ? "left-0 bottom-0 w-[calc(100%-1rem)] max-w-[20rem]"
-          : "left-2 right-2 top-3 bottom-3 md:left-[19rem] md:right-10 md:top-8 md:bottom-10",
+          : "left-2 right-2 top-3 bottom-3 md:left-[9rem] md:right-10 md:top-8 md:bottom-10",
         className,
       )}
     >
