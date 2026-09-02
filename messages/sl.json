@@ -151,7 +151,15 @@
     "partners": "Partnerstva"
   },
   "Hackathon": {
-    "main_cta": "Coming soon"
+    "main_cta": "Coming soon",
+    "pages": {
+      "sponsors": "Naši sponzorji",
+      "rewards": "Nagrade",
+      "faq": "Pogosta vprašanja",
+      "timeline": "Časovnica",
+      "numbers": "AdaHack v številkah",
+      "pictures": "Slike AdaHack 2025"
+    }
   },
   "Hackathon25": {
     "title": "AdaHack",

@@ -151,7 +151,15 @@
     "partners": "Partnerships"
   },
   "Hackathon": {
-    "main_cta": "Coming soon"
+    "main_cta": "Coming soon",
+    "pages": {
+      "sponsors": "Our sponsors",
+      "rewards": "Rewards & Recognition",
+      "faq": "FAQ",
+      "timeline": "Timeline",
+      "numbers": "AdaHack in numbers",
+      "pictures": "AdaHack 2025 pics"
+    }
   },
   "Hackathon25": {
     "title": "AdaHack",

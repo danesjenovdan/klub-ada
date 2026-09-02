@@ -4,15 +4,17 @@ import clsx from "clsx";
 import { ForwardRefComponent, PropsOf } from "@/src/app/utils/polymorphic";
 
 export const baseButton = tv({
-  base: "inline-flex shrink-0 relative justify-center items-center gap-1.5 select-none rounded-lg font-button font-medium text-center whitespace-nowrap outline-none select-none",
+  base: "inline-flex shrink-0 relative justify-center items-center gap-1.5 text-center whitespace-nowrap outline-none select-none font-heading uppercase text-sm md:text-base border-2 truncate",
   variants: {
     size: {
       sm: "text-sm h-8 py-1 px-4",
       md: "text-lg h-11 py-2 px-5",
     },
     variant: {
-      primary: "text-white bg-red text-start",
-      secondary: "border border-red text-red bg-white",
+      primary:
+        "hover:bg-red700 hover:text-black hover:border-t-red800 hover:border-l-red800 hover:border-r-red100 hover:border-b-red100 bg-red text-black border-t-red100 border-l-red100 border-r-red800 border-b-red800",
+      secondary:
+        "hover:bg-gray300 hover:text-black hover:border-t-gray900 hover:border-l-gray900 hover:border-r-gray100 hover:border-b-gray100 bg-gray200 text-black border-t-gray100 border-l-gray100 border-r-gray900 border-b-gray900",
     },
     disabled: {
       true: "cursor-not-allowed bg-gray300 border border-gray700 text-white",

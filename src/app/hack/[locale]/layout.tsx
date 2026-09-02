@@ -5,6 +5,7 @@ import { routing } from "@/src/i18n/routing";
 import { anaheim } from "@/src/app/fonts";
 import "@/src/app/[locale]/globals.css";
 import { Navbar } from "./components/navbar";
+import { Desktop } from "./components/desktop";
 
 export const metadata: Metadata = {
   title: "Klub Ada - Hackathon",
@@ -46,7 +47,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider locale={locale}>
           <Navbar />
-          {children}
+          <Desktop>{children}</Desktop>
         </NextIntlClientProvider>
       </body>
     </html>
