@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Image from "next/image";
 import { DesktopNav } from "./desktop-nav";
 
 /**
@@ -9,6 +10,14 @@ import { DesktopNav } from "./desktop-nav";
 export function Desktop({ children }: { children: ReactNode }) {
   return (
     <div className="relative max-w-full h-[calc(100vh-66px)] bg-[#000] overflow-hidden">
+      <Image
+        src="/assets/hackathon26/bg.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center z-0"
+      />
       <DesktopNav />
       <div className="absolute inset-0 z-20 pointer-events-none">
         {children}
