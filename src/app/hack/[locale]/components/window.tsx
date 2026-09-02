@@ -13,6 +13,12 @@ const raised =
   "border-2 border-t-gray100 border-l-gray100 border-r-gray900 border-b-gray900";
 const sunken =
   "border-2 border-t-gray900 border-l-gray900 border-r-gray100 border-b-gray100";
+/**
+ * The 2px gray chrome around a panel. Drawn as a ring (an outset box shadow)
+ * rather than as a background on the frame, so that a panel can be transparent
+ * and show the desktop through instead of the frame's gray.
+ */
+const chrome = "ring-2 ring-gray200";
 
 function WindowButton({
   label,
@@ -61,7 +67,7 @@ export function Window({ title, children, className }: WindowProps) {
   return (
     <div
       className={clsx(
-        "pointer-events-auto absolute flex flex-col bg-gray200 shadow-[6px_6px_0_rgba(0,0,0,0.6)]",
+        "pointer-events-auto absolute flex flex-col shadow-[6px_6px_0_rgba(0,0,0,0.6)]",
         raised,
         isMinimised
           ? "left-0 bottom-0 w-[calc(100%-1rem)] max-w-[20rem]"
@@ -71,7 +77,10 @@ export function Window({ title, children, className }: WindowProps) {
     >
       <div
         onDoubleClick={() => setIsMinimised((wasMinimised) => !wasMinimised)}
-        className="flex items-center justify-between gap-2 h-8 shrink-0 px-1 m-0.5 bg-[#0C0303] select-none"
+        className={clsx(
+          "flex items-center justify-between gap-2 h-8 shrink-0 px-1 m-0.5 bg-[#0C0303] select-none",
+          chrome,
+        )}
       >
         <span className="uppercase font-bold text-sm md:text-base text-white px-1 truncate">
           {`/ ${title}`}
@@ -94,6 +103,7 @@ export function Window({ title, children, className }: WindowProps) {
           className={clsx(
             "grow min-h-0 overflow-y-auto m-0.5 mt-0 p-4 bg-[#0C0303] md:p-6 text-white",
             sunken,
+            chrome,
           )}
         >
           {children}
