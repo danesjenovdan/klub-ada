@@ -9,7 +9,7 @@ import { DesktopShortcuts } from "./desktop-shortcuts";
  */
 export function Desktop({ children }: { children: ReactNode }) {
   return (
-    <div className="relative max-w-full h-[calc(100vh-66px)] bg-[#000] overflow-hidden">
+    <div className="relative max-w-full grow min-h-0 bg-[#000] overflow-hidden">
       <Image
         src="/assets/hackathon26/bg.png"
         alt=""

@@ -43,7 +43,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${anaheim.className} bg-[#000] antialiased border-2 border-red`}
+        className={`${anaheim.className} bg-[#000] antialiased border-2 border-red h-screen flex flex-col overflow-hidden`}
       >
         <NextIntlClientProvider locale={locale}>
           <Navbar />
