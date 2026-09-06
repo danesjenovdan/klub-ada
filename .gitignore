@@ -11,3 +11,6 @@ next-env.d.ts
 # sanity
 dist
 .sanity
+
+# local env overrides
+.env*.local
