@@ -71,7 +71,7 @@ export function TimelineItem({
 type TimelineProps = TimelineItemProps & { endTime?: string };
 
 export function Timeline() {
-  const t = useTranslations("Hackathon");
+  const t = useTranslations("Hackathon25");
   const locale = useLocale();
   const { data } = useSanityData({
     query: GET_TIMELINE_ITEMS,

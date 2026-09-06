@@ -151,6 +151,17 @@
     "partners": "Partnerstva"
   },
   "Hackathon": {
+    "main_cta": "Coming soon",
+    "pages": {
+      "sponsors": "Naši sponzorji",
+      "rewards": "Nagrade",
+      "faq": "Pogosta vprašanja",
+      "timeline": "Časovnica",
+      "numbers": "AdaHack v številkah",
+      "pictures": "Slike AdaHack 2025"
+    }
+  },
+  "Hackathon25": {
     "title": "AdaHack",
     "slogan": "Code for change",
     "location": "TBD, Ljubljana",
