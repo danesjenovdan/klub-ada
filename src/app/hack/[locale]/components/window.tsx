@@ -2,7 +2,12 @@
 
 import { ReactNode, useState } from "react";
 import clsx from "clsx";
-import { IconMinus, IconX } from "@tabler/icons-react";
+import {
+  IconMinus,
+  IconSquare,
+  IconSquares,
+  IconX,
+} from "@tabler/icons-react";
 import { useRouter } from "@/src/i18n/navigation";
 
 /**
@@ -24,10 +29,12 @@ function WindowButton({
   label,
   icon: Icon,
   onClick,
+  className,
 }: {
   label: string;
   icon: typeof IconX;
   onClick: () => void;
+  className?: string;
 }) {
   return (
     <button
@@ -39,6 +46,7 @@ function WindowButton({
         "h-6 w-6 shrink-0 flex items-center justify-center bg-gray200 text-black outline-none",
         raised,
         "active:border-t-gray900 active:border-l-gray900 active:border-r-gray100 active:border-b-gray100",
+        className,
       )}
     >
       <Icon className="w-3.5 h-3.5" stroke={3} />
@@ -58,11 +66,13 @@ export interface WindowProps {
 /**
  * Wraps a hackathon subpage in a draggable-looking "desktop window" that floats
  * on top of the main page. Closing it navigates back to the desktop, minimising
- * collapses it to its title bar in the bottom-left corner.
+ * collapses it to its title bar in the bottom-left corner and maximising fills
+ * the whole desktop, the way the window always looks on a phone.
  */
 export function Window({ title, children, className }: WindowProps) {
   const router = useRouter();
   const [isMinimised, setIsMinimised] = useState(false);
+  const [isMaximised, setIsMaximised] = useState(false);
 
   return (
     <div
@@ -71,7 +81,10 @@ export function Window({ title, children, className }: WindowProps) {
         raised,
         isMinimised
           ? "left-0 bottom-0 w-[calc(100%-1rem)] max-w-[20rem]"
-          : "left-2 right-2 top-3 bottom-3 md:left-[9rem] md:right-10 md:top-8 md:bottom-10",
+          : "left-2 right-2 top-3 bottom-3",
+        !isMinimised &&
+          !isMaximised &&
+          "md:left-[9rem] md:right-10 md:top-8 md:bottom-10",
         className,
       )}
     >
@@ -90,6 +103,17 @@ export function Window({ title, children, className }: WindowProps) {
             label={isMinimised ? "Restore" : "Minimise"}
             icon={IconMinus}
             onClick={() => setIsMinimised((wasMinimised) => !wasMinimised)}
+          />
+          <WindowButton
+            label={isMaximised ? "Restore" : "Maximise"}
+            icon={isMaximised ? IconSquares : IconSquare}
+            // A phone window already fills the screen, so there is nothing to
+            // maximise there.
+            className="hidden md:flex"
+            onClick={() => {
+              setIsMinimised(false);
+              setIsMaximised((wasMaximised) => !wasMaximised);
+            }}
           />
           <WindowButton
             label="Close"
