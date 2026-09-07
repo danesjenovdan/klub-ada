@@ -152,6 +152,7 @@
   },
   "Hackathon": {
     "main_cta": "Coming soon",
+    "photo_number": "Photo {number}",
     "pages": {
       "sponsors": "Our sponsors",
       "rewards": "Rewards & Recognition",

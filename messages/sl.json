@@ -152,6 +152,7 @@
   },
   "Hackathon": {
     "main_cta": "Coming soon",
+    "photo_number": "Slika {number}",
     "pages": {
       "sponsors": "Naši sponzorji",
       "rewards": "Nagrade",
