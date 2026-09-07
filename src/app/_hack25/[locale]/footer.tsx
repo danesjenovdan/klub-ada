@@ -7,7 +7,7 @@ import { LanguageDialog } from "../../[locale]/components/language-dialog";
 import { Link } from "./components/link";
 
 export function Footer() {
-  const t = useTranslations("Hackathon");
+  const t = useTranslations("Hackathon25");
 
   return (
     <div className="box-border max-w-full flex flex-col">
