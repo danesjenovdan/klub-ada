@@ -7,6 +7,7 @@ import { teamMemberType } from "./teamMemberType";
 import { activityType } from "./activityType";
 import { eventType } from "./eventType";
 import { hackathonTimelineItem } from "./hackathonTimelineItem";
+import { hack26TimelineItem } from "./hack26TimelineItem";
 import { hackathonFaqItem } from "./hackathonFaqItem";
 import { hackathonGallery } from "./hackathonGallery";
 
@@ -19,6 +20,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     eventType,
     teamMemberType,
     hackathonTimelineItem,
+    hack26TimelineItem,
     hackathonFaqItem,
     hackathonGallery,
   ],
