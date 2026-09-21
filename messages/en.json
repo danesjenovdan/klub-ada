@@ -165,9 +165,7 @@
       "heading": "AdaHack Quest",
       "subtitle": "A board game of skill, caffeine & merge conflicts. Are you READY?!!",
       "start": "Start",
-      "start_hint": "Press play",
       "finish": "Finish",
-      "finish_hint": "GG WP",
       "now": "You are here",
       "details": "Show details",
       "close": "Close"

@@ -47,6 +47,9 @@ const isNow = (time: string, end?: string) => {
   return now >= start && isSameDay(now, start);
 };
 
+/** Whether `time` is already behind us. */
+const isPast = (time: string) => new Date() > parseISO(time);
+
 /** The "FRI · 16.00" line under a tile's title. */
 const formatSlot = (locale: string, { time, endTime }: TimelineItem) =>
   [
@@ -78,16 +81,19 @@ function Connector({ index }: { index: number }) {
   );
 }
 
-/** The shared face of a tile: number, icon, title and time slot. */
+/**
+ * The shared face of a tile: number, icon, title and time slot. `onRed` inverts
+ * it for the filled red tile marking the item happening now.
+ */
 function TileFace({
   item,
   number,
-  isCurrent,
+  onRed,
   size = "sm",
 }: {
   item: TimelineItem;
   number: number;
-  isCurrent: boolean;
+  onRed?: boolean;
   size?: "sm" | "lg";
 }) {
   const locale = useLocale();
@@ -97,7 +103,7 @@ function TileFace({
       <span
         className={clsx(
           "absolute left-3 top-2 font-heading text-xs tracking-widest",
-          isCurrent ? "bg-red px-1 text-black" : "text-red",
+          onRed ? "text-black" : "text-red",
         )}
       >
         {`[${String(number).padStart(2, "0")}]`}
@@ -108,13 +114,28 @@ function TileFace({
           alt=""
           width={size === "lg" ? 48 : 40}
           height={size === "lg" ? 48 : 40}
-          className="object-contain [image-rendering:pixelated]"
+          className={clsx(
+            "object-contain [image-rendering:pixelated]",
+            // Red pixel art would disappear into a red tile, so it is flattened
+            // to a silhouette instead, like the black text next to it.
+            onRed && "brightness-0",
+          )}
         />
       )}
-      <span className="font-heading font-bold uppercase tracking-widest text-white text-sm md:text-base">
+      <span
+        className={clsx(
+          "font-heading font-bold uppercase tracking-widest text-sm md:text-base",
+          onRed ? "text-black" : "text-white",
+        )}
+      >
         {item.title}
       </span>
-      <span className="font-heading uppercase tracking-widest text-gray400 text-xs">
+      <span
+        className={clsx(
+          "font-heading uppercase tracking-widest text-xs",
+          onRed ? "text-black opacity-70" : "text-gray400",
+        )}
+      >
         {formatSlot(locale, item)}
       </span>
     </>
@@ -136,12 +157,10 @@ const Tag = ({ children }: { children: string }) => (
 function TileDialog({
   item,
   number,
-  isCurrent,
   onClose,
 }: {
   item: TimelineItem;
   number: number;
-  isCurrent: boolean;
   onClose: () => void;
 }) {
   const t = useTranslations("Hackathon");
@@ -161,8 +180,8 @@ function TileDialog({
       aria-label={item.title}
       className="fixed inset-0 m-0 hidden h-full max-h-none w-full max-w-none items-center justify-center bg-transparent p-4 open:flex backdrop:bg-[rgba(0,0,0,0.7)]"
     >
-      <div className="relative flex w-[min(22rem,100%)] flex-col items-center gap-2 border border-red bg-[#150606] px-6 pb-8 pt-10 text-center shadow-shineStrongRed">
-        <TileFace item={item} number={number} isCurrent={isCurrent} size="lg" />
+      <div className="relative flex w-[min(22rem,100%)] flex-col items-center gap-2 border border-red bg-[#150606] px-6 pb-8 pt-10 text-center">
+        <TileFace item={item} number={number} size="lg" />
         {item.description && (
           <p className="mt-2 font-heading text-sm leading-relaxed text-gray400">
             {item.description}
@@ -183,18 +202,10 @@ function TileDialog({
 }
 
 /** The solid red START and the dark FINISH tiles that bookend the board. */
-const EndTile = ({
-  label,
-  hint,
-  isStart,
-}: {
-  label: string;
-  hint: string;
-  isStart?: boolean;
-}) => (
+const EndTile = ({ label, isStart }: { label: string; isStart?: boolean }) => (
   <div
     className={clsx(
-      "flex grow flex-col items-center justify-center gap-1 border p-4 min-h-[8.5rem]",
+      "flex grow flex-col items-center justify-center border p-4 min-h-[8.5rem]",
       isStart
         ? "border-red bg-red text-black"
         : "border-red bg-[rgba(255,87,87,0.15)] text-white shadow-shineRed",
@@ -203,15 +214,13 @@ const EndTile = ({
     <span className="font-heading text-xl font-bold uppercase tracking-widest">
       {label}
     </span>
-    <span className="font-heading text-xs uppercase tracking-widest opacity-70">
-      {hint}
-    </span>
   </div>
 );
 
 export default function Page() {
   const t = useTranslations("Hackathon");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const currentTileRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
   const { data } = useSanityData({
     query: GET_TIMELINE_ITEMS,
@@ -222,6 +231,16 @@ export default function Page() {
   const currentIndex = items.findIndex(({ time, endTime }, index) =>
     isNow(time, endTime || items[index + 1]?.time),
   );
+  // Where the item happening now sits on the board - START takes the first
+  // slot, so it runs one ahead of the item's own index. -1 when the hackathon
+  // has not started or is already over, which leaves the whole board lit.
+  const currentTile = currentIndex < 0 ? -1 : currentIndex + 1;
+
+  // The board is a tall stack on a phone, so the tile you are on is likely to
+  // be off-screen on arrival.
+  useEffect(() => {
+    currentTileRef.current?.scrollIntoView({ block: "center" });
+  }, [currentTile]);
 
   if (!items.length) {
     return (
@@ -231,10 +250,20 @@ export default function Page() {
     );
   }
 
+  // Everything already behind you fades - the item happening now excepted, since
+  // that one is the red tile. START goes with them the moment the board is under
+  // way; FINISH stays lit as the thing still ahead. Indexed by board slot, so it
+  // lines up with `tiles` below.
+  const isDimmed = [
+    items.some(({ time }) => isPast(time)),
+    ...items.map(({ time }, index) => isPast(time) && index !== currentIndex),
+    false,
+  ];
+
   // START and FINISH are tiles on the board too, so they take a slot each.
   const tiles = [
     <>
-      <EndTile label={t("quest.start")} hint={t("quest.start_hint")} isStart />
+      <EndTile label={t("quest.start")} isStart />
       <Connector index={0} />
     </>,
     ...items.map((item, index) => {
@@ -250,20 +279,20 @@ export default function Page() {
               isCurrent ? `${item.title} - ${t("quest.now")}` : item.title
             }
             className={clsx(
-              "flex h-full w-full flex-col items-center justify-center gap-1.5 border bg-[#150606] p-4 pt-8 text-center outline-none transition-shadow min-h-[8.5rem]",
+              "flex h-full w-full flex-col items-center justify-center gap-1.5 border p-4 pt-8 text-center outline-none transition-shadow min-h-[8.5rem]",
               isCurrent
-                ? "border-red bg-[rgba(255,87,87,0.1)] shadow-shineStrongRed"
-                : "border-[rgba(255,87,87,0.3)] hover:border-red hover:shadow-shineRed",
+                ? "border-red bg-red"
+                : "border-[rgba(255,87,87,0.3)] bg-[#150606] hover:border-red hover:shadow-shineRed",
             )}
           >
-            <TileFace item={item} number={tileIndex} isCurrent={isCurrent} />
+            <TileFace item={item} number={tileIndex} onRed={isCurrent} />
           </button>
           {item.tag && <Tag>{item.tag}</Tag>}
           <Connector index={tileIndex} />
         </>
       );
     }),
-    <EndTile label={t("quest.finish")} hint={t("quest.finish_hint")} />,
+    <EndTile label={t("quest.finish")} />,
   ];
 
   return (
@@ -289,14 +318,26 @@ export default function Page() {
                 rowIndex % 2 === 1 && "md:[direction:rtl]",
               )}
             >
-              {row.map((tile, columnIndex) => (
-                <div
-                  key={columnIndex}
-                  className="relative flex flex-col md:[direction:ltr]"
-                >
-                  {tile}
-                </div>
-              ))}
+              {row.map((tile, columnIndex) => {
+                const boardIndex = rowIndex * COLUMNS + columnIndex;
+
+                return (
+                  <div
+                    key={columnIndex}
+                    ref={
+                      boardIndex === currentTile ? currentTileRef : undefined
+                    }
+                    className={clsx(
+                      "relative flex flex-col md:[direction:ltr]",
+                      // Tile, tag and the path leading out of it fade together,
+                      // so the board dims behind you rather than in pieces.
+                      isDimmed[boardIndex] && "opacity-40",
+                    )}
+                  >
+                    {tile}
+                  </div>
+                );
+              })}
             </div>
           ))}
         </div>
@@ -306,7 +347,6 @@ export default function Page() {
         <TileDialog
           item={items[openIndex]}
           number={openIndex + 1}
-          isCurrent={openIndex === currentIndex}
           onClose={() => setOpenIndex(null)}
         />
       )}
