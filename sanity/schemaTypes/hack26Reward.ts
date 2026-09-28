@@ -40,6 +40,13 @@ export const hack26Reward = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "icon",
+      title: "Icon",
+      description:
+        "Optional, shown in two corners of the turned-over card. Drawn 20px tall, so a simple mark reads better than a wordmark.",
+      type: "image",
+    }),
+    defineField({
       name: "isMain",
       title: "Main award",
       description: "Shown highlighted, full width, above the other rewards.",
