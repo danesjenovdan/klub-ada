@@ -152,6 +152,7 @@
   },
   "Hackathon": {
     "main_cta": "Coming soon",
+    "tickets_cta": "Tickets coming soon",
     "photo_number": "Photo {number}",
     "pages": {
       "sponsors": "Our sponsors",
@@ -176,6 +177,7 @@
     "slogan": "Code for change",
     "location": "TBD, Ljubljana",
     "main_cta": "Coming soon",
+    "tickets_cta": "Tickets coming soon",
     "numbers": {
       "title": "AdaHack 2025 <numbers>in numbers</numbers>",
       "participants": "participants",
