@@ -16,7 +16,7 @@ function ImageStat({
   stat: string;
 }) {
   return (
-    <div className="relative w-full min-h-[200px] min-w-[280px] max-w-[400px] md:min-w-[360px] md:min-h-[360px] rounded-lg">
+    <div className="relative w-full min-h-[150px] min-w-[200px] max-w-[320px] md:min-w-[300px] md:min-h-[360px] rounded-lg">
       <Image src={src} alt="" fill className="rounded-lg object-cover" />
       <div className="flex flex-col absolute w-full h-full top-0 left-0 items-center justify-center">
         <Heading
@@ -47,7 +47,7 @@ export default function Page() {
           label={t25("numbers.participants")}
           stat="80"
         />
-        <ImageStat src={stat2Src} label={t25("numbers.sponsors")} stat="25" />
+        <ImageStat src={stat2Src} label={t25("numbers.sponsors")} stat="26" />
         <ImageStat src={stat3Src} label={t25("numbers.awards")} stat="4000€" />
       </div>
     </Window>
