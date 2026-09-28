@@ -160,6 +160,15 @@
       "timeline": "Timeline",
       "numbers": "AdaHack in numbers",
       "pictures": "AdaHack 2025 pics"
+    },
+    "quest": {
+      "heading": "AdaHack Quest",
+      "subtitle": "A board game of skill, caffeine & merge conflicts. Are you READY?!!",
+      "start": "Start",
+      "finish": "Finish",
+      "now": "You are here",
+      "details": "Show details",
+      "close": "Close"
     }
   },
   "Hackathon25": {

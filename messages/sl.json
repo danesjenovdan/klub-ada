@@ -160,6 +160,15 @@
       "timeline": "Časovnica",
       "numbers": "AdaHack v številkah",
       "pictures": "Slike AdaHack 2025"
+    },
+    "quest": {
+      "heading": "AdaHack Quest",
+      "subtitle": "Namizna igra spretnosti, kofeina in merge konfliktov. Si PRIPRAVLJENA?!!",
+      "start": "Start",
+      "finish": "Cilj",
+      "now": "Tukaj si",
+      "details": "Pokaži podrobnosti",
+      "close": "Zapri"
     }
   },
   "Hackathon25": {
