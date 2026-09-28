@@ -162,6 +162,10 @@
       "numbers": "AdaHack in numbers",
       "pictures": "AdaHack 2025 pics"
     },
+    "prize_deck": {
+      "heading": "Prize deck",
+      "subtitle": "Five cards. One grand prize. Four challenges. No bluffing required."
+    },
     "quest": {
       "heading": "AdaHack Quest",
       "subtitle": "A board game of skill, caffeine & merge conflicts. Are you READY?!!",
