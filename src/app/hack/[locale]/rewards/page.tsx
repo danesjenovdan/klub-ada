@@ -1,11 +1,21 @@
+"use client";
+
 import clsx from "clsx";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Heading } from "@/src/app/[locale]/components/heading";
 import { Paragraph } from "@/src/app/[locale]/components/paragraph";
+import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { Window } from "../components/window";
 
+const GET_REWARDS = `*[_type == "hack26Reward"] | order(_createdAt) {
+  'title': coalesce(title[$language], title.sl),
+  'subtitle': coalesce(subtitle[$language], subtitle.sl),
+  'amount': coalesce(amount[$language], amount.sl),
+  isMain
+}`;
+
 type PrizeItemProps = {
-  amount: number;
+  amount: string;
   title: string;
   subtitle?: string;
   isMain?: boolean;
@@ -28,7 +38,7 @@ function PrizeItem({ amount, title, subtitle, isMain }: PrizeItemProps) {
         </Paragraph>
       )}
       <Heading className="font-paragraph" color="white" size="lg">
-        {`${amount} EUR`}
+        {amount}
       </Heading>
     </div>
   );
@@ -36,31 +46,32 @@ function PrizeItem({ amount, title, subtitle, isMain }: PrizeItemProps) {
 
 export default function Page() {
   const t = useTranslations("Hackathon");
-  // Last edition's prizes, kept until the 2026 ones are decided.
-  const t25 = useTranslations("Hackathon25");
+  const locale = useLocale();
+  const { data } = useSanityData({
+    query: GET_REWARDS,
+    params: { language: locale },
+  });
 
-  const challenges = [
-    { name: t25("challenges.1"), company: "Abelium" },
-    { name: t25("challenges.2"), company: "Smartis" },
-    { name: t25("challenges.3"), company: "Epilog" },
-    { name: t25("challenges.4"), company: "Calda" },
-  ];
+  const rewards = (data || []) as PrizeItemProps[];
+  const main = rewards.filter(({ isMain }) => isMain);
+  const others = rewards.filter(({ isMain }) => !isMain);
 
   return (
     <Window title={t("pages.rewards")}>
-      <div className="flex flex-col gap-4 max-w-[1000px] mx-auto">
-        <PrizeItem amount={2000} title={t25("winner")} isMain />
-        <div className="flex items-stretch flex-wrap gap-4">
-          {challenges.map(({ name, company }) => (
-            <PrizeItem
-              key={company}
-              amount={500}
-              title={t25("challenge", { company })}
-              subtitle={name}
-            />
+      {rewards.length ? (
+        <div className="flex flex-col gap-4 max-w-[1000px] mx-auto">
+          {main.map((reward) => (
+            <PrizeItem key={reward.title} {...reward} />
           ))}
+          <div className="flex items-stretch flex-wrap gap-4">
+            {others.map((reward) => (
+              <PrizeItem key={reward.title} {...reward} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <p className="font-paragraph text-base">{t("main_cta")}</p>
+      )}
     </Window>
   );
 }
