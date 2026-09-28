@@ -95,6 +95,14 @@ export default function Page() {
             </div>
           );
         })}
+        <div className="flex flex-col gap-3 items-center">
+          <Paragraph size="xl" weight="medium" color="white" textAlign="center">
+            {t25("sponsors.support")}
+          </Paragraph>
+          <div className="rounded-md border-gray w-full md:w-[60%] border p-5 flex items-center justify-center">
+            <Image src={banner} alt="" />
+          </div>
+        </div>
         <div className="flex justify-center">
           <LinkButton
             isExternal
