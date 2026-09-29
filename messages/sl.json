@@ -152,6 +152,7 @@
   },
   "Hackathon": {
     "main_cta": "Coming soon",
+    "loading": "Nalaganje ...",
     "tickets_cta": "Vstopnice kmalu",
     "photo_number": "Slika {number}",
     "pages": {

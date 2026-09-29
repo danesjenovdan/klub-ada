@@ -10,7 +10,7 @@ import imageLoader from "@/src/app/utils/image-loader";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import banner from "@/public/assets/hackathon/banner.png";
 import { LinkButton } from "../components/link-button";
-import { Window } from "../components/window";
+import { Window, WindowLoading } from "../components/window";
 
 const GET_SPONSORS = `*[_type == "hack26Sponsor"] | order(name) {
   name,
@@ -68,51 +68,60 @@ const GROUPS: { titleKey: string; type: SponsorType }[] = [
 export default function Page() {
   const t = useTranslations("Hackathon");
   const t25 = useTranslations("Hackathon25");
-  const { data } = useSanityData({ query: GET_SPONSORS });
+  const { data, isLoading } = useSanityData({ query: GET_SPONSORS });
   const allSponsors = (data || []) as Sponsor[];
 
   return (
     <Window title={t("pages.sponsors")}>
-      <div className="flex flex-col gap-8 max-w-[1000px] mx-auto">
-        {GROUPS.map(({ titleKey, type }) => {
-          const sponsors = allSponsors.filter((s) => s.type === type);
-          if (!sponsors.length) return null;
-          return (
-            <div key={titleKey} className="flex flex-col gap-3 items-center">
-              <Paragraph
-                size="xl"
-                weight="medium"
-                color="white"
-                textAlign="center"
-              >
-                {t25(titleKey)}
-              </Paragraph>
-              <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
-                {sponsors.map((sponsor) => (
-                  <SponsorItem key={sponsor.name} {...sponsor} />
-                ))}
+      {isLoading ? (
+        <WindowLoading />
+      ) : (
+        <div className="flex flex-col gap-8 max-w-[1000px] mx-auto">
+          {GROUPS.map(({ titleKey, type }) => {
+            const sponsors = allSponsors.filter((s) => s.type === type);
+            if (!sponsors.length) return null;
+            return (
+              <div key={titleKey} className="flex flex-col gap-3 items-center">
+                <Paragraph
+                  size="xl"
+                  weight="medium"
+                  color="white"
+                  textAlign="center"
+                >
+                  {t25(titleKey)}
+                </Paragraph>
+                <div className="flex items-stretch flex-wrap gap-4 w-full justify-center">
+                  {sponsors.map((sponsor) => (
+                    <SponsorItem key={sponsor.name} {...sponsor} />
+                  ))}
+                </div>
               </div>
+            );
+          })}
+          <div className="flex flex-col gap-3 items-center">
+            <Paragraph
+              size="xl"
+              weight="medium"
+              color="white"
+              textAlign="center"
+            >
+              {t25("sponsors.support")}
+            </Paragraph>
+            <div className="rounded-md border-gray w-full md:w-[60%] border p-5 flex items-center justify-center">
+              <Image src={banner} alt="" />
             </div>
-          );
-        })}
-        <div className="flex flex-col gap-3 items-center">
-          <Paragraph size="xl" weight="medium" color="white" textAlign="center">
-            {t25("sponsors.support")}
-          </Paragraph>
-          <div className="rounded-md border-gray w-full md:w-[60%] border p-5 flex items-center justify-center">
-            <Image src={banner} alt="" />
+          </div>
+          <div className="flex justify-center">
+            <LinkButton
+              isExternal
+              href="https://klub-ada.si/partnerstvo"
+              showIcon
+            >
+              {t25("sponsors.cta")}
+            </LinkButton>
           </div>
         </div>
-        <div className="flex justify-center">
-          <LinkButton
-            isExternal
-            href="https://klub-ada.si/partnerstvo"
-            showIcon
-          >
-            {t25("sponsors.cta")}
-          </LinkButton>
-        </div>
-      </div>
+      )}
     </Window>
   );
 }
