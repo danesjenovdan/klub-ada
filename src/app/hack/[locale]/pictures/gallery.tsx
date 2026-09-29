@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageLoader from "@/src/app/utils/image-loader";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
+import { WindowLoading } from "../components/window";
 
 const GET_GALLERY = `*[
   _type == "hackathonGallery" && year == $year
@@ -28,7 +29,7 @@ const PREVIEW_WIDTH = 1600;
  */
 export function Gallery() {
   const t = useTranslations("Hackathon");
-  const { data } = useSanityData({
+  const { data, isLoading } = useSanityData({
     query: GET_GALLERY,
     params: { year: GALLERY_YEAR },
   });
@@ -44,6 +45,10 @@ export function Gallery() {
       ?.querySelector('[aria-selected="true"]')
       ?.scrollIntoView({ inline: "nearest", block: "nearest" });
   }, [selectedIndex]);
+
+  if (isLoading) {
+    return <WindowLoading />;
+  }
 
   if (!photos.length) {
     return <p className="font-paragraph text-base">{t("main_cta")}</p>;

@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import { Paragraph } from "@/src/app/[locale]/components/paragraph";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import { Window } from "../components/window";
+import { Window, WindowLoading } from "../components/window";
 
 const GET_FAQ_ITEMS = `*[
   _type == "hackathonFaqItem"
@@ -95,7 +95,7 @@ export default function Page() {
   const t = useTranslations("Hackathon");
   const locale = useLocale();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { data } = useSanityData({
+  const { data, isLoading } = useSanityData({
     query: GET_FAQ_ITEMS,
     params: { language: locale },
   });
@@ -104,21 +104,25 @@ export default function Page() {
 
   return (
     <Window title={t("pages.faq")}>
-      <div className="flex flex-col gap-4 max-w-[1000px] mx-auto">
-        {faqItems.map(({ question, answer }, index) => (
-          <FaqItem
-            key={index}
-            question={question}
-            answer={answer}
-            isOpen={openIndex === index}
-            onChangeOpen={() =>
-              setOpenIndex((previousIndex) =>
-                previousIndex === index ? null : index,
-              )
-            }
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <WindowLoading />
+      ) : (
+        <div className="flex flex-col gap-4 max-w-[1000px] mx-auto">
+          {faqItems.map(({ question, answer }, index) => (
+            <FaqItem
+              key={index}
+              question={question}
+              answer={answer}
+              isOpen={openIndex === index}
+              onChangeOpen={() =>
+                setOpenIndex((previousIndex) =>
+                  previousIndex === index ? null : index,
+                )
+              }
+            />
+          ))}
+        </div>
+      )}
     </Window>
   );
 }

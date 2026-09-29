@@ -2,6 +2,8 @@
 
 import { ReactNode, useState } from "react";
 import clsx from "clsx";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import {
   IconMinus,
   IconSquare,
@@ -133,6 +135,53 @@ export function Window({ title, children, className }: WindowProps) {
           {children}
         </div>
       )}
+    </div>
+  );
+}
+
+/** How many blocks fill the progress bar before it starts over. */
+const LOADING_BLOCKS = 14;
+const LOADING_CYCLE_SECONDS = 2.8;
+
+/**
+ * An old Windows progress bar for a window whose contents are still on their
+ * way: chunky red blocks fill a sunken track one by one, then it starts over.
+ */
+export function WindowLoading() {
+  const t = useTranslations("Hackathon");
+
+  return (
+    <div
+      role="status"
+      className="flex h-full min-h-[12rem] flex-col items-center justify-center gap-3"
+    >
+      <p className="font-heading text-sm uppercase tracking-widest text-white">
+        {t("loading")}
+      </p>
+      <div
+        className={clsx(
+          "flex w-full max-w-[18rem] gap-[3px] bg-[#0C0303] p-[3px]",
+          sunken,
+        )}
+      >
+        {Array.from({ length: LOADING_BLOCKS }, (_, index) => {
+          const shownAt = index / LOADING_BLOCKS;
+          return (
+            <motion.span
+              key={index}
+              className="h-4 flex-1 bg-red"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0, 1, 1] }}
+              transition={{
+                duration: LOADING_CYCLE_SECONDS,
+                times: [0, shownAt, shownAt, 1],
+                ease: "linear",
+                repeat: Infinity,
+              }}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

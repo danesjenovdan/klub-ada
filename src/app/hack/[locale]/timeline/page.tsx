@@ -9,7 +9,7 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { formatTime } from "@/src/app/utils/date";
 import imageLoader from "@/src/app/utils/image-loader";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import { Window } from "../components/window";
+import { Window, WindowLoading } from "../components/window";
 
 const GET_TIMELINE_ITEMS = `*[
   _type == "hack26TimelineItem"
@@ -222,7 +222,7 @@ export default function Page() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const currentTileRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
-  const { data } = useSanityData({
+  const { data, isLoading } = useSanityData({
     query: GET_TIMELINE_ITEMS,
     params: { language: locale },
   });
@@ -245,7 +245,11 @@ export default function Page() {
   if (!items.length) {
     return (
       <Window title={t("pages.timeline")}>
-        <p className="font-paragraph text-base">{t("main_cta")}</p>
+        {isLoading ? (
+          <WindowLoading />
+        ) : (
+          <p className="font-paragraph text-base">{t("main_cta")}</p>
+        )}
       </Window>
     );
   }

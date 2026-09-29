@@ -8,7 +8,7 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageLoader from "@/src/app/utils/image-loader";
 import { instrumentSerif } from "@/src/app/fonts";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import { Window } from "../components/window";
+import { Window, WindowLoading } from "../components/window";
 
 const GET_REWARDS = `*[_type == "hack26Reward"] | order(_createdAt) {
   'title': coalesce(title[$language], title.sl),
@@ -207,7 +207,7 @@ function RewardCard({
 export default function Page() {
   const t = useTranslations("Hackathon");
   const locale = useLocale();
-  const { data } = useSanityData({
+  const { data, isLoading } = useSanityData({
     query: GET_REWARDS,
     params: { language: locale },
   });
@@ -217,7 +217,9 @@ export default function Page() {
 
   return (
     <Window title={t("pages.rewards")}>
-      {rewards.length ? (
+      {isLoading ? (
+        <WindowLoading />
+      ) : rewards.length ? (
         <div className="flex min-h-full flex-col gap-2">
           <h1 className="mx-auto w-full max-w-[1000px] font-heading text-2xl font-bold uppercase tracking-widest text-white md:text-3xl">
             {t("prize_deck.heading")}
