@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import clsx from "clsx";
 import { usePathname } from "@/src/i18n/navigation";
 import { FLOATING_PAGES, NAV_PAGES, PAGES_WITH_ICONS } from "../pages";
@@ -10,15 +9,11 @@ import { DesktopShortcut } from "./desktop-shortcut";
  * Every shortcut on the desktop. On a phone they are all equal, spread three
  * across the top of the screen and three across the bottom. From `md` up most
  * of them line up in the column on the left and the rest lie around wherever
- * they were dropped. The selection lives here so that only ever one shortcut is
- * selected.
+ * they were dropped. The shortcut of the current page is shown as selected.
  */
 export function DesktopShortcuts() {
   const pathname = usePathname();
-  const [selectedHref, setSelectedHref] = useState<string | null>(null);
-
-  const isSelected = (href: string) =>
-    selectedHref === href || pathname.endsWith(href);
+  const isSelected = (href: string) => pathname.endsWith(href);
 
   return (
     <>
@@ -28,7 +23,6 @@ export function DesktopShortcuts() {
             key={page.href}
             page={page}
             isSelected={isSelected(page.href)}
-            onSelect={() => setSelectedHref(page.href)}
           />
         ))}
       </nav>
@@ -38,7 +32,6 @@ export function DesktopShortcuts() {
             key={page.href}
             page={page}
             isSelected={isSelected(page.href)}
-            onSelect={() => setSelectedHref(page.href)}
           />
         ))}
       </nav>
@@ -47,7 +40,6 @@ export function DesktopShortcuts() {
           key={page.href}
           page={page}
           isSelected={isSelected(page.href)}
-          onSelect={() => setSelectedHref(page.href)}
           className={clsx("hidden md:flex absolute z-10", page.position)}
         />
       ))}
