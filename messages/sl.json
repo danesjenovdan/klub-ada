@@ -175,6 +175,18 @@
       "now": "Tukaj si",
       "details": "Pokaži podrobnosti",
       "close": "Zapri"
+    },
+    "sponsors": {
+      "title": "Sponzorji 2026",
+      "subtitle": "AdaHack poganjajo podporniki.\nRazišči planete in poglej, kdo je na krovu.",
+      "back": "Nazaj",
+      "labels": {
+        "gold": "zlati",
+        "silver": "srebrni",
+        "bronze": "bronasti",
+        "vibe": "vibe\ncoding",
+        "media": "mediji"
+      }
     }
   },
   "Hackathon25": {
