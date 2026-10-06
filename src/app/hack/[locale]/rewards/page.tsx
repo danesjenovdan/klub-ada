@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import clsx from "clsx";
-import { motion } from "motion/react";
+import { LayoutGroup, motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageLoader from "@/src/app/utils/image-loader";
-import { instrumentSerif } from "@/src/app/fonts";
+import { instrumentSerif, plexMono } from "@/src/app/fonts";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { Window, WindowLoading } from "../components/window";
 
@@ -26,36 +26,121 @@ type Reward = {
   icon?: SanityImageSource;
 };
 
-const cardFace =
-  "absolute inset-0 border-2 border-red bg-[#000] [backface-visibility:hidden]";
-
-/** Top and bottom edge of a card: corner art and labels on one line. */
-const cardRow =
-  "absolute inset-x-2 flex justify-between text-xs md:text-sm tracking-wider text-red";
+/**
+ * The felt of the table and the back of every card share one colour in the
+ * design, a shade warmer than the window behind them.
+ */
+const FELT = "bg-[#170d10]";
 
 /**
- * Corner art: the reward's own icon if it has one, pixels otherwise. The
- * turned-over card has less going on in its corners, so it draws them larger.
+ * Card width. `--card-w` is set on the page container (see `PrizeDeck`) from
+ * the container's width, so that all the cards fit in one row on the table
+ * from `md` up and two per row on a phone, capped at 1.5× the design's
+ * 147×210. Everything drawn on a card is sized in `em` against a font size
+ * derived from the same variable, so it scales with the card.
  */
-function PixelCorner({
-  icon,
-  large,
-}: {
-  icon?: SanityImageSource;
-  large?: boolean;
-}) {
+const cardSize = "w-[var(--card-w)] aspect-[7/10]";
+
+const cardFace = clsx(
+  "absolute inset-0 flex flex-col justify-between border border-red p-[0.65em] [backface-visibility:hidden]",
+  FELT,
+);
+
+/** Top and bottom edge of a card: corner art and a label on one line. */
+const cardRow = clsx(
+  "flex items-center justify-between text-[1em] uppercase tracking-[0.125em] text-red",
+  plexMono.className,
+);
+
+/**
+ * Corner art: the reward's own icon if it has one, the design's pixel diamond
+ * otherwise.
+ */
+function Corner({ icon }: { icon?: SanityImageSource }) {
   return icon ? (
     <img
       src={imageLoader(icon)}
       alt=""
-      className="h-6 md:h-8 w-auto max-w-[50%] object-contain"
+      className="h-[2.3em] w-auto max-w-[50%] object-contain"
     />
   ) : (
     <img
       src="/assets/hackathon26/card-corner.svg"
       alt=""
-      className={clsx("shrink-0", large ? "w-3.5 md:w-4" : "w-2.5 md:w-3")}
+      className="w-[0.57em] shrink-0"
     />
+  );
+}
+
+/** The back of a card: "AdaHack", the crowned duck, "2026". */
+function CardBack() {
+  return (
+    <div className={cardFace}>
+      <div className={cardRow}>
+        <Corner />
+        <span>AdaHack</span>
+        <Corner />
+      </div>
+      <img
+        src="/assets/hackathon26/card-duck.svg"
+        alt=""
+        className="mx-auto w-1/2"
+      />
+      <div className={cardRow}>
+        <Corner />
+        <span>2026</span>
+        <Corner />
+      </div>
+    </div>
+  );
+}
+
+/** The face of a card: the prize. */
+function CardFront({ reward }: { reward: Reward }) {
+  return (
+    <div
+      className={clsx(
+        cardFace,
+        "[transform:rotateY(180deg)] text-white",
+        reward.isMain && "shadow-shineRed",
+      )}
+    >
+      <div className={clsx(cardRow, "items-start normal-case tracking-normal")}>
+        <span className="font-semibold leading-none">{reward.amount}</span>
+        <Corner icon={reward.icon} />
+      </div>
+      <div className="flex flex-col items-center gap-1 px-1 text-center">
+        <span
+          className={clsx(
+            "text-[2.3em] leading-tight",
+            instrumentSerif.className,
+          )}
+        >
+          {reward.amount}
+        </span>
+        <span
+          className={clsx("text-[0.85em] leading-tight", plexMono.className)}
+        >
+          {reward.title}
+        </span>
+        {reward.subtitle && (
+          <span
+            className={clsx(
+              "text-[0.65em] font-light leading-tight text-gray400",
+              plexMono.className,
+            )}
+          >
+            {reward.subtitle}
+          </span>
+        )}
+      </div>
+      <div className={clsx(cardRow, "items-end normal-case tracking-normal")}>
+        <Corner icon={reward.icon} />
+        <span className="rotate-180 font-semibold leading-none">
+          {reward.amount}
+        </span>
+      </div>
+    </div>
   );
 }
 
@@ -68,139 +153,179 @@ const dealTransition = (index: number) => ({
 });
 
 /**
- * One reward as a playing card. It lies face down until clicked, then turns
- * over to show the prize.
+ * One reward as a playing card. The same `layoutId` is used in the deck and in
+ * its slot on the table, so when the deck is dealt each card glides from one
+ * to the other. It lies face down until clicked, then turns over to show the
+ * prize.
  */
 function RewardCard({
   reward,
   index,
-  count,
   isDealt,
+  isFlipped,
   onClick,
+  className,
+  style,
 }: {
   reward: Reward;
   index: number;
-  count: number;
   isDealt: boolean;
+  isFlipped: boolean;
   onClick: () => void;
+  className?: string;
+  style?: React.CSSProperties;
 }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-  // The first card lies on top of the deck, so it is also the first dealt.
-  const delay = index * DEAL_STAGGER;
-
   return (
     <motion.button
       type="button"
-      layout
-      // Lift each card on its way out, so it arcs up off the deck instead of
-      // sliding flat along the table.
-      animate={isDealt ? { y: [0, -40, 0], rotate: [0, -6, 0] } : undefined}
+      layoutId={`reward-card-${index}`}
       // Deal the cards one after another, like solitaire laying out its piles:
       // a quick flick off the deck that eases into place without bouncing.
-      // The layout move, lift and spin share one clock so they land together.
-      transition={{
-        layout: dealTransition(index),
-        y: {
-          ...dealTransition(index),
-          ease: ["easeOut", "easeIn"],
-          times: [0, 0.4, 1],
-        },
-        rotate: {
-          ...dealTransition(index),
-          ease: "easeOut",
-          times: [0, 0.3, 1],
-        },
-      }}
-      onClick={() =>
-        isDealt ? setIsFlipped((flipped) => !flipped) : onClick()
-      }
+      transition={{ layout: dealTransition(index) }}
+      onClick={onClick}
       aria-label={
         isFlipped ? `${reward.title}: ${reward.amount}` : "AdaHack 2026"
       }
       className={clsx(
-        // Five fit in one row on a laptop; narrower screens wrap them.
-        "relative w-36 md:w-44 aspect-[5/7] shrink-0 [perspective:1000px]",
-        // Stacked: every card shares one grid cell, nudged a little so the
-        // deck has visible depth.
-        !isDealt && "[grid-area:1/1]",
+        "relative block outline-none [perspective:1000px] focus-visible:ring-2 focus-visible:ring-[rgba(255,87,87,0.6)]",
+        className,
       )}
-      style={
-        isDealt
-          ? {
-              // Rise above the deck and the cards already dealt at the moment
-              // this card leaves, not before, so it never slides under them.
-              zIndex: count + index,
-              transition: `z-index 0s ${delay}s`,
-            }
-          : {
-              translate: `${index * -6}px ${index * 6}px`,
-              zIndex: count - index,
-            }
-      }
+      // 21px labels on a 220px card, and everything else in step with them.
+      style={{ fontSize: "calc(var(--card-w) / 10.5)", ...style }}
     >
       <motion.div
         className="absolute inset-0 [transform-style:preserve-3d]"
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.5 }}
+        // Lift the card on its way out, so it arcs up off the deck instead of
+        // sliding flat along the table. Flipping is a plain turn in place.
+        initial={false}
+        animate={{
+          rotateY: isFlipped ? 180 : 0,
+          y: isDealt ? [0, -40, 0] : 0,
+          rotate: isDealt ? [0, -6, 0] : 0,
+        }}
+        transition={{
+          rotateY: { duration: 0.5 },
+          y: {
+            ...dealTransition(index),
+            ease: ["easeOut", "easeIn"],
+            times: [0, 0.4, 1],
+          },
+          rotate: {
+            ...dealTransition(index),
+            ease: "easeOut",
+            times: [0, 0.3, 1],
+          },
+        }}
       >
-        <div
-          className={clsx(
-            cardFace,
-            "flex items-center justify-center text-white",
-          )}
-        >
-          <div className={clsx(cardRow, "top-2 items-center")}>
-            <PixelCorner />
-            <span className="uppercase font-bold">AdaHack</span>
-            <PixelCorner />
-          </div>
-          <img
-            src="/assets/hackathon26/card-duck.svg"
-            alt=""
-            className="w-1/2"
-          />
-          <div className={clsx(cardRow, "bottom-2 items-center")}>
-            <PixelCorner />
-            <span className="font-bold">2026</span>
-            <PixelCorner />
-          </div>
-        </div>
-        <div
-          className={clsx(
-            cardFace,
-            "[transform:rotateY(180deg)] flex flex-col items-center justify-center gap-1 px-3 text-center font-paragraph text-white",
-            reward.isMain && "bg-[#1f0a0a] shadow-shineRed",
-          )}
-        >
-          <div className={clsx(cardRow, "top-2 items-start")}>
-            <span className="font-bold leading-none">{reward.amount}</span>
-            <PixelCorner icon={reward.icon} large />
-          </div>
-          <div className={clsx(cardRow, "bottom-2 items-end")}>
-            <PixelCorner icon={reward.icon} large />
-            <span className="rotate-180 font-bold leading-none">
-              {reward.amount}
-            </span>
-          </div>
-          <span
-            className={clsx(
-              "text-2xl md:text-3xl leading-tight",
-              instrumentSerif.className,
-            )}
-          >
-            {reward.amount}
-          </span>
-          <span className="text-xs md:text-sm leading-tight">
-            {reward.title}
-          </span>
-          {reward.subtitle && (
-            <span className="text-[10px] md:text-xs leading-tight text-gray200">
-              {reward.subtitle}
-            </span>
-          )}
-        </div>
+        <CardBack />
+        <CardFront reward={reward} />
       </motion.div>
     </motion.button>
+  );
+}
+
+/**
+ * The prize deck: a stack of face-down cards beside a card table. Clicking the
+ * deck deals one card into each slot on the table; clicking a dealt card turns
+ * it over.
+ */
+function PrizeDeck({ rewards }: { rewards: Reward[] }) {
+  const t = useTranslations("Hackathon.prize_deck");
+  const [isDealt, setIsDealt] = useState(false);
+  const [flipped, setFlipped] = useState<boolean[]>(() =>
+    rewards.map(() => false),
+  );
+
+  const flip = (index: number) =>
+    setFlipped((cards) => cards.map((card, i) => (i === index ? !card : card)));
+
+  return (
+    <LayoutGroup>
+      {/* The numbers subtracted below are everything beside the cards in a
+          row: on a phone the table's padding and one gap (two cards per row),
+          from `md` the 220px column, the 32px gap to the table, the table's
+          padding and four gaps (five cards per row). */}
+      <div
+        className={clsx(
+          "flex min-h-full flex-col gap-8 md:flex-row [container-type:inline-size]",
+          "[--card-w:min(160px,calc((100cqw_-_44px)/2))]",
+          "md:[--card-w:min(220px,calc((100cqw_-_388px)/5))]",
+        )}
+      >
+        <div className="flex shrink-0 flex-col gap-10 md:w-[220px]">
+          <div className={clsx("flex flex-col gap-2", plexMono.className)}>
+            <h1 className="text-2xl font-semibold uppercase leading-normal tracking-[-0.02em] text-[#fafafa]">
+              {t("heading")}
+            </h1>
+            <p className="text-base font-light leading-normal tracking-[-0.02em] text-[#9d9d9d]">
+              {t("subtitle")}
+            </p>
+          </div>
+          {/* The deck: every card not yet dealt, stacked with a little offset
+              so it has visible depth. The first card lies on top. Its spot is
+              marked like the slots on the table, so it reads as the draw pile
+              once it is empty. */}
+          <div
+            className={clsx(
+              "relative grid border border-dashed border-[rgba(255,87,87,0.25)]",
+              cardSize,
+            )}
+            aria-label={t("deal")}
+            role={isDealt ? undefined : "group"}
+          >
+            {!isDealt &&
+              rewards.map((reward, index) => (
+                <RewardCard
+                  key={reward.title}
+                  reward={reward}
+                  index={index}
+                  isDealt={false}
+                  isFlipped={false}
+                  onClick={() => setIsDealt(true)}
+                  className="[grid-area:1/1] h-full w-full"
+                  style={{
+                    translate: `${index * 4}px ${index * 4}px`,
+                    zIndex: rewards.length - index,
+                  }}
+                />
+              ))}
+          </div>
+        </div>
+        {/* The table: felt with a rail around it and one marked slot per card,
+            so it reads as a card table before anything is dealt. */}
+        <div
+          className={clsx(
+            "relative flex grow flex-wrap content-center items-center justify-center gap-3 md:gap-[14px] p-4 md:p-10 min-h-[18rem]",
+            "before:pointer-events-none before:absolute before:inset-2 before:border before:border-[rgba(255,87,87,0.2)]",
+            FELT,
+          )}
+        >
+          {rewards.map((reward, index) => (
+            <div
+              key={reward.title}
+              className={clsx(
+                "relative border border-dashed border-[rgba(255,87,87,0.25)]",
+                cardSize,
+              )}
+            >
+              {isDealt && (
+                <RewardCard
+                  reward={reward}
+                  index={index}
+                  isDealt
+                  isFlipped={flipped[index]}
+                  onClick={() => flip(index)}
+                  className="absolute inset-0 h-full w-full"
+                  // Rise above the deck and the cards already dealt while in
+                  // flight, so a card never slides under one dealt before it.
+                  style={{ zIndex: rewards.length + index }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </LayoutGroup>
   );
 }
 
@@ -211,7 +336,6 @@ export default function Page() {
     query: GET_REWARDS,
     params: { language: locale },
   });
-  const [isDealt, setIsDealt] = useState(false);
 
   const rewards = (data || []) as Reward[];
 
@@ -220,33 +344,7 @@ export default function Page() {
       {isLoading ? (
         <WindowLoading />
       ) : rewards.length ? (
-        <div className="flex min-h-full flex-col gap-2">
-          <h1 className="mx-auto w-full max-w-[1000px] font-heading text-2xl font-bold uppercase tracking-widest text-white md:text-3xl">
-            {t("prize_deck.heading")}
-          </h1>
-          <p className="mx-auto w-full max-w-[1000px] font-heading text-sm text-gray400">
-            {t("prize_deck.subtitle")}
-          </p>
-          <div
-            className={clsx(
-              "grow mt-4",
-              isDealt
-                ? "flex flex-wrap items-center content-center justify-center gap-4 max-w-[1000px] mx-auto"
-                : "grid content-end justify-start pb-4 pl-6",
-            )}
-          >
-            {rewards.map((reward, index) => (
-              <RewardCard
-                key={reward.title}
-                reward={reward}
-                index={index}
-                count={rewards.length}
-                isDealt={isDealt}
-                onClick={() => setIsDealt(true)}
-              />
-            ))}
-          </div>
-        </div>
+        <PrizeDeck rewards={rewards} />
       ) : (
         <p className="font-paragraph text-base">{t("main_cta")}</p>
       )}
