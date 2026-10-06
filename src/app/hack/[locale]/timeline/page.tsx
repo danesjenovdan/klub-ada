@@ -244,7 +244,7 @@ export default function Page() {
 
   if (!items.length) {
     return (
-      <Window title={t("pages.timeline")}>
+      <Window title={t("pages.timeline")} fitContent>
         {isLoading ? (
           <WindowLoading />
         ) : (
@@ -300,50 +300,56 @@ export default function Page() {
   ];
 
   return (
-    <Window title={t("pages.timeline")}>
-      <div className="mx-auto flex max-w-[1000px] flex-col gap-2">
-        <h1 className="font-heading text-2xl font-bold uppercase tracking-widest text-white md:text-3xl">
-          {t("quest.heading")}
-        </h1>
-        <p className="font-heading text-sm text-gray400">
-          {t("quest.subtitle")}
-        </p>
+    <Window title={t("pages.timeline")} fitContent>
+      {/*
+        The window pads its content by 1.5rem on desktop; the extra 4.5rem here
+        brings the sides to four times that, so the board sits well inside.
+      */}
+      <div className="md:px-[4.5rem]">
+        <div className="mx-auto flex max-w-[1000px] flex-col gap-2 text-center">
+          <h1 className="font-paragraph text-3xl font-bold uppercase tracking-wider text-white md:text-4xl">
+            {t("quest.heading")}
+          </h1>
+          <p className="font-heading text-sm text-gray400">
+            {t("quest.subtitle")}
+          </p>
 
-        <div className="mt-4 flex flex-col gap-4">
-          {chunk(tiles, COLUMNS).map((row, rowIndex) => (
-            <div
-              key={rowIndex}
-              className={clsx(
-                "flex flex-col gap-4 md:grid md:grid-cols-4",
-                // Every other row runs the other way, so the board reads as one
-                // continuous path. A right-to-left row also fills from the right
-                // when it is the last one and short of tiles, which is where the
-                // path ends up.
-                rowIndex % 2 === 1 && "md:[direction:rtl]",
-              )}
-            >
-              {row.map((tile, columnIndex) => {
-                const boardIndex = rowIndex * COLUMNS + columnIndex;
+          <div className="mt-4 flex flex-col gap-4">
+            {chunk(tiles, COLUMNS).map((row, rowIndex) => (
+              <div
+                key={rowIndex}
+                className={clsx(
+                  "flex flex-col gap-4 md:grid md:grid-cols-4",
+                  // Every other row runs the other way, so the board reads as one
+                  // continuous path. A right-to-left row also fills from the right
+                  // when it is the last one and short of tiles, which is where the
+                  // path ends up.
+                  rowIndex % 2 === 1 && "md:[direction:rtl]",
+                )}
+              >
+                {row.map((tile, columnIndex) => {
+                  const boardIndex = rowIndex * COLUMNS + columnIndex;
 
-                return (
-                  <div
-                    key={columnIndex}
-                    ref={
-                      boardIndex === currentTile ? currentTileRef : undefined
-                    }
-                    className={clsx(
-                      "relative flex flex-col md:[direction:ltr]",
-                      // Tile, tag and the path leading out of it fade together,
-                      // so the board dims behind you rather than in pieces.
-                      isDimmed[boardIndex] && "opacity-40",
-                    )}
-                  >
-                    {tile}
-                  </div>
-                );
-              })}
-            </div>
-          ))}
+                  return (
+                    <div
+                      key={columnIndex}
+                      ref={
+                        boardIndex === currentTile ? currentTileRef : undefined
+                      }
+                      className={clsx(
+                        "relative flex flex-col md:[direction:ltr]",
+                        // Tile, tag and the path leading out of it fade together,
+                        // so the board dims behind you rather than in pieces.
+                        isDimmed[boardIndex] && "opacity-40",
+                      )}
+                    >
+                      {tile}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
