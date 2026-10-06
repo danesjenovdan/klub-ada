@@ -170,7 +170,8 @@
     },
     "prize_deck": {
       "heading": "Nagradni komplet",
-      "subtitle": "Pet kart. Ena glavna nagrada. Štirje izzivi. Brez blefiranja."
+      "subtitle": "Pet kart. Ena glavna nagrada. Štirje izzivi. Brez blefiranja.",
+      "deal": "Razdeli karte"
     },
     "quest": {
       "heading": "AdaHack Quest",
