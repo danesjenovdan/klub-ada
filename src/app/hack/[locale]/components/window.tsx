@@ -4,12 +4,7 @@ import { ReactNode, useState } from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import {
-  IconMinus,
-  IconSquare,
-  IconSquares,
-  IconX,
-} from "@tabler/icons-react";
+import { IconMinus, IconSquare, IconSquares, IconX } from "@tabler/icons-react";
 import { useRouter } from "@/src/i18n/navigation";
 
 /**
@@ -63,6 +58,12 @@ export interface WindowProps {
   title: string;
   children: ReactNode;
   className?: string;
+  /**
+   * Centre the window in the desktop and size it like the design's frame
+   * (capped width, tall enough to cover the title) instead of stretching it
+   * to every edge. The content scrolls inside once it would overflow.
+   */
+  fitContent?: boolean;
 }
 
 /**
@@ -71,7 +72,12 @@ export interface WindowProps {
  * collapses it to its title bar in the bottom-left corner and maximising fills
  * the whole desktop, the way the window always looks on a phone.
  */
-export function Window({ title, children, className }: WindowProps) {
+export function Window({
+  title,
+  children,
+  className,
+  fitContent = false,
+}: WindowProps) {
   const router = useRouter();
   const [isMinimised, setIsMinimised] = useState(false);
   const [isMaximised, setIsMaximised] = useState(false);
@@ -84,9 +90,21 @@ export function Window({ title, children, className }: WindowProps) {
         isMinimised
           ? "left-0 bottom-0 w-[calc(100%-1rem)] max-w-[20rem]"
           : "left-2 right-2 top-3 bottom-3",
+        // Desktop, stretched: pinned to every edge, clear of the shortcuts.
         !isMinimised &&
           !isMaximised &&
+          !fitContent &&
           "md:left-[9rem] md:right-10 md:top-8 md:bottom-10",
+        // Desktop, fit to content: centred in the desktop and hugging its
+        // content, as wide as the content plus padding (within the space right
+        // of the shortcuts, and never a sliver while the content is loading),
+        // at least 85% of the desktop tall so it always covers the title
+        // behind it, never taller than the desktop. The content scrolls inside
+        // once it would be.
+        !isMinimised &&
+          !isMaximised &&
+          fitContent &&
+          "md:left-[9rem] md:right-10 md:top-1/2 md:bottom-auto md:-translate-y-1/2 md:mx-auto md:w-fit md:min-w-[40rem] md:max-w-[calc(100%-11.5rem)] md:min-h-[85%] md:max-h-[calc(100%-4.5rem)]",
         className,
       )}
     >
