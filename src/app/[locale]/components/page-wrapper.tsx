@@ -8,7 +8,8 @@ type PageWrapperProps = {
     | "bg-red"
     | "bg-blue"
     | "bg-pink"
-    | "bg-black";
+    | "bg-black"
+    | "bg-transparent";
   hasNoTopPadding?: boolean;
   hasNoBottomPadding?: boolean;
 };

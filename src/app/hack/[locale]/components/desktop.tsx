@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { DesktopShortcuts } from "./desktop-shortcuts";
 import { Hero } from "./hero";
+import { DesktopShaderExperiment } from "./desktop-shader-experiment";
 
 /**
  * The hackathon "desktop": a full-bleed backdrop with the title in the middle
@@ -14,6 +15,7 @@ import { Hero } from "./hero";
 export function Desktop({ children }: { children: ReactNode }) {
   return (
     <div className="relative max-w-full grow min-h-0 bg-[#0c0303] overflow-hidden bg-[url(/assets/hackathon26/bg.svg)] bg-cover bg-center bg-no-repeat">
+      <DesktopShaderExperiment />
       <Hero />
       <DesktopShortcuts />
       <div className="absolute inset-0 z-20 pointer-events-none">
