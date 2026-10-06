@@ -175,6 +175,18 @@
       "now": "You are here",
       "details": "Show details",
       "close": "Close"
+    },
+    "sponsors": {
+      "title": "Sponsors 2026",
+      "subtitle": "AdaHack runs on its supporters.\nExplore the planets to see who’s on board.",
+      "back": "Back",
+      "labels": {
+        "gold": "gold",
+        "silver": "silver",
+        "bronze": "bronze",
+        "vibe": "vibe\ncoding",
+        "media": "media"
+      }
     }
   },
   "Hackathon25": {
