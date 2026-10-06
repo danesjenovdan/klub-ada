@@ -13,5 +13,5 @@ export const instrumentSerif = Instrument_Serif({
  */
 export const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "600"],
+  weight: ["300", "400", "500", "600"],
 });

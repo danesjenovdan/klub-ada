@@ -3,22 +3,35 @@ import { tv } from "tailwind-variants";
 import clsx from "clsx";
 import { ForwardRefComponent, PropsOf } from "@/src/app/utils/polymorphic";
 
+/**
+ * The hackathon's one button style: a solid red block with pixel-notched
+ * corners that inverts to white with red text on hover, like a selected item
+ * in an old menu. Shared by `Button` and
+ * `LinkButton`, so a button looks the same whether it is a `<button>`, a
+ * router link or a plain `<a>`.
+ */
 export const baseButton = tv({
-  base: "inline-flex shrink-0 relative justify-center items-center gap-1.5 text-center whitespace-nowrap outline-none select-none font-heading uppercase text-sm md:text-base border-2 truncate",
+  base: clsx(
+    "pixel-corners inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap select-none outline-none",
+    "bg-red text-white font-button font-medium",
+    "transition-colors duration-150 ease-out",
+  ),
   variants: {
     size: {
-      sm: "text-sm h-8 py-1 px-4",
-      md: "text-lg h-11 py-2 px-5",
-    },
-    variant: {
-      primary:
-        "hover:bg-red700 hover:text-black hover:border-t-red800 hover:border-l-red800 hover:border-r-red100 hover:border-b-red100 bg-red text-black border-t-red100 border-l-red100 border-r-red800 border-b-red800",
-      secondary:
-        "hover:bg-gray300 hover:text-black hover:border-t-gray900 hover:border-l-gray900 hover:border-r-gray100 hover:border-b-gray100 bg-gray200 text-black border-t-gray100 border-l-gray100 border-r-gray900 border-b-gray900",
+      sm: "text-sm h-8 px-4",
+      md: "text-base md:text-lg h-9 md:h-11 px-4 md:px-5",
     },
     disabled: {
-      true: "cursor-not-allowed bg-gray300 border border-gray700 text-white",
+      // A disabled button keeps its look (the navbar shows "coming soon" in
+      // one) but does not react to the pointer.
+      true: "cursor-default",
+      false:
+        "cursor-pointer hover:bg-white hover:text-red focus-visible:bg-white focus-visible:text-red",
     },
+  },
+  defaultVariants: {
+    size: "md",
+    disabled: false,
   },
 });
 
@@ -29,17 +42,12 @@ export interface ButtonOptions {
    */
   size?: "sm" | "md";
   /**
-   * Sets the style variant of the button
-   * @default 'primary'
-   */
-  variant?: "primary" | "secondary";
-  /**
    * If `true` the button will be disabled
    * @default false
    */
   isDisabled?: boolean;
   /**
-   * The HTML `type` attribute
+   * The HTML `type` attribute (only meaningful when rendered as a `<button>`)
    * @default 'button'
    */
   type?: "button" | "submit" | "reset";
@@ -52,13 +60,18 @@ export interface ButtonOptions {
 type PolymorphicButton = ForwardRefComponent<"button", ButtonOptions>;
 export type ButtonProps = PropsOf<PolymorphicButton>;
 
+/**
+ * The hackathon button. Pass `as="a"` with an `href` to render it as a plain
+ * anchor (for `mailto:` and other links the router should not touch); for
+ * in-app links use `LinkButton`.
+ */
 export const Button = forwardRef(
   (
     {
+      as: Component = "button",
       children,
       type = "button",
       size = "md",
-      variant = "primary",
       isDisabled = false,
       disabled: hasHtmlDisabledProp,
       iconRight: IconRight,
@@ -68,25 +81,24 @@ export const Button = forwardRef(
     forwardedRef,
   ) => {
     const shouldBeDisabled = isDisabled || hasHtmlDisabledProp;
+    const buttonProps =
+      Component === "button"
+        ? { type, disabled: shouldBeDisabled }
+        : { "aria-disabled": shouldBeDisabled || undefined };
 
     return (
-      <button
+      <Component
         ref={forwardedRef}
-        type={type}
-        disabled={shouldBeDisabled}
         className={clsx(
-          baseButton({
-            size,
-            variant,
-            disabled: shouldBeDisabled,
-          }),
+          baseButton({ size, disabled: shouldBeDisabled }),
           className,
         )}
+        {...buttonProps}
         {...rest}
       >
         {children}
         {IconRight && <IconRight className="w-4 h-4" />}
-      </button>
+      </Component>
     );
   },
 ) as PolymorphicButton;

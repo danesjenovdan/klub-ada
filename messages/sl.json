@@ -168,6 +168,10 @@
       "numbers": "AdaHack v številkah",
       "pictures": "Slike AdaHack 2025"
     },
+    "faq": {
+      "title": "Pogosto zastavljena vprašanja",
+      "ask": "Zastavi nam vprašanje"
+    },
     "prize_deck": {
       "heading": "Nagradni komplet",
       "subtitle": "Pet kart. Ena glavna nagrada. Štirje izzivi. Brez blefiranja.",
