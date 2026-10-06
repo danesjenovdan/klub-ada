@@ -1,0 +1,36 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_g_5499_2087)">
+<path d="M29.7155 40.0027V42.2827H34.2755V40.0027H29.7155Z" fill="#FF5757"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34.2755 42.2827V44.5777H13.7105V42.2827V40.0027V35.4277H11.4305V44.5777H6.85547V46.8577H41.1455V44.5777H36.5705V35.4277H34.2755V40.0027V42.2827Z" fill="#FAFAFA"/>
+<path d="M13.7105 42.2827H18.2855V40.0027H13.7105V42.2827Z" fill="#FF5757"/>
+<path d="M31.9951 30.8545H34.2751V35.4295H31.9951V30.8545Z" fill="#FAFAFA"/>
+<path d="M31.9951 12.5674H34.2751V17.1424H31.9951V12.5674Z" fill="#FAFAFA"/>
+<path d="M29.7158 28.5723H31.9958V30.8523H29.7158V28.5723Z" fill="#FAFAFA"/>
+<path d="M27.4199 26.293H29.7149V28.573H27.4199V26.293Z" fill="#FAFAFA"/>
+<path d="M25.1406 37.71H29.7156V40.005H25.1406V37.71Z" fill="#FF5757"/>
+<path d="M20.5652 21.7186V26.2936H22.8602V21.7186H20.5652Z" fill="#FAFAFA"/>
+<path d="M25.1402 26.2936H27.4202V21.7186H25.1402V26.2936Z" fill="#FAFAFA"/>
+<path d="M29.7152 21.7186V19.4236H27.4202V21.7186H29.7152Z" fill="#FAFAFA"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M27.4202 19.4236H29.7152V17.1436H18.2852V19.4236H20.5652V21.7186H22.8602V26.2936V37.7086H25.1402V26.2936V21.7186H27.4202V19.4236Z" fill="#FF5757"/>
+<path d="M15.9902 17.1436V19.4236H18.2852V17.1436H15.9902Z" fill="#FAFAFA"/>
+<path d="M18.2852 19.4236V21.7186H20.5652V19.4236H18.2852Z" fill="#FAFAFA"/>
+<path d="M29.7152 19.4236H31.9952V17.1436H29.7152V19.4236Z" fill="#FAFAFA"/>
+<path d="M18.2852 37.71H22.8602V40.005H18.2852V37.71Z" fill="#FF5757"/>
+<path d="M18.2852 26.293H20.5652V28.573H18.2852V26.293Z" fill="#FAFAFA"/>
+<path d="M15.9902 28.5723H18.2852V30.8523H15.9902V28.5723Z" fill="#FAFAFA"/>
+<path d="M13.7109 30.8545H15.9909V35.4295H13.7109V30.8545Z" fill="#FAFAFA"/>
+<path d="M13.7109 12.5674H15.9909V17.1424H13.7109V12.5674Z" fill="#FAFAFA"/>
+<path d="M13.7105 3.43367H34.2755V12.5687H36.5705V3.43367H41.1455V1.13867H6.85547V3.43367H11.4305V12.5687H13.7105V3.43367Z" fill="#FAFAFA"/>
+</g>
+<defs>
+<filter id="filter0_g_5499_2087" x="-0.9" y="-0.9" width="49.8" height="49.8" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.99900001287460327 0.99900001287460327" numOctaves="3" seed="9660" />
+<feDisplacementMap in="shape" scale="1.8000000715255737" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect1_texture_5499_2087">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+</defs>
+</svg>

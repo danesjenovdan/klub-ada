@@ -34,7 +34,7 @@ const PAGES: Page[] = [
 export const PAGES_WITH_ICONS = PAGES.map((page) => ({
   ...page,
   // Each shortcut's icon is named after its slug.
-  icon: `/assets/hackathon26${page.href}.png`,
+  icon: `/assets/hackathon26${page.href}.svg`,
 }));
 
 export type PageWithIcon = (typeof PAGES_WITH_ICONS)[number];
