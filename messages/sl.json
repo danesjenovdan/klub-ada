@@ -155,6 +155,11 @@
     "loading": "Nalaganje ...",
     "tickets_cta": "Vstopnice kmalu",
     "photo_number": "Slika {number}",
+    "hero": {
+      "title_line1": "AdaHack",
+      "title_line2": "Code for change",
+      "date": "21.-22.11.2026"
+    },
     "pages": {
       "sponsors": "Naši sponzorji",
       "rewards": "Nagrade",
