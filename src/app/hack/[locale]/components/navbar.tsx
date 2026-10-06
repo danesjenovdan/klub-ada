@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Button } from "./button";
 
 export function Navbar() {
   const t = useTranslations("Hackathon");
@@ -16,13 +17,9 @@ export function Navbar() {
           />
         </a>
       </div>
-      <button
-        type="button"
-        disabled
-        className="pixel-corners ml-auto inline-flex shrink-0 items-center justify-center whitespace-nowrap select-none bg-red text-white font-button font-medium text-base md:text-lg h-9 md:h-11 px-4 md:px-5 transition-transform duration-200 ease-in-out enabled:hover:-translate-y-1 enabled:hover:translate-x-1"
-      >
+      <Button isDisabled className="ml-auto">
         {t("tickets_cta")}
-      </button>
+      </Button>
     </nav>
   );
 }

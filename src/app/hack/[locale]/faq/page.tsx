@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import { IconMinus, IconPlus } from "@tabler/icons-react";
-import { Paragraph } from "@/src/app/[locale]/components/paragraph";
+import { plexMono } from "@/src/app/fonts";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
+import { Button } from "../components/button";
 import { Window, WindowLoading } from "../components/window";
 
 const GET_FAQ_ITEMS = `*[
@@ -16,74 +16,78 @@ const GET_FAQ_ITEMS = `*[
   'answer': coalesce(answer[$language], answer.sl)
 }`;
 
+const CONTACT_EMAIL = "info@klub-ada.si";
+
 type FaqItemProps = {
   question: string;
   answer: string;
   isOpen: boolean;
-  onChangeOpen: () => void;
+  onToggle: () => void;
 };
 
-function FaqItem({ question, answer, isOpen, onChangeOpen }: FaqItemProps) {
+/**
+ * The design's plus/minus toggle: two 1.8px square-capped strokes. The
+ * vertical one turns and fades away when the item opens, leaving the minus.
+ */
+function ToggleIcon({ isOpen }: { isOpen: boolean }) {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      // Sits on the first line of the question, like in the design, even when
+      // the question wraps.
+      className="mt-[1.5px] h-6 w-6 shrink-0 text-red"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="square"
+    >
+      <path d="M5 12H19" />
+      <motion.path
+        d="M12 5V19"
+        initial={false}
+        animate={{ rotate: isOpen ? 90 : 0, opacity: isOpen ? 0 : 1 }}
+        transition={{ duration: 0.2 }}
+        style={{ originX: "12px", originY: "12px" }}
+      />
+    </svg>
+  );
+}
+
+/** One question. A 2px frame that turns red while it is open. */
+function FaqItem({ question, answer, isOpen, onToggle }: FaqItemProps) {
   return (
     <div
-      className={clsx("border rounded-md p-6 cursor-pointer", {
-        "border-red shadow-shineStrongRed": isOpen,
-        "border-gray500": !isOpen,
-      })}
-      onClick={onChangeOpen}
+      className={clsx(
+        "border-2",
+        isOpen ? "border-red bg-[#0c0303]" : "border-[#2c2424]",
+      )}
     >
-      <div className="flex justify-between w-full gap-4">
-        <Paragraph size="xl" weight="bold" color="white">
-          {question}
-        </Paragraph>
-        <div className="relative w-6 h-6 shrink-0 flex items-center justify-center">
-          <motion.div
-            initial={false}
-            animate={{
-              opacity: isOpen ? 1 : 0.9,
-              scale: isOpen ? 1 : 0.9,
-            }}
-            transition={{ duration: 0.2 }}
-            className="absolute"
-          >
-            <IconMinus
-              className={isOpen ? "text-red" : "text-gray500"}
-              size={24}
-            />
-          </motion.div>
-          <motion.div
-            initial={false}
-            animate={{
-              opacity: isOpen ? 0 : 1,
-              scale: isOpen ? 0 : 1,
-            }}
-            transition={{ duration: 0.2 }}
-            className="absolute"
-          >
-            <IconPlus
-              className={isOpen ? "text-red" : "text-gray500"}
-              size={24}
-            />
-          </motion.div>
-        </div>
-      </div>
+      <h2>
+        <button
+          type="button"
+          aria-expanded={isOpen}
+          onClick={onToggle}
+          className="flex w-full items-start gap-4 p-6 text-left outline-none focus-visible:bg-[rgba(250,250,250,0.04)]"
+        >
+          <ToggleIcon isOpen={isOpen} />
+          <span className="text-lg font-semibold leading-normal tracking-[-0.02em] text-[#fafafa]">
+            {question}
+          </span>
+        </button>
+      </h2>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            initial="collapsed"
-            animate="open"
-            exit="collapsed"
-            variants={{
-              open: { opacity: 1, height: "auto" },
-              collapsed: { opacity: 0, height: 0 },
-            }}
-            transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
           >
-            <motion.div transition={{ duration: 0.8 }}>
-              <Paragraph size="lg" color="lightGray">
-                {answer}
-              </Paragraph>
-            </motion.div>
+            <p className="whitespace-pre-line px-6 pb-6 text-base font-light leading-normal tracking-[-0.02em] text-[#9d9d9d]">
+              {answer}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -92,35 +96,45 @@ function FaqItem({ question, answer, isOpen, onChangeOpen }: FaqItemProps) {
 }
 
 export default function Page() {
-  const t = useTranslations("Hackathon");
+  const t = useTranslations("Hackathon.faq");
   const locale = useLocale();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const { data, isLoading } = useSanityData({
     query: GET_FAQ_ITEMS,
     params: { language: locale },
   });
 
-  const faqItems = (data || []) as Omit<FaqItemProps, "isOpen">[];
+  const faqItems = (data || []) as Pick<FaqItemProps, "question" | "answer">[];
 
   return (
-    <Window title={t("pages.faq")}>
+    <Window title={t("title")}>
       {isLoading ? (
         <WindowLoading />
       ) : (
-        <div className="flex flex-col gap-4 max-w-[1000px] mx-auto">
-          {faqItems.map(({ question, answer }, index) => (
-            <FaqItem
-              key={index}
-              question={question}
-              answer={answer}
-              isOpen={openIndex === index}
-              onChangeOpen={() =>
-                setOpenIndex((previousIndex) =>
-                  previousIndex === index ? null : index,
-                )
-              }
-            />
-          ))}
+        <div
+          className={clsx(
+            "mx-auto flex max-w-[706px] flex-col gap-10 py-2 md:py-6",
+            plexMono.className,
+          )}
+        >
+          <div className="flex flex-col gap-0.5">
+            {faqItems.map(({ question, answer }, index) => (
+              <FaqItem
+                key={question}
+                question={question}
+                answer={answer}
+                isOpen={openIndex === index}
+                onToggle={() =>
+                  setOpenIndex((previous) =>
+                    previous === index ? null : index,
+                  )
+                }
+              />
+            ))}
+          </div>
+          <Button as="a" href={`mailto:${CONTACT_EMAIL}`} className="mx-auto">
+            {t("ask")}
+          </Button>
         </div>
       )}
     </Window>
