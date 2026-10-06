@@ -196,7 +196,9 @@
         "bronze": "bronze",
         "vibe": "vibe\ncoding",
         "media": "media"
-      }
+      },
+      "count": "{count, plural, =0 {Nobody on board yet} one {One sponsor on board} other {# sponsors on board}}",
+      "other_tiers": "Other tiers"
     }
   },
   "Hackathon25": {

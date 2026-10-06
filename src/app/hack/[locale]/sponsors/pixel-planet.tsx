@@ -75,7 +75,8 @@ function drawFrame(
       const shade = light[y][x];
       if (shade === null) continue;
       // Move the pattern down and to the right: the lit side feeds the shadow.
-      const threshold = BAYER[(((y - frame) % 4) + 4) % 4][(((x - frame) % 4) + 4) % 4];
+      const threshold =
+        BAYER[(((y - frame) % 4) + 4) % 4][(((x - frame) % 4) + 4) % 4];
       const dither = (threshold + 0.5) / 16 - 0.5;
       const tone = Math.min(
         palette.length - 1,

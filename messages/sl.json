@@ -196,7 +196,9 @@
         "bronze": "bronasti",
         "vibe": "vibe\ncoding",
         "media": "mediji"
-      }
+      },
+      "count": "{count, plural, =0 {Še nihče ni na krovu} one {# sponzor na krovu} two {# sponzorja na krovu} few {# sponzorji na krovu} other {# sponzorjev na krovu}}",
+      "other_tiers": "Druge ravni"
     }
   },
   "Hackathon25": {
