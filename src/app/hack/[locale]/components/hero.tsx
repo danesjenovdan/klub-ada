@@ -14,12 +14,32 @@ import { instrumentSerif, plexMono } from "@/src/app/fonts";
  * that still fits a phone.
  * The whole block is at 80% opacity like in the design, and ignores the
  * pointer so the shortcuts and windows above it stay clickable.
+ *
+ * The design gives the duck, title and date a grainy texture. It is drawn
+ * with an SVG filter (noise displacing the edges by a couple of pixels), so
+ * the text stays real text and the grain holds at any size and pixel density.
  */
 export function Hero() {
   const t = useTranslations("Hackathon.hero");
 
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center px-4 opacity-80 pointer-events-none select-none">
+    <div className="absolute inset-0 flex flex-col items-center justify-center px-4 opacity-80 pointer-events-none select-none [filter:url(#hero-grain)]">
+      <svg className="absolute h-0 w-0" aria-hidden>
+        <filter id="hero-grain" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="1.1"
+            numOctaves="2"
+            seed="9"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            scale="2.2"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </svg>
       <Image
         src="/assets/hackathon26/duck.svg"
         alt=""
