@@ -5,9 +5,17 @@ import clsx from "clsx";
 import { LayoutGroup, motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import imageLoader from "@/src/app/utils/image-loader";
 import { instrumentSerif, plexMono } from "@/src/app/fonts";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
+import {
+  CardBack,
+  Corner,
+  cardFace,
+  cardFontSize,
+  cardRow,
+  cardSize,
+  table,
+} from "../components/card";
 import { Window, WindowLoading } from "../components/window";
 
 const GET_REWARDS = `*[_type == "hack26Reward"] | order(_createdAt) {
@@ -25,75 +33,6 @@ type Reward = {
   isMain?: boolean;
   icon?: SanityImageSource;
 };
-
-/**
- * The felt of the table and the back of every card share one colour in the
- * design, a shade warmer than the window behind them.
- */
-const FELT = "bg-[#170d10]";
-
-/**
- * Card width. `--card-w` is set on the page container (see `PrizeDeck`) from
- * the container's width, so that all the cards fit in one row on the table
- * from `md` up and two per row on a phone, capped at 1.5× the design's
- * 147×210. Everything drawn on a card is sized in `em` against a font size
- * derived from the same variable, so it scales with the card.
- */
-const cardSize = "w-[var(--card-w)] aspect-[7/10]";
-
-const cardFace = clsx(
-  "absolute inset-0 flex flex-col justify-between border border-red p-[0.65em] [backface-visibility:hidden]",
-  FELT,
-);
-
-/** Top and bottom edge of a card: corner art and a label on one line. */
-const cardRow = clsx(
-  "flex items-center justify-between text-[1em] uppercase tracking-[0.125em] text-red",
-  plexMono.className,
-);
-
-/**
- * Corner art: the reward's own icon if it has one, the design's pixel diamond
- * otherwise.
- */
-function Corner({ icon }: { icon?: SanityImageSource }) {
-  return icon ? (
-    <img
-      src={imageLoader(icon)}
-      alt=""
-      className="h-[2.3em] w-auto max-w-[50%] object-contain"
-    />
-  ) : (
-    <img
-      src="/assets/hackathon26/card-corner.svg"
-      alt=""
-      className="w-[0.57em] shrink-0"
-    />
-  );
-}
-
-/** The back of a card: "AdaHack", the crowned duck, "2026". */
-function CardBack() {
-  return (
-    <div className={cardFace}>
-      <div className={cardRow}>
-        <Corner />
-        <span>AdaHack</span>
-        <Corner />
-      </div>
-      <img
-        src="/assets/hackathon26/card-duck.svg"
-        alt=""
-        className="mx-auto w-1/2"
-      />
-      <div className={cardRow}>
-        <Corner />
-        <span>2026</span>
-        <Corner />
-      </div>
-    </div>
-  );
-}
 
 /** The face of a card: the prize. */
 function CardFront({ reward }: { reward: Reward }) {
@@ -190,8 +129,7 @@ function RewardCard({
         "relative block outline-none [perspective:1000px] focus-visible:ring-2 focus-visible:ring-[rgba(255,87,87,0.6)]",
         className,
       )}
-      // 21px labels on a 220px card, and everything else in step with them.
-      style={{ fontSize: "calc(var(--card-w) / 10.5)", ...style }}
+      style={{ fontSize: cardFontSize, ...style }}
     >
       <motion.div
         className="absolute inset-0 [transform-style:preserve-3d]"
@@ -295,9 +233,8 @@ function PrizeDeck({ rewards }: { rewards: Reward[] }) {
             so it reads as a card table before anything is dealt. */}
         <div
           className={clsx(
-            "relative flex grow flex-wrap content-center items-center justify-center gap-3 md:gap-[14px] p-4 md:p-10 min-h-[18rem]",
-            "before:pointer-events-none before:absolute before:inset-2 before:border before:border-[rgba(255,87,87,0.2)]",
-            FELT,
+            table,
+            "grow gap-3 md:gap-[14px] p-4 md:p-10 min-h-[18rem]",
           )}
         >
           {rewards.map((reward, index) => (
