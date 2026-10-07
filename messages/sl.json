@@ -172,6 +172,13 @@
       "title": "Pogosto zastavljena vprašanja",
       "ask": "Zastavi nam vprašanje"
     },
+    "numbers": {
+      "heading": "AdaHack 2025 v številkah",
+      "subtitle": "Lanska izvedba v treh številkah. Obrni karto.",
+      "participants": "udeležencev",
+      "sponsors": "sponzorjev",
+      "awards": "nagrad"
+    },
     "prize_deck": {
       "heading": "Nagradni komplet",
       "subtitle": "Pet kart. Ena glavna nagrada. Štirje izzivi. Brez blefiranja.",
