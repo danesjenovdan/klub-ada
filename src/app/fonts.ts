@@ -29,3 +29,14 @@ export const geistPixel = localFont({
   display: "swap",
   fallback: ["Geist Mono", "ui-monospace", "Menlo", "monospace"],
 });
+
+/**
+ * Lilex itself (OFL), the hackathon design's monospace, loaded locally because
+ * Next's Google font list predates it. Variable, `wght` 100 to 700.
+ */
+export const lilex = localFont({
+  src: "./fonts/lilex.woff2",
+  weight: "100 700",
+  display: "swap",
+  fallback: ["IBM Plex Mono", "ui-monospace", "Menlo", "monospace"],
+});

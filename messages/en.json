@@ -324,6 +324,8 @@
     "replay": "Replay",
     "png": "PNG",
     "video": "Video",
+    "mp4": "MP4",
+    "gif": "GIF",
     "download_all": "All PNGs (zip)",
     "exporting": "Exporting {percent}%",
     "export_failed": "Export failed. Try Chrome.",
@@ -437,6 +439,7 @@
     },
     "logo": "Logo",
     "logo_full": "Full",
-    "logo_duck": "Duck only"
+    "logo_duck": "Duck only",
+    "logo_date": "Date"
   }
 }

@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { useLocale, useTranslations } from "next-intl";
-import { plexMono } from "@/src/app/fonts";
+import { lilex, plexMono } from "@/src/app/fonts";
 import { TimelinePostItem, dayKey, formatClock, formatDay } from "../data";
 import {
   INK,
@@ -69,7 +69,10 @@ export function TimelinePostView({
         style={{ top: compact ? 48 : 64 }}
       >
         <h2
-          className="font-extrabold leading-none tracking-[-0.02em]"
+          className={clsx(
+            lilex.className,
+            "font-extrabold leading-none tracking-[-0.02em]",
+          )}
           style={{ fontSize: compact ? 84 : 112 }}
         >
           {heading}
@@ -175,7 +178,10 @@ export function TimelinePostView({
                           : ""}
                       </p>
                       <p
-                        className="font-bold leading-[1.05] tracking-[-0.01em]"
+                        className={clsx(
+                          lilex.className,
+                          "font-bold leading-[1.05] tracking-[-0.01em]",
+                        )}
                         style={{ fontSize: titleSize }}
                       >
                         {item.title}

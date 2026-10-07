@@ -1,6 +1,7 @@
 "use client";
 
 import clsx from "clsx";
+import { IconPencil } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import { plexMono } from "@/src/app/fonts";
 import { JudgePost } from "./data";
@@ -25,17 +26,19 @@ export function JudgeEditor({
   const t = useTranslations("Posts.editor");
 
   return (
-    <details className="group border border-[rgba(255,87,87,0.25)]">
+    <details className="group border-2 border-[#ff5757]">
+      {/* As loud as the download buttons above it, so the editor is found. */}
       <summary
         className={clsx(
           plexMono.className,
-          "cursor-pointer select-none px-3 py-2 text-xs uppercase tracking-[0.12em] text-[#ff5757] marker:content-none",
+          "flex cursor-pointer select-none items-center gap-3 px-4 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#fafafa] transition-colors marker:content-none hover:bg-[rgba(255,87,87,0.15)] group-open:bg-[rgba(255,87,87,0.15)] [&::-webkit-details-marker]:hidden",
         )}
       >
-        <span className="inline-block transition-transform group-open:rotate-90">
-          ›
-        </span>{" "}
+        <IconPencil size={18} stroke={2} className="text-[#ff5757]" />
         {t("edit")}
+        <span className="ml-auto text-lg leading-none text-[#ff5757] transition-transform group-open:rotate-90">
+          ›
+        </span>
       </summary>
       <div className="flex flex-col gap-3 p-3 pt-1">
         <Field label={t("photo")}>

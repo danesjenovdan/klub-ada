@@ -52,7 +52,12 @@ export const GET_POSTS_CONTENT = `{
   },
   'gallery': *[_type == "hackathonGallery"] | order(year desc)[0] {
     year,
-    'photos': images[] { ..., alt, 'dimensions': asset->metadata.dimensions }
+    'photos': images[] {
+      ...,
+      alt,
+      'dimensions': asset->metadata.dimensions,
+      'fileName': asset->originalFilename
+    }
   }
 }`;
 
@@ -107,6 +112,8 @@ export type WorkshopPost = {
 export type GalleryPhoto = SanityImageSource & {
   alt?: string;
   dimensions?: { width: number; height: number };
+  /** The camera's file name, e.g. DSC01313.jpg, to tell burst shots apart. */
+  fileName?: string;
 };
 
 export type GalleryPost = { year: number; photos: GalleryPhoto[] };

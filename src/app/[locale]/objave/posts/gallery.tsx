@@ -3,7 +3,7 @@
 import { CSSProperties } from "react";
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
-import { instrumentSerif, plexMono } from "@/src/app/fonts";
+import { instrumentSerif, lilex, plexMono } from "@/src/app/fonts";
 import { urlFor } from "@/sanity/lib/image";
 import { FIGURES_2025 } from "@/src/app/hack/[locale]/numbers/figures";
 import { GalleryPhoto, GalleryPost } from "../data";
@@ -61,18 +61,43 @@ const CAPTION_KEYS: [string, string][] = [
 /** Photos never to use, by their exact alt text: the empty room full of chairs. */
 const EXCLUDED = ["hackathon"];
 
+/** The camera's frame number from a file name like DSC01313.jpg. */
+const frameNumber = (photo: GalleryPhoto) => {
+  const match = photo.fileName?.match(/(\d+)\.\w+$/);
+  return match ? Number(match[1]) : undefined;
+};
+
+/**
+ * Frames this close together are one burst, near enough the same picture
+ * (DSC01313 and DSC01314 are), so only the first of them is used.
+ */
+const BURST = 2;
+
 const pickPhotos = (allPhotos: GalleryPhoto[], count: number) => {
   const photos = allPhotos.filter(
     (p) => !EXCLUDED.includes(p.alt?.toLowerCase().trim() ?? ""),
   );
   const chosen: GalleryPhoto[] = [];
+  const fits = (photo: GalleryPhoto) => {
+    if (chosen.includes(photo)) return false;
+    const frame = frameNumber(photo);
+    return (
+      frame === undefined ||
+      !chosen.some((other) => {
+        const otherFrame = frameNumber(other);
+        return (
+          otherFrame !== undefined && Math.abs(otherFrame - frame) <= BURST
+        );
+      })
+    );
+  };
   for (const prefix of PREFERRED) {
     const photo = photos.find(
-      (p) => p.alt?.toLowerCase().startsWith(prefix) && !chosen.includes(p),
+      (p) => p.alt?.toLowerCase().startsWith(prefix) && fits(p),
     );
     if (photo) chosen.push(photo);
   }
-  for (const photo of photos) if (!chosen.includes(photo)) chosen.push(photo);
+  for (const photo of photos) if (fits(photo)) chosen.push(photo);
   return chosen.slice(0, count);
 };
 
@@ -85,25 +110,41 @@ const crop = (photo: GalleryPhoto, width: number, height: number) =>
     .format("webp")
     .url();
 
+/** The whole of `photo`, uncropped, at twice the width it is drawn. */
+const whole = (photo: GalleryPhoto, width: number) =>
+  urlFor(photo)
+    .width(Math.round(width * 2))
+    .format("webp")
+    .url();
+
 function Photo({
   photo,
   width,
   height,
+  fit = "cover",
   className,
   style,
 }: {
   photo: GalleryPhoto;
   width: number;
   height: number;
+  /** `contain` shows the whole photo, letterboxed, instead of filling the box. */
+  fit?: "cover" | "contain";
   className?: string;
   style?: CSSProperties;
 }) {
   return (
     <img
-      src={crop(photo, width, height)}
+      src={fit === "contain" ? whole(photo, width) : crop(photo, width, height)}
       alt={photo.alt ?? ""}
       crossOrigin="anonymous"
-      className={clsx("block object-cover", className)}
+      className={clsx(
+        // Never squeezed by the flex layout around it, which would crop it
+        // a second time.
+        "block shrink-0",
+        fit === "contain" ? "object-contain" : "object-cover",
+        className,
+      )}
       style={{ width, height, ...style }}
     />
   );
@@ -152,16 +193,23 @@ function Finder({ t, format, data, windowTitle }: LayoutProps) {
       style={{ left: 52, top, width, height }}
     >
       <div className="m-[3px] flex h-[42px] shrink-0 items-center bg-[#0C0303] px-[10px] ring-2 ring-[#bdbdbd]">
-        <span className="truncate text-[22px] font-bold uppercase">
+        <span
+          className={clsx(
+            lilex.className,
+            "truncate text-[22px] font-bold uppercase",
+          )}
+        >
           / {windowTitle}
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-[12px] p-[12px]">
+        {/* Like Finder's preview, the whole photo, on black where it doesn't fill. */}
         <Photo
           photo={photos[selected]}
           width={width - 30}
           height={preview}
-          className="w-full"
+          fit="contain"
+          className="w-full bg-black"
         />
         <div className="flex gap-[12px]">
           {photos.map((photo, index) => (

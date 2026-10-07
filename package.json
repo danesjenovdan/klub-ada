@@ -21,6 +21,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "fflate": "^0.8.3",
+    "gifenc": "^1.0.3",
     "mediabunny": "^1.61.3",
     "modern-screenshot": "^4.7.0",
     "motion": "^11.15.0",

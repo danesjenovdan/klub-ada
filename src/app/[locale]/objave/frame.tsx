@@ -33,6 +33,8 @@ export const RippleContext = createContext<string>(
  */
 export type LogoMode = "full" | "duck";
 export const LogoContext = createContext<LogoMode>("full");
+/** Whether the full lockup carries the date under the title; off by default. */
+export const DateContext = createContext(false);
 
 let ripple: Promise<string> | undefined;
 
@@ -163,6 +165,7 @@ export function Header({
   // The page's logo toggle can reduce every header to the duck.
   const logoMode = useContext(LogoContext);
   duckOnly = duckOnly || logoMode === "duck";
+  const showDate = useContext(DateContext);
   const tHero = useTranslations("Hackathon.hero");
   const compact = isCompact(format);
   const scale = compact ? 0.78 : 1;
@@ -234,23 +237,25 @@ export function Header({
               </div>
             </div>
           </div>
-          <p
-            className={clsx(
-              plexMono.className,
-              "mt-[22px] h-[38px] self-stretch text-[32px] leading-[1.2] tracking-[0.03em]",
-              align === "left" ? "pl-[34px]" : "text-center",
-            )}
-          >
-            {typed(tHero("date"), date)}
-            <span
-              className="inline-block w-[0.55em]"
-              style={{
-                opacity: date > 0 && date < 1 && caretVisible(t) ? 1 : 0,
-              }}
+          {showDate && (
+            <p
+              className={clsx(
+                plexMono.className,
+                "mt-[22px] h-[38px] self-stretch text-[32px] leading-[1.2] tracking-[0.03em]",
+                align === "left" ? "pl-[34px]" : "text-center",
+              )}
             >
-              _
-            </span>
-          </p>
+              {typed(tHero("date"), date)}
+              <span
+                className="inline-block w-[0.55em]"
+                style={{
+                  opacity: date > 0 && date < 1 && caretVisible(t) ? 1 : 0,
+                }}
+              >
+                _
+              </span>
+            </p>
+          )}
         </>
       )}
     </div>
@@ -298,17 +303,20 @@ export function NotchButton({
   style,
   size = "md",
   color = RED,
+  font = plexMono.className,
 }: {
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
   size?: "sm" | "md";
   color?: string;
+  /** The font's class name; Plex Mono unless a post sets its own. */
+  font?: string;
 }) {
   return (
     <div
       className={clsx(
-        plexMono.className,
+        font,
         "inline-flex items-center justify-center gap-[0.5em] whitespace-nowrap font-medium uppercase leading-none text-[#fafafa]",
         size === "md"
           ? "px-[64px] py-[26px] text-[48px] tracking-[0.03em]"

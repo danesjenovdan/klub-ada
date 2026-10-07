@@ -1,10 +1,8 @@
 "use client";
 
-import { CSSProperties } from "react";
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
-import { geistPixel, plexMono } from "@/src/app/fonts";
-import { pixelTitle } from "@/src/app/hack/[locale]/sponsors/model";
+import { instrumentSerif, plexMono } from "@/src/app/fonts";
 import { Header, PostFrame, PostProps, RED, isCompact } from "../frame";
 import { beat, steps } from "../motion";
 
@@ -51,18 +49,13 @@ export function CountdownPostView({
           gap: compact ? 28 : tall ? 64 : 44,
         }}
       >
+        {/* The logo's serif, plain white: the number reads as part of the lockup. */}
         <p
           className={clsx(
-            geistPixel.className,
-            pixelTitle,
-            "text-[var(--fill)]",
+            instrumentSerif.className,
+            "leading-[0.8] tracking-[-0.03em] text-[#fafafa]",
           )}
-          style={
-            {
-              "--fill": "#fafafa",
-              fontSize: compact ? 220 : tall ? 360 : 300,
-            } as CSSProperties
-          }
+          style={{ fontSize: compact ? 260 : tall ? 420 : 360 }}
         >
           {days}
         </p>
