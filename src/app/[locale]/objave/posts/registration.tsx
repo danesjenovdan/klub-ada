@@ -4,7 +4,7 @@ import { CSSProperties } from "react";
 import clsx from "clsx";
 import { IconMinus, IconSquare, IconX } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
-import { instrumentSerif, plexMono } from "@/src/app/fonts";
+import { instrumentSerif, lilex, plexMono } from "@/src/app/fonts";
 import { Format } from "../formats";
 import {
   GRAY,
@@ -47,6 +47,12 @@ export const BATCHES = 3;
 
 /** The empty band a story keeps at the bottom for the link sticker. */
 const STICKER_BAND = 360;
+/**
+ * The phone story turns that around: the hint and the sticker's spot sit at
+ * the top, under the header, and the phone rises from the bottom edge.
+ */
+const HINT_TOP = 340;
+const STICKER_SLOT = 300;
 const URL = "hack.klub-ada.si";
 
 const raised =
@@ -83,7 +89,7 @@ const useCopy = (data: Registration) => {
  * Telefon: a lock screen, after the Figma story. Two notifications slide in
  * from the top one after the other, the way iOS lands them.
  */
-function Phone({ t, format, data, unit, top, bottom }: LayoutProps) {
+function Phone({ t, format, data, unit, top }: LayoutProps) {
   const copy = useCopy(data);
   const width = 640 * unit;
   const notifications = copy.soldOut
@@ -98,8 +104,8 @@ function Phone({ t, format, data, unit, top, bottom }: LayoutProps) {
       className="absolute left-1/2 overflow-hidden"
       style={{
         top,
-        // Cut off at the bottom margin; a story keeps its sticker band free.
-        bottom: format.id === "story" ? bottom : 0,
+        // Cut off by the bottom of the post.
+        bottom: 0,
         width,
         transform: "translateX(-50%)",
       }}
@@ -178,14 +184,17 @@ function Badge({ mark, size }: { mark: string; size: number }) {
  */
 function Dialog({ t, data, unit: base, top, bottom }: LayoutProps) {
   const copy = useCopy(data);
-  // The dialog is the whole post here, so it is drawn larger and runs from
-  // under the header to the bottom margin.
+  // The dialog is the whole post here, so it is drawn larger, sized to its
+  // content and centred in the space under the header.
   const unit = base * 1.4;
   const glide = ease.inOutCubic(beat(t, 1.4, 0.9));
   const pressed = t > 2.35 && t < 2.55;
 
   return (
-    <div className="absolute inset-x-[52px] flex" style={{ top, bottom }}>
+    <div
+      className="absolute inset-x-[52px] flex items-center"
+      style={{ top, bottom }}
+    >
       <div
         className={clsx(
           "flex w-full flex-col bg-[#0C0303] shadow-[12px_12px_0_rgba(0,0,0,0.6)]",
@@ -193,7 +202,11 @@ function Dialog({ t, data, unit: base, top, bottom }: LayoutProps) {
         )}
       >
         <div className="m-[3px] flex h-[52px] items-center justify-between bg-[#0C0303] px-[10px] ring-2 ring-[#bdbdbd]">
-          <span className="text-[26px] font-bold uppercase">/ prijave.exe</span>
+          <span
+            className={clsx(lilex.className, "text-[26px] font-bold uppercase")}
+          >
+            / prijave.exe
+          </span>
           <span className="flex gap-[6px]">
             {[IconMinus, IconSquare, IconX].map((Icon, index) => (
               <span
@@ -206,24 +219,24 @@ function Dialog({ t, data, unit: base, top, bottom }: LayoutProps) {
           </span>
         </div>
         <div
-          className={clsx(
-            "m-[3px] mt-0 flex flex-1 flex-col justify-between",
-            sunken,
-          )}
+          className={clsx("m-[3px] mt-0 flex flex-col", sunken)}
           style={{ padding: 56 * unit, gap: 48 * unit }}
         >
           <div className="flex items-start" style={{ gap: 36 * unit }}>
             <Badge mark={copy.soldOut ? "!" : "i"} size={96 * unit} />
             <div className="flex flex-col" style={{ gap: 16 * unit }}>
               <p
-                className="font-extrabold leading-[1.02] tracking-[-0.02em]"
-                style={{ fontSize: 64 * unit }}
+                className={clsx(
+                  lilex.className,
+                  "font-extrabold leading-[1.02] tracking-[-0.02em]",
+                )}
+                style={{ fontSize: 64 * base }}
               >
                 {copy.title}
               </p>
               <p
-                className={clsx(plexMono.className, "leading-snug")}
-                style={{ fontSize: 28 * unit, color: GRAY }}
+                className={clsx(lilex.className, "leading-snug")}
+                style={{ fontSize: 40 * base, color: GRAY }}
               >
                 {copy.sub} {URL}
               </p>
@@ -233,7 +246,7 @@ function Dialog({ t, data, unit: base, top, bottom }: LayoutProps) {
             {!copy.soldOut && (
               <span
                 className={clsx(
-                  plexMono.className,
+                  lilex.className,
                   "flex items-center bg-[#bdbdbd] px-[28px] uppercase tracking-[0.06em] text-black",
                   raised,
                 )}
@@ -246,6 +259,7 @@ function Dialog({ t, data, unit: base, top, bottom }: LayoutProps) {
               <div style={{ transform: `translateY(${pressed ? 4 : 0}px)` }}>
                 <NotchButton
                   size="sm"
+                  font={lilex.className}
                   style={{
                     fontSize: 26 * unit,
                     padding: `${14 * unit}px ${30 * unit}px`,
@@ -274,26 +288,150 @@ function Dialog({ t, data, unit: base, top, bottom }: LayoutProps) {
   );
 }
 
+/** How finely the ticket is sliced to bend it round the roll, and the roll's size. */
+const ROLL_STRIPS = 64;
+const ROLL_RADIUS = 46;
+/** Each turn of paper sits this much inside the last, so the layers stack. */
+const ROLL_LAYER = 5;
+const ROLL_PERSPECTIVE = 1400;
 /**
- * Vstopnica: a ticket with its stub, under the title. A sold-out batch gets
- * a "sold out" stamp, slammed on in hard steps.
+ * The roll travels down and to the right at this angle, so its edge crosses
+ * the ticket diagonally; about the slope of the ticket's own diagonal.
  */
-function Ticket({ t, data, unit, top, bottom }: LayoutProps) {
-  const copy = useCopy(data);
+const ROLL_TILT = (20 * Math.PI) / 180;
+
+/**
+ * Where a slice of the ticket is while it unrolls: flat behind the roll's
+ * contact point `front`, wound round the roll beyond it. `s` is how far along
+ * the paper the slice is from the contact point; the angle round the roll is
+ * that over the radius, and the radius shrinks a little each turn.
+ */
+function rollSlice(x: number, front: number, unit: number) {
+  const s = x - front;
+  if (s <= 0) return { x, z: 0, angle: 0 };
+  const r0 = ROLL_RADIUS * unit;
+  const layer = ROLL_LAYER * unit;
+  // Arc length to angle on a slowly tightening spiral.
+  const angle = s / r0;
+  const r = Math.max(layer, r0 - (layer * angle) / (2 * Math.PI));
+  return {
+    x: front + r * Math.sin(angle),
+    z: r * (1 - Math.cos(angle)),
+    angle,
+  };
+}
+
+/** The face of the ticket, at full width; the roll slices it into strips. */
+function TicketFace({
+  copy,
+  unit,
+  height,
+}: {
+  copy: ReturnType<typeof useCopy>;
+  unit: number;
+  height: number;
+}) {
   const tHero = useTranslations("Hackathon.hero");
-  // The ticket prints out left to right in hard steps, like a ticket
-  // machine, then a light sweep runs across it; a sold-out one is stamped.
-  const print = steps(beat(t, 0.3, 1.0), 12);
+  // Half-circle bites out of both edges at the tear line.
+  const bite = (side: string) =>
+    `radial-gradient(circle at ${side} 50%, transparent ${28 * unit}px, #000 ${29 * unit}px)`;
+  const notch: CSSProperties = {
+    WebkitMaskImage: `${bite("0")}, ${bite("100%")}`,
+    WebkitMaskComposite: "source-in",
+    maskImage: `${bite("0")}, ${bite("100%")}`,
+    maskComposite: "intersect",
+  };
+  return (
+    <div
+      className="relative flex w-full overflow-hidden bg-red text-[#0c0303]"
+      style={{ height, ...notch }}
+    >
+      <div
+        className="flex flex-1 flex-col items-start justify-between text-left"
+        style={{ padding: `${40 * unit}px ${64 * unit}px` }}
+      >
+        <span
+          className={clsx(plexMono.className, "uppercase tracking-[0.2em]")}
+          style={{ fontSize: 24 * unit }}
+        >
+          {copy.t("ticket")} · {copy.t("batch", { n: copy.n })}
+        </span>
+        <span
+          className={clsx(instrumentSerif.className, "leading-[0.9]")}
+          style={{ fontSize: 96 * unit }}
+        >
+          {tHero("title_line1")}
+          <br />
+          {tHero("title_line2")}
+        </span>
+        <span
+          className={clsx(plexMono.className, "tracking-[0.06em]")}
+          style={{ fontSize: 26 * unit }}
+        >
+          {tHero("date")} · {URL}
+        </span>
+      </div>
+      {/* The stub, behind a perforated line. */}
+      <div
+        className="flex shrink-0 items-center justify-center border-l-[4px] border-dashed border-[#0c0303]"
+        style={{ width: 170 * unit }}
+      >
+        <span
+          className={clsx(
+            plexMono.className,
+            "whitespace-nowrap uppercase tracking-[0.2em]",
+          )}
+          style={{ fontSize: 24 * unit, transform: "rotate(-90deg)" }}
+        >
+          {copy.t("admit")}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Vstopnica: a ticket with its stub, under the title. It arrives rolled up
+ * at its top-left corner and unrolls diagonally across the post, towards the
+ * bottom right, like a strip off a ticket roll,
+ * then lies flat with a little thickness and a shadow under it. A sold-out
+ * batch gets a "sold out" stamp, slammed on in hard steps.
+ */
+function Ticket({ t, format, data, unit, top, bottom }: LayoutProps) {
+  const copy = useCopy(data);
+  const unroll = ease.inOutCubic(beat(t, 0.3, 1.1));
   const shine = beat(t, 1.45, 0.7);
   const stamp = beat(t, 1.5, 0.3);
   const height = 380 * unit;
-  // Half-circle bites out of both edges at the tear line.
-  const notch: CSSProperties = {
-    WebkitMaskImage: `radial-gradient(circle at 0 50%, transparent ${28 * unit}px, #000 ${29 * unit}px), radial-gradient(circle at 100% 50%, transparent ${28 * unit}px, #000 ${29 * unit}px)`,
-    WebkitMaskComposite: "source-in",
-    maskImage: `radial-gradient(circle at 0 50%, transparent ${28 * unit}px, #000 ${29 * unit}px), radial-gradient(circle at 100% 50%, transparent ${28 * unit}px, #000 ${29 * unit}px)`,
-    maskComposite: "intersect",
-  };
+  // The ticket spans the post between its side margins.
+  const width = format.width - 104;
+  // The roll works in its own frame, turned by the tilt: `u` along the way
+  // it travels, `v` along its axis. The ticket spans `u` from 0 to `span`
+  // and `v` from `-rise` to `depth - rise`.
+  const sin = Math.sin(ROLL_TILT);
+  const cos = Math.cos(ROLL_TILT);
+  const span = width * cos + height * sin;
+  const depth = width * sin + height * cos;
+  const rise = width * sin;
+  // The roll's contact line, from the top-left corner to past the
+  // bottom-right one so the last turn lies down too.
+  const front = mix(0, span, unroll);
+  const rolling = unroll < 1;
+  // Paper thickness and the shadow it casts, following the notches.
+  const solid = `drop-shadow(0 ${6 * unit}px 0 #8f2f2f) drop-shadow(0 ${26 * unit}px ${22 * unit}px rgba(0,0,0,0.55))`;
+
+  const strip = span / ROLL_STRIPS;
+  const slices = rolling
+    ? Array.from({ length: ROLL_STRIPS }, (_, index) => {
+        const left = index * strip;
+        const place = rollSlice(left, front, unit);
+        // Facing the viewer while the paper's normal points out of the post.
+        const facing = Math.cos(place.angle);
+        return { index, left, ...place, facing };
+      })
+        // Nearer slices paint over farther ones.
+        .sort((a, b) => a.z - b.z)
+    : [];
 
   return (
     <div
@@ -309,71 +447,87 @@ function Ticket({ t, data, unit, top, bottom }: LayoutProps) {
       >
         {copy.title}
       </p>
-      <div
-        className="relative w-full"
-        style={{ clipPath: `inset(-40% ${(1 - print) * 100}% -40% 0)` }}
-      >
-        <div
-          className="relative flex w-full overflow-hidden bg-red text-[#0c0303]"
-          style={{
-            height,
-            opacity: copy.soldOut && stamp >= 1 ? 0.55 : 1,
-            ...notch,
-          }}
-        >
-          <div
-            className="flex flex-1 flex-col items-start justify-between text-left"
-            style={{ padding: `${40 * unit}px ${64 * unit}px` }}
-          >
-            <span
-              className={clsx(plexMono.className, "uppercase tracking-[0.2em]")}
-              style={{ fontSize: 24 * unit }}
-            >
-              {copy.t("ticket")} · {copy.t("batch", { n: copy.n })}
-            </span>
-            <span
-              className={clsx(instrumentSerif.className, "leading-[0.9]")}
-              style={{ fontSize: 96 * unit }}
-            >
-              {tHero("title_line1")}
-              <br />
-              {tHero("title_line2")}
-            </span>
-            <span
-              className={clsx(plexMono.className, "tracking-[0.06em]")}
-              style={{ fontSize: 26 * unit }}
-            >
-              {tHero("date")} · {URL}
-            </span>
-          </div>
-          {shine > 0 && shine < 1 && (
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -inset-y-1/2 w-1/4"
+      <div className="relative w-full" style={{ height }}>
+        {rolling ? (
+          <div className="absolute inset-0" style={{ filter: solid }}>
+            {/* Turned into the roll's frame; the slices run across it. */}
+            <div
+              className="absolute left-0 top-0"
               style={{
-                left: `${mix(-30, 120, ease.inOutCubic(shine))}%`,
-                transform: "rotate(18deg)",
-                background:
-                  "linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)",
+                transform: `rotate(${ROLL_TILT}rad)`,
+                transformOrigin: "0 0",
               }}
-            />
-          )}
-          {/* The stub, behind a perforated line. */}
-          <div
-            className="flex shrink-0 items-center justify-center border-l-[4px] border-dashed border-[#0c0303]"
-            style={{ width: 170 * unit }}
-          >
-            <span
-              className={clsx(
-                plexMono.className,
-                "whitespace-nowrap uppercase tracking-[0.2em]",
-              )}
-              style={{ fontSize: 24 * unit, transform: "rotate(-90deg)" }}
             >
-              {copy.t("admit")}
-            </span>
+              {slices.map(({ index, left, x, z, angle, facing }) => (
+                <div
+                  key={index}
+                  className="absolute overflow-hidden"
+                  style={{
+                    left,
+                    top: -rise,
+                    // A hair wider so no seam shows between slices.
+                    width: strip + 1,
+                    height: depth,
+                    // Light from the front: the roll darkens as it turns away.
+                    filter: `brightness(${1 - 0.55 * (1 - Math.abs(facing)) ** 0.8})`,
+                    // Each slice is projected on its own (no preserve-3d,
+                    // which the exporter flattens), so the origin sits at the
+                    // ticket's centre to share one vanishing point. The slice
+                    // still turns about its own left edge: the shift by
+                    // `-origin` before the rotation moves the pivot back there.
+                    transformOrigin: `${span / 2 - left}px 50%`,
+                    transform: `perspective(${ROLL_PERSPECTIVE}px) translate3d(${x - left}px, 0, ${z}px) translateX(${-(span / 2 - left)}px) rotateY(${-angle}rad) translateX(${span / 2 - left}px)`,
+                  }}
+                >
+                  {/* The ticket, turned back level, at its place in the post. */}
+                  <div
+                    className="absolute"
+                    style={{
+                      left: -left,
+                      top: rise,
+                      width,
+                      transform: `rotate(${-ROLL_TILT}rad)`,
+                      transformOrigin: "0 0",
+                    }}
+                  >
+                    {facing >= 0 ? (
+                      <TicketFace copy={copy} unit={unit} height={height} />
+                    ) : (
+                      // The back of the paper: plain, a shade darker.
+                      <div className="bg-[#c94c4c]" style={{ height }} />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div
+            className="relative"
+            style={{
+              filter: solid,
+              opacity: copy.soldOut && stamp >= 1 ? 0.55 : 1,
+            }}
+          >
+            <TicketFace copy={copy} unit={unit} height={height} />
+            {shine > 0 && shine < 1 && (
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 overflow-hidden"
+              >
+                <span
+                  className="absolute -inset-y-1/2 w-1/4"
+                  style={{
+                    left: `${mix(-30, 120, ease.inOutCubic(shine))}%`,
+                    transform: "rotate(18deg)",
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)",
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        )}
         {copy.soldOut && stamp > 0 && (
           <div
             className={clsx(
@@ -541,6 +695,7 @@ export function RegistrationPostView({
   const compact = isCompact(format);
   const story = format.id === "story";
   const Layout = LAYOUTS[variant];
+  const hintOnTop = story && variant === "phone";
   return (
     <PostFrame t={t} format={format}>
       <Header t={t} format={format} align="center" still />
@@ -549,7 +704,7 @@ export function RegistrationPostView({
         format={format}
         data={data}
         unit={unitFor(format)}
-        top={compact ? 330 : 420}
+        top={hintOnTop ? HINT_TOP + STICKER_SLOT : compact ? 330 : 420}
         // A story keeps a band free at the bottom for Instagram's link
         // sticker, pointing to the application on Luma.
         bottom={story ? STICKER_BAND + 88 : compact ? 64 : 88}
@@ -560,7 +715,10 @@ export function RegistrationPostView({
             plexMono.className,
             "absolute inset-x-0 text-center uppercase tracking-[0.2em] text-red",
           )}
-          style={{ bottom: STICKER_BAND + 20, fontSize: 30 }}
+          style={{
+            ...(hintOnTop ? { top: HINT_TOP } : { bottom: STICKER_BAND + 20 }),
+            fontSize: 30,
+          }}
         >
           {tPosts("link_hint")} ↓
         </p>

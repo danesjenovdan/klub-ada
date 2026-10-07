@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { IconMinus, IconSquare, IconX } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
-import { plexMono } from "@/src/app/fonts";
+import { lilex, plexMono } from "@/src/app/fonts";
 import { FaqItem } from "../data";
 import { Format } from "../formats";
 import { Header, PostFrame, PostProps, isCompact } from "../frame";
@@ -53,7 +53,12 @@ function FaqWindow({
       style={style}
     >
       <div className="m-[3px] flex h-[52px] shrink-0 items-center justify-between gap-[12px] bg-[#0C0303] px-[10px] ring-2 ring-[#bdbdbd]">
-        <span className="truncate px-[4px] text-[26px] font-bold uppercase">
+        <span
+          className={clsx(
+            lilex.className,
+            "truncate px-[4px] text-[26px] font-bold uppercase",
+          )}
+        >
           / {title}
         </span>
         <span className="flex items-center gap-[6px]">

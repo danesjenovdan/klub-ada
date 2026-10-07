@@ -190,3 +190,51 @@ export async function encodeMp4({
   await output.finalize();
   return new Blob([output.target.buffer!], { type: "video/mp4" });
 }
+
+/**
+ * Encodes `frameCount` frames into a looping GIF, the same way as
+ * `encodeMp4`. Each frame gets its own 256-colour palette, so the red swirl
+ * and the photos keep as much of their colour as a GIF allows.
+ */
+export async function encodeGif({
+  width,
+  height,
+  fps,
+  frameCount,
+  drawFrame,
+  onProgress,
+}: {
+  width: number;
+  height: number;
+  fps: number;
+  frameCount: number;
+  drawFrame: (index: number) => Promise<HTMLCanvasElement>;
+  onProgress?: (progress: number) => void;
+}) {
+  const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
+  const target = document.createElement("canvas");
+  target.width = width;
+  target.height = height;
+  const ctx = target.getContext("2d", { willReadFrequently: true })!;
+  const gif = GIFEncoder();
+  // GIF delays are whole hundredths of a second.
+  const delay = Math.round(100 / fps) * 10;
+
+  for (let index = 0; index < frameCount; index++) {
+    const frame = await drawFrame(index);
+    ctx.clearRect(0, 0, width, height);
+    ctx.drawImage(frame, 0, 0, width, height);
+    const { data } = ctx.getImageData(0, 0, width, height);
+    const palette = quantize(data, 256);
+    gif.writeFrame(applyPalette(data, palette), width, height, {
+      palette,
+      delay,
+      // 0 loops forever; it is only read from the first frame.
+      repeat: 0,
+    });
+    onProgress?.((index + 1) / frameCount);
+  }
+
+  gif.finish();
+  return new Blob([gif.bytes()], { type: "image/gif" });
+}

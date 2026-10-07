@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import { IconMinus, IconSquare, IconX } from "@tabler/icons-react";
-import { instrumentSerif, plexMono } from "@/src/app/fonts";
+import { instrumentSerif, lilex, plexMono } from "@/src/app/fonts";
 import { urlFor } from "@/sanity/lib/image";
 import { WorkshopPost } from "../data";
 import {
@@ -96,7 +96,12 @@ export function PhotoWindow({
           )}
         >
           <div className="m-[3px] flex h-[40px] shrink-0 items-center justify-between bg-[#0C0303] px-[6px] ring-2 ring-[#bdbdbd]">
-            <span className="truncate px-[4px] text-[22px] font-bold uppercase">
+            <span
+              className={clsx(
+                lilex.className,
+                "truncate px-[4px] text-[22px] font-bold uppercase",
+              )}
+            >
               / {title}
             </span>
             <span className="flex gap-[4px]">
@@ -208,7 +213,10 @@ function Horizontal({ t, format, data, kicker }: LayoutProps) {
           style={{ gap: compact ? 10 : 16 }}
         >
           <h2
-            className="font-extrabold leading-[1.05] tracking-[-0.02em]"
+            className={clsx(
+              lilex.className,
+              "font-extrabold leading-[1.05] tracking-[-0.02em]",
+            )}
             style={{ fontSize: titleSize }}
           >
             {data.title}

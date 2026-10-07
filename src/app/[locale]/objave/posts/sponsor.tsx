@@ -18,16 +18,17 @@ import {
 } from "../frame";
 import { beat, ease } from "../motion";
 import { PlanetPixels } from "./planet-pixels";
-import { loadImage, trackDrawing } from "./screen-photo";
+import { trackDrawing } from "./screen-photo";
+import { Trimmed, trimLogo } from "@/src/app/hack/[locale]/sponsors/trim-logo";
 
 /*
- * Sponsor posts, in five layouts to choose from. All of them share the centred
+ * Sponsor posts, in two layouts to choose from. All of them share the centred
  * header, the logo standing bare, and the tier told by its planet's colour
  * alone. The logo and the type hold still; only the planet moves, each layout
  * with one of the gestures the sponsors page itself uses.
  */
 
-export type SponsorVariant = "orbit" | "planet" | "sky" | "burst";
+export type SponsorVariant = "sky" | "burst";
 
 export const SPONSOR_VARIANTS: {
   id: SponsorVariant;
@@ -35,8 +36,6 @@ export const SPONSOR_VARIANTS: {
   duration: number;
   still: number;
 }[] = [
-  { id: "orbit", label: "Orbita", duration: 4, still: 2 },
-  { id: "planet", label: "Planet", duration: 4.5, still: 4 },
   { id: "sky", label: "Nebo", duration: 5, still: 2.5 },
   { id: "burst", label: "Pok", duration: 4.5, still: 4 },
 ];
@@ -80,58 +79,6 @@ function PlanetBody({
       />
     </div>
   );
-}
-
-type Trimmed = { src: string; ratio: number };
-const trimmed = new Map<string, Promise<Trimmed>>();
-
-/**
- * A logo cropped to its visible pixels. Several logos were uploaded on a wide
- * canvas with lots of empty space around the mark, which made them render
- * small; trimming lets every mark be sized by what is actually drawn.
- */
-function trimLogo(src: string) {
-  let job = trimmed.get(src);
-  if (!job) {
-    job = loadImage(src).then((image) => {
-      const canvas = document.createElement("canvas");
-      canvas.width = image.naturalWidth;
-      canvas.height = image.naturalHeight;
-      const ctx = canvas.getContext("2d")!;
-      ctx.drawImage(image, 0, 0);
-      const { data, width, height } = ctx.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height,
-      );
-      let left = width;
-      let right = -1;
-      let top = height;
-      let bottom = -1;
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          if (data[(y * width + x) * 4 + 3] > 16) {
-            if (x < left) left = x;
-            if (x > right) right = x;
-            if (y < top) top = y;
-            if (y > bottom) bottom = y;
-          }
-        }
-      }
-      // Nothing transparent to trim: keep the image as it is.
-      if (right < 0) return { src, ratio: width / height };
-      const w = right - left + 1;
-      const h = bottom - top + 1;
-      const crop = document.createElement("canvas");
-      crop.width = w;
-      crop.height = h;
-      crop.getContext("2d")!.drawImage(canvas, left, top, w, h, 0, 0, w, h);
-      return { src: crop.toDataURL("image/png"), ratio: w / h };
-    });
-    trimmed.set(src, job);
-  }
-  return job;
 }
 
 /**
@@ -185,8 +132,8 @@ function SponsorLogo({
 type LayoutProps = PostProps<SponsorPost> & { planet: Planet };
 
 /**
- * Orbita: the site's tier view. The planet fills the bottom like a world seen
- * from orbit, still from the first frame, in a dark sky of the site's
+ * The scene Pok lands on, after the site's tier view. The planet fills the
+ * bottom like a world seen from orbit, still from the first frame, in a dark sky of the site's
  * twinkling stars; only the dither and the stars move. The logo floats above.
  */
 function Orbit({ t, format, data, planet }: LayoutProps) {
@@ -229,44 +176,6 @@ function Orbit({ t, format, data, planet }: LayoutProps) {
         }}
       />
       <SponsorLogo data={data} format={format} style={{ top: logoY }} />
-    </>
-  );
-}
-
-/**
- * Planet: one whole planet over the logo, like a planet in the site's sponsor
- * sky. It is there from the first frame and holds still; its dither turns and
- * its glow slowly breathes.
- */
-function WholePlanet({ t, format, data, planet }: LayoutProps) {
-  const compact = isCompact(format);
-  const tall = format.height > 1600;
-  const size = compact ? 400 : tall ? 680 : 540;
-  const gap = compact ? 48 : 72;
-  const logoBox = compact ? 130 : tall ? 210 : 160;
-  const area = format.height - headerBottom(format) - bottomMargin(format);
-  const top = headerBottom(format) + (area - size - gap - logoBox) / 2;
-
-  // One slow breath every four seconds or so.
-  const breath = (1 - Math.cos(t * 1.5)) / 2;
-
-  return (
-    <>
-      <PlanetBody
-        planet={planet}
-        t={t}
-        size={size}
-        glow={44 + 24 * breath}
-        style={{
-          left: (format.width - size) / 2,
-          top,
-        }}
-      />
-      <SponsorLogo
-        data={data}
-        format={format}
-        style={{ top: top + size + gap + logoBox / 2 }}
-      />
     </>
   );
 }
@@ -356,8 +265,6 @@ function Burst({ t, format, data, planet }: LayoutProps) {
 }
 
 const LAYOUTS: Record<SponsorVariant, (props: LayoutProps) => JSX.Element> = {
-  orbit: Orbit,
-  planet: WholePlanet,
   sky: Sky,
   burst: Burst,
 };
@@ -372,13 +279,7 @@ export function SponsorPostView({
   const Layout = LAYOUTS[variant];
 
   return (
-    <PostFrame
-      t={t}
-      format={format}
-      rippleStill
-      // Orbita is a night sky: stars on the dark ground, no red swirl.
-      showRipple={variant !== "orbit"}
-    >
+    <PostFrame t={t} format={format} rippleStill>
       <Header t={t} format={format} align="center" still />
       <Layout t={t} format={format} data={data} planet={planet} />
     </PostFrame>

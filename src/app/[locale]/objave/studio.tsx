@@ -12,6 +12,7 @@ import {
   canEncodeMp4,
   canvasToPng,
   downloadBlob,
+  encodeGif,
   encodeMp4,
 } from "./capture";
 import {
@@ -22,7 +23,13 @@ import {
   JudgePost,
 } from "./data";
 import { FORMATS, FPS, Format } from "./formats";
-import { LogoContext, LogoMode, RippleContext, rasteriseRipple } from "./frame";
+import {
+  DateContext,
+  LogoContext,
+  LogoMode,
+  RippleContext,
+  rasteriseRipple,
+} from "./frame";
 import {
   CATEGORIES,
   Category,
@@ -134,7 +141,15 @@ function useWidth() {
   return [ref, width] as const;
 }
 
-type Job = { postId: string; kind: "png" | "video" | "zip"; progress: number };
+type Job = {
+  postId: string;
+  kind: "png" | "video" | "gif" | "zip";
+  progress: number;
+};
+
+/** A GIF is drawn smaller and choppier than the MP4, or it gets huge. */
+const GIF_WIDTH = 540;
+const GIF_FPS = 20;
 
 /** The red notched button of the posts, small, for the page's own controls. */
 const control = clsx(
@@ -150,6 +165,7 @@ function PostCard({
   onPng,
   onSvg,
   onVideo,
+  onGif,
   children,
 }: {
   post: PostDef;
@@ -159,6 +175,7 @@ function PostCard({
   onPng: () => void;
   onSvg: () => void;
   onVideo: () => void;
+  onGif: () => void;
   /** Extra controls under the card, e.g. the workshop editor. */
   children?: React.ReactNode;
 }) {
@@ -259,8 +276,8 @@ function PostCard({
             {`${Math.min(playhead, post.duration).toFixed(1)} / ${post.duration.toFixed(1)} s`}
           </p>
         </div>
-        {/* Downloads: two stills, then the animation. */}
-        <div className="grid grid-cols-3 gap-2">
+        {/* Downloads: two stills, then the animation as MP4 or GIF. */}
+        <div className="grid grid-cols-4 gap-2">
           <button
             type="button"
             disabled={busy}
@@ -286,7 +303,18 @@ function PostCard({
               "bg-[#ff5757] text-black hover:bg-[#ff7a7a]",
             )}
           >
-            ↓ {t("video")}
+            ↓ {t("mp4")}
+          </button>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={onGif}
+            className={clsx(
+              control,
+              "bg-[#ff5757] text-black hover:bg-[#ff7a7a]",
+            )}
+          >
+            ↓ {t("gif")}
           </button>
         </div>
       </div>
@@ -307,8 +335,9 @@ export function Studio() {
   const format = FORMATS.find((f) => f.id === formatId)!;
   const [category, setCategory] = useState<Category | "all">("all");
   const [logoMode, setLogoMode] = useState<LogoMode>("full");
+  const [showDate, setShowDate] = useState(false);
   const [variants, setVariants] = useState<Variants>({
-    sponsors: "orbit",
+    sponsors: "sky",
     registration: "phone",
     pictures: "finder",
   });
@@ -467,6 +496,33 @@ export function Studio() {
       downloadBlob(blob, fileName(post, format, "mp4"));
     });
 
+  const exportGif = (post: PostDef) =>
+    run(async () => {
+      setJob({ postId: post.id, kind: "gif", progress: 0 });
+      // Captured straight at the GIF's size, which is also much quicker.
+      const scale = GIF_WIDTH / format.width;
+      const width = GIF_WIDTH;
+      const height = Math.round(format.height * scale);
+      // The still first, to collect every font, as for the MP4.
+      const node = await showOnStage(post, post.still);
+      const capturer = new FrameCapturer(node, scale);
+      await capturer.capture();
+
+      const blob = await encodeGif({
+        width,
+        height,
+        fps: GIF_FPS,
+        frameCount: Math.round(post.duration * GIF_FPS),
+        drawFrame: async (index) => {
+          await showOnStage(post, index / GIF_FPS);
+          return capturer.capture();
+        },
+        onProgress: (progress) =>
+          setJob({ postId: post.id, kind: "gif", progress }),
+      });
+      downloadBlob(blob, fileName(post, format, "gif"));
+    });
+
   const exportAllPngs = () =>
     run(async () => {
       const { zipSync } = await import("fflate");
@@ -505,394 +561,420 @@ export function Studio() {
       value={ripple ?? "/assets/hackathon26/social/ripple.svg"}
     >
       <LogoContext.Provider value={logoMode}>
-        <main
-          className={clsx(
-            anaheim.className,
-            "min-h-screen bg-[#0c0303] px-4 py-10 text-[#fafafa] md:px-10",
-          )}
-        >
-          <header className="mb-10 flex items-start justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <img
-                src="/assets/hackathon26/social/duck.svg"
-                alt=""
-                className="h-12 w-auto [image-rendering:pixelated]"
-              />
-              <h1
+        <DateContext.Provider value={showDate}>
+          <main
+            className={clsx(
+              anaheim.className,
+              "min-h-screen bg-[#0c0303] px-4 py-10 text-[#fafafa] md:px-10",
+            )}
+          >
+            <header className="mb-10 flex items-start justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <img
+                  src="/assets/hackathon26/social/duck.svg"
+                  alt=""
+                  className="h-12 w-auto [image-rendering:pixelated]"
+                />
+                <h1
+                  className={clsx(
+                    instrumentSerif.className,
+                    "text-5xl leading-none md:text-6xl",
+                  )}
+                >
+                  {t("heading")}
+                </h1>
+              </div>
+              {/* How it works, folded away behind a pixel question mark. */}
+              <details className="group relative z-40 shrink-0">
+                <summary
+                  aria-label={t("help")}
+                  title={t("help")}
+                  className="flex h-12 w-12 cursor-pointer list-none items-center justify-center border border-[rgba(255,87,87,0.5)] transition-colors hover:bg-[rgba(255,87,87,0.15)] group-open:bg-[#ff5757] [&::-webkit-details-marker]:hidden"
+                >
+                  <PixelQuestion />
+                </summary>
+                <ol className="absolute right-0 top-[calc(100%+8px)] z-40 flex w-[min(26rem,calc(100vw-2rem))] flex-col gap-3 border border-[rgba(255,87,87,0.5)] bg-[#0c0303] p-4 shadow-[8px_8px_0_rgba(0,0,0,0.6)]">
+                  {[0, 1, 2].map((index) => (
+                    <li key={index} className="flex gap-4">
+                      <span
+                        className={clsx(
+                          plexMono.className,
+                          "flex h-8 w-8 shrink-0 items-center justify-center bg-[#ff5757] text-sm font-semibold text-black",
+                        )}
+                      >
+                        {index + 1}
+                      </span>
+                      <span className="flex flex-col gap-1">
+                        <span className="text-lg font-bold leading-tight">
+                          {t(`steps.${index}.title`)}
+                        </span>
+                        <span className="text-sm leading-snug text-[#bdbdbd]">
+                          {t(`steps.${index}.text`)}
+                        </span>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </details>
+            </header>
+
+            {/* The controls stay in reach while scrolling through the posts. */}
+            {/* The background runs edge to edge; the lines keep to the page
+            margins, so they line up with the section dividers below. */}
+            <div className="sticky top-0 z-30 -mx-4 mb-10 bg-[rgba(12,3,3,0.92)] px-4 backdrop-blur md:-mx-10 md:px-10">
+              <div className="flex flex-col gap-3 border-y border-[rgba(255,87,87,0.25)] py-3">
+                {/* Row one: the format, and the bulk download at the far end. */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span
+                    className={clsx(
+                      plexMono.className,
+                      "mr-1 w-20 text-[10px] uppercase tracking-[0.16em] text-gray400",
+                    )}
+                  >
+                    {t("format")}
+                  </span>
+                  {FORMATS.map((f) => (
+                    <button
+                      key={f.id}
+                      type="button"
+                      disabled={!!job}
+                      aria-pressed={f.id === formatId}
+                      onClick={() => setFormatId(f.id)}
+                      className={clsx(
+                        control,
+                        f.id === formatId
+                          ? "bg-[#ff5757] text-black"
+                          : "hover:bg-[rgba(255,87,87,0.15)]",
+                      )}
+                    >
+                      <FormatLogo id={f.id} />
+                      {f.label}
+                      <span className="opacity-60">
+                        {Math.round(f.width * f.exportScale)}×
+                        {Math.round(f.height * f.exportScale)}
+                      </span>
+                    </button>
+                  ))}
+                  {/* The logo in every post's header: the full lockup or the duck. */}
+                  <span
+                    className={clsx(
+                      plexMono.className,
+                      "ml-4 mr-1 text-[10px] uppercase tracking-[0.16em] text-gray400",
+                    )}
+                  >
+                    {t("logo")}
+                  </span>
+                  {(["full", "duck"] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      disabled={!!job}
+                      aria-pressed={logoMode === mode}
+                      onClick={() => setLogoMode(mode)}
+                      className={clsx(
+                        control,
+                        logoMode === mode
+                          ? "bg-[#ff5757] text-black"
+                          : "hover:bg-[rgba(255,87,87,0.15)]",
+                      )}
+                    >
+                      {t(`logo_${mode}`)}
+                    </button>
+                  ))}
+                  {/* The date under the full lockup, off unless asked for. */}
+                  <button
+                    type="button"
+                    disabled={!!job || logoMode === "duck"}
+                    aria-pressed={showDate}
+                    onClick={() => setShowDate((on) => !on)}
+                    className={clsx(
+                      control,
+                      showDate && logoMode !== "duck"
+                        ? "bg-[#ff5757] text-black"
+                        : "hover:bg-[rgba(255,87,87,0.15)]",
+                    )}
+                  >
+                    {t("logo_date")}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={!!job || !shown.length}
+                    onClick={exportAllPngs}
+                    className={clsx(
+                      control,
+                      "ml-auto whitespace-nowrap hover:bg-[#ff5757] hover:text-black",
+                    )}
+                  >
+                    ↓ {t("download_all")}
+                    {job?.kind === "zip" &&
+                      ` · ${Math.round(job.progress * 100)} %`}
+                  </button>
+                </div>
+                {/* Row two: which posts to show. */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span
+                    className={clsx(
+                      plexMono.className,
+                      "mr-1 w-20 text-[10px] uppercase tracking-[0.16em] text-gray400",
+                    )}
+                  >
+                    {t("show")}
+                  </span>
+                  {(["all", ...CATEGORIES] as const).map((c) => (
+                    <button
+                      key={c}
+                      type="button"
+                      aria-pressed={c === category}
+                      onClick={() => setCategory(c)}
+                      className={clsx(
+                        control,
+                        "border-transparent",
+                        c === category
+                          ? "bg-[#fafafa] text-black"
+                          : "text-[#d3d2d2] hover:text-white",
+                      )}
+                    >
+                      {t(`categories.${c}`)}
+                      <span className="opacity-60">
+                        {c === "all" ? posts.length : counts[c]}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {message && (
+              <p
                 className={clsx(
-                  instrumentSerif.className,
-                  "text-5xl leading-none md:text-6xl",
+                  plexMono.className,
+                  "mb-6 border border-[#fbb040] px-4 py-3 text-sm text-[#fbb040]",
                 )}
               >
-                {t("heading")}
-              </h1>
-            </div>
-            {/* How it works, folded away behind a pixel question mark. */}
-            <details className="group relative z-40 shrink-0">
-              <summary
-                aria-label={t("help")}
-                title={t("help")}
-                className="flex h-12 w-12 cursor-pointer list-none items-center justify-center border border-[rgba(255,87,87,0.5)] transition-colors hover:bg-[rgba(255,87,87,0.15)] group-open:bg-[#ff5757] [&::-webkit-details-marker]:hidden"
+                {message}
+              </p>
+            )}
+
+            {isLoading ? (
+              <p
+                className={clsx(
+                  plexMono.className,
+                  "text-sm uppercase tracking-[0.12em]",
+                )}
               >
-                <PixelQuestion />
-              </summary>
-              <ol className="absolute right-0 top-[calc(100%+8px)] z-40 flex w-[min(26rem,calc(100vw-2rem))] flex-col gap-3 border border-[rgba(255,87,87,0.5)] bg-[#0c0303] p-4 shadow-[8px_8px_0_rgba(0,0,0,0.6)]">
-                {[0, 1, 2].map((index) => (
-                  <li key={index} className="flex gap-4">
-                    <span
-                      className={clsx(
-                        plexMono.className,
-                        "flex h-8 w-8 shrink-0 items-center justify-center bg-[#ff5757] text-sm font-semibold text-black",
-                      )}
-                    >
-                      {index + 1}
-                    </span>
-                    <span className="flex flex-col gap-1">
-                      <span className="text-lg font-bold leading-tight">
-                        {t(`steps.${index}.title`)}
-                      </span>
-                      <span className="text-sm leading-snug text-[#bdbdbd]">
-                        {t(`steps.${index}.text`)}
-                      </span>
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </details>
-          </header>
-
-          {/* The controls stay in reach while scrolling through the posts. */}
-          {/* The background runs edge to edge; the lines keep to the page
-            margins, so they line up with the section dividers below. */}
-          <div className="sticky top-0 z-30 -mx-4 mb-10 bg-[rgba(12,3,3,0.92)] px-4 backdrop-blur md:-mx-10 md:px-10">
-            <div className="flex flex-col gap-3 border-y border-[rgba(255,87,87,0.25)] py-3">
-              {/* Row one: the format, and the bulk download at the far end. */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span
-                  className={clsx(
-                    plexMono.className,
-                    "mr-1 w-20 text-[10px] uppercase tracking-[0.16em] text-gray400",
-                  )}
-                >
-                  {t("format")}
-                </span>
-                {FORMATS.map((f) => (
-                  <button
-                    key={f.id}
-                    type="button"
-                    disabled={!!job}
-                    aria-pressed={f.id === formatId}
-                    onClick={() => setFormatId(f.id)}
-                    className={clsx(
-                      control,
-                      f.id === formatId
-                        ? "bg-[#ff5757] text-black"
-                        : "hover:bg-[rgba(255,87,87,0.15)]",
-                    )}
-                  >
-                    <FormatLogo id={f.id} />
-                    {f.label}
-                    <span className="opacity-60">
-                      {Math.round(f.width * f.exportScale)}×
-                      {Math.round(f.height * f.exportScale)}
-                    </span>
-                  </button>
-                ))}
-                {/* The logo in every post's header: the full lockup or the duck. */}
-                <span
-                  className={clsx(
-                    plexMono.className,
-                    "ml-4 mr-1 text-[10px] uppercase tracking-[0.16em] text-gray400",
-                  )}
-                >
-                  {t("logo")}
-                </span>
-                {(["full", "duck"] as const).map((mode) => (
-                  <button
-                    key={mode}
-                    type="button"
-                    disabled={!!job}
-                    aria-pressed={logoMode === mode}
-                    onClick={() => setLogoMode(mode)}
-                    className={clsx(
-                      control,
-                      logoMode === mode
-                        ? "bg-[#ff5757] text-black"
-                        : "hover:bg-[rgba(255,87,87,0.15)]",
-                    )}
-                  >
-                    {t(`logo_${mode}`)}
-                  </button>
-                ))}
-                <button
-                  type="button"
-                  disabled={!!job || !shown.length}
-                  onClick={exportAllPngs}
-                  className={clsx(
-                    control,
-                    "ml-auto whitespace-nowrap hover:bg-[#ff5757] hover:text-black",
-                  )}
-                >
-                  ↓ {t("download_all")}
-                  {job?.kind === "zip" &&
-                    ` · ${Math.round(job.progress * 100)} %`}
-                </button>
-              </div>
-              {/* Row two: which posts to show. */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span
-                  className={clsx(
-                    plexMono.className,
-                    "mr-1 w-20 text-[10px] uppercase tracking-[0.16em] text-gray400",
-                  )}
-                >
-                  {t("show")}
-                </span>
-                {(["all", ...CATEGORIES] as const).map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    aria-pressed={c === category}
-                    onClick={() => setCategory(c)}
-                    className={clsx(
-                      control,
-                      "border-transparent",
-                      c === category
-                        ? "bg-[#fafafa] text-black"
-                        : "text-[#d3d2d2] hover:text-white",
-                    )}
-                  >
-                    {t(`categories.${c}`)}
-                    <span className="opacity-60">
-                      {c === "all" ? posts.length : counts[c]}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {message && (
-            <p
-              className={clsx(
-                plexMono.className,
-                "mb-6 border border-[#fbb040] px-4 py-3 text-sm text-[#fbb040]",
-              )}
-            >
-              {message}
-            </p>
-          )}
-
-          {isLoading ? (
-            <p
-              className={clsx(
-                plexMono.className,
-                "text-sm uppercase tracking-[0.12em]",
-              )}
-            >
-              {t("loading")}
-            </p>
-          ) : (
-            <div className="flex flex-col gap-16">
-              {CATEGORIES.filter(
-                (c) => category === "all" || category === c,
-              ).map((c) => {
-                const sectionPosts = shown.filter(
-                  (post) => post.category === c,
-                );
-                if (!sectionPosts.length) return null;
-                const options =
-                  c === "registration"
-                    ? { label: t("layout"), list: REGISTRATION_VARIANTS }
-                    : c === "sponsors"
-                      ? { label: t("layout"), list: SPONSOR_VARIANTS }
-                      : c === "pictures"
-                        ? { label: t("layout"), list: GALLERY_VARIANTS }
-                        : null;
-                const key = c as keyof Variants;
-                return (
-                  <section key={c} className="flex flex-col gap-6">
-                    <div className="flex flex-col gap-4 border-b border-[rgba(255,87,87,0.2)] pb-5 lg:flex-row lg:items-end lg:justify-between">
-                      <div className="flex flex-col gap-1">
-                        <h2
-                          className={clsx(
-                            instrumentSerif.className,
-                            "text-4xl leading-none",
-                          )}
-                        >
-                          {t(`categories.${c}`)}{" "}
-                          <span
+                {t("loading")}
+              </p>
+            ) : (
+              <div className="flex flex-col gap-16">
+                {CATEGORIES.filter(
+                  (c) => category === "all" || category === c,
+                ).map((c) => {
+                  const sectionPosts = shown.filter(
+                    (post) => post.category === c,
+                  );
+                  if (!sectionPosts.length) return null;
+                  const options =
+                    c === "registration"
+                      ? { label: t("layout"), list: REGISTRATION_VARIANTS }
+                      : c === "sponsors"
+                        ? { label: t("layout"), list: SPONSOR_VARIANTS }
+                        : c === "pictures"
+                          ? { label: t("layout"), list: GALLERY_VARIANTS }
+                          : null;
+                  const key = c as keyof Variants;
+                  return (
+                    <section key={c} className="flex flex-col gap-6">
+                      <div className="flex flex-col gap-4 border-b border-[rgba(255,87,87,0.2)] pb-5 lg:flex-row lg:items-end lg:justify-between">
+                        <div className="flex flex-col gap-1">
+                          <h2
                             className={clsx(
-                              plexMono.className,
-                              "align-middle text-sm text-gray400",
+                              instrumentSerif.className,
+                              "text-4xl leading-none",
                             )}
                           >
-                            {t("count", { count: sectionPosts.length })}
-                          </span>
-                        </h2>
-                        {t.has(`sections.${c}`) && (
-                          <p className="max-w-2xl text-base text-[#bdbdbd]">
-                            {t(`sections.${c}`)}
-                          </p>
-                        )}
-                      </div>
-                      {options && (
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span
-                            className={clsx(
-                              plexMono.className,
-                              "mr-1 text-[10px] uppercase tracking-[0.16em] text-gray400",
-                            )}
-                          >
-                            {options.label}
-                          </span>
-                          {options.list.map((option) => (
-                            <button
-                              key={option.id}
-                              type="button"
-                              disabled={!!job}
-                              aria-pressed={variants[key] === option.id}
-                              onClick={() =>
-                                setVariants((current) => ({
-                                  ...current,
-                                  [key]: option.id,
-                                }))
-                              }
+                            {t(`categories.${c}`)}{" "}
+                            <span
                               className={clsx(
-                                control,
-                                variants[key] === option.id
-                                  ? "bg-[#ff5757] text-black"
-                                  : "hover:bg-[rgba(255,87,87,0.15)]",
+                                plexMono.className,
+                                "align-middle text-sm text-gray400",
                               )}
                             >
-                              {option.label}
-                            </button>
-                          ))}
+                              {t("count", { count: sectionPosts.length })}
+                            </span>
+                          </h2>
+                          {t.has(`sections.${c}`) && (
+                            <p className="max-w-2xl text-base text-[#bdbdbd]">
+                              {t(`sections.${c}`)}
+                            </p>
+                          )}
                         </div>
-                      )}
-                    </div>
-                    <div
-                      className="grid gap-x-8 gap-y-12"
-                      style={{
-                        gridTemplateColumns: `repeat(auto-fill, minmax(${format.id === "story" ? 240 : 300}px, 1fr))`,
-                      }}
-                    >
-                      {sectionPosts.map((post) => (
-                        <PostCard
-                          key={`${post.id}-${format.id}-${post.variant ?? ""}`}
-                          post={post}
-                          format={format}
-                          job={
-                            job && job.postId === post.id && job.kind !== "zip"
-                              ? job
-                              : null
-                          }
-                          busy={!!job}
-                          onPng={() => exportPng(post)}
-                          onSvg={() => exportSvg(post)}
-                          onVideo={() => exportVideo(post)}
-                        >
-                          {post.category === "jury" &&
-                            (() => {
-                              const base =
-                                content?.judges.find(
-                                  (j) => j._id === post.id,
-                                ) ??
-                                (post.id === exampleJudge._id
-                                  ? exampleJudge
-                                  : undefined);
-                              return (
-                                base && (
-                                  <JudgeEditor
-                                    value={{ ...base, ...judgeEdits[post.id] }}
-                                    onChange={(edit) =>
-                                      setJudgeEdits((edits) => ({
-                                        ...edits,
-                                        [post.id]: {
-                                          ...edits[post.id],
-                                          ...edit,
-                                        },
-                                      }))
-                                    }
-                                    onReset={() =>
-                                      setJudgeEdits(
-                                        ({ [post.id]: _, ...rest }) => rest,
-                                      )
-                                    }
-                                  />
-                                )
-                              );
-                            })()}
-                          {post.category === "awards" &&
-                            (() => {
-                              const base = content?.rewards.find(
-                                (r) => r._id === post.id,
-                              );
-                              return (
-                                base && (
-                                  <AwardEditor
-                                    value={{ ...base, ...rewardEdits[post.id] }}
-                                    onChange={(edit) =>
-                                      setRewardEdits((edits) => ({
-                                        ...edits,
-                                        [post.id]: {
-                                          ...edits[post.id],
-                                          ...edit,
-                                        },
-                                      }))
-                                    }
-                                    onReset={() =>
-                                      setRewardEdits(
-                                        ({ [post.id]: _, ...rest }) => rest,
-                                      )
-                                    }
-                                  />
-                                )
-                              );
-                            })()}
-                          {post.category === "workshops" &&
-                            (() => {
-                              const workshop = workshopFor(post.id);
-                              return (
-                                workshop && (
-                                  <WorkshopEditor
-                                    value={workshop}
-                                    onChange={(edit) =>
-                                      setWorkshopEdits((edits) => ({
-                                        ...edits,
-                                        [post.id]: {
-                                          ...edits[post.id],
-                                          ...edit,
-                                        },
-                                      }))
-                                    }
-                                    onReset={() =>
-                                      setWorkshopEdits(
-                                        ({ [post.id]: _, ...rest }) => rest,
-                                      )
-                                    }
-                                  />
-                                )
-                              );
-                            })()}
-                        </PostCard>
-                      ))}
-                    </div>
-                  </section>
-                );
-              })}
-            </div>
-          )}
+                        {options && (
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span
+                              className={clsx(
+                                plexMono.className,
+                                "mr-1 text-[10px] uppercase tracking-[0.16em] text-gray400",
+                              )}
+                            >
+                              {options.label}
+                            </span>
+                            {options.list.map((option) => (
+                              <button
+                                key={option.id}
+                                type="button"
+                                disabled={!!job}
+                                aria-pressed={variants[key] === option.id}
+                                onClick={() =>
+                                  setVariants((current) => ({
+                                    ...current,
+                                    [key]: option.id,
+                                  }))
+                                }
+                                className={clsx(
+                                  control,
+                                  variants[key] === option.id
+                                    ? "bg-[#ff5757] text-black"
+                                    : "hover:bg-[rgba(255,87,87,0.15)]",
+                                )}
+                              >
+                                {option.label}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <div
+                        className="grid gap-x-8 gap-y-12"
+                        style={{
+                          gridTemplateColumns: `repeat(auto-fill, minmax(${format.id === "story" ? 240 : 300}px, 1fr))`,
+                        }}
+                      >
+                        {sectionPosts.map((post) => (
+                          <PostCard
+                            key={`${post.id}-${format.id}-${post.variant ?? ""}`}
+                            post={post}
+                            format={format}
+                            job={
+                              job &&
+                              job.postId === post.id &&
+                              job.kind !== "zip"
+                                ? job
+                                : null
+                            }
+                            busy={!!job}
+                            onPng={() => exportPng(post)}
+                            onSvg={() => exportSvg(post)}
+                            onVideo={() => exportVideo(post)}
+                            onGif={() => exportGif(post)}
+                          >
+                            {post.category === "jury" &&
+                              (() => {
+                                const base =
+                                  content?.judges.find(
+                                    (j) => j._id === post.id,
+                                  ) ??
+                                  (post.id === exampleJudge._id
+                                    ? exampleJudge
+                                    : undefined);
+                                return (
+                                  base && (
+                                    <JudgeEditor
+                                      value={{
+                                        ...base,
+                                        ...judgeEdits[post.id],
+                                      }}
+                                      onChange={(edit) =>
+                                        setJudgeEdits((edits) => ({
+                                          ...edits,
+                                          [post.id]: {
+                                            ...edits[post.id],
+                                            ...edit,
+                                          },
+                                        }))
+                                      }
+                                      onReset={() =>
+                                        setJudgeEdits(
+                                          ({ [post.id]: _, ...rest }) => rest,
+                                        )
+                                      }
+                                    />
+                                  )
+                                );
+                              })()}
+                            {post.category === "awards" &&
+                              (() => {
+                                const base = content?.rewards.find(
+                                  (r) => r._id === post.id,
+                                );
+                                return (
+                                  base && (
+                                    <AwardEditor
+                                      value={{
+                                        ...base,
+                                        ...rewardEdits[post.id],
+                                      }}
+                                      onChange={(edit) =>
+                                        setRewardEdits((edits) => ({
+                                          ...edits,
+                                          [post.id]: {
+                                            ...edits[post.id],
+                                            ...edit,
+                                          },
+                                        }))
+                                      }
+                                      onReset={() =>
+                                        setRewardEdits(
+                                          ({ [post.id]: _, ...rest }) => rest,
+                                        )
+                                      }
+                                    />
+                                  )
+                                );
+                              })()}
+                            {post.category === "workshops" &&
+                              (() => {
+                                const workshop = workshopFor(post.id);
+                                return (
+                                  workshop && (
+                                    <WorkshopEditor
+                                      value={workshop}
+                                      onChange={(edit) =>
+                                        setWorkshopEdits((edits) => ({
+                                          ...edits,
+                                          [post.id]: {
+                                            ...edits[post.id],
+                                            ...edit,
+                                          },
+                                        }))
+                                      }
+                                      onReset={() =>
+                                        setWorkshopEdits(
+                                          ({ [post.id]: _, ...rest }) => rest,
+                                        )
+                                      }
+                                    />
+                                  )
+                                );
+                              })()}
+                          </PostCard>
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })}
+              </div>
+            )}
 
-          {/* Off screen, full size: what actually gets captured. */}
-          <div
-            ref={stageRef}
-            aria-hidden
-            className="pointer-events-none fixed left-0 top-0 -translate-x-[200vw]"
-          >
-            {stage && stage.post.render(stage.t, format)}
-          </div>
-        </main>
+            {/* Off screen, full size: what actually gets captured. */}
+            <div
+              ref={stageRef}
+              aria-hidden
+              className="pointer-events-none fixed left-0 top-0 -translate-x-[200vw]"
+            >
+              {stage && stage.post.render(stage.t, format)}
+            </div>
+          </main>
+        </DateContext.Provider>
       </LogoContext.Provider>
     </RippleContext.Provider>
   );
