@@ -512,7 +512,7 @@ export function Studio() {
           )}
         >
           <header className="mb-10 flex items-start justify-between gap-6">
-            <div className="flex items-end gap-4">
+            <div className="flex items-center gap-4">
               <img
                 src="/assets/hackathon26/social/duck.svg"
                 alt=""

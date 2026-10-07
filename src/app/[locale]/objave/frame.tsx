@@ -205,10 +205,10 @@ export function Header({
         }
         alt=""
         width={145}
-        height={duckOnly ? 113 : 100}
+        height={duckOnly ? 119 : 100}
         className={clsx(
           "relative w-[145px]",
-          duckOnly ? "h-[113px]" : "left-[4px] h-[100px]",
+          duckOnly ? "h-[119px]" : "left-[4px] h-[100px]",
         )}
         style={{
           clipPath: `inset(${(1 - duckIn) * 100}% 0 0 0)`,
