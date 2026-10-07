@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -162,11 +162,48 @@ const LOADING_BLOCKS = 14;
 const LOADING_CYCLE_SECONDS = 2.8;
 
 /**
+ * How long a window stays empty before the progress bar appears. Most pages
+ * arrive well within this, so the window just opens and fills; the bar only
+ * shows up when there is really something to wait for, instead of flashing.
+ */
+const LOADING_DELAY_MS = 400;
+
+/**
+ * When the current wait began. A navigation shows the route's skeleton window
+ * first and then hands over to the page's own loading state; both read this
+ * one clock, so the delay counts from the click, not from each handover.
+ */
+let waitingSince: number | null = null;
+let clearWaiting: number | undefined;
+
+/**
  * An old Windows progress bar for a window whose contents are still on their
  * way: chunky red blocks fill a sunken track one by one, then it starts over.
+ * It holds back until `LOADING_DELAY_MS` after the wait began; until then the
+ * window sits empty.
  */
 export function WindowLoading() {
   const t = useTranslations("Hackathon");
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    window.clearTimeout(clearWaiting);
+    waitingSince ??= performance.now();
+    const remaining = LOADING_DELAY_MS - (performance.now() - waitingSince);
+    const timer = window.setTimeout(
+      () => setIsVisible(true),
+      Math.max(0, remaining),
+    );
+    return () => {
+      window.clearTimeout(timer);
+      // A loading state that takes over right away keeps the clock running.
+      clearWaiting = window.setTimeout(() => (waitingSince = null), 50);
+    };
+  }, []);
+
+  if (!isVisible) {
+    return <div aria-busy="true" className="h-full min-h-[12rem]" />;
+  }
 
   return (
     <div
