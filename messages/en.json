@@ -172,6 +172,13 @@
       "title": "Frequently asked questions",
       "ask": "Ask us a question"
     },
+    "numbers": {
+      "heading": "AdaHack 2025 in numbers",
+      "subtitle": "Last year's edition, in three numbers. Turn a card to see.",
+      "participants": "participants",
+      "sponsors": "sponsors",
+      "awards": "in awards"
+    },
     "prize_deck": {
       "heading": "Prize deck",
       "subtitle": "Five cards. One grand prize. Four challenges. No bluffing required.",
