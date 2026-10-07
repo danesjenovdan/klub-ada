@@ -299,5 +299,144 @@
       "linkedin": "LinkedIn",
       "instagram": "Instagram"
     }
+  },
+  "Posts": {
+    "meta_title": "Objave AdaHack 2026",
+    "heading": "Objave za družbena omrežja",
+    "format": "Format",
+    "categories": {
+      "all": "Vse",
+      "savethedate": "Save the date",
+      "website": "Spletna stran",
+      "registration": "Prijave",
+      "numbers": "2025 v številkah",
+      "countdown": "Odštevanje",
+      "sponsors": "Sponzorji",
+      "awards": "Nagrade",
+      "timeline": "Časovnica",
+      "workshops": "Delavnice",
+      "jury": "Žirija",
+      "faq": "FAQ",
+      "pictures": "Slike 2025"
+    },
+    "play": "Predvajaj",
+    "pause": "Ustavi",
+    "replay": "Znova",
+    "png": "PNG",
+    "video": "Video",
+    "download_all": "Vsi PNG-ji (zip)",
+    "exporting": "Izvažam {percent} %",
+    "export_failed": "Izvoz ni uspel. Poskusi v Chromu.",
+    "no_video": "Ta brskalnik ne zna kodirati videa. Odpri stran v Chromu ali Safariju.",
+    "loading": "Nalagam vsebino ...",
+    "count": "{count, plural, one {# objava} two {# objavi} few {# objave} other {# objav}}",
+    "timeline": {
+      "heading": "Časovnica"
+    },
+    "workshop": {
+      "kicker": "Delavnica",
+      "window": "delavnica.exe",
+      "example_title": "Od ideje do prototipa v 60 minutah",
+      "example_speaker": "Ime Priimek",
+      "example_role": "Senior developer @ Podjetje",
+      "example_description": "Kako hitro preveriti idejo, preden porabiš ves vikend za kodo."
+    },
+    "gallery": {
+      "title": "AdaHack 2025",
+      "captions": {
+        "team": "Ekipa Ada",
+        "stickers": "Nalepke!",
+        "hackathon": "Hekanje",
+        "audience": "Publika",
+        "presentation": "Pitch!",
+        "klub": "Klub Ada",
+        "snack": "Hack & snack",
+        "fallback": "AdaHack 2025"
+      },
+      "recap": "Recap"
+    },
+    "save_the_date": {
+      "button": "Save the date"
+    },
+    "editor": {
+      "edit": "Uredi",
+      "photo": "Fotografija",
+      "title": "Naslov",
+      "speaker": "Ime",
+      "role": "Vloga",
+      "reset": "Ponastavi",
+      "zoom": "Povečava",
+      "position_y": "Položaj gor–dol",
+      "position_x": "Položaj levo–desno",
+      "amount": "Nagrada (znesek)",
+      "challenge": "Izziv"
+    },
+    "steps": [
+      {
+        "title": "Izberi format",
+        "text": "Instagram objava, Instagram story ali LinkedIn. Izbira velja za vse objave in vse prenose."
+      },
+      {
+        "title": "Preglej",
+        "text": "Premakni miško čez objavo, da se animacija predvaja. Z drsnikom pod njo se premikaš po času."
+      },
+      {
+        "title": "Prenesi",
+        "text": "PNG in SVG sta statični sliki, SVG je vektorska. Video je MP4 z animacijo; izvoz traja okoli pol minute, zavihek pusti odprt."
+      }
+    ],
+    "show": "Pokaži",
+    "layout": "Postavitev",
+    "sections": {
+      "savethedate": "Napoved datuma, za začetek kampanje.",
+      "website": "Povabilo na spletno stran hackathona.",
+      "sponsors": "Ena objava za vsakega sponzorja. Izbrana postavitev velja za vse.",
+      "awards": "Ena objava za vsako nagrado.",
+      "timeline": "Urnik obeh dni v eni objavi.",
+      "faq": "Karusel: naslovnica in ena objava za vsako vprašanje. Objavi jih v tem vrstnem redu.",
+      "pictures": "Utrinki z lanskega hackathona.",
+      "registration": "Napoved, da so prijave odprte, in objava za vsak razprodan batch. Postavitev velja za vse.",
+      "numbers": "Lanska izvedba v treh številkah.",
+      "countdown": "Ena objava za vsak mejnik: 30, 14, 7, 3 in 1 dan pred hackathonom.",
+      "jury": "Ena objava za vsakega člana žirije. Pod predogledom lahko zamenjaš fotografijo in uredi besedilo."
+    },
+    "registration": {
+      "open_title": "Prijave so odprte",
+      "open_sub": "Zagotovi si mesto na AdaHack 2026.",
+      "apply": "Prijavi se",
+      "cancel": "Prekliči",
+      "ok": "V redu",
+      "batch": "Batch {n}",
+      "soldout_title": "Batch {n} razprodan",
+      "soldout_short": "Razprodan",
+      "soldout_sub": "Pohiti, mesta hitro pošle.",
+      "stamp": "Razprodano",
+      "open_tag": "Odprto",
+      "soon_tag": "Kmalu",
+      "ticket": "Vstopnica",
+      "admit": "Za eno osebo",
+      "notif_app": "Klub Ada",
+      "notif_now": "zdaj",
+      "notif_earlier": "pred 3 min",
+      "notif_open_1": "Prijave na AdaHack 2026 so odprte!",
+      "notif_open_2": "Pohiti in se prijavi",
+      "notif_soldout_1": "Batch {n} je razprodan",
+      "notif_soldout_2": "Pohiti, naslednji je že tu",
+      "lead": "Prijavi se na",
+      "all_gone": "Vse vstopnice so razprodane. Hvala!",
+      "link_hint": "Prijava"
+    },
+    "help": "Kako deluje",
+    "svg": "SVG",
+    "countdown": {
+      "days": "{count, plural, one {dan do AdaHacka} two {dneva do AdaHacka} few {dnevi do AdaHacka} other {dni do AdaHacka}}"
+    },
+    "jury": {
+      "kicker": "Žirija",
+      "tag": "Žirija"
+    },
+    "logo": "Logotip",
+    "logo_full": "Celoten",
+    "logo_duck": "Samo raca"
   }
 }
