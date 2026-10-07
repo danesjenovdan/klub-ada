@@ -182,7 +182,12 @@
     "prize_deck": {
       "heading": "Prize deck",
       "subtitle": "Five cards. One grand prize. Four challenges. No bluffing required.",
-      "deal": "Deal the cards"
+      "deal": "Deal the cards",
+      "cursor": {
+        "deal": "Deal",
+        "show": "Show",
+        "fold": "Fold"
+      }
     },
     "quest": {
       "heading": "AdaHack Quest",
