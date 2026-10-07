@@ -1,8 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import clsx from "clsx";
-import { LayoutGroup, motion } from "motion/react";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  motion,
+  useMotionValue,
+  useSpring,
+} from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { instrumentSerif, plexMono } from "@/src/app/fonts";
@@ -122,6 +129,7 @@ function RewardCard({
       // a quick flick off the deck that eases into place without bouncing.
       transition={{ layout: dealTransition(index) }}
       onClick={onClick}
+      data-cursor={isDealt ? index : "deck"}
       aria-label={
         isFlipped ? `${reward.title}: ${reward.amount}` : "AdaHack 2026"
       }
@@ -162,6 +170,61 @@ function RewardCard({
   );
 }
 
+type CursorAction = "deal" | "show" | "fold";
+
+/**
+ * A little tag that trails the mouse over the cards and says, in poker terms,
+ * what a click will do: deal the deck, show a card, or fold it back face down.
+ * It is portalled to the body because the window is translated, which would
+ * otherwise turn `fixed` into "fixed to the window".
+ */
+function CursorTag({
+  action,
+  x,
+  y,
+}: {
+  action: CursorAction | null;
+  x: ReturnType<typeof useMotionValue<number>>;
+  y: ReturnType<typeof useMotionValue<number>>;
+}) {
+  const t = useTranslations("Hackathon.prize_deck.cursor");
+  const [isMounted, setIsMounted] = useState(false);
+  // Trail the pointer a touch, so the tag feels dragged along rather than
+  // glued on.
+  const springX = useSpring(x, { stiffness: 900, damping: 50, mass: 0.4 });
+  const springY = useSpring(y, { stiffness: 900, damping: 50, mass: 0.4 });
+
+  useEffect(() => setIsMounted(true), []);
+  if (!isMounted) return null;
+
+  return createPortal(
+    <motion.div
+      aria-hidden
+      className="pointer-events-none fixed left-0 top-0 z-[100]"
+      style={{ x: springX, y: springY }}
+    >
+      <AnimatePresence>
+        {action && (
+          <motion.span
+            key="tag"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.12, ease: "easeOut" }}
+            className={clsx(
+              "ml-4 mt-5 block origin-top-left whitespace-nowrap border border-red bg-[#170d10] px-2 py-1 text-xs uppercase tracking-[0.125em] text-red shadow-[2px_2px_0_rgba(255,87,87,0.35)]",
+              plexMono.className,
+            )}
+          >
+            {t(action)}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.div>,
+    document.body,
+  );
+}
+
 /**
  * The prize deck: a stack of face-down cards beside a card table. Clicking the
  * deck deals one card into each slot on the table; clicking a dealt card turns
@@ -177,13 +240,42 @@ function PrizeDeck({ rewards }: { rewards: Reward[] }) {
   const flip = (index: number) =>
     setFlipped((cards) => cards.map((card, i) => (i === index ? !card : card)));
 
+  // The card under the mouse ("deck" or a dealt card's index), for the cursor
+  // tag. The tag's word is worked out from state, so it updates the moment a
+  // click deals or flips without waiting for the mouse to move. Touch has no
+  // hover, so the tag only follows a mouse or pen.
+  const [hovered, setHovered] = useState<string | null>(null);
+  const cursorAction: CursorAction | null =
+    hovered === null
+      ? null
+      : hovered === "deck"
+        ? isDealt
+          ? null
+          : "deal"
+        : flipped[Number(hovered)]
+          ? "fold"
+          : "show";
+  const cursorX = useMotionValue(0);
+  const cursorY = useMotionValue(0);
+
+  const trackCursor = (event: React.PointerEvent) => {
+    if (event.pointerType === "touch") return;
+    cursorX.set(event.clientX);
+    cursorY.set(event.clientY);
+    const card = (event.target as Element).closest("[data-cursor]");
+    setHovered(card?.getAttribute("data-cursor") ?? null);
+  };
+
   return (
     <LayoutGroup>
+      <CursorTag action={cursorAction} x={cursorX} y={cursorY} />
       {/* The numbers subtracted below are everything beside the cards in a
           row: on a phone the table's padding and one gap (two cards per row),
           from `md` the 220px column, the 32px gap to the table, the table's
           padding and four gaps (five cards per row). */}
       <div
+        onPointerMove={trackCursor}
+        onPointerLeave={() => setHovered(null)}
         className={clsx(
           "flex min-h-full flex-col gap-8 md:flex-row [container-type:inline-size]",
           "[--card-w:min(160px,calc((100cqw_-_44px)/2))]",
