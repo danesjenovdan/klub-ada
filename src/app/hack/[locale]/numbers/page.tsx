@@ -19,6 +19,7 @@ import {
   table,
 } from "../components/card";
 import { Window } from "../components/window";
+import { FIGURES_2025 } from "./figures";
 
 type Stat = {
   src: StaticImageData;
@@ -130,7 +131,9 @@ function StatCard({ stat }: { stat: Stat }) {
       type="button"
       onClick={() => setIsFlipped((flipped) => !flipped)}
       aria-label={
-        isFlipped ? `${stat.value}${stat.suffix ?? ""} ${stat.label}` : "AdaHack 2025"
+        isFlipped
+          ? `${stat.value}${stat.suffix ?? ""} ${stat.label}`
+          : "AdaHack 2025"
       }
       className={clsx(
         "relative block outline-none [perspective:1000px] focus-visible:ring-2 focus-visible:ring-[rgba(255,87,87,0.6)]",
@@ -158,11 +161,11 @@ export default function Page() {
   const n = useTranslations("Hackathon.numbers");
 
   // Last edition's numbers, kept until the 2026 event has its own.
-  const stats: Stat[] = [
-    { src: stat1Src, value: 80, label: n("participants") },
-    { src: stat2Src, value: 26, label: n("sponsors") },
-    { src: stat3Src, value: 4000, suffix: "€", label: n("awards") },
-  ];
+  const stats: Stat[] = FIGURES_2025.map(({ labelKey, ...figure }, index) => ({
+    ...figure,
+    src: [stat1Src, stat2Src, stat3Src][index],
+    label: n(labelKey),
+  }));
 
   return (
     <Window title={t("pages.numbers")}>

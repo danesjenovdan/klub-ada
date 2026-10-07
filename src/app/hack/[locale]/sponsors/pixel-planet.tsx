@@ -92,6 +92,12 @@ export interface PixelPlanetProps {
   tier: keyof typeof PLANET_ART;
   className?: string;
   style?: CSSProperties;
+  /**
+   * Draw this step of the turning dither (any integer) instead of animating on
+   * the planet's own timer, for something that keeps its own clock, like the
+   * social posts.
+   */
+  frame?: number;
 }
 
 /**
@@ -100,13 +106,23 @@ export interface PixelPlanetProps {
  * drifts diagonally one cell at a time; smaller planets turn a little faster.
  * With reduced motion the planet holds its first frame.
  */
-export function PixelPlanet({ tier, className, style }: PixelPlanetProps) {
+export function PixelPlanet({
+  tier,
+  className,
+  style,
+  frame: fixedFrame,
+}: PixelPlanetProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const prepared = useMemo(() => prepare(PLANET_ART[tier]), [tier]);
 
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d");
     if (!ctx) return;
+
+    if (fixedFrame !== undefined) {
+      drawFrame(ctx, prepared, ((fixedFrame % 4) + 4) % 4);
+      return;
+    }
 
     let frame = 0;
     drawFrame(ctx, prepared, frame);
@@ -123,7 +139,7 @@ export function PixelPlanet({ tier, className, style }: PixelPlanetProps) {
       drawFrame(ctx, prepared, frame);
     }, stepMs);
     return () => window.clearInterval(timer);
-  }, [prepared]);
+  }, [prepared, fixedFrame]);
 
   return (
     <canvas
