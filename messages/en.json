@@ -299,5 +299,144 @@
       "linkedin": "LinkedIn",
       "instagram": "Instagram"
     }
+  },
+  "Posts": {
+    "meta_title": "AdaHack 2026 posts",
+    "heading": "Social media posts",
+    "format": "Format",
+    "categories": {
+      "all": "All",
+      "savethedate": "Save the date",
+      "website": "Website",
+      "registration": "Registration",
+      "numbers": "2025 in numbers",
+      "countdown": "Countdown",
+      "sponsors": "Sponsors",
+      "awards": "Awards",
+      "timeline": "Timeline",
+      "workshops": "Workshops",
+      "jury": "Jury",
+      "faq": "FAQ",
+      "pictures": "2025 photos"
+    },
+    "play": "Play",
+    "pause": "Pause",
+    "replay": "Replay",
+    "png": "PNG",
+    "video": "Video",
+    "download_all": "All PNGs (zip)",
+    "exporting": "Exporting {percent}%",
+    "export_failed": "Export failed. Try Chrome.",
+    "no_video": "This browser can't encode video. Open the page in Chrome or Safari.",
+    "loading": "Loading content ...",
+    "count": "{count, plural, one {# post} other {# posts}}",
+    "timeline": {
+      "heading": "Timeline"
+    },
+    "workshop": {
+      "kicker": "Workshop",
+      "window": "workshop.exe",
+      "example_title": "From idea to prototype in 60 minutes",
+      "example_speaker": "First Last",
+      "example_role": "Senior developer @ Company",
+      "example_description": "How to test an idea quickly, before you spend the whole weekend coding it."
+    },
+    "gallery": {
+      "title": "AdaHack 2025",
+      "captions": {
+        "team": "Team Ada",
+        "stickers": "Stickers!",
+        "hackathon": "Hacking",
+        "audience": "The crowd",
+        "presentation": "Pitch!",
+        "klub": "Klub Ada",
+        "snack": "Hack & snack",
+        "fallback": "AdaHack 2025"
+      },
+      "recap": "Recap"
+    },
+    "save_the_date": {
+      "button": "Save the date"
+    },
+    "editor": {
+      "edit": "Edit",
+      "photo": "Photo",
+      "title": "Title",
+      "speaker": "Name",
+      "role": "Role",
+      "reset": "Reset",
+      "zoom": "Zoom",
+      "position_y": "Position up–down",
+      "position_x": "Position left–right",
+      "amount": "Prize (amount)",
+      "challenge": "Challenge"
+    },
+    "steps": [
+      {
+        "title": "Pick a format",
+        "text": "Instagram post, Instagram story or LinkedIn. It applies to every post and every download."
+      },
+      {
+        "title": "Preview",
+        "text": "Hover over a post to play its animation. The slider underneath scrubs through it."
+      },
+      {
+        "title": "Download",
+        "text": "PNG and SVG are stills; SVG is vector. Video is an animated MP4; it takes about half a minute to export, keep the tab open."
+      }
+    ],
+    "show": "Show",
+    "layout": "Layout",
+    "sections": {
+      "savethedate": "The date announcement, to open the campaign.",
+      "website": "An invitation to the hackathon's website.",
+      "sponsors": "One post per sponsor. The layout you pick applies to all of them.",
+      "awards": "One post per award.",
+      "timeline": "Both days' schedule in one post.",
+      "faq": "A carousel: a cover and one post per question. Post them in this order.",
+      "pictures": "Moments from last year's hackathon.",
+      "registration": "The announcement that registration is open, and a post for every sold-out batch. The layout applies to all of them.",
+      "numbers": "Last year's edition in three figures.",
+      "countdown": "One post per milestone: 30, 14, 7, 3 and 1 day before the hackathon.",
+      "jury": "One post per jury member. Under the preview you can swap the photo and edit the text."
+    },
+    "registration": {
+      "open_title": "Registration is open",
+      "open_sub": "Grab your spot at AdaHack 2026.",
+      "apply": "Register",
+      "cancel": "Cancel",
+      "ok": "OK",
+      "batch": "Batch {n}",
+      "soldout_title": "Batch {n} sold out",
+      "soldout_short": "Sold out",
+      "soldout_sub": "Hurry, spots go fast.",
+      "stamp": "Sold out",
+      "open_tag": "Open",
+      "soon_tag": "Soon",
+      "ticket": "Ticket",
+      "admit": "Admits one",
+      "notif_app": "Klub Ada",
+      "notif_now": "now",
+      "notif_earlier": "3m ago",
+      "notif_open_1": "AdaHack 2026 registration is open!",
+      "notif_open_2": "Hurry and register",
+      "notif_soldout_1": "Batch {n} is sold out",
+      "notif_soldout_2": "Hurry, the next one is live",
+      "lead": "Register for",
+      "all_gone": "Every ticket is gone. Thank you!",
+      "link_hint": "Register"
+    },
+    "help": "How it works",
+    "svg": "SVG",
+    "countdown": {
+      "days": "{count, plural, one {day to AdaHack} other {days to AdaHack}}"
+    },
+    "jury": {
+      "kicker": "Jury",
+      "tag": "Jury"
+    },
+    "logo": "Logo",
+    "logo_full": "Full",
+    "logo_duck": "Duck only"
   }
 }
