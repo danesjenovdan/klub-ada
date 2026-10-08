@@ -1,8 +1,8 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import { motion } from "framer-motion";
+import { lilex } from "@/src/app/fonts";
 import { useTranslations } from "next-intl";
 import { IconMinus, IconSquare, IconSquares, IconX } from "@tabler/icons-react";
 import { useRouter } from "@/src/i18n/navigation";
@@ -98,6 +98,10 @@ export function Window({
           !isMaximised &&
           fitContent &&
           "md:left-[9rem] md:right-10 md:top-1/2 md:bottom-auto md:-translate-y-1/2 md:mx-auto md:w-fit md:min-w-[40rem] md:max-w-[calc(100%-11.5rem)] md:min-h-[85%] md:max-h-[calc(100%-4.5rem)]",
+        // A phone held sideways has no height to spare for the desktop around
+        // the window, so it fills the desktop the way it does on a phone.
+        !isMinimised &&
+          "short:left-2 short:right-2 short:top-2 short:bottom-2 short:mx-0 short:w-auto short:min-w-0 short:max-w-none short:min-h-0 short:max-h-none short:translate-y-0",
         className,
       )}
     >
@@ -108,7 +112,12 @@ export function Window({
           chrome,
         )}
       >
-        <span className="uppercase font-bold text-sm md:text-base text-white px-1 truncate">
+        <span
+          className={clsx(
+            lilex.className,
+            "uppercase font-bold text-sm md:text-base text-white px-1 truncate",
+          )}
+        >
           {`/ ${title}`}
         </span>
         <div className="flex items-center gap-1">
@@ -122,7 +131,7 @@ export function Window({
             icon={isMaximised ? IconSquares : IconSquare}
             // A phone window already fills the screen, so there is nothing to
             // maximise there.
-            className="hidden md:flex"
+            className="hidden md:flex short:hidden"
             onClick={() => {
               setIsMinimised(false);
               setIsMaximised((wasMaximised) => !wasMaximised);
@@ -162,6 +171,25 @@ const LOADING_CYCLE_SECONDS = 2.8;
 const LOADING_DELAY_MS = 400;
 
 /**
+ * The bar is drawn entirely in CSS, so it is in the server-rendered HTML and
+ * appears and animates before the page's JavaScript has run - on a phone that
+ * can take seconds after a direct load. It sits hidden until the delay is up;
+ * block `i` lights up `i / LOADING_BLOCKS` into each cycle and stays lit until
+ * the cycle starts over.
+ */
+const LOADING_CSS = [
+  "@keyframes hack-loading-reveal{to{visibility:visible}}",
+  ...Array.from({ length: LOADING_BLOCKS }, (_, index) => {
+    const litAt = ((index / LOADING_BLOCKS) * 100).toFixed(3);
+    return `@keyframes hack-loading-block-${index}{0%{opacity:${index ? 0 : 1}}${litAt}%,100%{opacity:1}}`;
+  }),
+].join("");
+
+/** `useLayoutEffect` without React's warning when it renders on the server. */
+const useIsomorphicLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
+
+/**
  * When the current wait began. A navigation shows the route's skeleton window
  * first and then hands over to the page's own loading state; both read this
  * one clock, so the delay counts from the click, not from each handover.
@@ -177,32 +205,30 @@ let clearWaiting: number | undefined;
  */
 export function WindowLoading() {
   const t = useTranslations("Hackathon");
-  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // Once hydrated, line the CSS delay up with the shared clock, so a handover
+  // from the skeleton neither restarts the wait nor the blocks' cycle. Runs
+  // before paint, so the bar never blinks out in between.
+  useIsomorphicLayoutEffect(() => {
     window.clearTimeout(clearWaiting);
     waitingSince ??= performance.now();
     const remaining = LOADING_DELAY_MS - (performance.now() - waitingSince);
-    const timer = window.setTimeout(
-      () => setIsVisible(true),
-      Math.max(0, remaining),
-    );
+    ref.current?.style.setProperty("--loading-delay", `${remaining}ms`);
     return () => {
-      window.clearTimeout(timer);
       // A loading state that takes over right away keeps the clock running.
       clearWaiting = window.setTimeout(() => (waitingSince = null), 50);
     };
   }, []);
 
-  if (!isVisible) {
-    return <div aria-busy="true" className="h-full min-h-[12rem]" />;
-  }
-
   return (
     <div
+      ref={ref}
       role="status"
-      className="flex h-full min-h-[12rem] flex-col items-center justify-center gap-3"
+      aria-busy="true"
+      className="invisible flex h-full min-h-[12rem] flex-col items-center justify-center gap-3 [--loading-delay:400ms] [animation:hack-loading-reveal_0s_var(--loading-delay)_forwards]"
     >
+      <style dangerouslySetInnerHTML={{ __html: LOADING_CSS }} />
       <p className="font-heading text-sm uppercase tracking-widest text-white">
         {t("loading")}
       </p>
@@ -212,23 +238,15 @@ export function WindowLoading() {
           sunken,
         )}
       >
-        {Array.from({ length: LOADING_BLOCKS }, (_, index) => {
-          const shownAt = index / LOADING_BLOCKS;
-          return (
-            <motion.span
-              key={index}
-              className="h-4 flex-1 bg-red"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 0, 1, 1] }}
-              transition={{
-                duration: LOADING_CYCLE_SECONDS,
-                times: [0, shownAt, shownAt, 1],
-                ease: "linear",
-                repeat: Infinity,
-              }}
-            />
-          );
-        })}
+        {Array.from({ length: LOADING_BLOCKS }, (_, index) => (
+          <span
+            key={index}
+            className="h-4 flex-1 bg-red opacity-0"
+            style={{
+              animation: `hack-loading-block-${index} ${LOADING_CYCLE_SECONDS}s steps(1, end) var(--loading-delay) infinite`,
+            }}
+          />
+        ))}
       </div>
     </div>
   );

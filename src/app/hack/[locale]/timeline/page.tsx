@@ -6,10 +6,12 @@ import Image from "next/image";
 import { isSameDay, parseISO } from "date-fns";
 import { useLocale, useTranslations } from "next-intl";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { plexMono } from "@/src/app/fonts";
 import { formatTime } from "@/src/app/utils/date";
 import imageLoader from "@/src/app/utils/image-loader";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { Window, WindowLoading } from "../components/window";
+import { TIMELINE_FIXTURES } from "../_dev/fixtures";
 
 const GET_TIMELINE_ITEMS = `*[
   _type == "hack26TimelineItem"
@@ -178,12 +180,20 @@ function TileDialog({
       // which is the backdrop.
       onClick={(event) => event.target === dialogRef.current && onClose()}
       aria-label={item.title}
-      className="fixed inset-0 m-0 hidden h-full max-h-none w-full max-w-none items-center justify-center bg-transparent p-4 open:flex backdrop:bg-[rgba(0,0,0,0.7)]"
+      // `safe center` centres a popup that fits and starts one that is taller
+      // than the screen at the top, so its close button stays reachable.
+      className="fixed inset-0 m-0 hidden h-full max-h-none w-full max-w-none [align-items:safe_center] justify-center bg-transparent p-4 open:flex backdrop:bg-[rgba(0,0,0,0.7)]"
     >
-      <div className="relative flex w-[min(22rem,100%)] flex-col items-center gap-2 border border-red bg-[#150606] px-6 pb-8 pt-10 text-center">
+      <div className="relative flex w-[min(22rem,100%)] flex-col items-center gap-2 border border-red bg-[#150606] px-5 pb-8 pt-10 text-center md:px-6">
         <TileFace item={item} number={number} size="lg" />
         {item.description && (
-          <p className="mt-2 font-heading text-sm leading-relaxed text-gray400">
+          // Running text reads better left-aligned in the narrower mono.
+          <p
+            className={clsx(
+              "mt-2 self-stretch text-left text-[13px] font-light leading-relaxed text-gray300 md:text-sm",
+              plexMono.className,
+            )}
+          >
             {item.description}
           </p>
         )}
@@ -225,6 +235,7 @@ export default function Page() {
   const { data, isLoading } = useSanityData({
     query: GET_TIMELINE_ITEMS,
     params: { language: locale },
+    fixtures: TIMELINE_FIXTURES,
   });
 
   const items = (data || []) as TimelineItem[];
@@ -244,7 +255,7 @@ export default function Page() {
 
   if (!items.length) {
     return (
-      <Window title={t("pages.timeline")} fitContent>
+      <Window title={t("pages.timeline")}>
         {isLoading ? (
           <WindowLoading />
         ) : (
@@ -300,21 +311,26 @@ export default function Page() {
   ];
 
   return (
-    <Window title={t("pages.timeline")} fitContent>
-      {/*
-        The window pads its content by 1.5rem on desktop; the extra 4.5rem here
-        brings the sides to four times that, so the board sits well inside.
-      */}
-      <div className="md:px-[4.5rem]">
-        <div className="mx-auto flex max-w-[1000px] flex-col gap-2 text-center">
-          <h1 className="font-paragraph text-3xl font-bold uppercase tracking-wider text-white md:text-4xl">
+    <Window title={t("pages.timeline")}>
+      {/* The rewards page's layout: title and subtitle in a 220px column on
+          the left, the board beside it. */}
+      <div className="flex flex-col gap-8 md:flex-row">
+        <div
+          className={clsx(
+            "flex shrink-0 flex-col gap-2 md:w-[220px]",
+            plexMono.className,
+          )}
+        >
+          <h1 className="text-xl md:text-2xl font-semibold uppercase leading-normal tracking-[-0.02em] text-[#fafafa]">
             {t("quest.heading")}
           </h1>
-          <p className="font-heading text-sm text-gray400">
+          <p className="text-sm md:text-base font-light leading-normal tracking-[-0.02em] text-[#9d9d9d]">
             {t("quest.subtitle")}
           </p>
+        </div>
 
-          <div className="mt-4 flex flex-col gap-4">
+        <div className="flex min-w-0 grow flex-col text-center">
+          <div className="flex flex-col gap-4">
             {chunk(tiles, COLUMNS).map((row, rowIndex) => (
               <div
                 key={rowIndex}

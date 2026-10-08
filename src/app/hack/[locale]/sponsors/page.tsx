@@ -12,8 +12,9 @@ import clsx from "clsx";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
-import { geistPixel, plexMono } from "@/src/app/fonts";
+import { lilex, plexMono } from "@/src/app/fonts";
 import { Window, WindowLoading } from "../components/window";
+import { SPONSORS_FIXTURES } from "../_dev/fixtures";
 import { PixelPlanet } from "./pixel-planet";
 import { BurstOrigin, PixelBurst } from "./pixel-burst";
 import { TierView } from "./tier-view";
@@ -25,7 +26,7 @@ import {
   Sponsor,
   Tier,
   pct,
-  pixelTitle,
+  roundStroke,
 } from "./model";
 
 const GET_SPONSORS = `*[_type == "hack26Sponsor"] | order(name) {
@@ -144,8 +145,10 @@ function Glow({ color, className }: { color: string; className?: string }) {
   );
 }
 
-const planetLabel =
-  " text-xl font-semibold leading-none tracking-[-0.02em] text-white";
+const planetLabel = clsx(
+  lilex.className,
+  "text-xl font-bold leading-none tracking-[-0.02em] text-white",
+);
 
 function PlanetButton({
   planet,
@@ -188,9 +191,10 @@ function PlanetButton({
       <span
         className={clsx(
           planetLabel,
-          "absolute inset-0 flex items-center justify-center text-center [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]",
+          "absolute inset-0 flex items-center justify-center text-center",
           planet.tier === "vibe" && "whitespace-pre-line",
         )}
+        style={roundStroke(planet.color, "0.08em")}
       >
         {t(`labels.${planet.labelKey}`)}
       </span>
@@ -226,17 +230,17 @@ function Overview({
       <div className="relative z-10 flex max-w-[294px] flex-col items-center gap-2 pt-4 text-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:pt-0">
         <h1
           className={clsx(
-            geistPixel.className,
-            pixelTitle,
-            "text-2xl text-red400 md:text-4xl",
+            lilex.className,
+            "whitespace-nowrap text-[26px] font-bold lowercase leading-none text-white md:text-[30px]",
           )}
+          style={roundStroke("#ff5757", "0.05em")}
         >
           {t("title")}
         </h1>
         <p
           className={clsx(
             plexMono.className,
-            "max-w-[36ch] whitespace-pre-line text-base font-light leading-relaxed tracking-[-0.02em] text-gray200",
+            "max-w-[36ch] whitespace-pre-line text-sm font-normal leading-snug tracking-[-0.02em] text-gray200 md:text-base",
           )}
         >
           {t("subtitle")}
@@ -257,22 +261,25 @@ function Overview({
 }
 
 /**
- * Width of an element, kept current as it resizes. `mounted` tells the hook
+ * Size of an element, kept current as it resizes. `mounted` tells the hook
  * when the element exists, since the sky only renders once the data is in.
  */
-function useElementWidth(ref: RefObject<HTMLElement | null>, mounted: boolean) {
-  const [width, setWidth] = useState(0);
+function useElementSize(ref: RefObject<HTMLElement | null>, mounted: boolean) {
+  const [size, setSize] = useState({ width: 0, height: 0 });
   useEffect(() => {
     const element = ref.current;
     if (!mounted || !element) return;
     const observer = new ResizeObserver(([entry]) =>
-      setWidth(entry.contentRect.width),
+      setSize({
+        width: entry.contentRect.width,
+        height: entry.contentRect.height,
+      }),
     );
     observer.observe(element);
-    setWidth(element.clientWidth);
+    setSize({ width: element.clientWidth, height: element.clientHeight });
     return () => observer.disconnect();
   }, [ref, mounted]);
-  return width;
+  return size;
 }
 
 /** How long after the click the tier view starts to show through the debris. */
@@ -281,9 +288,15 @@ const REVEAL_DELAY = 420;
 export default function Page() {
   const t = useTranslations("Hackathon");
   const reducedMotion = useReducedMotion();
-  const { data, isLoading } = useSanityData({ query: GET_SPONSORS });
+  const { data, isLoading } = useSanityData({
+    query: GET_SPONSORS,
+    fixtures: SPONSORS_FIXTURES,
+  });
   const skyRef = useRef<HTMLDivElement>(null);
-  const skyWidth = useElementWidth(skyRef, !isLoading);
+  const { width: skyWidth } = useElementSize(
+    skyRef,
+    !isLoading,
+  );
   const [selected, setSelected] = useState<Planet | null>(null);
   const [burst, setBurst] = useState<{
     planet: Planet;
@@ -323,7 +336,6 @@ export default function Page() {
                 planet={selected}
                 sponsors={sponsors.filter((s) => s.type === selected.tier)}
                 skyWidth={skyWidth}
-                onBack={() => setSelected(null)}
                 onSelectTier={setSelected}
               />
             ) : (

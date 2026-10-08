@@ -1,14 +1,14 @@
 "use client";
 
-import { CSSProperties } from "react";
+import { CSSProperties, Fragment } from "react";
 import clsx from "clsx";
-import Image from "next/image";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import imageLoader from "@/src/app/utils/image-loader";
-import { geistPixel } from "@/src/app/fonts";
+import { lilex } from "@/src/app/fonts";
 import { PixelPlanet } from "./pixel-planet";
-import { PLANETS, Planet, Sponsor, pixelTitle } from "./model";
+import { logoSize, useTrimmedLogo } from "./trim-logo";
+import { PLANETS, Planet, Sponsor, roundStroke } from "./model";
 
 /*
  * One sponsor tier: the planet fills the bottom of the window like a world
@@ -21,7 +21,6 @@ export type TierViewProps = {
   sponsors: Sponsor[];
   /** Current width of the window body in CSS pixels, for sizing from the design's 1254px. */
   skyWidth: number;
-  onBack: () => void;
   onSelectTier: (planet: Planet) => void;
 };
 
@@ -46,55 +45,6 @@ const materialise = (delay: number) => ({
     ease: "linear" as const,
   },
 });
-
-function TierHeading({ planet, count }: { planet: Planet; count: number }) {
-  const t = useTranslations("Hackathon.sponsors");
-  return (
-    <motion.div
-      {...materialise(0.05)}
-      className="flex flex-col items-center gap-3 text-center"
-    >
-      <h2
-        className={clsx(
-          geistPixel.className,
-          pixelTitle,
-          "text-4xl text-[var(--fill)] md:text-6xl",
-          planet.tier === "vibe" && "whitespace-pre-line",
-        )}
-        style={
-          {
-            "--fill": `color-mix(in srgb, ${planet.color} 70%, white)`,
-          } as CSSProperties
-        }
-      >
-        {t(`labels.${planet.labelKey}`)}
-      </h2>
-      <p className=" text-sm text-gray200 md:text-base">
-        {t("count", { count })}
-      </p>
-    </motion.div>
-  );
-}
-
-function BackButton({ onBack }: { onBack: () => void }) {
-  const t = useTranslations("Hackathon.sponsors");
-  return (
-    <button
-      type="button"
-      onClick={onBack}
-      className="group relative z-10 flex w-fit items-center gap-3 outline-none"
-    >
-      <img
-        src="/assets/hackathon26/sponsors.svg"
-        alt=""
-        className="h-10 w-10 -rotate-90"
-      />
-      <span className=" text-sm uppercase tracking-widest text-white md:text-base transition-colors duration-200 group-hover:text-red group-focus-visible:text-red">
-        {t("back")}
-      </span>
-    </button>
-  );
-}
 
 /** The other four tiers as small planets, so a visitor can hop between systems. */
 function OtherPlanets({
@@ -155,36 +105,278 @@ function PixelPlus({ color }: { color: string }) {
   );
 }
 
-/** A logo on its own, no container: sized by height so wide and square marks weigh the same. */
+/*
+ * The rocket from the design (mkt, "Group 207"), drawn in the design's own
+ * pixels on its 128px-tall frame and scaled as a whole: speed lines and
+ * swept fins in the tier color at the back, a hull that stretches to fit the logo, and a
+ * stepped nose pointing right. The hull and nose are drawn in 4px lines, the
+ * fins and speed lines in 8px. The inside is dark because the logos are white.
+ */
+const ROCKET_HEIGHT = 128;
+/** Where the hull's top and bottom edges sit in the frame, and their weight. */
+const HULL_TOP = 28;
+const HULL_BOTTOM = 100;
+const LINE = 4;
+/** The nose's diagonal: seven 4px steps down to an 8px-tall tip. */
+const NOSE_STEPS = 7;
+
+function RocketSvg({
+  width,
+  scale,
+  children,
+}: {
+  width: number;
+  scale: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <svg
+      aria-hidden
+      viewBox={`0 0 ${width} ${ROCKET_HEIGHT}`}
+      width={width * scale}
+      height={ROCKET_HEIGHT * scale}
+      shapeRendering="crispEdges"
+      className="shrink-0"
+    >
+      {children}
+    </svg>
+  );
+}
+
+/**
+ * The upper fin, row by row in 4px cells as `[from, to)`: swept back from
+ * the hull's top edge (row 7) to a point behind the back wall.
+ */
+const FIN_ROWS: [number, number][] = [
+  [4, 8],
+  [5, 10],
+  [6, 12],
+  [7, 14],
+  [8, 16],
+  [9, 18],
+];
+
+/**
+ * A fin in the tier color with a one-cell white outline, open where it sits
+ * on the hull; `flip` mirrors it below. Drawn in cells, inside `scale(4)`.
+ */
+function Fin({ flip }: { flip?: boolean }) {
+  const cells = ROCKET_HEIGHT / LINE;
+  const y = (row: number) => (flip ? cells - 1 - row : row);
+  const fill: [number, number, number][] = [];
+  const line: [number, number, number][] = [];
+  FIN_ROWS.forEach(([a, b], i) => {
+    const row = i + 1;
+    fill.push([a, y(row), b - a]);
+    line.push([a, y(row), 1], [b - 1, y(row), 1]);
+    // The part of the row the one above doesn't cover is outer edge too.
+    const above = FIN_ROWS[i - 1];
+    if (!above) line.push([a, y(row), b - a]);
+    else if (above[1] < b) line.push([above[1], y(row), b - above[1]]);
+  });
+  const rects = (boxes: [number, number, number][]) =>
+    boxes.map(([x, row, w]) => (
+      <rect key={`${x}-${row}-${w}`} x={x} y={row} width={w} height="1" />
+    ));
+  return (
+    <>
+      <g style={{ fill: "var(--fin)" }}>{rects(fill)}</g>
+      <g className="fill-[var(--line)]">{rects(line)}</g>
+    </>
+  );
+}
+
+function SpeedLine({
+  x,
+  y,
+  width,
+  delay,
+}: {
+  x: number;
+  y: number;
+  width: number;
+  delay: number;
+}) {
+  return (
+    <rect
+      x={x}
+      y={y}
+      width={width}
+      height="8"
+      // On hover the exhaust stretches back in two hard steps: thrust.
+      className="transition-transform duration-150 ease-[steps(2,end)] motion-safe:animate-[hack-twinkle_1.2s_steps(1,end)_infinite] [@media(hover:hover)]:group-hover:[transform:scaleX(1.5)] group-focus-visible:[transform:scaleX(1.5)]"
+      style={{
+        animationDelay: `${delay}s`,
+        transformBox: "fill-box",
+        transformOrigin: "right",
+      }}
+    />
+  );
+}
+
+function RocketTail({ scale }: { scale: number }) {
+  return (
+    <RocketSvg width={80} scale={scale}>
+      <rect
+        x="40"
+        y={HULL_TOP + LINE}
+        width="40"
+        height={HULL_BOTTOM - HULL_TOP - 2 * LINE}
+        style={{ fill: "var(--hull)" }}
+      />
+      <g transform={`scale(${LINE})`}>
+        <Fin />
+        <Fin flip />
+      </g>
+      <g className="fill-[var(--line)]">
+        {/* Speed lines, flickering out of step with each other. */}
+        <SpeedLine x={12} y={44} width={16} delay={0} />
+        <SpeedLine x={4} y={60} width={24} delay={-0.4} />
+        <SpeedLine x={12} y={76} width={16} delay={-0.8} />
+        {/* Back wall, and the start of the hull's top and bottom edges. */}
+        <rect
+          x="36"
+          y={HULL_TOP}
+          width={LINE}
+          height={HULL_BOTTOM - HULL_TOP}
+        />
+        <rect x="40" y={HULL_TOP} width="40" height={LINE} />
+        <rect x="40" y={HULL_BOTTOM - LINE} width="40" height={LINE} />
+      </g>
+    </RocketSvg>
+  );
+}
+
+function RocketNose({ scale }: { scale: number }) {
+  const steps = Array.from({ length: NOSE_STEPS }, (_, i) => i * LINE);
+  const top = HULL_TOP + LINE;
+  const bottom = HULL_BOTTOM - LINE;
+  const tip = steps.length * LINE;
+  return (
+    <RocketSvg width={32} scale={scale}>
+      {/* The nose cone is painted in the tier color, like the fins. */}
+      <g style={{ fill: "var(--fin)" }}>
+        {steps.map((d) => (
+          <Fragment key={d}>
+            <rect x="0" y={top + d} width={d} height={LINE} />
+            <rect x="0" y={bottom - LINE - d} width={d} height={LINE} />
+          </Fragment>
+        ))}
+        <rect x="0" y={top + tip} width={tip} height={8} />
+      </g>
+      <g className="fill-[var(--line)]">
+        {/* The seam between the dark hull and the painted cone. */}
+        <rect x="0" y={HULL_TOP} width={LINE} height={HULL_BOTTOM - HULL_TOP} />
+        {steps.map((d) => (
+          <Fragment key={d}>
+            <rect x={d} y={top + d} width="8" height={LINE} />
+            <rect x={d} y={bottom - LINE - d} width="8" height={LINE} />
+          </Fragment>
+        ))}
+        <rect x={tip} y={top + tip} width={LINE} height="8" />
+      </g>
+    </RocketSvg>
+  );
+}
+
+/** Strong ease-out: rockets arrive fast and settle. */
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
+
+/** A sponsor's logo riding in the hull of a pixel rocket. */
 function Logo({
   sponsor,
-  height,
+  scale,
   index,
+  color,
 }: {
   sponsor: Sponsor;
-  height: number;
+  scale: number;
   index: number;
+  color: string;
 }) {
+  const reduceMotion = useReducedMotion();
+  const logo = useTrimmedLogo(
+    imageLoader(sponsor.image, 1200),
+    sponsor.dimensions.width / sponsor.dimensions.height,
+  );
+  // Trimmed and sized by area, so every logo carries the same weight; a
+  // wordmark lands about half the hull's inner height, as in the design.
+  const size = logoSize(
+    logo.ratio,
+    2800 * scale * scale,
+    140 * scale,
+    44 * scale,
+  );
+  const delay = 0.3 + index * 0.06;
   return (
     <motion.a
       href={sponsor.link}
       target="_blank"
       rel="noopener noreferrer"
-      title={sponsor.name}
-      {...materialise(0.3 + index * 0.08)}
-      whileHover={{ scale: 1.06 }}
-      whileTap={{ scale: 0.96 }}
-      className="relative z-10 flex items-center outline-none transition-[filter] duration-200 hover:[filter:drop-shadow(0_0_12px_rgba(255,255,255,0.5))] focus-visible:[filter:drop-shadow(0_0_12px_rgba(255,255,255,0.5))]"
-      style={{ height }}
+      {...materialise(delay)}
+      whileTap={{ scale: 0.97 }}
+      // Hover matches the desktop shortcuts: the rocket grows a little,
+      // brightens and glows in its tier color around its own outline.
+      className="group relative z-10 block outline-none [--line:#fff]"
+      style={
+        {
+          "--tier": color,
+          // The hull is the night sky itself, so the logo sits on plain dark;
+          // the tier color goes on the fins.
+          "--hull": "#0c0303",
+          "--fin": `color-mix(in srgb, ${color} 80%, #0c0303)`,
+          "--bob": `${-LINE * scale}px`,
+        } as CSSProperties
+      }
     >
-      <Image
-        src={imageLoader(sponsor.image, 600)}
-        alt={sponsor.name}
-        width={sponsor.dimensions.width}
-        height={sponsor.dimensions.height}
-        className="h-full w-auto object-contain"
-        style={{ maxWidth: height * 3.4 }}
-      />
+      {/* Flies in from the left, the way it is pointing. */}
+      <motion.span
+        initial={{
+          transform: reduceMotion ? "translateX(0px)" : "translateX(-40px)",
+        }}
+        animate={{ transform: "translateX(0px)" }}
+        transition={{ duration: 0.6, delay, ease: EASE_OUT }}
+        className="block"
+      >
+        {/* Idles with a one-line hop, each rocket out of step with the last. */}
+        <span
+          className="block motion-safe:animate-[hack-bob_2.4s_steps(1,end)_infinite]"
+          style={{ animationDelay: `${-index * 0.7}s` }}
+        >
+          <span
+            className={clsx(
+              "flex items-center transition-[transform,filter] duration-200 ease-out",
+              "[@media(hover:hover)]:group-hover:scale-105 [@media(hover:hover)]:group-hover:[filter:brightness(1.1)_drop-shadow(0_0_2px_color-mix(in_srgb,var(--tier)_50%,transparent))_drop-shadow(0_0_8px_color-mix(in_srgb,var(--tier)_30%,transparent))]",
+              "group-focus-visible:scale-105 group-focus-visible:[filter:brightness(1.1)_drop-shadow(0_0_2px_color-mix(in_srgb,var(--tier)_50%,transparent))_drop-shadow(0_0_8px_color-mix(in_srgb,var(--tier)_30%,transparent))]",
+            )}
+          >
+            <RocketTail scale={scale} />
+            <span
+              className="flex shrink-0 items-center border-y border-[var(--line)] bg-[var(--hull)]"
+              style={{
+                height: (HULL_BOTTOM - HULL_TOP) * scale,
+                borderTopWidth: LINE * scale,
+                borderBottomWidth: LINE * scale,
+                paddingRight: 12 * scale,
+                // Start the logo in the tail's empty stretch of hull, as far
+                // clear of the back wall (x 40) as `paddingRight` leaves it
+                // clear of the nose, so the logo sits centred in the hull and
+                // the rocket is no longer than it needs to be.
+                marginLeft: -(80 - 40 - 12) * scale,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- a trimmed data URL */}
+              <img
+                src={logo.src}
+                alt={sponsor.name}
+                className="block object-contain"
+                style={size}
+              />
+            </span>
+            <RocketNose scale={scale} />
+          </span>
+        </span>
+      </motion.span>
     </motion.a>
   );
 }
@@ -192,11 +384,11 @@ function Logo({
 function Logos({
   sponsors,
   planet,
-  height,
+  scale,
 }: {
   sponsors: Sponsor[];
   planet: Planet;
-  height: number;
+  scale: number;
 }) {
   const t = useTranslations("Hackathon");
   if (!sponsors.length) {
@@ -212,32 +404,59 @@ function Logos({
     );
   }
   return (
-    <div className="flex flex-wrap items-center justify-center gap-y-6">
+    // A loose flight, not a queue: up to three rockets a row, each nudged off
+    // the grid by its own amount so the rows don't line up.
+    <div
+      className="flex flex-wrap items-center justify-center"
+      style={{
+        maxWidth: 1000 * scale,
+        columnGap: 64 * scale,
+        rowGap: 40 * scale,
+      }}
+    >
       {sponsors.map((sponsor, index) => (
-        <div key={sponsor.name} className="flex items-center">
-          {index > 0 && (
-            <span className="mx-7 hidden md:block">
-              <PixelPlus color={`${planet.color}99`} />
-            </span>
-          )}
-          <Logo sponsor={sponsor} height={height} index={index} />
+        <div
+          key={sponsor.name}
+          className="flex items-center"
+          style={{
+            transform: `translate(${FLIGHT[index % FLIGHT.length][0] * scale}px, ${FLIGHT[index % FLIGHT.length][1] * scale}px)`,
+          }}
+        >
+          <Logo
+            sponsor={sponsor}
+            scale={scale}
+            index={index}
+            color={planet.color}
+          />
         </div>
       ))}
     </div>
   );
 }
 
+/** Each rocket's nudge `[x, y]` off its slot, in design pixels; repeats. */
+const FLIGHT: [number, number][] = [
+  [-24, -36],
+  [16, 28],
+  [-8, -14],
+  [40, 18],
+  [-36, -10],
+  [12, 34],
+  [28, -26],
+];
+
 export function TierView({
   planet,
   sponsors,
   skyWidth,
-  onBack,
   onSelectTier,
 }: TierViewProps) {
   const s = scaleFor(skyWidth);
   // Capped so each of the planet's 25 cells stays a readable block, not a slab.
-  const planetSize = Math.round(Math.min(skyWidth * 0.62, 880));
-  const logoHeight = Math.round(50 * s);
+  const planetSize = Math.round(Math.min(skyWidth * 0.52, 740));
+  const t = useTranslations("Hackathon.sponsors");
+  // How much of the planet shows above the bottom edge.
+  const planetShows = planetSize * 0.38;
 
   return (
     <motion.div
@@ -270,10 +489,24 @@ export function TierView({
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0c0303] via-[#0c0303]/40 to-transparent"
       />
-      <BackButton onBack={onBack} />
-      <div className="relative z-10 flex grow flex-col items-center justify-start gap-10 pt-6 md:pt-10">
-        <TierHeading planet={planet} count={sponsors.length} />
-        <Logos sponsors={sponsors} planet={planet} height={logoHeight} />
+      {/* At the top of the sky; the other tiers below are the way out. */}
+      <motion.h2
+        {...materialise(0.05)}
+        className={clsx(
+          lilex.className,
+          "pointer-events-none relative z-10 mx-auto flex min-h-10 items-center whitespace-nowrap text-center text-2xl font-bold lowercase leading-none text-white md:text-3xl",
+          planet.tier === "vibe" && "whitespace-pre-line",
+        )}
+        style={roundStroke(planet.color, "0.08em")}
+      >
+        {t(`labels.${planet.labelKey}`)}
+      </motion.h2>
+      {/* The rockets float in the sky between the top and the planet. */}
+      <div
+        className="relative z-10 flex grow flex-col items-center justify-center gap-10 pt-6 md:pt-10"
+        style={{ paddingBottom: planetShows }}
+      >
+        <Logos sponsors={sponsors} planet={planet} scale={s} />
       </div>
       <OtherPlanets current={planet} onSelectTier={onSelectTier} />
     </motion.div>

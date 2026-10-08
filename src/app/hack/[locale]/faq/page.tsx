@@ -8,6 +8,7 @@ import { plexMono } from "@/src/app/fonts";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { Button } from "../components/button";
 import { Window, WindowLoading } from "../components/window";
+import { FAQ_FIXTURES } from "../_dev/fixtures";
 
 const GET_FAQ_ITEMS = `*[
   _type == "hackathonFaqItem"
@@ -68,10 +69,10 @@ function FaqItem({ question, answer, isOpen, onToggle }: FaqItemProps) {
           type="button"
           aria-expanded={isOpen}
           onClick={onToggle}
-          className="flex w-full items-start gap-4 p-6 text-left outline-none focus-visible:bg-[rgba(250,250,250,0.04)]"
+          className="flex w-full items-start gap-3 p-4 text-left outline-none focus-visible:bg-[rgba(250,250,250,0.04)] md:gap-4 md:p-6"
         >
           <ToggleIcon isOpen={isOpen} />
-          <span className="text-lg font-semibold leading-normal tracking-[-0.02em] text-[#fafafa]">
+          <span className="text-base font-semibold leading-normal tracking-[-0.02em] text-[#fafafa] md:text-lg">
             {question}
           </span>
         </button>
@@ -85,7 +86,7 @@ function FaqItem({ question, answer, isOpen, onToggle }: FaqItemProps) {
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="whitespace-pre-line px-6 pb-6 text-base font-light leading-normal tracking-[-0.02em] text-[#9d9d9d]">
+            <p className="whitespace-pre-line px-4 pb-4 text-sm font-light leading-normal tracking-[-0.02em] text-[#9d9d9d] [overflow-wrap:anywhere] md:px-6 md:pb-6 md:text-base">
               {answer}
             </p>
           </motion.div>
@@ -102,6 +103,7 @@ export default function Page() {
   const { data, isLoading } = useSanityData({
     query: GET_FAQ_ITEMS,
     params: { language: locale },
+    fixtures: FAQ_FIXTURES,
   });
 
   const faqItems = (data || []) as Pick<FaqItemProps, "question" | "answer">[];

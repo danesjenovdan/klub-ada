@@ -28,7 +28,7 @@ export function DesktopShortcut({
     <Link
       href={href}
       className={clsx(
-        "w-24 flex flex-col items-center gap-2 p-1 outline-none group",
+        "w-24 flex flex-col items-center gap-2 p-1 outline-none group short:w-auto short:gap-1",
         className,
       )}
     >
@@ -38,13 +38,13 @@ export function DesktopShortcut({
         width={48}
         height={48}
         className={clsx(
-          "w-12 h-12 object-contain transition-[transform,filter] duration-200 ease-out",
+          "w-12 h-12 short:w-8 short:h-8 object-contain transition-[transform,filter] duration-200 ease-out",
           "group-hover:scale-110 group-hover:[filter:brightness(1.25)_drop-shadow(0_0_3px_rgba(255,87,87,0.9))_drop-shadow(0_0_12px_rgba(255,87,87,0.6))]",
           "group-focus-visible:scale-110 group-focus-visible:[filter:brightness(1.25)_drop-shadow(0_0_3px_rgba(255,87,87,0.9))_drop-shadow(0_0_12px_rgba(255,87,87,0.6))]",
           isSelected && "brightness-75",
         )}
       />
-      <span className="font-paragraph text-sm text-white text-center leading-tight break-words px-1 [text-shadow:1px_1px_2px_rgba(0,0,0,0.9)]">
+      <span className="font-paragraph text-sm short:text-xs text-white text-center leading-tight break-words px-1 [text-shadow:1px_1px_2px_rgba(0,0,0,0.9)]">
         {t(labelKey)}
       </span>
     </Link>

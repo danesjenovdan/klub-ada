@@ -27,7 +27,7 @@ export const geistPixel = localFont({
   src: "./fonts/geist-pixel.woff2",
   weight: "400",
   display: "swap",
-  fallback: ["Geist Mono", "ui-monospace", "Menlo", "monospace"],
+  fallback: ["Geist Mono", "ui-monospace", "Menlo", "Consolas", "monospace"],
 });
 
 /**
@@ -38,5 +38,9 @@ export const lilex = localFont({
   src: "./fonts/lilex.woff2",
   weight: "100 700",
   display: "swap",
-  fallback: ["IBM Plex Mono", "ui-monospace", "Menlo", "monospace"],
+  // Exposed as a CSS variable too, so Tailwind's `font-heading` can use it.
+  variable: "--font-lilex",
+  // Named fallbacks before the generic `monospace`, which is Courier on
+  // Windows; Courier should never show.
+  fallback: ["IBM Plex Mono", "ui-monospace", "Menlo", "Consolas", "monospace"],
 });

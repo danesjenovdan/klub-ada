@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import clsx from "clsx";
 import { animate, motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { instrumentSerif, plexMono } from "@/src/app/fonts";
 import stat1Src from "@/public/assets/hack-stat-1.png";
 import stat2Src from "@/public/assets/hack-stat-2.png";
@@ -63,11 +63,26 @@ function useCounter(value: number, isRunning: boolean) {
   return count;
 }
 
+/**
+ * A figure in the reader's locale: "4.000 €" in Slovenian, "€4,000" in
+ * English, with the thousands separator either way.
+ */
+function formatFigure(locale: string, value: number, suffix?: string) {
+  return suffix === "€"
+    ? new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: "EUR",
+        maximumFractionDigits: 0,
+      }).format(value)
+    : new Intl.NumberFormat(locale).format(value) + (suffix ?? "");
+}
+
 /** The red diamond would vanish on the red face, so the face shows it white. */
 const whiteCorner = "brightness-0 invert";
 
 /** The face of a card: last year's photo under the figure and its label. */
 function StatFace({ stat, isShown }: { stat: Stat; isShown: boolean }) {
+  const locale = useLocale();
   const count = useCounter(stat.value, isShown);
 
   return (
@@ -98,8 +113,7 @@ function StatFace({ stat, isShown }: { stat: Stat; isShown: boolean }) {
             instrumentSerif.className,
           )}
         >
-          {count}
-          {stat.suffix}
+          {formatFigure(locale, count, stat.suffix)}
         </span>
         <span
           className={clsx(
@@ -124,6 +138,7 @@ function StatFace({ stat, isShown }: { stat: Stat; isShown: boolean }) {
  * over and counts up to the figure.
  */
 function StatCard({ stat }: { stat: Stat }) {
+  const locale = useLocale();
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
@@ -132,7 +147,7 @@ function StatCard({ stat }: { stat: Stat }) {
       onClick={() => setIsFlipped((flipped) => !flipped)}
       aria-label={
         isFlipped
-          ? `${stat.value}${stat.suffix ?? ""} ${stat.label}`
+          ? `${formatFigure(locale, stat.value, stat.suffix)} ${stat.label}`
           : "AdaHack 2025"
       }
       className={clsx(
@@ -169,25 +184,27 @@ export default function Page() {
 
   return (
     <Window title={t("pages.numbers")}>
-      {/* `--card-w`: three cards and two gaps fit inside the table's padding
-          on a phone, and are capped at the design's 1.5× card from `md`. */}
+      {/* `--card-w`: one card per row on a phone, so the figure and its
+          label stay readable; three across from `md`, capped at the design's
+          1.5× card; three small ones across on a phone held sideways. */}
       <div
         className={clsx(
           "mx-auto flex max-w-[1000px] flex-col gap-8 py-2 md:py-6 [container-type:inline-size]",
-          "[--card-w:min(220px,calc((100cqw_-_56px)/3))]",
+          "[--card-w:min(200px,calc(100cqw_-_32px))]",
           "md:[--card-w:min(220px,calc((100cqw_-_108px)/3))]",
+          "short:[--card-w:min(130px,calc((100cqw_-_56px)/3))]",
           plexMono.className,
         )}
       >
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-semibold uppercase leading-normal tracking-[-0.02em] text-[#fafafa]">
+          <h1 className="text-xl md:text-2xl font-semibold uppercase leading-normal tracking-[-0.02em] text-[#fafafa]">
             {n("heading")}
           </h1>
-          <p className="text-base font-light leading-normal tracking-[-0.02em] text-[#9d9d9d]">
+          <p className="text-sm md:text-base font-light leading-normal tracking-[-0.02em] text-[#9d9d9d]">
             {n("subtitle")}
           </p>
         </div>
-        <div className={clsx(table, "gap-3 md:gap-[14px] p-4 md:p-10")}>
+        <div className={clsx(table, "gap-5 md:gap-[14px] p-4 md:p-10 short:gap-3")}>
           {stats.map((stat) => (
             <StatCard key={stat.label} stat={stat} />
           ))}

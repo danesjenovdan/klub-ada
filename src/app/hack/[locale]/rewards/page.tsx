@@ -24,6 +24,7 @@ import {
   table,
 } from "../components/card";
 import { Window, WindowLoading } from "../components/window";
+import { REWARDS_FIXTURES } from "../_dev/fixtures";
 
 const GET_REWARDS = `*[_type == "hack26Reward"] | order(_createdAt) {
   'title': coalesce(title[$language], title.sl),
@@ -52,27 +53,37 @@ function CardFront({ reward }: { reward: Reward }) {
       )}
     >
       <div className={clsx(cardRow, "items-start normal-case tracking-normal")}>
-        <span className="font-semibold leading-none">{reward.amount}</span>
+        <span className="min-w-0 truncate font-semibold leading-none">
+          {reward.amount}
+        </span>
         <Corner icon={reward.icon} />
       </div>
       <div className="flex flex-col items-center gap-1 px-1 text-center">
         <span
           className={clsx(
-            "text-[2.3em] leading-tight",
+            "max-w-full truncate leading-tight",
             instrumentSerif.className,
           )}
+          // One line, stepped down from 2.3em until it fits the card: the
+          // face's inner width is ~0.75 of the card and a glyph ~0.5em wide.
+          style={{
+            fontSize: `min(2.3em, calc(var(--card-w) * 1.5 / ${reward.amount.length}))`,
+          }}
         >
           {reward.amount}
         </span>
         <span
-          className={clsx("text-[0.85em] leading-tight", plexMono.className)}
+          className={clsx(
+            "line-clamp-3 text-[0.85em] leading-tight",
+            plexMono.className,
+          )}
         >
           {reward.title}
         </span>
         {reward.subtitle && (
           <span
             className={clsx(
-              "text-[0.65em] font-light leading-tight text-gray400",
+              "line-clamp-2 text-[0.65em] font-light leading-tight text-gray400",
               plexMono.className,
             )}
           >
@@ -82,7 +93,7 @@ function CardFront({ reward }: { reward: Reward }) {
       </div>
       <div className={clsx(cardRow, "items-end normal-case tracking-normal")}>
         <Corner icon={reward.icon} />
-        <span className="rotate-180 font-semibold leading-none">
+        <span className="min-w-0 rotate-180 truncate font-semibold leading-none">
           {reward.amount}
         </span>
       </div>
@@ -272,7 +283,9 @@ function PrizeDeck({ rewards }: { rewards: Reward[] }) {
       {/* The numbers subtracted below are everything beside the cards in a
           row: on a phone the table's padding and one gap (two cards per row),
           from `md` the 220px column, the 32px gap to the table, the table's
-          padding and four gaps (five cards per row). */}
+          padding and four gaps (five cards per row). On a short screen the
+          table's padding and gaps shrink, and the card is capped so it fits
+          the height that is there. */}
       <div
         onPointerMove={trackCursor}
         onPointerLeave={() => setHovered(null)}
@@ -280,14 +293,15 @@ function PrizeDeck({ rewards }: { rewards: Reward[] }) {
           "flex min-h-full flex-col gap-8 md:flex-row [container-type:inline-size]",
           "[--card-w:min(160px,calc((100cqw_-_44px)/2))]",
           "md:[--card-w:min(220px,calc((100cqw_-_388px)/5))]",
+          "md:short:[--card-w:min(120px,calc((100cqw_-_332px)/5))]",
         )}
       >
-        <div className="flex shrink-0 flex-col gap-10 md:w-[220px]">
+        <div className="flex shrink-0 flex-col gap-10 md:w-[220px] md:short:gap-4">
           <div className={clsx("flex flex-col gap-2", plexMono.className)}>
-            <h1 className="text-2xl font-semibold uppercase leading-normal tracking-[-0.02em] text-[#fafafa]">
+            <h1 className="text-xl md:text-2xl md:short:text-xl font-semibold uppercase leading-normal tracking-[-0.02em] text-[#fafafa]">
               {t("heading")}
             </h1>
-            <p className="text-base font-light leading-normal tracking-[-0.02em] text-[#9d9d9d]">
+            <p className="text-sm md:text-base md:short:text-sm font-light leading-normal tracking-[-0.02em] text-[#9d9d9d]">
               {t("subtitle")}
             </p>
           </div>
@@ -326,7 +340,7 @@ function PrizeDeck({ rewards }: { rewards: Reward[] }) {
         <div
           className={clsx(
             table,
-            "grow gap-3 md:gap-[14px] p-4 md:p-10 min-h-[18rem]",
+            "grow gap-3 md:gap-[14px] p-4 md:p-10 min-h-[18rem] md:short:gap-3 md:short:p-4 short:min-h-0",
           )}
         >
           {rewards.map((reward, index) => (
@@ -364,6 +378,7 @@ export default function Page() {
   const { data, isLoading } = useSanityData({
     query: GET_REWARDS,
     params: { language: locale },
+    fixtures: REWARDS_FIXTURES,
   });
 
   const rewards = (data || []) as Reward[];
