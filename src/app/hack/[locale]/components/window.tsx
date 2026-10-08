@@ -6,15 +6,8 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { IconMinus, IconSquare, IconSquares, IconX } from "@tabler/icons-react";
 import { useRouter } from "@/src/i18n/navigation";
+import { raised, sunken } from "./bevel";
 
-/**
- * Classic 3D bevel of an old Windows UI element: light on the top/left edges,
- * dark on the bottom/right ones. `sunken` is the same trick, inverted.
- */
-const raised =
-  "border-2 border-t-gray100 border-l-gray100 border-r-gray900 border-b-gray900";
-const sunken =
-  "border-2 border-t-gray900 border-l-gray900 border-r-gray100 border-b-gray100";
 /**
  * The 2px gray chrome around a panel. Drawn as a ring (an outset box shadow)
  * rather than as a background on the frame, so that a panel can be transparent
