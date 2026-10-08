@@ -326,6 +326,8 @@
     "video": "Video",
     "mp4": "MP4",
     "gif": "GIF",
+    "settings": "Settings",
+    "close": "Close",
     "download_all": "All PNGs (zip)",
     "exporting": "Exporting {percent}%",
     "export_failed": "Export failed. Try Chrome.",
