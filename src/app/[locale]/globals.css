@@ -206,6 +206,16 @@ body {
   );
 }
 
+/* The same notch at half the size, for small things like the lever's ball. */
+.pixel-corners-sm {
+  clip-path: polygon(
+    0 3px, 3px 3px, 3px 0,
+    calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px,
+    100% calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%,
+    3px 100%, 3px calc(100% - 3px), 0 calc(100% - 3px)
+  );
+}
+
 /* Hackathon sky: stars twinkle in whole steps, the way pixels should. */
 @keyframes hack-twinkle {
   0%,
