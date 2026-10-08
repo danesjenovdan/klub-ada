@@ -30,9 +30,10 @@ export function Navbar() {
       <span
         className={clsx(
           lilex.className,
-          // Below ~420px the tickets button and language switch leave it no
-          // room, and the logo already says where you are.
-          "hidden min-[420px]:block min-w-0 uppercase font-bold text-sm md:text-base text-white truncate",
+          // Below ~460px the tickets button and language switch leave it no
+          // room, and the logo already says where you are. (An arbitrary
+          // media query: `min-[420px]:` is off while a screen is `raw`.)
+          "hidden [@media(min-width:460px)]:block min-w-0 uppercase font-bold text-sm md:text-base text-white truncate",
         )}
       >
         {`/ ${t("site_title")}`}
@@ -40,7 +41,9 @@ export function Navbar() {
       <div className="ml-auto flex items-center gap-2 md:gap-3">
         <Button isDisabled>{t("tickets_cta")}</Button>
         {/* On a phone the desktop has no room for the tray (see `Tray`). */}
-        <div className="md:hidden">
+        {/* Three quarters size on a phone: the slot machine is drawn in fixed
+            px (its reel cell drives the spin), so it is zoomed as a whole. */}
+        <div className="md:hidden [zoom:0.75]">
           <LanguageSwitch />
         </div>
       </div>

@@ -8,6 +8,7 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import imageLoader from "@/src/app/utils/image-loader";
 import { useSanityData } from "@/src/app/utils/use-sanity-data";
 import { WindowLoading } from "../components/window";
+import { GALLERY_FIXTURES } from "../_dev/fixtures";
 
 const GET_GALLERY = `*[
   _type == "hackathonGallery" && year == $year
@@ -32,6 +33,7 @@ export function Gallery() {
   const { data, isLoading } = useSanityData({
     query: GET_GALLERY,
     params: { year: GALLERY_YEAR },
+    fixtures: GALLERY_FIXTURES,
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const filmstripRef = useRef<HTMLDivElement>(null);

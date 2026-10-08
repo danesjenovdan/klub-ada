@@ -1,11 +1,13 @@
 "use client";
 
-import { PointerEvent, useRef, useState } from "react";
+import { PointerEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import { useLocale, useTranslations } from "next-intl";
 import {
   animate,
+  cubicBezier,
+  interpolate,
   motion,
   useMotionValue,
   useReducedMotion,
@@ -20,12 +22,52 @@ const CELL = 36;
 /** How far the ball has to be dragged down before letting go pulls the lever. */
 const PULL_DISTANCE = 22;
 const SPIN_SECONDS = 1.1;
+/** The reel starts a beat after the lever, once the arm is on its way down. */
+const SPIN_DELAY_SECONDS = 0.14;
 /** Lands a little past the target and settles back, like a real reel. */
-const SPIN_EASE = [0.12, 0.6, 0.25, 1.12] as const;
+const spinEase = cubicBezier(0.12, 0.6, 0.25, 1.12);
+const ARM_SECONDS = 0.62;
+const armEase = cubicBezier(0.3, 0, 0.3, 1);
 
 /** What can blur past on the reel between the two languages. */
 const SYMBOLS = ["duck", "logo", "seven", "SL", "EN"] as const;
 type ReelSymbol = (typeof SYMBOLS)[number];
+
+/**
+ * The spin in progress, if any. Switching language swaps the whole layout
+ * (it lives under `[locale]`), so the switch that was pulled unmounts a few
+ * hundred ms into its spin and a fresh one mounts at rest - which cut every
+ * spin short once the other language's route was cached. The spin is kept
+ * out here and played off the clock instead, so whichever switch is mounted
+ * picks it up at the same point and the reel always runs its full course.
+ */
+type Spin = {
+  cells: ReelSymbol[];
+  target: ReelSymbol;
+  /** Where the lever was when it was let go (dragging moves it). */
+  armFrom: number;
+  startedAt: number;
+};
+let currentSpin: Spin | null = null;
+
+const secondsSince = ({ startedAt }: Spin) =>
+  (performance.now() - startedAt) / 1000;
+
+/** The reel strip's offset `elapsed` seconds into a spin. */
+const stripAt = (spin: Spin, elapsed: number) => {
+  const progress = (elapsed - SPIN_DELAY_SECONDS) / SPIN_SECONDS;
+  return (
+    -(spin.cells.length - 1) *
+    CELL *
+    spinEase(Math.min(1, Math.max(0, progress)))
+  );
+};
+
+/** The lever `elapsed` seconds into a spin: down, a little bounce, back up. */
+const armAt = (spin: Spin, elapsed: number) =>
+  interpolate([0, 0.38, 0.52, 1], [spin.armFrom, -1, -0.92, 1], {
+    ease: armEase,
+  })(Math.min(1, elapsed / ARM_SECONDS));
 
 function ReelCell({ symbol }: { symbol: ReelSymbol }) {
   return (
@@ -60,8 +102,10 @@ function ReelCell({ symbol }: { symbol: ReelSymbol }) {
  * machine: a reel showing the current language and a lever with a red ball.
  * Pulling the lever (clicking it, or dragging the ball down) or clicking the
  * reel spins the reel past a few symbols until it lands on the other language.
- * The route change starts as the reel starts, so the spin covers the load.
- * With reduced motion it switches straight away. Keeps the current page, so
+ * The route change starts as the reel starts, so the spin covers the load;
+ * the spin itself is kept outside the component (see `currentSpin`) so the
+ * switch that mounts in the new language carries on with it. With reduced
+ * motion it switches straight away. Keeps the current page, so
  * switching from the FAQ lands on the FAQ.
  */
 export function LanguageSwitch() {
@@ -74,47 +118,76 @@ export function LanguageSwitch() {
   const pathname = usePathname().replace(/^\/hack(?=\/|$)/, "") || "/";
   const shouldReduceMotion = useReducedMotion();
 
-  /** The reel's strip while it spins; at rest it shows just the locale. */
-  const [spinningCells, setSpinningCells] = useState<ReelSymbol[] | null>(null);
-  const stripY = useMotionValue(0);
+  /**
+   * The reel's strip while it spins; at rest it shows just the locale. A
+   * switch mounting mid-spin starts on the spin's strip at its current offset,
+   * so its first frame already matches the one it replaces.
+   */
+  const [spinningCells, setSpinningCells] = useState<ReelSymbol[] | null>(
+    () => currentSpin?.cells ?? null,
+  );
+  /** The language the reel landed on while the page is still switching. */
+  const [landedOn, setLandedOn] = useState<ReelSymbol | null>(null);
+  const stripY = useMotionValue(
+    currentSpin ? stripAt(currentSpin, secondsSince(currentSpin)) : 0,
+  );
   /** 1 is the lever standing up, -1 is it pulled all the way down. */
-  const armScale = useMotionValue(1);
-  const isBusy = useRef(false);
+  const armScale = useMotionValue(
+    currentSpin ? armAt(currentSpin, secondsSince(currentSpin)) : 1,
+  );
   const drag = useRef<{ startY: number; hasMoved: boolean } | null>(null);
+  const isBusy = () => currentSpin !== null || landedOn !== null;
+
+  // Play the current spin off the clock until it lands.
+  useEffect(() => {
+    if (!spinningCells) return;
+    let frame = 0;
+    const tick = () => {
+      const spin = currentSpin;
+      const elapsed = spin ? secondsSince(spin) : Infinity;
+      if (!spin || elapsed >= SPIN_DELAY_SECONDS + SPIN_SECONDS) {
+        currentSpin = null;
+        // If the new language's page hasn't arrived yet, hold the reel on it
+        // rather than snapping back to the language being left.
+        if (spin && spin.target !== locale.toUpperCase()) {
+          setLandedOn(spin.target);
+        }
+        setSpinningCells(null);
+        stripY.set(0);
+        armScale.set(1);
+        return;
+      }
+      stripY.set(stripAt(spin, elapsed));
+      armScale.set(armAt(spin, elapsed));
+      frame = requestAnimationFrame(tick);
+    };
+    tick();
+    return () => cancelAnimationFrame(frame);
+  }, [spinningCells, locale, stripY, armScale]);
 
   const spin = () => {
-    if (isBusy.current) return;
+    if (isBusy()) return;
     const current = locale.toUpperCase() as ReelSymbol;
     const target = routing.locales.find((option) => option !== locale)!;
     router.replace({ pathname }, { locale: target, scroll: false });
     if (shouldReduceMotion) return;
 
-    isBusy.current = true;
-    animate(armScale, [armScale.get(), -1, -0.92, 1], {
-      duration: 0.62,
-      times: [0, 0.38, 0.52, 1],
-      ease: [0.3, 0, 0.3, 1],
-    });
     const blur = Array.from(
       { length: 12 + Math.floor(Math.random() * 4) },
       () => SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
     );
-    const cells = [current, ...blur, target.toUpperCase() as ReelSymbol];
-    setSpinningCells(cells);
-    stripY.set(0);
-    animate(stripY, -(cells.length - 1) * CELL, {
-      duration: SPIN_SECONDS,
-      ease: SPIN_EASE,
-      delay: 0.14,
-    }).then(() => {
-      setSpinningCells(null);
-      stripY.set(0);
-      isBusy.current = false;
-    });
+    const landing = target.toUpperCase() as ReelSymbol;
+    currentSpin = {
+      cells: [current, ...blur, landing],
+      target: landing,
+      armFrom: armScale.get(),
+      startedAt: performance.now(),
+    };
+    setSpinningCells(currentSpin.cells);
   };
 
   const onLeverPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
-    if (isBusy.current) return;
+    if (isBusy()) return;
     drag.current = { startY: event.clientY, hasMoved: false };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
@@ -153,7 +226,9 @@ export function LanguageSwitch() {
         )}
       >
         <motion.div style={{ y: stripY }} className="flex flex-col">
-          {(spinningCells ?? [locale.toUpperCase() as ReelSymbol]).map(
+          {(
+            spinningCells ?? [landedOn ?? (locale.toUpperCase() as ReelSymbol)]
+          ).map(
             (symbol, index) => (
               <ReelCell key={index} symbol={symbol} />
             ),

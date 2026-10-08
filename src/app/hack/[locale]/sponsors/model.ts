@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export type Tier = "gold" | "silver" | "bronze" | "vibe" | "partner";
@@ -68,10 +69,31 @@ export const pct = (value: number, total: number) =>
   `${(value / total) * 100}%`;
 
 /**
- * Pixel title treatment shared by the sky and the tier views: the letters are
+ * Pixel title treatment (used by the posts countdown): the letters are
  * filled with a light tint, hugged by a one-cell ring in the window's dark
  * background, with a translucent white ring outside that. The cell `--s`
  * scales with the type; the fill is set by the caller.
  */
 export const pixelTitle =
   "uppercase leading-none [--s:0.08em] [--gap:#0c0303] [--ring:rgba(255,255,255,0.7)] [text-shadow:var(--s)_0_0_var(--gap),calc(-1*var(--s))_0_0_var(--gap),0_var(--s)_0_var(--gap),0_calc(-1*var(--s))_0_var(--gap),var(--s)_var(--s)_0_var(--gap),calc(-1*var(--s))_var(--s)_0_var(--gap),var(--s)_calc(-1*var(--s))_0_var(--gap),calc(-1*var(--s))_calc(-1*var(--s))_0_var(--gap),calc(2*var(--s))_0_0_var(--ring),calc(-2*var(--s))_0_0_var(--ring),0_calc(2*var(--s))_0_var(--ring),0_calc(-2*var(--s))_0_var(--ring),calc(2*var(--s))_calc(2*var(--s))_0_var(--ring),calc(-2*var(--s))_calc(2*var(--s))_0_var(--ring),calc(2*var(--s))_calc(-2*var(--s))_0_var(--ring),calc(-2*var(--s))_calc(-2*var(--s))_0_var(--ring),calc(2*var(--s))_var(--s)_0_var(--ring),calc(-2*var(--s))_var(--s)_0_var(--ring),calc(2*var(--s))_calc(-1*var(--s))_0_var(--ring),calc(-2*var(--s))_calc(-1*var(--s))_0_var(--ring),var(--s)_calc(2*var(--s))_0_var(--ring),calc(-1*var(--s))_calc(2*var(--s))_0_var(--ring),var(--s)_calc(-2*var(--s))_0_var(--ring),calc(-1*var(--s))_calc(-2*var(--s))_0_var(--ring)]";
+
+/**
+ * A round-cornered outline for display text. `-webkit-text-stroke` always
+ * mitres its corners (Chrome ignores `stroke-linejoin` on HTML text), so the
+ * outline is instead a ring of hard shadows set around a circle of `width`,
+ * with a second ring at half the radius to close any gaps.
+ */
+export function roundStroke(color: string, width: string): CSSProperties {
+  const ring = (radius: string, steps: number) =>
+    Array.from({ length: steps }, (_, i) => {
+      const angle = (2 * Math.PI * i) / steps;
+      const x = Math.cos(angle).toFixed(3);
+      const y = Math.sin(angle).toFixed(3);
+      return `calc(${radius} * ${x}) calc(${radius} * ${y}) 0 ${color}`;
+    });
+  return {
+    textShadow: [...ring(width, 24), ...ring(`(${width} * 0.5)`, 12)].join(
+      ", ",
+    ),
+  };
+}

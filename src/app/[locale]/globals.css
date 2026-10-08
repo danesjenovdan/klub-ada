@@ -236,6 +236,20 @@ body {
   }
 }
 
+/*
+ * Sponsor rockets idle by hopping one pixel up and back, held in place
+ * between hops (run with a steps() timing function) so they stay on the grid.
+ */
+@keyframes hack-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--bob, -4px));
+  }
+}
+
 /* The arms of a plus-shaped star fold away so it collapses to one pixel. */
 @keyframes hack-star-arms {
   0%,
