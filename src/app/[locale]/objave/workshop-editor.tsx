@@ -10,7 +10,8 @@ import { DEFAULT_CROP } from "./posts/screen-photo";
 
 export const field = clsx(
   plexMono.className,
-  "w-full border border-[rgba(255,87,87,0.35)] bg-[#0c0303] px-3 py-2 text-sm text-[#fafafa] outline-none focus-visible:border-[#ff5757]",
+  // 16px on a phone: iOS zooms the page in on focus for anything smaller.
+  "w-full border border-[rgba(255,87,87,0.35)] bg-[#0c0303] px-3 py-2 text-base text-[#fafafa] outline-none focus-visible:border-[#ff5757] md:text-sm",
 );
 
 export function Field({

@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { IconBrandInstagram, IconBrandLinkedin } from "@tabler/icons-react";
 import clsx from "clsx";
 import { useLocale, useTranslations } from "next-intl";
 import { anaheim, instrumentSerif, plexMono } from "@/src/app/fonts";
@@ -45,6 +44,7 @@ import { photosReady } from "./posts/screen-photo";
 import { WorkshopEditor } from "./workshop-editor";
 import { AwardEditor } from "./award-editor";
 import { JudgeEditor } from "./judge-editor";
+import { Segmented, Toolbar, caption, control } from "./toolbar";
 
 /** A question mark drawn in pixels, for the help button. */
 function PixelQuestion() {
@@ -76,18 +76,6 @@ function PixelQuestion() {
         ),
       )}
     </svg>
-  );
-}
-
-/** The network a format is for, by its logo. */
-function FormatLogo({ id }: { id: Format["id"] }) {
-  const Logo = id === "linkedin" ? IconBrandLinkedin : IconBrandInstagram;
-  return (
-    <Logo
-      size={18}
-      stroke={1.75}
-      aria-label={id === "linkedin" ? "LinkedIn" : "Instagram"}
-    />
   );
 }
 
@@ -151,12 +139,6 @@ type Job = {
 const GIF_WIDTH = 540;
 const GIF_FPS = 20;
 
-/** The red notched button of the posts, small, for the page's own controls. */
-const control = clsx(
-  plexMono.className,
-  "inline-flex items-center justify-center gap-2 border border-[#ff5757] px-3 py-2 text-xs uppercase tracking-[0.12em] transition-colors disabled:cursor-not-allowed disabled:opacity-40",
-);
-
 function PostCard({
   post,
   format,
@@ -210,11 +192,16 @@ function PostCard({
       <div
         ref={ref}
         className="relative cursor-pointer border border-[rgba(255,87,87,0.3)] bg-black shadow-[6px_6px_0_rgba(0,0,0,0.6)] transition-colors hover:border-[#ff5757]"
-        onMouseEnter={() => {
+        // Hovering plays the post with a mouse only: a tap on a touch screen
+        // fires an emulated hover before its click, which would start the
+        // post and stop it again straight away. A tap plays and pauses.
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "mouse") return;
           setPlayhead(0);
           setIsPlaying(true);
         }}
-        onMouseLeave={() => {
+        onPointerLeave={(event) => {
+          if (event.pointerType !== "mouse") return;
           setIsPlaying(false);
           setPlayhead(post.still);
         }}
@@ -227,6 +214,18 @@ function PostCard({
             t={Math.min(playhead, post.duration)}
             width={width}
           />
+        )}
+        {/* On a touch screen there is no hover to hint that a post plays. */}
+        {!isPlaying && !job && (
+          <span
+            aria-hidden
+            className={clsx(
+              plexMono.className,
+              "pointer-events-none absolute bottom-2 right-2 bg-[rgba(12,3,3,0.8)] px-2 py-1 text-xs uppercase tracking-[0.14em] text-[#fafafa] [@media(hover:hover)]:hidden",
+            )}
+          >
+            ▶ {t("play")}
+          </span>
         )}
         {job && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[rgba(12,3,3,0.8)]">
@@ -256,7 +255,7 @@ function PostCard({
           setPlayhead(Number(event.target.value));
         }}
         aria-label={post.label}
-        className="w-full accent-[#ff5757]"
+        className="h-6 w-full accent-[#ff5757]"
       />
 
       <div className="flex flex-col gap-3">
@@ -264,7 +263,7 @@ function PostCard({
           <p
             className={clsx(
               plexMono.className,
-              "text-[10px] uppercase tracking-[0.16em] text-[#ff5757]",
+              "text-xs uppercase tracking-[0.14em] text-[#ff5757]",
             )}
           >
             {t(`categories.${post.category}`)}
@@ -272,7 +271,7 @@ function PostCard({
           <p className="truncate text-lg font-bold leading-tight">
             {post.label}
           </p>
-          <p className={clsx(plexMono.className, "text-[11px] text-gray400")}>
+          <p className={clsx(plexMono.className, "text-xs text-gray400")}>
             {`${Math.min(playhead, post.duration).toFixed(1)} / ${post.duration.toFixed(1)} s`}
           </p>
         </div>
@@ -552,7 +551,7 @@ export function Studio() {
           c,
           posts.filter((p) => p.category === c).length,
         ]),
-      ),
+      ) as Record<Category, number>,
     [posts],
   );
 
@@ -565,20 +564,20 @@ export function Studio() {
           <main
             className={clsx(
               anaheim.className,
-              "min-h-screen bg-[#0c0303] px-4 py-10 text-[#fafafa] md:px-10",
+              "min-h-screen bg-[#0c0303] px-4 py-6 text-[#fafafa] md:px-10 md:py-10",
             )}
           >
-            <header className="mb-10 flex items-start justify-between gap-6">
-              <div className="flex items-center gap-4">
+            <header className="mb-6 flex items-center justify-between gap-4 md:mb-10 md:items-start md:gap-6">
+              <div className="flex min-w-0 items-center gap-3 md:gap-4">
                 <img
                   src="/assets/hackathon26/social/duck.svg"
                   alt=""
-                  className="h-12 w-auto [image-rendering:pixelated]"
+                  className="h-8 w-auto shrink-0 [image-rendering:pixelated] md:h-12"
                 />
                 <h1
                   className={clsx(
                     instrumentSerif.className,
-                    "text-5xl leading-none md:text-6xl",
+                    "text-[28px] leading-none sm:text-4xl md:text-6xl",
                   )}
                 >
                   {t("heading")}
@@ -589,7 +588,7 @@ export function Studio() {
                 <summary
                   aria-label={t("help")}
                   title={t("help")}
-                  className="flex h-12 w-12 cursor-pointer list-none items-center justify-center border border-[rgba(255,87,87,0.5)] transition-colors hover:bg-[rgba(255,87,87,0.15)] group-open:bg-[#ff5757] [&::-webkit-details-marker]:hidden"
+                  className="flex h-10 w-10 cursor-pointer list-none md:h-12 md:w-12 items-center justify-center border border-[rgba(255,87,87,0.5)] transition-colors hover:bg-[rgba(255,87,87,0.15)] group-open:bg-[#ff5757] [&::-webkit-details-marker]:hidden"
                 >
                   <PixelQuestion />
                 </summary>
@@ -618,131 +617,22 @@ export function Studio() {
               </details>
             </header>
 
-            {/* The controls stay in reach while scrolling through the posts. */}
-            {/* The background runs edge to edge; the lines keep to the page
-            margins, so they line up with the section dividers below. */}
-            <div className="sticky top-0 z-30 -mx-4 mb-10 bg-[rgba(12,3,3,0.92)] px-4 backdrop-blur md:-mx-10 md:px-10">
-              <div className="flex flex-col gap-3 border-y border-[rgba(255,87,87,0.25)] py-3">
-                {/* Row one: the format, and the bulk download at the far end. */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <span
-                    className={clsx(
-                      plexMono.className,
-                      "mr-1 w-20 text-[10px] uppercase tracking-[0.16em] text-gray400",
-                    )}
-                  >
-                    {t("format")}
-                  </span>
-                  {FORMATS.map((f) => (
-                    <button
-                      key={f.id}
-                      type="button"
-                      disabled={!!job}
-                      aria-pressed={f.id === formatId}
-                      onClick={() => setFormatId(f.id)}
-                      className={clsx(
-                        control,
-                        f.id === formatId
-                          ? "bg-[#ff5757] text-black"
-                          : "hover:bg-[rgba(255,87,87,0.15)]",
-                      )}
-                    >
-                      <FormatLogo id={f.id} />
-                      {f.label}
-                      <span className="opacity-60">
-                        {Math.round(f.width * f.exportScale)}×
-                        {Math.round(f.height * f.exportScale)}
-                      </span>
-                    </button>
-                  ))}
-                  {/* The logo in every post's header: the full lockup or the duck. */}
-                  <span
-                    className={clsx(
-                      plexMono.className,
-                      "ml-4 mr-1 text-[10px] uppercase tracking-[0.16em] text-gray400",
-                    )}
-                  >
-                    {t("logo")}
-                  </span>
-                  {(["full", "duck"] as const).map((mode) => (
-                    <button
-                      key={mode}
-                      type="button"
-                      disabled={!!job}
-                      aria-pressed={logoMode === mode}
-                      onClick={() => setLogoMode(mode)}
-                      className={clsx(
-                        control,
-                        logoMode === mode
-                          ? "bg-[#ff5757] text-black"
-                          : "hover:bg-[rgba(255,87,87,0.15)]",
-                      )}
-                    >
-                      {t(`logo_${mode}`)}
-                    </button>
-                  ))}
-                  {/* The date under the full lockup, off unless asked for. */}
-                  <button
-                    type="button"
-                    disabled={!!job || logoMode === "duck"}
-                    aria-pressed={showDate}
-                    onClick={() => setShowDate((on) => !on)}
-                    className={clsx(
-                      control,
-                      showDate && logoMode !== "duck"
-                        ? "bg-[#ff5757] text-black"
-                        : "hover:bg-[rgba(255,87,87,0.15)]",
-                    )}
-                  >
-                    {t("logo_date")}
-                  </button>
-                  <button
-                    type="button"
-                    disabled={!!job || !shown.length}
-                    onClick={exportAllPngs}
-                    className={clsx(
-                      control,
-                      "ml-auto whitespace-nowrap hover:bg-[#ff5757] hover:text-black",
-                    )}
-                  >
-                    ↓ {t("download_all")}
-                    {job?.kind === "zip" &&
-                      ` · ${Math.round(job.progress * 100)} %`}
-                  </button>
-                </div>
-                {/* Row two: which posts to show. */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <span
-                    className={clsx(
-                      plexMono.className,
-                      "mr-1 w-20 text-[10px] uppercase tracking-[0.16em] text-gray400",
-                    )}
-                  >
-                    {t("show")}
-                  </span>
-                  {(["all", ...CATEGORIES] as const).map((c) => (
-                    <button
-                      key={c}
-                      type="button"
-                      aria-pressed={c === category}
-                      onClick={() => setCategory(c)}
-                      className={clsx(
-                        control,
-                        "border-transparent",
-                        c === category
-                          ? "bg-[#fafafa] text-black"
-                          : "text-[#d3d2d2] hover:text-white",
-                      )}
-                    >
-                      {t(`categories.${c}`)}
-                      <span className="opacity-60">
-                        {c === "all" ? posts.length : counts[c]}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+            {/* The settings and filter stay in reach while scrolling. */}
+            <Toolbar
+              format={format}
+              onFormat={setFormatId}
+              logoMode={logoMode}
+              onLogoMode={setLogoMode}
+              showDate={showDate}
+              onShowDate={setShowDate}
+              category={category}
+              onCategory={setCategory}
+              counts={counts}
+              total={posts.length}
+              isBusy={!!job}
+              onDownloadAll={exportAllPngs}
+              zipProgress={job?.kind === "zip" ? job.progress : null}
+            />
 
             {message && (
               <p
@@ -765,7 +655,7 @@ export function Studio() {
                 {t("loading")}
               </p>
             ) : (
-              <div className="flex flex-col gap-16">
+              <div className="flex flex-col gap-12 md:gap-16">
                 {CATEGORIES.filter(
                   (c) => category === "all" || category === c,
                 ).map((c) => {
@@ -783,13 +673,13 @@ export function Studio() {
                           : null;
                   const key = c as keyof Variants;
                   return (
-                    <section key={c} className="flex flex-col gap-6">
+                    <section key={c} className="flex flex-col gap-5 md:gap-6">
                       <div className="flex flex-col gap-4 border-b border-[rgba(255,87,87,0.2)] pb-5 lg:flex-row lg:items-end lg:justify-between">
                         <div className="flex flex-col gap-1">
                           <h2
                             className={clsx(
                               instrumentSerif.className,
-                              "text-4xl leading-none",
+                              "text-3xl leading-none md:text-4xl",
                             )}
                           >
                             {t(`categories.${c}`)}{" "}
@@ -809,44 +699,36 @@ export function Studio() {
                           )}
                         </div>
                         {options && (
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span
-                              className={clsx(
-                                plexMono.className,
-                                "mr-1 text-[10px] uppercase tracking-[0.16em] text-gray400",
-                              )}
-                            >
-                              {options.label}
-                            </span>
-                            {options.list.map((option) => (
-                              <button
-                                key={option.id}
-                                type="button"
-                                disabled={!!job}
-                                aria-pressed={variants[key] === option.id}
-                                onClick={() =>
+                          // A phone puts the caption above and lets the
+                          // options share the full width.
+                          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+                            <span className={caption}>{options.label}</span>
+                            <div className="w-full md:w-auto">
+                              <Segmented
+                                label={options.label}
+                                options={options.list.map((option) => ({
+                                  id: option.id,
+                                  content: option.label,
+                                }))}
+                                value={variants[key]}
+                                onChange={(id) =>
                                   setVariants((current) => ({
                                     ...current,
-                                    [key]: option.id,
+                                    [key]: id,
                                   }))
                                 }
-                                className={clsx(
-                                  control,
-                                  variants[key] === option.id
-                                    ? "bg-[#ff5757] text-black"
-                                    : "hover:bg-[rgba(255,87,87,0.15)]",
-                                )}
-                              >
-                                {option.label}
-                              </button>
-                            ))}
+                                disabled={!!job}
+                                isSmall
+                                stretch
+                              />
+                            </div>
                           </div>
                         )}
                       </div>
                       <div
                         className="grid gap-x-8 gap-y-12"
                         style={{
-                          gridTemplateColumns: `repeat(auto-fill, minmax(${format.id === "story" ? 240 : 300}px, 1fr))`,
+                          gridTemplateColumns: `repeat(auto-fill, minmax(min(${format.id === "story" ? 240 : 300}px, 100%), 1fr))`,
                         }}
                       >
                         {sectionPosts.map((post) => (
