@@ -326,6 +326,8 @@
     "video": "Video",
     "mp4": "MP4",
     "gif": "GIF",
+    "settings": "Nastavitve",
+    "close": "Zapri",
     "download_all": "Vsi PNG-ji (zip)",
     "exporting": "Izvažam {percent} %",
     "export_failed": "Izvoz ni uspel. Poskusi v Chromu.",
