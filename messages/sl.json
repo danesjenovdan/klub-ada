@@ -28,20 +28,20 @@
       "description2": "Naša misija je ustvariti vključujoče okolje za ženske, ki delujejo v tehnologiji z organizacijo dogodkov v živo, programerskih uric, knjižnega kluba, izobraževalnih vsebin, mentorstva, Discord skupnosti, in se več.",
       "benefits_title": "S partnerstvom lahko pridobite naslednje:",
       "benefits": [
-        "Povečana prepoznavnost vašega podjetja.",
-        "Dostop do vrhunskega talenta.",
-        "Ustvarjanje pozitivnega vpliva na družbo."
+        "povečana prepoznavnost vašega podjetja",
+        "dostop do vrhunskega talenta",
+        "ustvarjanje pozitivnega vpliva na družbo"
       ]
     },
     "collaboration": {
       "title": "Možnosti sodelovanja",
       "options": [
-        "Predstavitev in sodelovanje pri oblikovanju vsebine dogodkov.",
-        "Objava zaposlitvenih oglasov na naših platformah.",
-        "Programerski dogodki in mreženje.",
-        "Deljenje promocijskega materiala na dogodkih.",
-        "Povečanje prepoznavnosti vaše blagovne znamke.",
-        "Druge oblike sodelovanja po dogovoru."
+        "predstavitev in sodelovanje pri oblikovanju vsebine dogodkov",
+        "objava zaposlitvenih oglasov na naših platformah",
+        "programerski dogodki in mreženje",
+        "deljenje promocijskega materiala na dogodkih",
+        "povečanje prepoznavnosti vaše blagovne znamke",
+        "druge oblike sodelovanja po dogovoru"
       ]
     },
     "stats": {
@@ -61,20 +61,20 @@
   },
   "Activities": {
     "title": "Aktivnosti",
-    "description": "Preberi si vse aktivnosti, ki jih ponujamo.",
+    "description": "Preberi več o aktivnostih, ki jih ponujamo.",
     "cta": "Koledar aktivnosti"
   },
   "AboutUs": {
-    "title": "Navdušujemo ženske nad tehnologijo in jih podpiramo na karierni poti.",
+    "title": "Navdušujemo ženske za tehnologijo in jih podpiramo na karierni poti.",
     "meet_the_team": "Spoznaj ekipo",
     "mission": {
       "title": "Misija",
-      "subtitle": "Navduševati ženske nad tehnologijo ter jim nuditi podporo in vire za razvoj veščin, mreženje ter rast na kariernem področju.",
+      "subtitle": "Navduševati ženske za tehnologijo ter jim nuditi podporo in vire za razvoj veščin, mreženje ter rast na kariernem področju.",
       "description": "Naše aktivnosti so zasnovane tako, da ustvarjajo varno in spodbudno okolje, kjer lahko udeleženke delijo ideje, izkušnje in se vključujejo v pogovore."
     },
     "story": {
       "title": "Zgodba o našem začetku",
-      "subtitle": "Klub Ada je nastal iz želje po povezovanju žensk na področju, kjer smo pogosto v manjšini, kar prinaša edinstvene izzive in dileme.",
+      "subtitle": "Klub Ada je nastal iz želje po povezovanju žensk na področju, kjer smo pogosto v manjšini, kar prinaša svojevrstne izzive in dileme.",
       "description": "Zaradi teh izkušenj se pogosto počutimo, kot da v ta prostor ne spadamo. Z našimi aktivnostmi želimo poudariti, da je tehnologija prostor, kjer smo dobrodošle in kjer je naš glas pomemben."
     },
     "name": {
@@ -92,7 +92,7 @@
   },
   "Hero": {
     "title": "Skupnost žensk v tehnologiji",
-    "description": "Klub Ada organizira dogodke, ki so namenjeni mreženju in deljenju znanja, kariernemu in osebnemu razvoju za dijakinje, študentke, zaposlene in vse, ki jih zanima področje tehnologije.",
+    "description": "Klub Ada organizira prireditve, ki so namenjenene mreženju in deljenju znanja, kariernemu in osebnemu razvoju za dijakinje, študentke, zaposlene in vse, ki jih zanima področje tehnologije.",
     "cta_event": "Pridi na dogodek",
     "cta_partners": "Postani partner",
     "image_alt": "Slika dogodka"
