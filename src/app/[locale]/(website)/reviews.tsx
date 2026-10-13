@@ -10,7 +10,7 @@ const reviewsSl = [
     paragraph:
       '"Najprej sem spoznala Simono, soustanoviteljico kluba Ada. Bila je finalistka za Inženirko leta 2023 in se mi je kot mlada, prikupna, a nadvse nadobudna inženirka prav vtisnila v spomin. Ker sem tudi sama del inženirskega kroga, kjer imamo v podjetju Danfoss ekipo Women in STEM, sva s Simono vzpostavili stik in se dogovorili za sodelovanje na okrogli mizi z naslovom »Koda za uspeh: delavnica načrtovanja kariere v tehnologiji!«.',
     emphasis:
-      'Klub Ada navdihuje mlade in tudi manj mlade. So zagnana ekipa z veliko idejami, ki jih z lahkoto tekom leta realizirajo v uspešne dogodke in projekte. Stvari počnejo s srcem. Zato jih podpiram in jim želim uspeh tudi v prihodnje!"',
+      'Klub Ada navdihuje mlade in tudi manj mlade. So zagnana ekipa z veliko idejami, ki jih z lahkoto med letom realizirajo v uspešne dogodke in projekte. Stvari počnejo s srcem. Zato jih podpiram in jim želim uspeh tudi v prihodnje!"',
     image: "/assets/tamara-stumperger.webp",
     alt: "Tamara Stumperger profile picture",
     title:
@@ -20,7 +20,7 @@ const reviewsSl = [
   {
     id: 2,
     paragraph:
-      '"Do sedaj sem se udeležila le enega dogodka, me je ta navdušil. Dogodek je bil odlično organiziran, z aktualnimi temami in izjemnimi gostjami. Srečala sem ženske s podobnimi izkušnjami, kar mi je dalo zagon za nadaljnje učenje in delo. Vesela sem, da pri nas obstaja takšna skupnost, kjer lahko najdeš podporo in nasvete za karierno pot.',
+      '"Do sedaj sem se udeležila le enega dogodka, a me je navdušil. Dogodek je bil odlično organiziran, z aktualnimi temami in izjemnimi gostjami. Srečala sem ženske s podobnimi izkušnjami, kar mi je dalo zagon za nadaljnje učenje in delo. Vesela sem, da pri nas obstaja takšna skupnost, kjer lahko najdeš podporo in nasvete za karierno pot.',
     emphasis:
       'Priporočam tudi pridružitev Discord skupini za še več povezovanja in izmenjave izkušenj."',
     image: "/assets/marusa-kerpan.webp",
@@ -41,7 +41,7 @@ const reviewsSl = [
   {
     id: 4,
     paragraph:
-      '"Pred nekaj meseci sem potrebovala nasvet pri iskanju prve zaposlitve, in res, kapa dol za vso pomoč, podporo in nasvete, ki sem jih prejela. Tudi sami dogodki so odlično preživet čas v družbi ambicioznih in pozitivno naravnanih žensk v tehnologiji. Discord skupnost kluba Ada je prava zakladnica za vse, ki iščejo motivacijo, zaposlitev, izobraževanje ali pa samo dobro knjigo.',
+      '"Pred nekaj meseci sem potrebovala nasvet pri iskanju prve zaposlitve, in res, kapo dol za vso pomoč, podporo in nasvete, ki sem jih prejela. Tudi sami dogodki so odlično preživet čas v družbi ambicioznih in pozitivno naravnanih žensk v tehnologiji. Discord skupnost kluba Ada je prava zakladnica za vse, ki iščejo motivacijo, zaposlitev, izobraževanje ali pa samo dobro knjigo.',
     emphasis: 'Moja izkušnja s Klubom Ada je čista pozitiva!"',
     image: "/assets/nika-likar.webp",
     alt: "Nika Likar profile picture",
