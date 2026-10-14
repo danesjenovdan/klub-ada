@@ -10,7 +10,10 @@ import { InlineError } from "@/src/app/[locale]/components/inline-error";
 import Skeleton from "@/src/app/[locale]/components/skeleton";
 import { useLocale, useTranslations } from "next-intl";
 
-const PINNED_POSTS_QUERY = `*[_type == "post" && language == $language && pinned] {
+// Pinned posts first, then the newest, so a locale with nothing pinned still
+// shows its latest posts.
+const TOP_POSTS_QUERY = `*[_type == "post" && language == $language]
+  | order(coalesce(pinned, false) desc, coalesce(publishedAt, _createdAt) desc)[0...3] {
   title,
   slug,
   mainImage,
@@ -25,11 +28,11 @@ export function TopBlogs() {
   const t = useTranslations("Blog");
   const locale = useLocale();
   const { data, error, isLoading } = useSanityData({
-    query: PINNED_POSTS_QUERY,
+    query: TOP_POSTS_QUERY,
     params: { language: locale },
   });
 
-  const pinnedPosts = (data || []) as Post[];
+  const topPosts = (data || []) as Post[];
 
   return (
     <PageWrapper bgColor="bg-pink">
@@ -64,7 +67,7 @@ export function TopBlogs() {
               </div>
             ) : (
               <div className="flex flex-col md:flex-row md:flex-nowrap gap-4">
-                {pinnedPosts.map((post) => (
+                {topPosts.map((post) => (
                   <div key={post.slug.current} className="basis-1/3">
                     <PostComponent post={post} />
                   </div>
