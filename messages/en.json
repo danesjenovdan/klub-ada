@@ -153,7 +153,7 @@
   "Hackathon": {
     "main_cta": "Coming soon",
     "loading": "Loading...",
-    "tickets_cta": "Tickets coming soon",
+    "tickets_cta": "Get tickets!",
     "site_title": "AdaHack 2026",
     "switch_language": "Switch to Slovene",
     "photo_number": "Photo {number}",
@@ -375,7 +375,12 @@
       "position_y": "Position up–down",
       "position_x": "Position left–right",
       "amount": "Prize (amount)",
-      "challenge": "Challenge"
+      "challenge": "Challenge",
+      "edit_phone": "Edit phone screen",
+      "clock": "Clock",
+      "notification": "Notification {n}",
+      "notification_time": "Time",
+      "notification_detail": "Notifications' bottom line"
     },
     "steps": [
       {
@@ -398,7 +403,7 @@
       "website": "An invitation to the hackathon's website.",
       "sponsors": "One post per sponsor. The layout you pick applies to all of them.",
       "awards": "One post per award.",
-      "timeline": "Both days' schedule in one post.",
+      "timeline": "A carousel: one post per day. Post them in this order.",
       "faq": "A carousel: a cover and one post per question. Post them in this order.",
       "pictures": "Moments from last year's hackathon.",
       "registration": "The announcement that registration is open, and a post for every sold-out batch. The layout applies to all of them.",
@@ -410,7 +415,6 @@
       "open_title": "Registration is open",
       "open_sub": "Grab your spot at AdaHack 2026.",
       "apply": "Register",
-      "cancel": "Cancel",
       "ok": "OK",
       "batch": "Batch {n}",
       "soldout_title": "Batch {n} sold out",

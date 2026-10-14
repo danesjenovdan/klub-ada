@@ -39,11 +39,16 @@ import {
 } from "./posts";
 import { SPONSOR_VARIANTS } from "./posts/sponsor";
 import { GALLERY_VARIANTS } from "./posts/gallery";
-import { REGISTRATION_VARIANTS } from "./posts/registration";
+import {
+  PhoneScreen,
+  REGISTRATION_VARIANTS,
+  Registration,
+} from "./posts/registration";
 import { photosReady } from "./posts/screen-photo";
 import { WorkshopEditor } from "./workshop-editor";
 import { AwardEditor } from "./award-editor";
 import { JudgeEditor } from "./judge-editor";
+import { PhoneEditor } from "./phone-editor";
 import { Segmented, Toolbar, caption, control } from "./toolbar";
 
 /** A question mark drawn in pixels, for the help button. */
@@ -385,6 +390,8 @@ export function Studio() {
   const [rewardEdits, setRewardEdits] = useState<
     Record<string, Partial<RewardPost>>
   >({});
+  // Changes made on the page to each registration post's lock screen.
+  const [phoneEdits, setPhoneEdits] = useState<Record<string, PhoneScreen>>({});
   const [workshopEdits, setWorkshopEdits] = useState<
     Record<string, Partial<WorkshopPost>>
   >({});
@@ -405,6 +412,7 @@ export function Studio() {
             rewardEdits,
             exampleJudge,
             judgeEdits,
+            phoneEdits,
           )
         : [],
     [
@@ -415,6 +423,7 @@ export function Studio() {
       rewardEdits,
       exampleJudge,
       judgeEdits,
+      phoneEdits,
     ],
   );
   const shown = posts.filter(
@@ -783,6 +792,38 @@ export function Studio() {
                                   )
                                 );
                               })()}
+                            {post.category === "registration" &&
+                              variants.registration === "phone" && (
+                                <PhoneEditor
+                                  registration={
+                                    {
+                                      ...(post.id === "registration-open"
+                                        ? { kind: "open" }
+                                        : {
+                                            kind: "soldout",
+                                            batch: Number(
+                                              post.id.split("-").pop(),
+                                            ),
+                                          }),
+                                      phone: phoneEdits[post.id],
+                                    } as Registration
+                                  }
+                                  onChange={(edit) =>
+                                    setPhoneEdits((edits) => ({
+                                      ...edits,
+                                      [post.id]: {
+                                        ...edits[post.id],
+                                        ...edit,
+                                      },
+                                    }))
+                                  }
+                                  onReset={() =>
+                                    setPhoneEdits(
+                                      ({ [post.id]: _, ...rest }) => rest,
+                                    )
+                                  }
+                                />
+                              )}
                             {post.category === "awards" &&
                               (() => {
                                 const base = content?.rewards.find(

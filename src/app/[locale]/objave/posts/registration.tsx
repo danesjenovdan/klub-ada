@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
 import clsx from "clsx";
 import { IconMinus, IconSquare, IconX } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
@@ -18,6 +18,7 @@ import {
 } from "../frame";
 import { beat, caretVisible, ease, mix, steps, typed } from "../motion";
 import { Pointer } from "./pointer";
+import { LockupPost } from "./save-the-date";
 
 /*
  * Registration posts: "registration is open", then one for every batch that
@@ -25,11 +26,30 @@ import { Pointer } from "./pointer";
  * pointing people to the site.
  */
 
-export type Registration =
+export type Registration = (
   | { kind: "open" }
-  | { kind: "soldout"; batch: number };
+  | { kind: "soldout"; batch: number }
+) & {
+  /** Changes made on the page to the phone layout's lock screen. */
+  phone?: PhoneScreen;
+};
 
-export type RegistrationVariant = "phone" | "dialog" | "ticket" | "progress";
+/** What the lock screen shows. An emptied notification is left off. */
+export type PhoneScreen = {
+  clock?: string;
+  first?: string;
+  firstTime?: string;
+  second?: string;
+  secondTime?: string;
+  detail?: string;
+};
+
+export type RegistrationVariant =
+  | "phone"
+  | "dialog"
+  | "ticket"
+  | "progress"
+  | "lockup";
 
 export const REGISTRATION_VARIANTS: {
   id: RegistrationVariant;
@@ -41,6 +61,7 @@ export const REGISTRATION_VARIANTS: {
   { id: "dialog", label: "Okno", duration: 4.5, still: 4 },
   { id: "ticket", label: "Vstopnica", duration: 4, still: 3.6 },
   { id: "progress", label: "Napredek", duration: 4.5, still: 4 },
+  { id: "lockup", label: "Logotip", duration: 6, still: 5 },
 ];
 
 export const BATCHES = 3;
@@ -85,6 +106,24 @@ const useCopy = (data: Registration) => {
   };
 };
 
+/** The lock screen as drawn: the page's changes over the default copy. */
+export function usePhoneScreen(data: Registration): Required<PhoneScreen> {
+  const { t, soldOut, allGone, n } = useCopy(data);
+  return {
+    clock: "09:41",
+    first: soldOut ? t("notif_soldout_1", { n }) : t("notif_open_1"),
+    firstTime: t("notif_earlier"),
+    second: allGone
+      ? t("all_gone")
+      : soldOut
+        ? t("notif_soldout_2")
+        : t("notif_open_2"),
+    secondTime: t("notif_now"),
+    detail: URL,
+    ...data.phone,
+  };
+}
+
 /**
  * Telefon: a lock screen, after the Figma story. Two notifications slide in
  * from the top one after the other, the way iOS lands them.
@@ -92,12 +131,11 @@ const useCopy = (data: Registration) => {
 function Phone({ t, format, data, unit, top }: LayoutProps) {
   const copy = useCopy(data);
   const width = 640 * unit;
-  const notifications = copy.soldOut
-    ? [
-        copy.t("notif_soldout_1", { n: copy.n }),
-        copy.allGone ? copy.t("all_gone") : copy.t("notif_soldout_2"),
-      ]
-    : [copy.t("notif_open_1"), copy.t("notif_open_2")];
+  const screen = usePhoneScreen(data);
+  const notifications = [
+    { text: screen.first, time: screen.firstTime },
+    { text: screen.second, time: screen.secondTime },
+  ].filter((notification) => notification.text);
 
   return (
     <div
@@ -120,10 +158,10 @@ function Phone({ t, format, data, unit, top }: LayoutProps) {
           className="mt-[44px] text-center font-semibold leading-none tracking-[-0.02em]"
           style={{ fontSize: 150 * unit }}
         >
-          09:41
+          {screen.clock}
         </p>
         <div className="mt-[48px] flex flex-col gap-[14px] px-[22px]">
-          {notifications.map((text, index) => {
+          {notifications.map(({ text, time }, index) => {
             const p = ease.outBack(beat(t, 0.5 + index * 0.6, 0.55));
             return (
               <div
@@ -144,18 +182,16 @@ function Phone({ t, format, data, unit, top }: LayoutProps) {
                 <span className="flex min-w-0 flex-1 flex-col gap-[4px]">
                   <span className="flex justify-between text-[22px] uppercase tracking-[0.04em] text-[#666]">
                     <span>{copy.t("notif_app")}</span>
-                    <span className="normal-case">
-                      {index === 0
-                        ? copy.t("notif_earlier")
-                        : copy.t("notif_now")}
-                    </span>
+                    <span className="normal-case">{time}</span>
                   </span>
                   <span className="text-[30px] font-bold leading-tight">
                     {text}
                   </span>
-                  <span className="text-[26px] leading-tight text-[#444]">
-                    {URL}
-                  </span>
+                  {screen.detail && (
+                    <span className="text-[26px] leading-tight text-[#444]">
+                      {screen.detail}
+                    </span>
+                  )}
                 </span>
               </div>
             );
@@ -166,15 +202,49 @@ function Phone({ t, format, data, unit, top }: LayoutProps) {
   );
 }
 
-/** A pixel badge: "i" for news, "!" for a sold-out batch. */
-function Badge({ mark, size }: { mark: string; size: number }) {
+/** When the pointer glides in, and when it clicks. */
+const GLIDE_START = 1.4;
+const GLIDE = 0.9;
+const PRESS: [number, number] = [2.35, 2.55];
+
+/**
+ * A button the pointer glides in to and clicks: it eases in from below right,
+ * settles on the button's trailing padding so the label stays readable, and
+ * the button dips while it is pressed.
+ */
+export function Clickable({
+  t,
+  unit,
+  leaves,
+  children,
+}: {
+  t: number;
+  unit: number;
+  /** Glide back out after the click, for when it would cover what's below. */
+  leaves?: boolean;
+  children: (pressed: boolean) => ReactNode;
+}) {
+  const glide =
+    ease.inOutCubic(beat(t, GLIDE_START, GLIDE)) -
+    (leaves ? ease.inOutCubic(beat(t, PRESS[1] + 0.4, GLIDE)) : 0);
+  const pressed = t > PRESS[0] && t < PRESS[1];
   return (
-    <span
-      className="flex shrink-0 items-center justify-center bg-red font-extrabold text-[#0c0303]"
-      style={{ width: size, height: size, fontSize: size * 0.7 }}
-    >
-      {mark}
-    </span>
+    <div className="relative">
+      <div style={{ transform: `translateY(${pressed ? 4 : 0}px)` }}>
+        {children(pressed)}
+      </div>
+      {t > GLIDE_START && glide > 0 && (
+        <div
+          className="absolute"
+          style={{
+            left: `calc(100% - ${mix(-300, 26 * unit, glide)}px)`,
+            top: mix(420, 34 * unit, glide),
+          }}
+        >
+          <Pointer pressed={pressed} />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -187,8 +257,6 @@ function Dialog({ t, data, unit: base, top, bottom }: LayoutProps) {
   // The dialog is the whole post here, so it is drawn larger, sized to its
   // content and centred in the space under the header.
   const unit = base * 1.4;
-  const glide = ease.inOutCubic(beat(t, 1.4, 0.9));
-  const pressed = t > 2.35 && t < 2.55;
 
   return (
     <div
@@ -222,64 +290,72 @@ function Dialog({ t, data, unit: base, top, bottom }: LayoutProps) {
           className={clsx("m-[3px] mt-0 flex flex-col", sunken)}
           style={{ padding: 56 * unit, gap: 48 * unit }}
         >
-          <div className="flex items-start" style={{ gap: 36 * unit }}>
-            <Badge mark={copy.soldOut ? "!" : "i"} size={96 * unit} />
-            <div className="flex flex-col" style={{ gap: 16 * unit }}>
+          {/* The words lead on the left, the rocket closes the row on the
+              right; the action row spans both, so the URL shares the text's
+              edge and the button the rocket's. */}
+          <div
+            className="grid items-start"
+            style={{
+              gridTemplateColumns: `minmax(0, 1fr) ${120 * unit}px`,
+              columnGap: 40 * unit,
+              rowGap: 52 * unit,
+            }}
+          >
+            <div className="flex flex-col" style={{ gap: 18 * unit }}>
               <p
                 className={clsx(
                   lilex.className,
-                  "font-extrabold leading-[1.02] tracking-[-0.02em]",
+                  "font-extrabold leading-[1.02] tracking-[-0.02em] [text-wrap:balance]",
                 )}
                 style={{ fontSize: 64 * base }}
               >
-                {copy.title}
+                {copy.title}!
               </p>
               <p
-                className={clsx(lilex.className, "leading-snug")}
+                className={clsx(
+                  lilex.className,
+                  "leading-snug [text-wrap:pretty]",
+                )}
                 style={{ fontSize: 40 * base, color: GRAY }}
               >
-                {copy.sub} {URL}
+                {copy.sub}
               </p>
             </div>
-          </div>
-          <div className="flex justify-end" style={{ gap: 20 * unit }}>
-            {!copy.soldOut && (
+            <img
+              src="/assets/hackathon26/social/rocket.svg"
+              alt=""
+              className="col-start-2 row-start-1 h-auto w-full [image-rendering:pixelated]"
+            />
+            {/* The address goes with the action it leads to; the row wraps
+                rather than squeezing either. */}
+            <div
+              className="col-span-2 flex flex-wrap items-center justify-between"
+              style={{ gap: 24 * unit }}
+            >
               <span
                 className={clsx(
                   lilex.className,
-                  "flex items-center bg-[#bdbdbd] px-[28px] uppercase tracking-[0.06em] text-black",
-                  raised,
+                  "whitespace-nowrap tracking-[0.02em] text-red",
                 )}
-                style={{ fontSize: 26 * unit, padding: `0 ${30 * unit}px` }}
+                style={{ fontSize: 28 * base }}
               >
-                {copy.t("cancel")}
+                {URL}
               </span>
-            )}
-            <div className="relative">
-              <div style={{ transform: `translateY(${pressed ? 4 : 0}px)` }}>
-                <NotchButton
-                  size="sm"
-                  font={lilex.className}
-                  style={{
-                    fontSize: 26 * unit,
-                    padding: `${14 * unit}px ${30 * unit}px`,
-                    filter: pressed ? "brightness(0.85)" : undefined,
-                  }}
-                >
-                  {copy.soldOut ? copy.t("ok") : copy.t("apply")}
-                </NotchButton>
-              </div>
-              {t > 1.4 && (
-                <div
-                  className="absolute"
-                  style={{
-                    left: `calc(100% - ${mix(-300, 40, glide)}px)`,
-                    top: mix(420, 30, glide),
-                  }}
-                >
-                  <Pointer pressed={pressed} />
-                </div>
-              )}
+              <Clickable t={t} unit={unit}>
+                {(pressed) => (
+                  <NotchButton
+                    size="sm"
+                    font={lilex.className}
+                    style={{
+                      fontSize: 26 * unit,
+                      padding: `${14 * unit}px ${30 * unit}px`,
+                      filter: pressed ? "brightness(0.85)" : undefined,
+                    }}
+                  >
+                    {copy.soldOut ? copy.t("ok") : copy.t("apply")}
+                  </NotchButton>
+                )}
+              </Clickable>
             </div>
           </div>
         </div>
@@ -672,8 +748,55 @@ function Progress({ t, format, data, unit: base, top, bottom }: LayoutProps) {
   );
 }
 
+/**
+ * Logotip: the save-the-date lockup, with the news in its button. A sold-out
+ * batch says so in the button and says what's next under it.
+ */
+function Lockup({ t, format, data }: PostProps<Registration>) {
+  const copy = useCopy(data);
+  const story = format.id === "story";
+  return (
+    <LockupPost
+      t={t}
+      format={format}
+      overlay={
+        // A story keeps the bottom free for the link sticker, as the others.
+        story && (
+          <p
+            className={clsx(
+              plexMono.className,
+              "absolute inset-x-0 text-center uppercase tracking-[0.2em] text-red",
+            )}
+            style={{ bottom: STICKER_BAND + 20, fontSize: 30 }}
+          >
+            {copy.t("link_hint")} ↓
+          </p>
+        )
+      }
+    >
+      <Clickable t={t} unit={1} leaves>
+        {(pressed) => (
+          <NotchButton
+            size="sm"
+            style={{ filter: pressed ? "brightness(0.85)" : undefined }}
+          >
+            {copy.title}!
+          </NotchButton>
+        )}
+      </Clickable>
+      {/* Just the address under the button, on every post. */}
+      <p
+        className={clsx(plexMono.className, "tracking-[0.04em] text-red")}
+        style={{ fontSize: 26 }}
+      >
+        {URL}
+      </p>
+    </LockupPost>
+  );
+}
+
 const LAYOUTS: Record<
-  RegistrationVariant,
+  Exclude<RegistrationVariant, "lockup">,
   (props: LayoutProps) => JSX.Element
 > = {
   phone: Phone,
@@ -694,6 +817,7 @@ export function RegistrationPostView({
   const tPosts = useTranslations("Posts.registration");
   const compact = isCompact(format);
   const story = format.id === "story";
+  if (variant === "lockup") return <Lockup t={t} format={format} data={data} />;
   const Layout = LAYOUTS[variant];
   const hintOnTop = story && variant === "phone";
   return (

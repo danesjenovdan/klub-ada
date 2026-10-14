@@ -5,6 +5,9 @@ import { lilex } from "@/src/app/fonts";
 import { Button } from "./button";
 import { LanguageSwitch } from "./language-switch";
 
+const TICKETS_URL =
+  "https://www.eventbrite.com/e/adahack-code-for-change-tickets-2003306018228?aff=oddtdtcreator";
+
 /**
  * The title bar of the site itself: the whole hackathon site is one maximised
  * window, so its navbar is drawn like a `Window` title bar (dark bar inside the
@@ -39,7 +42,14 @@ export function Navbar() {
         {`/ ${t("site_title")}`}
       </span>
       <div className="ml-auto flex items-center gap-2 md:gap-3">
-        <Button isDisabled>{t("tickets_cta")}</Button>
+        <Button
+          as="a"
+          href={TICKETS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("tickets_cta")}
+        </Button>
         {/* On a phone the desktop has no room for the tray (see `Tray`). */}
         {/* Three quarters size on a phone: the slot machine is drawn in fixed
             px (its reel cell drives the spin), so it is zoomed as a whole. */}
