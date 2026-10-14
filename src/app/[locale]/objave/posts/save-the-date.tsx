@@ -1,8 +1,10 @@
 "use client";
 
+import { ReactNode } from "react";
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import { instrumentSerif, plexMono } from "@/src/app/fonts";
+import { Format } from "../formats";
 import { NotchButton, PostFrame, PostProps, isCompact } from "../frame";
 import { Swirl } from "./swirl";
 
@@ -14,8 +16,31 @@ export const SAVE_THE_DATE_STILL = 5;
  * the site's swirling backdrop, which is the only thing that moves.
  */
 export function SaveTheDatePostView({ t, format }: PostProps<null>) {
-  const tHero = useTranslations("Hackathon.hero");
   const tPosts = useTranslations("Posts.save_the_date");
+  return (
+    <LockupPost t={t} format={format}>
+      <NotchButton size="sm">{tPosts("button")}</NotchButton>
+    </LockupPost>
+  );
+}
+
+/**
+ * The save-the-date lockup with whatever goes under the date in place of its
+ * button; the registration posts use it too.
+ */
+export function LockupPost({
+  t,
+  format,
+  children,
+  overlay,
+}: {
+  t: number;
+  format: Format;
+  children: ReactNode;
+  /** Drawn over the whole post, outside the scaled lockup. */
+  overlay?: ReactNode;
+}) {
+  const tHero = useTranslations("Hackathon.hero");
   const compact = isCompact(format);
   const tall = format.height > 1600;
   const scale = compact ? 0.82 : tall ? 1.15 : 1;
@@ -52,11 +77,12 @@ export function SaveTheDatePostView({ t, format }: PostProps<null>) {
           >
             {tHero("date")}
           </p>
-          <div className="mt-[32px]">
-            <NotchButton size="sm">{tPosts("button")}</NotchButton>
+          <div className="mt-[32px] flex flex-col items-center gap-[20px]">
+            {children}
           </div>
         </div>
       </div>
+      {overlay}
     </PostFrame>
   );
 }

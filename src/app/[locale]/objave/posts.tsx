@@ -18,6 +18,7 @@ import {
   TIMELINE_DURATION,
   TIMELINE_STILL,
   TimelinePostView,
+  timelineDays,
 } from "./posts/timeline";
 import {
   NUMBERS_DURATION,
@@ -39,6 +40,7 @@ import {
 } from "./posts/faq";
 import {
   BATCHES,
+  PhoneScreen,
   REGISTRATION_VARIANTS,
   Registration,
   RegistrationPostView,
@@ -144,6 +146,8 @@ export function buildPosts(
   exampleJudge?: JudgePost,
   /** Changes made on the page to a judge, by its id, over the Sanity data. */
   judgeEdits: Record<string, Partial<JudgePost>> = {},
+  /** Changes made on the page to a registration post's lock screen, by its id. */
+  phoneEdits: Record<string, PhoneScreen> = {},
 ): PostDef[] {
   const sponsorVariant = SPONSOR_VARIANTS.find(
     (v) => v.id === variants.sponsors,
@@ -186,12 +190,14 @@ export function buildPosts(
         <WebsitePostView t={t} format={format} data={null} />
       ),
     } satisfies PostDef,
-    ...registrations.map(
-      (registration): PostDef => ({
-        id:
-          registration.kind === "open"
-            ? "registration-open"
-            : `registration-batch-${registration.batch}`,
+    ...registrations.map((plain): PostDef => {
+      const id =
+        plain.kind === "open"
+          ? "registration-open"
+          : `registration-batch-${plain.batch}`;
+      const registration = { ...plain, phone: phoneEdits[id] };
+      return {
+        id,
         category: "registration",
         label:
           registration.kind === "open"
@@ -208,8 +214,8 @@ export function buildPosts(
             variant={variants.registration}
           />
         ),
-      }),
-    ),
+      };
+    }),
     {
       id: "numbers-2025",
       category: "numbers",
@@ -264,20 +270,23 @@ export function buildPosts(
         ),
       };
     }),
-    ...(content.timeline.length
-      ? [
-          {
-            id: "timeline",
-            category: "timeline",
-            label: "AdaHack 2026",
-            duration: TIMELINE_DURATION,
-            still: TIMELINE_STILL,
-            render: (t, format) => (
-              <TimelinePostView t={t} format={format} data={content.timeline} />
-            ),
-          } satisfies PostDef,
-        ]
-      : []),
+    // One post per day, so neither has to squeeze in beside the other.
+    ...timelineDays(content.timeline).map(
+      (items, day, all): PostDef => ({
+        id: `timeline-${day + 1}`,
+        category: "timeline",
+        label: `${day + 1} AdaHack 2026`,
+        duration: TIMELINE_DURATION,
+        still: TIMELINE_STILL,
+        render: (t, format) => (
+          <TimelinePostView
+            t={t}
+            format={format}
+            data={{ items, day, days: all.length }}
+          />
+        ),
+      }),
+    ),
     ...workshops.map((sanityWorkshop, index): PostDef => {
       const workshop = {
         ...sanityWorkshop,
