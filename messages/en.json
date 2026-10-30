@@ -209,7 +209,7 @@
         "silver": "silver",
         "bronze": "bronze",
         "vibe": "vibe\ncoding",
-        "media": "media"
+        "media": "product"
       },
       "count": "{count, plural, =0 {Nobody on board yet} one {One sponsor on board} other {# sponsors on board}}",
       "other_tiers": "Other tiers"
@@ -246,7 +246,7 @@
       "gold": "Gold sponsors",
       "silver": "Silver sponsors",
       "bronze": "Bronze sponsors",
-      "media": "Product sponsors",
+      "media": "Partners",
       "vibe_coding_partner": "Vibe coding partner",
       "support": "Supporters",
       "cta": "Work with us"
