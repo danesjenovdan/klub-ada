@@ -205,3 +205,67 @@ body {
     6px 100%, 6px calc(100% - 3px), 3px calc(100% - 3px), 3px calc(100% - 6px), 0 calc(100% - 6px)
   );
 }
+
+/* The same notch at half the size, for small things like the lever's ball. */
+.pixel-corners-sm {
+  clip-path: polygon(
+    0 3px, 3px 3px, 3px 0,
+    calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px,
+    100% calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%,
+    3px 100%, 3px calc(100% - 3px), 0 calc(100% - 3px)
+  );
+}
+
+/* Hackathon sky: stars twinkle in whole steps, the way pixels should. */
+@keyframes hack-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 1;
+  }
+  56% {
+    opacity: 0.3;
+  }
+  64% {
+    opacity: 0.3;
+  }
+  68% {
+    opacity: 1;
+  }
+}
+
+/*
+ * Sponsor rockets idle by hopping one pixel up and back, held in place
+ * between hops (run with a steps() timing function) so they stay on the grid.
+ */
+@keyframes hack-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--bob, -4px));
+  }
+}
+
+/* The arms of a plus-shaped star fold away so it collapses to one pixel. */
+@keyframes hack-star-arms {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  38% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+}

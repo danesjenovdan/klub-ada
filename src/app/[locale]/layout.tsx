@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { anaheim } from "../fonts";
+import { anaheim, lilex } from "../fonts";
 import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { notFound } from "next/navigation";
@@ -64,7 +64,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${anaheim.className} antialiased max-w-screen-2xl mx-auto`}
+        className={`${anaheim.className} ${lilex.variable} antialiased max-w-screen-2xl mx-auto`}
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        // A phone held sideways: too short for the stacked layouts, whatever
+        // its width. Sorted after the min-width screens, so it wins over `md`.
+        short: { raw: "(orientation: landscape) and (max-height: 500px)" },
+      },
       colors: {
         black: "var(--color-black)",
         white: "var(--color-white)",
@@ -55,7 +60,7 @@ const config: Config = {
         border: "var(--color-border)",
       },
       fontFamily: {
-        heading: ["Courier", "monospace"],
+        heading: ["var(--font-lilex)", "ui-monospace", "Menlo", "Consolas", "monospace"],
         paragraph: ["Anaheim", "sans-serif"],
         button: ["Anaheim", "sans-serif"],
       },

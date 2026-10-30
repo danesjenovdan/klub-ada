@@ -1,8 +1,46 @@
-import { Anaheim, Instrument_Serif } from "next/font/google";
+import { Anaheim, IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
+import localFont from "next/font/local";
 
 export const anaheim = Anaheim({ subsets: ["latin"] });
 
 export const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
+});
+
+/**
+ * Closest Google-hosted match for Lilex, the monospace used by the hackathon
+ * design (Lilex is derived from IBM Plex Mono).
+ */
+export const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+});
+
+/**
+ * Pixel display face for the hackathon's big headings: Google Fonts' build of
+ * Geist Pixel (OFL), loaded locally because Next's Google font list predates
+ * it. One weight, 400; the pixel shape is a variable axis, `ELSH` (0 to 100),
+ * with the solid square at 0.
+ */
+export const geistPixel = localFont({
+  src: "./fonts/geist-pixel.woff2",
+  weight: "400",
+  display: "swap",
+  fallback: ["Geist Mono", "ui-monospace", "Menlo", "Consolas", "monospace"],
+});
+
+/**
+ * Lilex itself (OFL), the hackathon design's monospace, loaded locally because
+ * Next's Google font list predates it. Variable, `wght` 100 to 700.
+ */
+export const lilex = localFont({
+  src: "./fonts/lilex.woff2",
+  weight: "100 700",
+  display: "swap",
+  // Exposed as a CSS variable too, so Tailwind's `font-heading` can use it.
+  variable: "--font-lilex",
+  // Named fallbacks before the generic `monospace`, which is Courier on
+  // Windows; Courier should never show.
+  fallback: ["IBM Plex Mono", "ui-monospace", "Menlo", "Consolas", "monospace"],
 });

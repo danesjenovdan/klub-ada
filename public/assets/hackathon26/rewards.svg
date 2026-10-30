@@ -1,0 +1,29 @@
+<svg width="50" height="48" viewBox="0 0 50 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_g_5499_2066)">
+<path d="M0.599609 20.2192V42.9508H3.11982V22.7394H35.9654V42.9508H3.11982V45.471H46.0794V42.9508H38.5022V22.7394H46.0794V42.9508H48.5996V10.1052H46.0794V17.6824H43.5426V20.2192H10.697V17.6824H8.17681V20.2192H0.599609Z" fill="#FAFAFA"/>
+<path d="M43.542 7.58566H46.0788V10.1059H43.542V7.58566Z" fill="#FAFAFA"/>
+<path d="M41.0215 25.2599H43.5417V40.4309H41.0215V25.2599Z" fill="#FAFAFA"/>
+<path d="M41.0215 15.1642H43.5417V17.6844H41.0215V15.1642Z" fill="#FAFAFA"/>
+<path d="M41.0215 5.04855H43.5417V7.58534H41.0215V5.04855Z" fill="#FAFAFA"/>
+<path d="M38.502 12.6271H41.0222V15.1639H38.502V12.6271Z" fill="#FAFAFA"/>
+<path d="M38.502 7.58566H41.0222V10.1059H38.502V7.58566Z" fill="#FAFAFA"/>
+<path d="M20.8112 30.3169H18.2744V40.4309H30.9086V25.2599H20.8112V30.3169ZM28.3884 32.8371V37.8941H20.8112V32.8371H28.3884Z" fill="#FAFAFA"/>
+<path d="M15.7539 25.2599H18.2741V27.7967H15.7539V25.2599Z" fill="#FF5757"/>
+<path d="M13.2335 25.2599H5.65625V40.4309H15.7537V30.3169H13.2335V25.2599ZM13.2335 37.8941H8.18475V32.8371H13.2417L13.2335 37.8941Z" fill="#FAFAFA"/>
+<path d="M5.65625 2.52902H41.0221V5.04923H5.65625V2.52902Z" fill="#FAFAFA"/>
+<path d="M5.65625 15.1642H8.17646V17.6844H5.65625V15.1642Z" fill="#FAFAFA"/>
+<path d="M38.5022 12.6261V10.1059H3.11982V7.58566H0.599609V12.6261H3.11982V15.1629H5.6566V12.6261H38.5022Z" fill="#FAFAFA"/>
+<path d="M3.12012 5.04855H5.6569V7.58534H3.12012V5.04855Z" fill="#FAFAFA"/>
+</g>
+<defs>
+<filter id="filter0_g_5499_2066" x="-0.000390649" y="-0.6" width="49.2" height="49.2" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.99900001287460327 0.99900001287460327" numOctaves="3" seed="9660" />
+<feDisplacementMap in="shape" scale="1.2000000476837158" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect1_texture_5499_2066">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+</defs>
+</svg>

@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="2121.82" height="1786.65" viewBox="0 0 2121.82 1786.65" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ellipse 4" opacity="0.64" filter="url(#filter0_fg_14119_127368)">
+<path d="M1291.55 1215.17C887.996 1260.88 312.097 1049.69 839.693 344.951C1260.74 -57.4039 2315.88 166.346 1841.82 1316.95C1837.52 1327.38 988.554 2234.45 164.554 894.451C213.054 1190.23 43.5543 926.672 346.054 664.451C456.055 1554.45 1345.05 1511.95 1605.67 1368.45C2117.31 800.055 1628.64 43.6299 955.653 364.451C429.554 994.451 1014.32 1132.17 1251.05 1132.17C1711.05 1003.67 1492.55 559.171 1212.05 594.171C971.053 659.671 1062.11 932.672 1189.05 932.672C1264.05 932.672 1291.55 877.172 1291.55 827.172C1291.55 777.172 1233.55 770.171 1182.55 827.172C1107.05 709.671 1318.05 636.171 1364.55 730.171C1445.05 826.171 1355.55 1008.62 1212.05 1011.67C1112.69 1013.78 944.554 960.171 944.554 755.171C944.554 682.171 1041.55 469.946 1291.55 489.671C1572.55 511.841 1887.56 1050.67 1291.55 1215.17Z" fill="#FF5757" fill-opacity="0.2"/>
+</g>
+<defs>
+<filter id="filter0_fg_14119_127368" x="2.8731e-07" y="5.16941e-06" width="2121.82" height="1786.65" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="80" result="effect1_foregroundBlur_14119_127368"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.66666668653488159 0.66666668653488159" numOctaves="3" seed="9176" />
+<feDisplacementMap in="effect1_foregroundBlur_14119_127368" scale="30" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect2_texture_14119_127368">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+</defs>
+</svg>
