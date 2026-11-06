@@ -14,6 +14,7 @@ import { hack26Sponsor } from "./hack26Sponsor";
 import { hack26Reward } from "./hack26Reward";
 import { hack26Workshop } from "./hack26Workshop";
 import { hack26Judge } from "./hack26Judge";
+import { hack26TreasureHuntPuzzle } from "./hack26TreasureHuntPuzzle";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -31,5 +32,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     hack26Reward,
     hack26Workshop,
     hack26Judge,
+    hack26TreasureHuntPuzzle,
   ],
 };

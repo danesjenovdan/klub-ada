@@ -168,7 +168,8 @@
       "faq": "FAQ",
       "timeline": "Timeline",
       "numbers": "AdaHack in numbers",
-      "pictures": "AdaHack 2025 pics"
+      "pictures": "AdaHack 2025 pics",
+      "treasure_hunt": "Treasure hunt"
     },
     "faq": {
       "title": "Frequently asked questions",
@@ -213,6 +214,18 @@
       },
       "count": "{count, plural, =0 {Nobody on board yet} one {One sponsor on board} other {# sponsors on board}}",
       "other_tiers": "Other tiers"
+    },
+    "treasure_hunt": {
+      "title": "Treasure hunt",
+      "description": "To make the wait for the hackathon go by faster, we have prepared a Treasure Hunt for you! Our duck has left behind coded messages scattered across our social media, posts, and website instead of footprints. Find 5 messages, decode them, and enter the complete password in the field below!",
+      "more_help": "Need more help?",
+      "more_help_description": "Check out the hints below.",
+      "puzzle": "Coded message #{number}",
+      "hint": "Hint #{number}",
+      "placeholder": "Enter solution here",
+      "cta": "Submit",
+      "success": "Congratulations, hacker - you have discovered the secret of Ada Duck! Come to the hackathon and tell us the password to receive a special prize.",
+      "failure": "Incorrect solution. Please try again."
     }
   },
   "Hackathon25": {
