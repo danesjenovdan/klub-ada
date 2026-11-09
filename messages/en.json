@@ -224,7 +224,7 @@
       "hint": "Hint #{number}",
       "placeholder": "Enter solution here",
       "cta": "Submit",
-      "success": "Congratulations, hacker - you have discovered the secret of Ada Duck! Come to the hackathon and tell us the password to receive a special prize.",
+      "success": "Congratulations, hacker - you have discovered the secret of Ada Duck! Send the password to us on info@klub-ada.si - first 10 people will receive a special prize.",
       "failure": "Incorrect solution. Please try again."
     }
   },
