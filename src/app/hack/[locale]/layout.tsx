@@ -46,6 +46,9 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
+        // Extensions such as Grammarly add attributes to <body> before React
+        // loads; ignore those differences on this one element.
+        suppressHydrationWarning
         // The site is one maximised window: a raised grey frame holding the
         // navbar (its title bar) and the desktop sunk in below it.
         className={clsx(
