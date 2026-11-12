@@ -168,7 +168,8 @@
       "faq": "FAQ",
       "timeline": "Timeline",
       "numbers": "AdaHack in numbers",
-      "pictures": "AdaHack 2025 pics"
+      "pictures": "AdaHack 2025 pics",
+      "treasure_hunt": "Treasure hunt"
     },
     "faq": {
       "title": "Frequently asked questions",
@@ -213,6 +214,18 @@
       },
       "count": "{count, plural, =0 {Nobody on board yet} one {One sponsor on board} other {# sponsors on board}}",
       "other_tiers": "Other tiers"
+    },
+    "treasure_hunt": {
+      "title": "Treasure hunt",
+      "description": "To make the wait for the hackathon go by faster, we have prepared a Treasure Hunt for you! Our duck has left behind coded messages scattered across our social media, posts, and website instead of footprints. Find 5 messages, decode them, and enter the complete password in the field below!",
+      "more_help": "Need more help?",
+      "more_help_description": "Check out the hints below.",
+      "puzzle": "Coded message #{number}",
+      "hint": "Hint #{number}",
+      "placeholder": "Enter solution here",
+      "cta": "Submit",
+      "success": "Congratulations, hacker - you have discovered the secret of Ada Duck! Send the password to us on info@klub-ada.si - first 10 people will receive a special prize.",
+      "failure": "Incorrect solution. Please try again."
     }
   },
   "Hackathon25": {
@@ -309,6 +322,7 @@
     "categories": {
       "all": "All",
       "savethedate": "Save the date",
+      "announcement": "Announcement",
       "website": "Website",
       "registration": "Registration",
       "numbers": "2025 in numbers",
@@ -409,7 +423,8 @@
       "registration": "The announcement that registration is open, and a post for every sold-out batch. The layout applies to all of them.",
       "numbers": "Last year's edition in three figures.",
       "countdown": "One post per milestone: 30, 14, 7, 3 and 1 day before the hackathon.",
-      "jury": "One post per jury member. Under the preview you can swap the photo and edit the text."
+      "jury": "One post per jury member. Under the preview you can swap the photo and edit the text.",
+      "announcement": "A general AdaHack announcement for sponsors and the team to share: the title alone, with planets, with 2025 photos, and with planets and the sponsors’ logos (without partners), with or without tier labels. Made mainly for LinkedIn (1:1)."
     },
     "registration": {
       "open_title": "Registration is open",

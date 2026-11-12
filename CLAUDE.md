@@ -10,7 +10,10 @@ npm run dev          # Next dev server on http://localhost:3000
 npm run build        # production build (output: standalone, used by the Dockerfile)
 npm run lint         # next lint (eslint-config-next); there is no test suite
 npx sanity deploy    # push schema/Studio changes to https://klub-ada.sanity.studio (manual step after editing sanity/schemaTypes)
+npx sanity exec scripts/<file>.ts --with-user-token   # run a one-off content script in scripts/ with your Sanity CLI login
 ```
+
+To see the hackathon site locally, open http://hack.localhost:3000. The middleware reads the subdomain from the `Host` header, so `localhost:3000/hack/...` is not the same thing.
 
 Required env (`.env` / `.env.local`, both currently committed): `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET` (or the `SANITY_STUDIO_*` equivalents, see `sanity/env.ts`). `LOOPS_API_KEY` is needed only by `src/app/api/subscribe/route.ts`.
 
@@ -23,7 +26,7 @@ Next.js 15 App Router, React 18, TypeScript, Tailwind 3 (CSS-variable palette in
 ### Three sites in one app, split by route group and subdomain
 
 - `src/app/[locale]/(website)/` — the main klub-ada.si site. Slovenian route names (`o-nas`, `dogodki`, `partnerstvo`, `blog`). Each page folder holds its `page.tsx` plus section components (`hero.tsx`, `team.tsx`, ...) colocated next to it.
-- `src/app/hack/[locale]/` — the hackathon site served at **hack.klub-ada.si**. `src/middleware.ts` detects the `hack` subdomain and *rewrites* `/{locale}/...` to `/hack/{locale}/...`, so the visible URL never contains `/hack`. It is a retro "desktop" UI: `components/desktop.tsx` is the backdrop, `pages.ts` is the single list of subpages that become desktop shortcuts, and each subpage renders inside `components/window.tsx`. Add a hackathon subpage by adding a route folder and an entry in `pages.ts` (icon is resolved as `/assets/hackathon26/<slug>.png`).
+- `src/app/hack/[locale]/` — the hackathon site served at **hack.klub-ada.si**. `src/middleware.ts` detects the `hack` subdomain and *rewrites* `/{locale}/...` to `/hack/{locale}/...`, so the visible URL never contains `/hack`. It is a retro "desktop" UI: `components/desktop.tsx` is the backdrop, `pages.ts` is the single list of subpages that become desktop shortcuts, and each subpage renders inside `components/window.tsx`. Add a hackathon subpage by adding a route folder and an entry in `pages.ts` (icon is resolved as `/assets/hackathon26/<slug>.svg`). `_dev/` holds a dev-server-only toggle that replaces each window's Sanity content with stress-test fixtures (`demo`, `worst`, `empty`, `one`, `many`; see `_dev/fixtures.ts` and `src/app/utils/data-scenario`). New hackathon windows that read Sanity data should support it.
 - `src/app/_hack25/` — the previous year's hackathon site, kept but unrouted (Next ignores `_`-prefixed folders). Treat as reference, not live code.
 - `src/app/[locale]/studio/[[...tool]]/` — Sanity Studio mounted at `/sl/studio` and `/en/studio` (`sanity.config.ts` defines one workspace per locale).
 

@@ -324,3 +324,29 @@ export const GALLERY_FIXTURES: SanityFixtures = {
   one: [PHOTOS[0]],
   many: repeat(PHOTOS, 150),
 };
+
+/* ------------------------------------------------------- Treasure hunt --- */
+
+const TREASURE_HUNT_WORST = [
+  {
+    hints: [
+      "Pobrskaj po naših Instagram objavah in poišči tisto s pogostimi vprašanji in odgovori.",
+      "Geslo uganke poskusi dešifrirati z uporabo Morsejeve abecede.",
+      "'.-' = A  '-..' = B in tako dalje...",
+    ],
+  },
+  // A single hint, and one long enough to wrap many times with a bare URL.
+  {
+    hints: [
+      "Če imaš težave pri iskanju namiga, malo bolj podrobno pobrskaj po naši spletni strani https://hack.klub-ada.si/sl/treasure-hunt?utm_source=instagram&utm_medium=story&utm_campaign=adahack-2026-lov-na-zaklad in poglej tudi v izvorno kodo, morda se geslo skriva tam, kjer ga najmanj pričakuješ.\n\nNamig: ni na telefonu.",
+    ],
+  },
+  { hints: ["ROT5", "F = A", "G = B", "H = C", "I = D", "J = E"] },
+];
+
+export const TREASURE_HUNT_FIXTURES: SanityFixtures = {
+  worst: TREASURE_HUNT_WORST,
+  empty: [],
+  one: [TREASURE_HUNT_WORST[0]],
+  many: repeat(TREASURE_HUNT_WORST, 15),
+};

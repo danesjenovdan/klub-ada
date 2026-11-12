@@ -29,6 +29,13 @@ const PAGES: Page[] = [
   { href: "/timeline", labelKey: "pages.timeline" },
   { href: "/numbers", labelKey: "pages.numbers" },
   { href: "/pictures", labelKey: "pages.pictures" },
+  {
+    href: "/treasure-hunt",
+    labelKey: "pages.treasure_hunt",
+    // Left lying low on the right, where the duck that hid the clues can
+    // be spotted without it crowding the title.
+    position: "left-[80%] top-[72%] -translate-x-1/2 -translate-y-1/2",
+  },
 ];
 
 export const PAGES_WITH_ICONS = PAGES.map((page) => ({

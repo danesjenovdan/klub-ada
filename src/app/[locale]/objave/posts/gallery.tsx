@@ -73,7 +73,7 @@ const frameNumber = (photo: GalleryPhoto) => {
  */
 const BURST = 2;
 
-const pickPhotos = (allPhotos: GalleryPhoto[], count: number) => {
+export const pickPhotos = (allPhotos: GalleryPhoto[], count: number) => {
   const photos = allPhotos.filter(
     (p) => !EXCLUDED.includes(p.alt?.toLowerCase().trim() ?? ""),
   );
@@ -117,7 +117,7 @@ const whole = (photo: GalleryPhoto, width: number) =>
     .format("webp")
     .url();
 
-function Photo({
+export function Photo({
   photo,
   width,
   height,

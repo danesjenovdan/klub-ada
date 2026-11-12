@@ -28,7 +28,7 @@ export function DesktopShortcut({
     <Link
       href={href}
       className={clsx(
-        "w-24 flex flex-col items-center gap-2 p-1 outline-none group short:w-auto short:gap-1",
+        "w-[5.5rem] md:w-24 flex flex-col items-center gap-2 p-1 outline-none group short:w-auto short:gap-1",
         className,
       )}
     >

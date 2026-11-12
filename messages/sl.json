@@ -168,7 +168,8 @@
       "faq": "Pogosta vprašanja",
       "timeline": "Časovnica",
       "numbers": "AdaHack v številkah",
-      "pictures": "Slike AdaHack 2025"
+      "pictures": "Slike AdaHack 2025",
+      "treasure_hunt": "Lov na zaklad"
     },
     "faq": {
       "title": "Pogosto zastavljena vprašanja",
@@ -213,6 +214,18 @@
       },
       "count": "{count, plural, =0 {Še nihče ni na krovu} one {# sponzor na krovu} two {# sponzorja na krovu} few {# sponzorji na krovu} other {# sponzorjev na krovu}}",
       "other_tiers": "Druge ravni"
+    },
+    "treasure_hunt": {
+      "title": "Lov na zaklad",
+      "description": "Da ti bo čakanje na hekaton hitreje minilo, smo zate pripravile Lov na zaklad! Naša račka je namesto stopinj pustila zakodirana sporočila, razpršena po naših socialnih omrežjih, objavah in spletni strani. Najdi 5 sporočil, jih odkodiraj in celotno geslo vpiši v polje spodaj!",
+      "more_help": "Potrebuješ več pomoči?",
+      "more_help_description": "Oglej si namige spodaj.",
+      "puzzle": "Uganka #{number}",
+      "hint": "Namig #{number}",
+      "placeholder": "Vpiši rešitev tukaj",
+      "cta": "Pošlji",
+      "success": "Čestitke, heker/ka - odkril/a si skrivnost Ada račke! Geslo nam pošlji na info@klub-ada.si - prvih 10 bo prejelo posebno nagrado.",
+      "failure": "Napačna rešitev. Poskusi znova."
     }
   },
   "Hackathon25": {
@@ -309,6 +322,7 @@
     "categories": {
       "all": "Vse",
       "savethedate": "Save the date",
+      "announcement": "Najava",
       "website": "Spletna stran",
       "registration": "Prijave",
       "numbers": "2025 v številkah",
@@ -409,7 +423,8 @@
       "registration": "Napoved, da so prijave odprte, in objava za vsak razprodan batch. Postavitev velja za vse.",
       "numbers": "Lanska izvedba v treh številkah.",
       "countdown": "Ena objava za vsak mejnik: 30, 14, 7, 3 in 1 dan pred hackathonom.",
-      "jury": "Ena objava za vsakega člana žirije. Pod predogledom lahko zamenjaš fotografijo in uredi besedilo."
+      "jury": "Ena objava za vsakega člana žirije. Pod predogledom lahko zamenjaš fotografijo in uredi besedilo.",
+      "announcement": "Splošna najava AdaHacka, ki jo lahko delijo sponzorji in ekipa: samo naslov, s planeti, s slikami 2025 ter s planeti in logotipi sponzorjev (brez partnerjev), z oznakami ravni ali brez. Narejena predvsem za LinkedIn (1:1)."
     },
     "registration": {
       "open_title": "Prijave so odprte",

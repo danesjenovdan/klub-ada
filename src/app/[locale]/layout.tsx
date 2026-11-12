@@ -63,7 +63,10 @@ export default async function RootLayout({
           }}
         />
       </head>
+      {/* Browser extensions such as Grammarly add attributes to <body> before
+          React loads; ignore those differences on this one element. */}
       <body
+        suppressHydrationWarning
         className={`${anaheim.className} ${lilex.variable} antialiased max-w-screen-2xl mx-auto`}
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
