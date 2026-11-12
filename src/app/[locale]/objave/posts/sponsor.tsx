@@ -49,7 +49,7 @@ const ditherFrame = (planet: Planet, t: number) =>
   Math.floor((t * 1000) / (115 + PLANET_ART[planet.tier].size * 5));
 
 /** A planet drawn at `size`, turning on the post clock, with its glow. */
-function PlanetBody({
+export function PlanetBody({
   planet,
   t,
   size,

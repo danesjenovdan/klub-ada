@@ -322,6 +322,7 @@
     "categories": {
       "all": "All",
       "savethedate": "Save the date",
+      "announcement": "Announcement",
       "website": "Website",
       "registration": "Registration",
       "numbers": "2025 in numbers",
@@ -422,7 +423,8 @@
       "registration": "The announcement that registration is open, and a post for every sold-out batch. The layout applies to all of them.",
       "numbers": "Last year's edition in three figures.",
       "countdown": "One post per milestone: 30, 14, 7, 3 and 1 day before the hackathon.",
-      "jury": "One post per jury member. Under the preview you can swap the photo and edit the text."
+      "jury": "One post per jury member. Under the preview you can swap the photo and edit the text.",
+      "announcement": "A general AdaHack announcement for sponsors and the team to share, in four versions: the title alone, with planets, with 2025 photos, and with the sponsors’ logos (without partners). Made mainly for LinkedIn (1:1)."
     },
     "registration": {
       "open_title": "Registration is open",
@@ -461,6 +463,9 @@
     "logo": "Logo",
     "logo_full": "Full",
     "logo_duck": "Duck only",
-    "logo_date": "Date"
+    "logo_date": "Date",
+    "announcement": {
+      "sponsors": "Sponsors"
+    }
   }
 }

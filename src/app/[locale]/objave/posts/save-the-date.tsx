@@ -33,54 +33,67 @@ export function LockupPost({
   format,
   children,
   overlay,
+  footer,
+  backdrop,
+  scale: scaleOverride,
 }: {
   t: number;
   format: Format;
   children: ReactNode;
   /** Drawn over the whole post, outside the scaled lockup. */
   overlay?: ReactNode;
+  /** Drawn over the swirl and under the lockup, across the whole post. */
+  backdrop?: ReactNode;
+  /** Laid out under the lockup, which centres in the room left above it. */
+  footer?: ReactNode;
+  /** How big the lockup is drawn, in place of the format's default. */
+  scale?: number;
 }) {
   const tHero = useTranslations("Hackathon.hero");
   const compact = isCompact(format);
   const tall = format.height > 1600;
-  const scale = compact ? 0.82 : tall ? 1.15 : 1;
+  const scale = scaleOverride ?? (compact ? 0.82 : tall ? 1.15 : 1);
 
   return (
     <PostFrame t={t} format={format} showRipple={false}>
       <Swirl t={t} width={format.width} height={format.height} />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div
-          className="flex flex-col items-center text-center"
-          style={{ transform: `scale(${scale})` }}
-        >
-          {/* The Figma lockup: the duck's belly tucked behind the title. */}
-          <img
-            src="/assets/hackathon26/duck.svg"
-            alt=""
-            className="relative left-[6px] h-auto w-[230px]"
-          />
-          <p
-            className={clsx(
-              instrumentSerif.className,
-              "relative -mt-[33px] text-[112px] leading-[0.9] tracking-[-0.02em] text-[#e8e6e6]",
-            )}
+      {backdrop}
+      <div className="absolute inset-0 flex flex-col">
+        <div className="flex flex-1 items-center justify-center">
+          <div
+            className="flex flex-col items-center text-center"
+            style={{ transform: `scale(${scale})` }}
           >
-            {tHero("title_line1")}
-            <br />
-            {tHero("title_line2")}
-          </p>
-          <p
-            className={clsx(
-              plexMono.className,
-              "mt-[28px] text-[34px] tracking-[0.04em]",
-            )}
-          >
-            {tHero("date")}
-          </p>
-          <div className="mt-[32px] flex flex-col items-center gap-[20px]">
-            {children}
+            {/* The Figma lockup: the duck's belly tucked behind the title. */}
+            <img
+              src="/assets/hackathon26/duck.svg"
+              alt=""
+              className="relative left-[6px] h-auto w-[230px]"
+            />
+            <p
+              className={clsx(
+                instrumentSerif.className,
+                "relative -mt-[33px] text-[112px] leading-[0.9] tracking-[-0.02em] text-[#e8e6e6]",
+              )}
+            >
+              {tHero("title_line1")}
+              <br />
+              {tHero("title_line2")}
+            </p>
+            <p
+              className={clsx(
+                plexMono.className,
+                "mt-[28px] text-[34px] tracking-[0.04em]",
+              )}
+            >
+              {tHero("date")}
+            </p>
+            <div className="mt-[32px] flex flex-col items-center gap-[20px]">
+              {children}
+            </div>
           </div>
         </div>
+        {footer}
       </div>
       {overlay}
     </PostFrame>

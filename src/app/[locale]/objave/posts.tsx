@@ -57,6 +57,13 @@ import {
   SaveTheDatePostView,
 } from "./posts/save-the-date";
 import {
+  ANNOUNCEMENT_DURATION,
+  ANNOUNCEMENT_STILL,
+  AnnouncementLook,
+  AnnouncementPostView,
+  wallRows,
+} from "./posts/announcement";
+import {
   WORKSHOP_DURATION,
   WORKSHOP_STILL,
   WorkshopPostView,
@@ -64,6 +71,7 @@ import {
 
 export type Category =
   | "savethedate"
+  | "announcement"
   | "website"
   | "registration"
   | "numbers"
@@ -78,6 +86,7 @@ export type Category =
 
 export const CATEGORIES: Category[] = [
   "savethedate",
+  "announcement",
   "website",
   "registration",
   "numbers",
@@ -133,6 +142,31 @@ export type Variants = {
   pictures: GalleryVariant;
 };
 
+/** The announcement's versions; those that need content only when it exists. */
+const announcementLooks = (content: PostsContent) => {
+  const looks: { id: string; label: string; look: AnnouncementLook }[] = [
+    { id: "announcement", label: "AdaHack 2026", look: { kind: "plain" } },
+    {
+      id: "announcement-planets",
+      label: "AdaHack 2026 planeti",
+      look: { kind: "planets" },
+    },
+  ];
+  if (content.gallery?.photos?.length)
+    looks.push({
+      id: "announcement-photos",
+      label: "AdaHack 2026 slike",
+      look: { kind: "photos", photos: content.gallery.photos },
+    });
+  if (wallRows(content.sponsors).length)
+    looks.push({
+      id: "announcement-sponsors",
+      label: "AdaHack 2026 sponzorji",
+      look: { kind: "logos", sponsors: content.sponsors },
+    });
+  return looks;
+};
+
 /** Every post the content makes, in the order they are shown. */
 export function buildPosts(
   content: PostsContent,
@@ -180,6 +214,18 @@ export function buildPosts(
         <SaveTheDatePostView t={t} format={format} data={null} />
       ),
     } satisfies PostDef,
+    ...announcementLooks(content).map(
+      ({ id, label, look }): PostDef => ({
+        id,
+        category: "announcement",
+        label,
+        duration: ANNOUNCEMENT_DURATION,
+        still: ANNOUNCEMENT_STILL,
+        render: (t, format) => (
+          <AnnouncementPostView t={t} format={format} data={look} />
+        ),
+      }),
+    ),
     {
       id: "website",
       category: "website",
