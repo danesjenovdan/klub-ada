@@ -160,9 +160,26 @@ const announcementLooks = (content: PostsContent) => {
     });
   if (wallRows(content.sponsors).length)
     looks.push({
-      id: "announcement-sponsors",
-      label: "AdaHack 2026 sponzorji",
-      look: { kind: "logos", sponsors: content.sponsors },
+      id: "announcement-planets-sponsors",
+      label: "AdaHack 2026 planeti sponzorji",
+      look: { kind: "planets-logos", sponsors: content.sponsors },
+    });
+  if (wallRows(content.sponsors).length)
+    looks.push({
+      id: "announcement-planets-sponsors-bare",
+      label: "AdaHack 2026 planeti sponzorji brez oznak",
+      look: { kind: "planets-logos", sponsors: content.sponsors, bare: true },
+    });
+  if (wallRows(content.sponsors).length)
+    looks.push({
+      id: "announcement-planets-sponsors-small",
+      label: "AdaHack 2026 planeti sponzorji manjši",
+      look: {
+        kind: "planets-logos",
+        sponsors: content.sponsors,
+        bare: true,
+        small: true,
+      },
     });
   return looks;
 };

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { plexMono } from "@/src/app/fonts";
 import imageLoader from "@/src/app/utils/image-loader";
 import { PLANETS, Tier } from "@/src/app/hack/[locale]/sponsors/model";
+import { PixelPlanet } from "@/src/app/hack/[locale]/sponsors/pixel-planet";
 import { Trimmed, trimLogo } from "@/src/app/hack/[locale]/sponsors/trim-logo";
 import { GalleryPhoto, SponsorPost } from "../data";
 import { Format } from "../formats";
@@ -35,30 +36,16 @@ const URL = "hack.klub-ada.si";
 const WALL_TIERS: Tier[] = ["gold", "silver", "bronze", "vibe"];
 
 /**
- * The box each logo is fitted into at 1080px wide, and the area it gets, so a
- * long wordmark and a compact mark weigh about the same. Gold gets a row of
- * its own; everyone else shares one size.
+ * The area each logo gets in its cell, at 1080px wide, so a long wordmark and
+ * a compact mark weigh about the same; gold gets more.
  */
-const CELL = {
-  gold: { width: 210, height: 54, area: 5600 },
-  rest: { width: 138, height: 36, area: 2500 },
-};
+const LOGO_AREA = { gold: 7600, rest: 4600 };
 
-/** At most this many logos to a row, before the rest wrap onto another. */
-const MAX_COLUMNS = 6;
-
-/**
- * The sponsors on the wall in two groups: gold, then silver, bronze and vibe
- * coding together. Empty groups are dropped.
- */
+/** The sponsors on the wall, one group per tier, gold first; empty tiers dropped. */
 export const wallRows = (sponsors: SponsorPost[]) =>
-  [["gold"], ["silver", "bronze", "vibe"]]
-    .map((tiers) =>
-      WALL_TIERS.filter((tier) => tiers.includes(tier)).flatMap((tier) =>
-        sponsors.filter((sponsor) => sponsor.type === tier),
-      ),
-    )
-    .filter((group) => group.length);
+  WALL_TIERS.map((tier) =>
+    sponsors.filter((sponsor) => sponsor.type === tier),
+  ).filter((group) => group.length);
 
 /** Every sponsor's logo trimmed to what is drawn, once all have loaded. */
 function useTrimmedLogos(sponsors: SponsorPost[]) {
@@ -93,110 +80,130 @@ function useTrimmedLogos(sponsors: SponsorPost[]) {
 }
 
 /**
- * The sponsors' logos under a small caption. Space, not a rule, sets them off
- * from the lockup; a fade into the ground keeps the swirl from running through
- * them. Each group is a grid of equal cells with its rows as even as they can
- * be (9 logos are 5 + 4, not 6 + 3), the last row centred. Each logo steps in
- * after the one before.
+ * The sponsors as the site's sponsor sky shows them: one row per tier, led by
+ * the tier's pixel planet and its name in the site's tier label, the logos
+ * after it in cells framed in the tier's colour. The cells share the row
+ * between them, so every row runs the full width of the post and each sponsor
+ * is set apart in its own frame. A fade into the ground keeps the swirl from
+ * running through them. The logos hold still from the first frame.
  */
 function SponsorWall({
   t,
   format,
   sponsors,
+  labels = true,
+  small = false,
 }: {
   t: number;
   format: Format;
   sponsors: SponsorPost[];
+  /** Lead each row with its tier's planet and name; off, the cells take the row. */
+  labels?: boolean;
+  /** A narrower wall, about 70% of the post's width, with smaller logos. */
+  small?: boolean;
 }) {
-  const tPosts = useTranslations("Posts.announcement");
+  const tLabels = useTranslations("Hackathon.sponsors.labels");
   const logos = useTrimmedLogos(sponsors);
   const compact = isCompact(format);
   const tall = format.height > 1600;
-  const unit = compact ? 1 : tall ? 1.35 : 1.12;
-  // Inside a group, logos sit 28 apart across and 22 down; the groups are 44
-  // apart, twice the gap inside one, so they read as two.
-  const columnGap = 28 * unit;
-  const rowGap = 22 * unit;
-  let index = 0;
-
+  const unit = compact ? 1 : tall ? 1.3 : 1.1;
+  const margin = small ? format.width * 0.15 : 48;
+  const labelWidth = labels ? 212 * unit : 0;
+  const gap = (small ? 10 : 12) * unit;
+  const rowHeight = (small ? 60 : 76) * unit;
+  const rowsWidth = format.width - margin * 2 - labelWidth;
   return (
     <div
-      className="relative flex shrink-0 flex-col items-center"
+      className="relative flex shrink-0 flex-col"
       style={{
-        paddingTop: (compact ? 36 : 56) * unit,
-        paddingBottom: (compact ? 60 : 84) * unit,
-        gap: 28 * unit,
-        background: `linear-gradient(to bottom, transparent, ${INK}e6 ${compact ? 30 : 40}%)`,
+        padding: `${(compact ? 28 : 44) * unit}px ${margin}px ${(compact ? 48 : 72) * unit}px`,
+        gap,
+        background: `linear-gradient(to bottom, transparent, ${INK}e6 ${compact ? 26 : 34}%)`,
       }}
     >
-      <p
-        className={clsx(
-          plexMono.className,
-          "uppercase tracking-[0.2em] text-[#9a9898]",
-        )}
-        style={{ fontSize: 17 * unit }}
-      >
-        {tPosts("sponsors")}
-      </p>
-      {logos && (
-        <div className="flex flex-col items-center" style={{ gap: 44 * unit }}>
-          {wallRows(sponsors).map((group, groupIndex) => {
-            const cell =
-              groupIndex === 0 && group[0].type === "gold"
-                ? CELL.gold
-                : CELL.rest;
-            const rows = Math.ceil(group.length / MAX_COLUMNS);
-            const columns = Math.ceil(group.length / rows);
-            const cellWidth = cell.width * unit;
-            const cellHeight = cell.height * unit;
-            return (
-              <div
-                key={group[0]._id}
-                className="flex flex-wrap justify-center"
-                style={{
-                  columnGap,
-                  rowGap,
-                  width: columns * cellWidth + (columns - 1) * columnGap,
-                }}
-              >
+      {logos &&
+        wallRows(sponsors).map((group) => {
+          const planet = PLANETS.find((p) => p.tier === group[0].type)!;
+          const cellWidth =
+            (rowsWidth - (group.length - 1) * gap) / group.length;
+          const area =
+            (planet.tier === "gold" ? LOGO_AREA.gold : LOGO_AREA.rest) *
+            (small ? 0.62 : 1) *
+            unit *
+            unit;
+          return (
+            <div
+              key={planet.tier}
+              className="flex items-center"
+              style={{ height: rowHeight }}
+            >
+              {labels && (
+                <div
+                  className="flex shrink-0 items-center"
+                  style={{ width: labelWidth, gap: 12 * unit }}
+                >
+                  <PixelPlanet
+                    tier={planet.tier}
+                    frame={0}
+                    className="shrink-0"
+                    style={{
+                      width: 30 * unit,
+                      height: 30 * unit,
+                      filter: `drop-shadow(0 0 ${8 * unit}px ${planet.color}99)`,
+                    }}
+                  />
+                  <span
+                    className={clsx(
+                      plexMono.className,
+                      "whitespace-nowrap uppercase leading-none tracking-[0.12em]",
+                    )}
+                    style={{ fontSize: 19 * unit, color: planet.color }}
+                  >
+                    {tLabels(planet.labelKey).replace("\n", " ")}
+                  </span>
+                </div>
+              )}
+              <div className="flex h-full" style={{ gap }}>
                 {group.map((sponsor) => {
                   const logo = logos[sponsor._id];
                   if (!logo) return null;
+                  const pad = (small ? 13 : 16) * unit;
                   const height = Math.min(
-                    Math.sqrt((cell.area * unit * unit) / logo.ratio),
-                    cellHeight,
-                    cellWidth / logo.ratio,
+                    Math.sqrt(area / logo.ratio),
+                    rowHeight - pad * 2,
+                    (cellWidth - pad * 2) / logo.ratio,
                   );
-                  const shown = materialise(t, 0.5 + index++ * 0.06);
                   return (
                     <div
                       key={sponsor._id}
                       className="flex items-center justify-center"
-                      style={{ width: cellWidth, height: cellHeight }}
+                      style={{
+                        width: cellWidth,
+                        height: "100%",
+                        background: INK,
+                        border: `2px solid ${planet.color}99`,
+                      }}
                     >
                       <img
                         src={logo.src}
                         alt={sponsor.name}
-                        style={{
-                          height,
-                          width: height * logo.ratio,
-                          opacity: shown,
-                        }}
+                        style={{ height, width: height * logo.ratio }}
                       />
                     </div>
                   );
                 })}
               </div>
-            );
-          })}
-        </div>
-      )}
+            </div>
+          );
+        })}
     </div>
   );
 }
 
+type SkySpot = { tier: Tier; x: number; y: number; size: number };
+
 /** The planets of the sponsor sky, as fractions of the post: centre and width. */
-const SKY: { tier: Tier; x: number; y: number; size: number }[] = [
+const SKY: SkySpot[] = [
   { tier: "gold", x: 0.1, y: 0.94, size: 0.56 },
   { tier: "bronze", x: 0.93, y: 0.08, size: 0.34 },
   { tier: "silver", x: 0.92, y: 0.74, size: 0.17 },
@@ -205,11 +212,31 @@ const SKY: { tier: Tier; x: number; y: number; size: number }[] = [
 ];
 
 /**
+ * The sky over the sponsors' logos: every planet kept in the top half, so the
+ * bottom stays clear for the wall.
+ */
+const SKY_ABOVE_LOGOS: SkySpot[] = [
+  { tier: "gold", x: 0.04, y: 0.1, size: 0.44 },
+  { tier: "bronze", x: 0.96, y: 0.3, size: 0.26 },
+  { tier: "silver", x: 0.84, y: 0.04, size: 0.12 },
+  { tier: "vibe", x: 0.09, y: 0.5, size: 0.08 },
+  { tier: "partner", x: 0.93, y: 0.55, size: 0.05 },
+];
+
+/**
  * The sponsor sky around the lockup: its planets in the corners, cut by the
  * edges, and the site's stars between them. The planets turn their dither and
  * the stars twinkle; nothing else moves.
  */
-function PlanetSky({ t, format }: { t: number; format: Format }) {
+function PlanetSky({
+  t,
+  format,
+  spots = SKY,
+}: {
+  t: number;
+  format: Format;
+  spots?: SkySpot[];
+}) {
   const { width, height } = format;
   return (
     <>
@@ -227,7 +254,7 @@ function PlanetSky({ t, format }: { t: number; format: Format }) {
           },
         ]}
       />
-      {SKY.map((spot) => {
+      {spots.map((spot) => {
         const planet = PLANETS.find((p) => p.tier === spot.tier)!;
         const size = width * spot.size;
         return (
@@ -306,14 +333,22 @@ function PhotoCorners({
 
 export type AnnouncementLook =
   | { kind: "plain" }
-  | { kind: "logos"; sponsors: SponsorPost[] }
   | { kind: "planets" }
+  | {
+      kind: "planets-logos";
+      sponsors: SponsorPost[];
+      /** Without the tier's planet and name in front of each row. */
+      bare?: boolean;
+      /** A narrower wall with smaller logos. */
+      small?: boolean;
+    }
   | { kind: "photos"; photos: GalleryPhoto[] };
 
 /**
  * The general announcement, for the team and every sponsor to share: the
  * save-the-date lockup and the site's address, on its own, with the sponsors'
- * logos underneath, in the sponsor sky's planets, or among last year's photos.
+ * logos underneath, in the sponsor sky's planets (with or without the logos),
+ * or among last year's photos.
  */
 export function AnnouncementPostView({
   t,
@@ -322,24 +357,33 @@ export function AnnouncementPostView({
 }: PostProps<AnnouncementLook>) {
   const compact = isCompact(format);
   const tall = format.height > 1600;
+  const withLogos = data.kind === "planets-logos";
 
   return (
     <LockupPost
       t={t}
       format={format}
-      scale={
-        data.kind === "logos" ? (compact ? 0.8 : tall ? 1.1 : 0.9) : undefined
-      }
+      // Over the planets, only the planets and stars move; the swirl holds.
+      swirlStill={data.kind === "planets" || data.kind === "planets-logos"}
+      scale={withLogos ? (compact ? 0.8 : tall ? 1.1 : 0.9) : undefined}
       backdrop={
         data.kind === "planets" ? (
           <PlanetSky t={t} format={format} />
+        ) : data.kind === "planets-logos" ? (
+          <PlanetSky t={t} format={format} spots={SKY_ABOVE_LOGOS} />
         ) : data.kind === "photos" ? (
           <PhotoCorners t={t} format={format} photos={data.photos} />
         ) : null
       }
       footer={
-        data.kind === "logos" && (
-          <SponsorWall t={t} format={format} sponsors={data.sponsors} />
+        withLogos && (
+          <SponsorWall
+            t={t}
+            format={format}
+            sponsors={data.sponsors}
+            labels={!data.bare}
+            small={data.small}
+          />
         )
       }
     >

@@ -424,7 +424,7 @@
       "numbers": "Lanska izvedba v treh številkah.",
       "countdown": "Ena objava za vsak mejnik: 30, 14, 7, 3 in 1 dan pred hackathonom.",
       "jury": "Ena objava za vsakega člana žirije. Pod predogledom lahko zamenjaš fotografijo in uredi besedilo.",
-      "announcement": "Splošna najava AdaHacka, ki jo lahko delijo sponzorji in ekipa, v štirih različicah: samo naslov, s planeti, s slikami 2025 in z logotipi sponzorjev (brez partnerjev). Narejena predvsem za LinkedIn (1:1)."
+      "announcement": "Splošna najava AdaHacka, ki jo lahko delijo sponzorji in ekipa: samo naslov, s planeti, s slikami 2025 ter s planeti in logotipi sponzorjev (brez partnerjev), z oznakami ravni ali brez. Narejena predvsem za LinkedIn (1:1)."
     },
     "registration": {
       "open_title": "Prijave so odprte",
@@ -463,9 +463,6 @@
     "logo": "Logotip",
     "logo_full": "Celoten",
     "logo_duck": "Samo raca",
-    "logo_date": "Datum",
-    "announcement": {
-      "sponsors": "Sponzorji"
-    }
+    "logo_date": "Datum"
   }
 }

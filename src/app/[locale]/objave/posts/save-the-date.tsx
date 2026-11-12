@@ -35,6 +35,7 @@ export function LockupPost({
   overlay,
   footer,
   backdrop,
+  swirlStill = false,
   scale: scaleOverride,
 }: {
   t: number;
@@ -42,6 +43,8 @@ export function LockupPost({
   children: ReactNode;
   /** Drawn over the whole post, outside the scaled lockup. */
   overlay?: ReactNode;
+  /** Hold the swirl on one frame, for a post where something else moves. */
+  swirlStill?: boolean;
   /** Drawn over the swirl and under the lockup, across the whole post. */
   backdrop?: ReactNode;
   /** Laid out under the lockup, which centres in the room left above it. */
@@ -56,7 +59,11 @@ export function LockupPost({
 
   return (
     <PostFrame t={t} format={format} showRipple={false}>
-      <Swirl t={t} width={format.width} height={format.height} />
+      <Swirl
+        t={swirlStill ? SAVE_THE_DATE_STILL : t}
+        width={format.width}
+        height={format.height}
+      />
       {backdrop}
       <div className="absolute inset-0 flex flex-col">
         <div className="flex flex-1 items-center justify-center">

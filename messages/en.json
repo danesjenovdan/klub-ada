@@ -424,7 +424,7 @@
       "numbers": "Last year's edition in three figures.",
       "countdown": "One post per milestone: 30, 14, 7, 3 and 1 day before the hackathon.",
       "jury": "One post per jury member. Under the preview you can swap the photo and edit the text.",
-      "announcement": "A general AdaHack announcement for sponsors and the team to share, in four versions: the title alone, with planets, with 2025 photos, and with the sponsors’ logos (without partners). Made mainly for LinkedIn (1:1)."
+      "announcement": "A general AdaHack announcement for sponsors and the team to share: the title alone, with planets, with 2025 photos, and with planets and the sponsors’ logos (without partners), with or without tier labels. Made mainly for LinkedIn (1:1)."
     },
     "registration": {
       "open_title": "Registration is open",
@@ -463,9 +463,6 @@
     "logo": "Logo",
     "logo_full": "Full",
     "logo_duck": "Duck only",
-    "logo_date": "Date",
-    "announcement": {
-      "sponsors": "Sponsors"
-    }
+    "logo_date": "Date"
   }
 }
